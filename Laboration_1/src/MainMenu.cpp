@@ -24,7 +24,7 @@ void MainMenu::run() {
         switch(menu.menuChoice())
         {
             case 1:
-                testQueue.TESTPOST();
+                createQueue();
                 break;
             case 2:
                 enQueue();
@@ -52,10 +52,10 @@ void MainMenu::run() {
 }
 
 void MainMenu::createQueue() {
-    std::cout << "Enter the size of the queue: ";
-    int queueSize=0;
-    std::cin >> queueSize;
-    std::cout << "Creating queue with a designated size of " << queueSize << std::endl;
+    Type B = 0;
+    std::cout << "Enter size of queue: " << std::endl;
+    std::cin >> B;
+    QueueQ TEST(B);
     menu.setenableMenu();
 }
 
@@ -92,6 +92,8 @@ void MainMenu::nrElements() const {
     std::cout << "nrElements " << std::endl;
 }
 
-void MainMenu::capacity() const {
+void MainMenu::capacity(){
     std::cout << "Maximum capacity " << std::endl;
+    int max=0;
+    std::cout << "MAX: " << testQueue.capacity();
 }

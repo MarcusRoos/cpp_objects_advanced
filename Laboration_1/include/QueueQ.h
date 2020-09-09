@@ -9,7 +9,7 @@
 #include <memory>
 
 typedef int Type; // Make Type an alias for int
-const int QSIZE = 10; // Default Queue size
+const int QSIZE = 10; // Default Queue sizeS
 class QueueQ {
 private:
     std::unique_ptr<Type[]> my_ptr;
@@ -19,7 +19,6 @@ private:
     int maxElem; // max capacity of queue
 
 public:
-    void TESTPOST();
     QueueQ(int n = QSIZE); // n = max capacity of queue
     // /* Pre: -
     // Post: A Queue object with capacity for n data- items is created. */

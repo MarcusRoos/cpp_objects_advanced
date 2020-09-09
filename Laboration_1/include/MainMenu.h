@@ -24,7 +24,7 @@ private:
     void isEmpty() const;
     void isFull() const;
     void nrElements() const;
-    void capacity() const;
+    void capacity();
 public:
     MainMenu();
     void run();
