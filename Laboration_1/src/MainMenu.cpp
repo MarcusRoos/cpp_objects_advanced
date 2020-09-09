@@ -55,7 +55,7 @@ void MainMenu::createQueue() {
     Type B = 0;
     std::cout << "Enter size of queue: " << std::endl;
     std::cin >> B;
-    QueueQ TEST(B);
+    testQueue = QueueQ(B);
     menu.setenableMenu();
 }
 
@@ -95,5 +95,5 @@ void MainMenu::nrElements() const {
 void MainMenu::capacity(){
     std::cout << "Maximum capacity " << std::endl;
     int max=0;
-    std::cout << "MAX: " << testQueue.capacity();
+    std::cout << "MAX: " << testQueue.capacity() << std::endl;
 }
