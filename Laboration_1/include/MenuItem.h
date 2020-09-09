@@ -6,6 +6,7 @@
 
 #ifndef DT060G_MENUITEM_H
 #define DT060G_MENUITEM_H
+#include "QueueQ.h"
 #include <string>
 //------------------------------------------------------------------------------
 // Class definition

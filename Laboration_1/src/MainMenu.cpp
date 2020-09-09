@@ -24,7 +24,7 @@ void MainMenu::run() {
         switch(menu.menuChoice())
         {
             case 1:
-                createQueue();
+                testQueue.TESTPOST();
                 break;
             case 2:
                 enQueue();

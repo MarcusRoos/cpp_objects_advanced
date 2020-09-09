@@ -7,6 +7,7 @@
 #ifndef DT060G_MAINMENU_H
 #define DT060G_MAINMENU_H
 #include "Menu.h"
+#include "QueueQ.h"
 #include "Management.h"
 #include <fstream>
 #include <vector>
@@ -15,7 +16,8 @@
 //------------------------------------------------------------------------------
 class MainMenu {
 private:
-    Menu menu, filemenu, printmenu;
+    Menu menu;
+    QueueQ testQueue;
     void createQueue();
     void enQueue();
     void deQueue();
