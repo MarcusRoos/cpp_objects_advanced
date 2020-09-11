@@ -56,6 +56,7 @@ void MainMenu::createQueue() {
     std::cout << "Enter size of queue: " << std::endl;
     std::cin >> B;
     testQueue = QueueQ(B);
+    my_ptr[B];
     menu.setenableMenu();
 }
 
@@ -73,7 +74,10 @@ MainMenu::MainMenu() {
 }
 
 void MainMenu::enQueue() {
-    std::cout << "enQueue " << std::endl;
+    std::cout << "Enter size of the integer to add to queue:  " << std::endl;
+    Type input=0;
+    std::cin >> input;
+    testQueue.enqueue(input);
 }
 
 void MainMenu::deQueue() {
@@ -81,7 +85,12 @@ void MainMenu::deQueue() {
 }
 
 void MainMenu::isEmpty() const {
-    std::cout << "isEmpty " << std::endl;
+    if (testQueue.empty() == 0){
+        std::cout << "Queue is empty. " << std::endl;
+    }
+    else{
+        std::cout << "Queue isn't empty. " << std::endl;
+    }
 }
 
 void MainMenu::isFull() const {
@@ -94,6 +103,5 @@ void MainMenu::nrElements() const {
 
 void MainMenu::capacity(){
     std::cout << "Maximum capacity " << std::endl;
-    int max=0;
     std::cout << "MAX: " << testQueue.capacity() << std::endl;
 }

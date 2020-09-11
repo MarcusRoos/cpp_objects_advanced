@@ -16,6 +16,7 @@
 //------------------------------------------------------------------------------
 class MainMenu {
 private:
+    std::unique_ptr<Type[]> my_ptr;
     Menu menu;
     QueueQ testQueue;
     void createQueue();
