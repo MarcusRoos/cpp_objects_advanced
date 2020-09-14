@@ -80,7 +80,7 @@ void MainMenu::enQueue() {
 }
 
 void MainMenu::deQueue() {
-    Type reference;
+    Type reference=0;
     testQueue.dequeue(reference);
     std::cout << "deQueue " << std::endl;
 }

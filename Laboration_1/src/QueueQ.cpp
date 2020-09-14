@@ -9,10 +9,10 @@
 #include <algorithm>
 
 QueueQ::QueueQ(int n)
-:my_ptr(new Type[n])
 {
+    my_ptr = std::unique_ptr<Type>(new Type[n]);
     head=0; // index in array for head
-    tail=0; // index in array for tail
+    tail=-1; // index in array for tail
     nElem=0; // nr of items in queue
     maxElem=n; // max capacity of queue
 }
@@ -36,14 +36,10 @@ int QueueQ::length() const {
 void QueueQ::dequeue(Type &elem) {
     tail++;
     nElem--;
-    std::cout << "deQueue: " << tail << std::endl;
-    std::cout << "Deleting element: " << my_ptr[tail] << std::endl;
 }
 
 void QueueQ::enqueue(Type elem) {
         head++;
         nElem++;
-        my_ptr[head]=elem;
-    std::cout << "enQueue: " << head << std::endl;
-    std::cout << "ptr: " << my_ptr[head] << std::endl;
+        my_ptr[head];
 }
