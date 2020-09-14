@@ -17,7 +17,7 @@
 class MainMenu {
 private:
     Menu menu;
-    QueueQ testQueue;
+    std::unique_ptr<QueueQ>testQueue;
     void createQueue();
     void enQueue();
     void deQueue();
