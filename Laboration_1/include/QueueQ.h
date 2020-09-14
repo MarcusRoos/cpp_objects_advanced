@@ -12,14 +12,14 @@ typedef int Type; // Make Type an alias for int
 const int QSIZE = 10; // Default Queue sizeS
 class QueueQ {
 private:
-    std::unique_ptr<Type>my_ptr;
+    std::unique_ptr<Type[]>my_ptr;
     int head; // index in array for head
     int tail; // index in array for tail
     int nElem; // nr of items in queue
     int maxElem; // max capacity of queue
 
 public:
-    explicit QueueQ(int n = QSIZE); // n = max capacity of queue
+    QueueQ(int n = QSIZE); // n = max capacity of queue
     // /* Pre: -
     // Post: A Queue object with capacity for n data- items is created. */
     void enqueue(Type elem);
