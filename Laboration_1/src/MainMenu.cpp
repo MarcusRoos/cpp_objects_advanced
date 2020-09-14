@@ -56,7 +56,6 @@ void MainMenu::createQueue() {
     std::cout << "Enter size of queue: " << std::endl;
     std::cin >> B;
     testQueue = QueueQ(B);
-    my_ptr[B];
     menu.setenableMenu();
 }
 
@@ -81,6 +80,8 @@ void MainMenu::enQueue() {
 }
 
 void MainMenu::deQueue() {
+    Type reference;
+    testQueue.dequeue(reference);
     std::cout << "deQueue " << std::endl;
 }
 
@@ -94,11 +95,18 @@ void MainMenu::isEmpty() const {
 }
 
 void MainMenu::isFull() const {
-    std::cout << "isFull " << std::endl;
+    int temp=0;
+    temp = testQueue.capacity();
+    if (testQueue.full() != temp){
+        std::cout << "Queue isn't full. " << std::endl;
+    }
+    else{
+        std::cout << "Queue is full. " << std::endl;
+    }
 }
 
 void MainMenu::nrElements() const {
-    std::cout << "nrElements " << std::endl;
+    std::cout << "Number of elements in queue:  " << testQueue.length() << std::endl;
 }
 
 void MainMenu::capacity(){

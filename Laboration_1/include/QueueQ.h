@@ -19,7 +19,7 @@ private:
     int maxElem; // max capacity of queue
 
 public:
-    QueueQ(int n = QSIZE); // n = max capacity of queue
+    explicit QueueQ(int n = QSIZE); // n = max capacity of queue
     // /* Pre: -
     // Post: A Queue object with capacity for n data- items is created. */
     void enqueue(Type elem);

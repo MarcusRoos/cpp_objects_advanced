@@ -26,23 +26,24 @@ bool QueueQ::empty() const {
 }
 
 bool QueueQ::full() const {
-    return false;
+    return nElem != 0;
 }
 
 int QueueQ::length() const {
-    return 0;
+    return nElem;
 }
 
 void QueueQ::dequeue(Type &elem) {
     tail++;
     nElem--;
     std::cout << "deQueue: " << tail << std::endl;
+    std::cout << "Deleting element: " << my_ptr[tail] << std::endl;
 }
 
 void QueueQ::enqueue(Type elem) {
         head++;
         nElem++;
-        my_ptr[0]=elem;
+        my_ptr[head]=elem;
     std::cout << "enQueue: " << head << std::endl;
-    std::cout << "ptr: " << my_ptr[0] << std::endl;
+    std::cout << "ptr: " << my_ptr[head] << std::endl;
 }
