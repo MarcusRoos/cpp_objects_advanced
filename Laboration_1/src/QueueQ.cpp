@@ -22,11 +22,11 @@ int QueueQ::capacity() const{
 }
 
 bool QueueQ::empty() const {
-    return nElem != 0;
+    return nElem == 0;
 }
 
 bool QueueQ::full() const {
-    return nElem != 0;
+    return nElem == capacity();
 }
 
 int QueueQ::length() const {
@@ -34,15 +34,19 @@ int QueueQ::length() const {
 }
 
 void QueueQ::dequeue(Type &elem) {
-    std::cout << "deQueue: " << tail << std::endl;
+    if (tail == capacity()){
+        tail=0;
+    }
     std::cout << "Deleting element: " << my_ptr[tail] << std::endl;
     nElem--;
     tail++;
 }
 
 void QueueQ::enqueue(Type elem) {
+    if (head == capacity()){
+        head=0;
+    }
     my_ptr[head]=elem;
-    std::cout << "enQueue: " << head << std::endl;
     std::cout << "ptr: " << my_ptr[head] << std::endl;
         head++;
         nElem++;

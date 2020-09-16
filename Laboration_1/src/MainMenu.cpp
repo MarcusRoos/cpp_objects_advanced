@@ -74,20 +74,30 @@ MainMenu::MainMenu() {
 }
 
 void MainMenu::enQueue() {
-    std::cout << "Enter size of the integer to add to queue:  " << std::endl;
-    Type input=0;
-    std::cin >> input;
-    testQueue->enqueue(5);
+    if (testQueue->length() < testQueue->capacity()){
+        std::cout << "Enter size of the integer to add to queue:  " << std::endl;
+        Type input=0;
+        std::cin >> input;
+        testQueue->enqueue(input);
+    }
+    else{
+        std::cout << "Queue is full! " << std::endl;
+    }
 }
 
 void MainMenu::deQueue() {
-    Type reference=0;
-    testQueue->dequeue(reference);
-    std::cout << "deQueue " << std::endl;
+    if (testQueue->empty()){
+        std::cout << "Queue is empty, did not remove any entries! " << std::endl;
+    }
+    else {
+        Type reference;
+        testQueue->dequeue(reference);
+        std::cout << "reference: " << reference << std::endl;
+    }
 }
 
 void MainMenu::isEmpty() const {
-    if (testQueue->empty() == 0){
+    if (testQueue->empty()){
         std::cout << "Queue is empty. " << std::endl;
     }
     else{
@@ -96,9 +106,7 @@ void MainMenu::isEmpty() const {
 }
 
 void MainMenu::isFull() const {
-    int temp=0;
-    temp = testQueue->capacity();
-    if (testQueue->full() != temp){
+    if (!testQueue->full()){
         std::cout << "Queue isn't full. " << std::endl;
     }
     else{
