@@ -7,7 +7,16 @@
 #ifndef DT060G_QUEUEQ_H
 #define DT060G_QUEUEQ_H
 #include <memory>
+/**
+ Class testApp
 
+ The testApp will handle the menu options and allow user input, it will
+ handle the communication between the user and the underlying classes.
+ From here the user will be able to call different functions which will
+ handle different tasks. A queue need to be created by using the first
+ alternative before any of the other options open up, exit excluded.
+ */
+ 
 typedef int Type; // Make Type an alias for int
 const int QSIZE = 10; // Default Queue sizeS
 class QueueQ {

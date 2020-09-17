@@ -4,7 +4,7 @@
 // StudentID: Maro1904
 //
 
-#include "MainMenu.h"
+#include "testApp.h"
 #include <iostream>
 #include <iomanip>
 #include <limits>
@@ -17,7 +17,7 @@ The run function, this function will be called in the main program, from here a
  as well as the exit option,
  once a queue has been created the rest of the options will open up.
 */
-void MainMenu::run() {
+void testApp::run() {
     bool again = true;
     do
     {
@@ -52,7 +52,7 @@ void MainMenu::run() {
     }while(again);
 }
 
-void MainMenu::createQueue() {
+void testApp::createQueue() {
     std::cout << "Enter size of queue, between 1-100000: " << std::endl;
     Type choice=0;
     std::cin >> choice;
@@ -70,7 +70,7 @@ void MainMenu::createQueue() {
 }
 
 
-MainMenu::MainMenu() {
+testApp::testApp() {
     menu.setTitle("**** Array pointer queue ****");
     menu.addItem("Create queue", true);
     menu.addItem("Add element to queue", false);
@@ -82,7 +82,7 @@ MainMenu::MainMenu() {
     menu.addItem("Exit", true);
 }
 
-void MainMenu::enQueue() {
+void testApp::enQueue() {
     if (testQueue->length() < testQueue->capacity()){
         Type eleQueue=0;
         std::cout << "Enter element to be queued, "
@@ -101,7 +101,7 @@ void MainMenu::enQueue() {
     }
 }
 
-void MainMenu::deQueue() {
+void testApp::deQueue() {
     Type reference=0;
     if (testQueue->empty()){
         std::cout << "Queue is empty, did not remove any entries! " << std::endl;
@@ -112,7 +112,7 @@ void MainMenu::deQueue() {
     }
 }
 
-void MainMenu::isEmpty() const {
+void testApp::isEmpty() const {
     if (testQueue->empty()){
         std::cout << "Queue is empty. " << std::endl;
     }
@@ -121,7 +121,7 @@ void MainMenu::isEmpty() const {
     }
 }
 
-void MainMenu::isFull() const {
+void testApp::isFull() const {
     if (!testQueue->full()){
         std::cout << "Queue isn't full. " << std::endl;
     }
@@ -130,11 +130,11 @@ void MainMenu::isFull() const {
     }
 }
 
-void MainMenu::nrElements() const {
+void testApp::nrElements() const {
     std::cout << "Number of elements in queue:  " << testQueue->length() << std::endl;
 }
 
-void MainMenu::capacity(){
+void testApp::capacity(){
     std::cout << "Maximum capacity " << std::endl;
     std::cout << "MAX: " << testQueue->capacity() << std::endl;
 }
