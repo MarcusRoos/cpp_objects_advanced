@@ -37,7 +37,7 @@ void QueueQ::dequeue(Type &elem) {
     if (head == capacity()){
         head=0;
     }
-    std::cout << "Deleting element: " << my_ptr[head] << std::endl;
+    elem = my_ptr[elem];
     nElem--;
     head++;
 }

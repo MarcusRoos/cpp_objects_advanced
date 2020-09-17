@@ -102,11 +102,11 @@ void MainMenu::enQueue() {
 }
 
 void MainMenu::deQueue() {
+    Type reference=0;
     if (testQueue->empty()){
         std::cout << "Queue is empty, did not remove any entries! " << std::endl;
     }
     else {
-        Type reference;
         testQueue->dequeue(reference);
         std::cout << "reference: " << reference << std::endl;
     }
