@@ -7,6 +7,7 @@
 #include "MainMenu.h"
 #include <iostream>
 #include <iomanip>
+#include <limits>
 
 /**
 The run function, this function will be called in the main program, from here a
@@ -52,10 +53,16 @@ void MainMenu::run() {
 }
 
 void MainMenu::createQueue() {
-    Type B = 0;
-    std::cout << "Enter size of queue: " << std::endl;
-    std::cin >> B;
-    std::unique_ptr<QueueQ> my_ptr(new QueueQ(B));
+    std::cout << "Enter size of queue, between 1-100000: " << std::endl;
+    Type choice=0;
+    std::cin >> choice;
+    while (std::cin.fail() || choice <1 || choice >100000){
+        std::cout << "Wrong input.\n";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin >> choice;
+    }
+    std::unique_ptr<QueueQ> my_ptr(new QueueQ(choice));
     testQueue = std::move(my_ptr);
     menu.setenableMenu();
 }
@@ -75,10 +82,15 @@ MainMenu::MainMenu() {
 
 void MainMenu::enQueue() {
     if (testQueue->length() < testQueue->capacity()){
-        std::cout << "Enter size of the integer to add to queue:  " << std::endl;
-        Type input=0;
-        std::cin >> input;
-        testQueue->enqueue(input);
+        Type choice=0;
+        std::cin >> choice;
+        while (std::cin.fail() || choice <1 || choice >100000){
+            std::cout << "Wrong input.\n";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cin >> choice;
+        }
+        testQueue->enqueue(choice);
     }
     else{
         std::cout << "Queue is full! " << std::endl;
