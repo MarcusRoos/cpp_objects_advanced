@@ -65,6 +65,8 @@ void MainMenu::createQueue() {
     std::unique_ptr<QueueQ> my_ptr(new QueueQ(choice));
     testQueue = std::move(my_ptr);
     menu.setenableMenu();
+    std::cin.clear();
+    std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
 
@@ -82,15 +84,17 @@ MainMenu::MainMenu() {
 
 void MainMenu::enQueue() {
     if (testQueue->length() < testQueue->capacity()){
-        Type choice=0;
-        std::cin >> choice;
-        while (std::cin.fail() || choice <1 || choice >100000){
+        Type eleQueue=0;
+        std::cout << "Enter element to be queued, "
+                     "integer between 1 and 100000" << std::endl;
+        std::cin >> eleQueue;
+        while (std::cin.fail() || eleQueue <1 || eleQueue >100000){
             std::cout << "Wrong input.\n";
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cin >> choice;
+            std::cin >> eleQueue;
         }
-        testQueue->enqueue(choice);
+        testQueue->enqueue(eleQueue);
     }
     else{
         std::cout << "Queue is full! " << std::endl;

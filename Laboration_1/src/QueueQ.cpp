@@ -34,20 +34,19 @@ int QueueQ::length() const {
 }
 
 void QueueQ::dequeue(Type &elem) {
-    if (tail == capacity()){
-        tail=0;
-    }
-    std::cout << "Deleting element: " << my_ptr[tail] << std::endl;
-    nElem--;
-    tail++;
-}
-
-void QueueQ::enqueue(Type elem) {
     if (head == capacity()){
         head=0;
     }
-    my_ptr[head]=elem;
-    std::cout << "ptr: " << my_ptr[head] << std::endl;
-        head++;
+    std::cout << "Deleting element: " << my_ptr[head] << std::endl;
+    nElem--;
+    head++;
+}
+
+void QueueQ::enqueue(Type elem) {
+    if (tail == capacity()){
+        tail=0;
+    }
+    my_ptr[tail]=elem;
+    tail++;
         nElem++;
 }
