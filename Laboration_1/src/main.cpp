@@ -5,6 +5,7 @@
 //
 
 #include "MainMenu.h"
+#include "memstat.hpp"
 
 int main() {
     MainMenu mainmenu;
