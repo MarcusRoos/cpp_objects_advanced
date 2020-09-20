@@ -53,7 +53,13 @@ void testApp::run() {
 }
 
 /**
-The create queue function, 
+The create queue function, this function will start by asking the user for
+ an input, this input will be sent to another function in the QueueQ
+ class, where an array in an unique ptr will be created. This array queue
+ will be moved to another unique ptr within the testapp class. The size of
+ the queue is hardcoded to be set between 1 and 100000, only numbers are
+ acceptable and within the chosen interval. If a queue already exists the
+ previous one will be written over.
 */
 void testApp::createQueue() {
     std::cout << "Enter size of queue, between 1-100000: " << std::endl;
@@ -72,7 +78,10 @@ void testApp::createQueue() {
     std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 }
 
-
+/**
+The testApp constructor, adds menu items to determine which items are enabled
+ as well as disabled by default.
+*/
 testApp::testApp() {
     menu.setTitle("**** Array pointer queue ****");
     menu.addItem("Create queue", true);
@@ -85,6 +94,15 @@ testApp::testApp() {
     menu.addItem("Exit", true);
 }
 
+/**
+The enqueue function, this function once called will first of all determine if
+ there's a spot in the queue, if there isn't any available spot in the queue it
+ will inform the user and exit the function. If there is however a spot in the
+ queue, the user will be asked to enter a number once again between 1 and 100000
+ to add to the queue. If the input matches the criteria this number will be
+ added as an element in the queue by calling the enqueue function in the
+ QueueQ class.
+*/
 void testApp::enQueue() {
     if (testQueue->length() < testQueue->capacity()){
         Type eleQueue=0;
@@ -104,6 +122,12 @@ void testApp::enQueue() {
     }
 }
 
+/**
+The dequeue function, it will first of all check whether the queue is
+ empty or not, if the function is empty it will inform the user and exit.
+ If there is however an element in the queue this element will be removed, and
+ a reference will tell the user which element got removed.
+*/
 void testApp::deQueue() {
     Type reference=0;
     if (testQueue->empty()){
@@ -115,6 +139,12 @@ void testApp::deQueue() {
     }
 }
 
+/**
+The is empty function, the empty function will check if the queue is
+ empty or not, it will point towards a function in the QueueQ class to determine
+ this. If the queue is empty the user will be informed, if its not, the user
+ will be informed of that as well.
+*/
 void testApp::isEmpty() const {
     if (testQueue->empty()){
         std::cout << "Queue is empty. " << std::endl;
@@ -124,6 +154,12 @@ void testApp::isEmpty() const {
     }
 }
 
+/**
+The is full function, the full function will check if the queue is
+ full or not, it will point towards a function in the QueueQ class to determine
+ this. If the queue is full the user will be informed, if its not, the user
+ will be informed of that as well.
+*/
 void testApp::isFull() const {
     if (!testQueue->full()){
         std::cout << "Queue isn't full. " << std::endl;
@@ -133,10 +169,22 @@ void testApp::isFull() const {
     }
 }
 
+/**
+The is the nr of elements function, this function will check the amount of
+ elements found within the queue,
+ it will point towards a function in the QueueQ class to determine
+ this. The number of elements will be printed out on the screen by calling
+ a function in the QueueQ class.
+*/
 void testApp::nrElements() const {
     std::cout << "Number of elements in queue:  " << testQueue->length() << std::endl;
 }
 
+/**
+The maximum capacity function, this function will ask the QueueQ function
+ what the maximum capacity of the queue is, and use this as a pointer to
+ tell the user how many elements the queue can fit at max capacity.
+*/
 void testApp::capacity(){
     std::cout << "Maximum capacity " << std::endl;
     std::cout << "MAX: " << testQueue->capacity() << std::endl;
