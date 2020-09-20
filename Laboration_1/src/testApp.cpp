@@ -135,7 +135,7 @@ void testApp::deQueue() {
     }
     else {
         testQueue->dequeue(reference);
-        std::cout << "reference: " << reference << std::endl;
+        std::cout << "Deleting element: " << reference << std::endl;
     }
 }
 

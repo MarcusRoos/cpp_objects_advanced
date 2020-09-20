@@ -65,7 +65,7 @@ void QueueQ::dequeue(Type &elem) {
     if (head == capacity()){
         head=0;
     }
-    elem = my_ptr[elem];
+    elem = my_ptr[head];
     nElem--;
     head++;
 }
