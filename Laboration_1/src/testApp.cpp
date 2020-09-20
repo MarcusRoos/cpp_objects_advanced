@@ -52,6 +52,9 @@ void testApp::run() {
     }while(again);
 }
 
+/**
+The create queue function, 
+*/
 void testApp::createQueue() {
     std::cout << "Enter size of queue, between 1-100000: " << std::endl;
     Type choice=0;
