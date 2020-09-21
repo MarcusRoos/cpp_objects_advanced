@@ -1,5 +1,4 @@
 # Laboration 1
-Test
 
 ## Environment & Tools
 Windows 10 64bit. 
