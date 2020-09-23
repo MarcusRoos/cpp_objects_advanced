@@ -32,6 +32,7 @@ public:
     void getcurrBalance();
     void gettotalBalance();
     void accountInfo();
+    bool is_digits(const std::string &str);
     testProgram();
     void run();
 };

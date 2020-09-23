@@ -77,6 +77,15 @@ void testProgram::setAccountNr() {
     std::cout << "Enter your social security number (12 digits)" << std::endl;
     std::string input;
     std::cin >> input;
+    do{
+        if(!is_digits(input)) {
+            std::cout << "Only integers!" << std::endl;
+        }
+        if(input.length() != 12){
+            std::cout << "Input needs to be 12 numbers!" << std::endl;
+        }
+        std::cin >> input;
+    }while(!is_digits(input) || input.length() != 12);
     account.setAccountNr(input);
 }
 
@@ -106,4 +115,8 @@ void testProgram::gettotalBalance() {
 
 void testProgram::accountInfo() {
     std::cout << account.accountInfo();
+}
+
+bool testProgram::is_digits(const std::string &str) {
+    return str.find_first_not_of("0123456789") == std::string::npos;
 }
