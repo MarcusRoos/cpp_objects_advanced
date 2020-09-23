@@ -4,10 +4,7 @@
 // StudentID: Maro1904
 //
 
-#include "testApp.h"
-#include <iostream>
-#include <iomanip>
-#include <limits>
+#include "testProgram.h"
 
 /**
 The run function, this function will be called in the main program, from here a
@@ -17,7 +14,7 @@ The run function, this function will be called in the main program, from here a
  as well as the exit option,
  once a queue has been created the rest of the options will open up.
 */
-void testApp::run() {
+void testProgram::run() {
     bool again = true;
     do
     {
@@ -25,7 +22,7 @@ void testApp::run() {
         switch(menu.menuChoice())
         {
             case 1:
-                createQueue();
+                setAccountNr();
                 break;
             case 2:
                 enQueue();
@@ -52,24 +49,13 @@ void testApp::run() {
     }while(again);
 }
 
-/**
-The create queue function, this function will start by asking the user for
- an input, this input will be sent to another function in the QueueQ
- class, where an array in an unique ptr will be created. This array queue
- will be moved to another unique ptr within the testapp class. The size of
- the queue is hardcoded to be set between 1 and 100000, only numbers are
- acceptable and within the chosen interval. If a queue already exists the
- previous one will be written over.
-*/
-void testApp::createQueue() {
 
-}
 
 /**
 The testApp constructor, adds menu items to determine which items are enabled
  as well as disabled by default.
 */
-testApp::testApp() {
+testProgram::testProgram() {
     menu.setTitle("**** Array pointer queue ****");
     menu.addItem("Create queue", true);
     menu.addItem("Add element to queue", false);
@@ -82,27 +68,31 @@ testApp::testApp() {
 }
 
 
-void testApp::enQueue() {
+void testProgram::enQueue() {
 
 }
 
-void testApp::deQueue() {
+void testProgram::deQueue() {
 
 }
 
 
-void testApp::isEmpty() const {
+void testProgram::isEmpty() const {
 
 }
 
-void testApp::isFull() const {
+void testProgram::isFull() const {
 
 }
 
-void testApp::nrElements() const {
+void testProgram::nrElements() const {
 
 }
 
-void testApp::capacity(){
+void testProgram::capacity(){
+
+}
+
+void testProgram::setAccountNr() {
 
 }

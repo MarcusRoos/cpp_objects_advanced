@@ -4,11 +4,11 @@
 // StudentID: Maro1904
 //
 
-#include "testApp.h"
+#include "testProgram.h"
 // #include "memstat.hpp"
 
 int main() {
-    testApp mainmenu;
+    testProgram mainmenu;
     mainmenu.run();
     return 0;
 }

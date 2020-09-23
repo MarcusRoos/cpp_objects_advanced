@@ -4,8 +4,8 @@
 // StudentID: Maro1904
 //
 
-#ifndef DT060G_TESTAPP_H
-#define DT060G_TESTAPP_H
+#ifndef DT060G_TESTPROGRAM_H
+#define DT060G_TESTPROGRAM_H
 #include "Menu.h"
 #include <fstream>
 #include <vector>
@@ -18,19 +18,18 @@
  handle different tasks. A queue need to be created by using the first
  alternative before any of the other options open up, exit excluded.
  */
-class testApp {
+class testProgram {
 private:
     Menu menu;
 public:
-    void createQueue();
+    void setAccountNr();
     void enQueue();
     void deQueue();
     void isEmpty() const;
     void isFull() const;
     void nrElements() const;
     void capacity();
-    testApp();
-    void runSubMenu();
+    testProgram();
     void run();
 };
 #endif
