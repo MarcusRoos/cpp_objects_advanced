@@ -25,25 +25,28 @@ void testProgram::run() {
                 setAccountNr();
                 break;
             case 2:
-                enQueue();
+                addcurrBalance();
                 break;
             case 3:
-                deQueue();
+                deductcurrBalance();
                 break;
             case 4:
-                isEmpty();
+                changeallCredit();
                 break;
             case 5:
-                isFull();
+                getcurrCredit();
                 break;
             case 6:
-                nrElements();
+                getcurrBalance();
                 break;
             case 7:
-                capacity();
+                gettotalBalance();
                 break;
             case 8:
-                again = false;
+                accountInfo();
+                break;
+            case 9:
+                again=false;
                 break;
         }
     }while(again);
@@ -57,42 +60,45 @@ The testApp constructor, adds menu items to determine which items are enabled
 */
 testProgram::testProgram() {
     menu.setTitle("**** Array pointer queue ****");
-    menu.addItem("Create queue", true);
-    menu.addItem("Add element to queue", false);
-    menu.addItem("Delete element from queue", false);
-    menu.addItem("Check Empty", false);
-    menu.addItem("Check Full", false);
-    menu.addItem("Check number of elements", false);
-    menu.addItem("Check maximum capacity", false);
+    menu.addItem("Set account number", true);
+    menu.addItem("Add current balance", true);
+    menu.addItem("Deduct current balance", true);
+    menu.addItem("Change credit", true);
+    menu.addItem("Get current credit", true);
+    menu.addItem("Get current balance", true);
+    menu.addItem("Get current TOTAL balance", true);
+    menu.addItem("Show account info", true);
     menu.addItem("Exit", true);
 }
 
-
-void testProgram::enQueue() {
-
-}
-
-void testProgram::deQueue() {
-
-}
-
-
-void testProgram::isEmpty() const {
-
-}
-
-void testProgram::isFull() const {
-
-}
-
-void testProgram::nrElements() const {
-
-}
-
-void testProgram::capacity(){
-
-}
-
 void testProgram::setAccountNr() {
+
+}
+
+void testProgram::addcurrBalance() {
+
+}
+
+void testProgram::deductcurrBalance() {
+
+}
+
+void testProgram::changeallCredit() {
+
+}
+
+void testProgram::getcurrCredit() {
+
+}
+
+void testProgram::getcurrBalance() {
+
+}
+
+void testProgram::gettotalBalance() {
+
+}
+
+void testProgram::accountInfo() {
 
 }

@@ -23,12 +23,13 @@ private:
     Menu menu;
 public:
     void setAccountNr();
-    void enQueue();
-    void deQueue();
-    void isEmpty() const;
-    void isFull() const;
-    void nrElements() const;
-    void capacity();
+    void addcurrBalance();
+    void deductcurrBalance();
+    void changeallCredit();
+    void getcurrCredit();
+    void getcurrBalance();
+    void gettotalBalance();
+    void accountInfo();
     testProgram();
     void run();
 };
