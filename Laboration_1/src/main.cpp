@@ -5,10 +5,10 @@
 //
 
 #include "testApp.h"
-#include "memstat.hpp"
+// #include "memstat.hpp"
 
 int main() {
     testApp mainmenu;
-    mainmenu.run();
+    mainmenu.runSubMenu();
     return 0;
 }

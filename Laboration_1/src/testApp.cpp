@@ -189,3 +189,32 @@ void testApp::capacity(){
     std::cout << "Maximum capacity " << std::endl;
     std::cout << "MAX: " << testQueue->capacity() << std::endl;
 }
+
+/**
+Extra menu to make sure a queue has been created, instead of simply shutting
+ off the other options this works as an extra safety measurement.
+ If a queue is created the other menu options will be visible and free to
+ choose from.
+*/
+void testApp::runSubMenu() {
+        std::cout << "1. Create Queue" << std::endl;
+        std::cout << "2. Exit" << std::endl;
+        std::cout << "Enter choice" << std::endl;
+        int choice = 0;
+        std::cin >> choice;
+        while (std::cin.fail() || choice < 1 || choice > 2) {
+            std::cout << "Wrong input.\n";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cin >> choice;
+        }
+        switch (choice) {
+            case 1:
+                createQueue();
+                run();
+                break;
+            case 2:
+            default:
+                break;
+        }
+}

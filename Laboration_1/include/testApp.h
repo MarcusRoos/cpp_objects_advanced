@@ -82,6 +82,13 @@ public:
 */
     testApp();
     /**
+* runSubMenu function, starts up the whole program
+*
+* @param None.
+* @return None.
+*/
+    void runSubMenu();
+    /**
 * run function, starts up the whole program
 *
 * @param None.
