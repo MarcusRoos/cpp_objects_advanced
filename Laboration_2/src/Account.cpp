@@ -7,12 +7,12 @@
 #include "Account.h"
 
 Account::Account() {
-    accountNr=0;
+    accountNr="";
     currBalance=0;
     allCredit=0;
 }
 
-void Account::setAccountNr(int personNumber) {
+void Account::setAccountNr(std::string personNumber) {
     accountNr = personNumber;
 }
 
@@ -42,6 +42,6 @@ int Account::gettotalBalance() {
     return tot;
 }
 
-int Account::accountInfo() {
+std::string Account::accountInfo() {
     return accountNr;
 }

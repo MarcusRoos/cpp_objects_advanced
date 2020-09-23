@@ -9,6 +9,7 @@
 #include "Menu.h"
 #include <fstream>
 #include <vector>
+#include "Account.h"
 /**
  Class testApp
 
@@ -21,6 +22,7 @@
 class testProgram {
 private:
     Menu menu;
+    Account account;
 public:
     void setAccountNr();
     void addcurrBalance();

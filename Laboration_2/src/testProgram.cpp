@@ -5,6 +5,7 @@
 //
 
 #include "testProgram.h"
+#include <iostream>
 
 /**
 The run function, this function will be called in the main program, from here a
@@ -72,7 +73,11 @@ testProgram::testProgram() {
 }
 
 void testProgram::setAccountNr() {
-
+    std::cin.clear();
+    std::cout << "Enter your social security number (12 digits)" << std::endl;
+    std::string input;
+    std::cin >> input;
+    account.setAccountNr(input);
 }
 
 void testProgram::addcurrBalance() {
@@ -100,5 +105,5 @@ void testProgram::gettotalBalance() {
 }
 
 void testProgram::accountInfo() {
-
+    std::cout << account.accountInfo();
 }

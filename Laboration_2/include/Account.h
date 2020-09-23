@@ -6,21 +6,24 @@
 
 #ifndef DT060G_ACCOUNT_H
 #define DT060G_ACCOUNT_H
+
+#include <string>
+
 const int DEFAULTSIZE = 0;
 class Account {
 private:
-    int accountNr;
+    std::string accountNr;
     int currBalance;
     int allCredit;
 public:
     Account();
-    void setAccountNr(int personNumber);
+    void setAccountNr(std::string personNumber);
     void addcurrBalance(int balance);
     void deductcurrBalance(int balanceRemove);
     void changeallCredit(int creditChange);
     int getcurrCredit();
     int getcurrBalance();
     int gettotalBalance();
-    int accountInfo();
+    std::string accountInfo();
 };
 #endif //DT060G_ACCOUNT_H
