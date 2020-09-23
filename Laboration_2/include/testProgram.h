@@ -10,15 +10,7 @@
 #include <fstream>
 #include <vector>
 #include "Account.h"
-/**
- Class testApp
 
- The testApp will handle the menu options and allow user input, it will
- handle the communication between the user and the underlying classes.
- From here the user will be able to call different functions which will
- handle different tasks. A queue need to be created by using the first
- alternative before any of the other options open up, exit excluded.
- */
 class testProgram {
 private:
     Menu menu;
@@ -32,7 +24,7 @@ public:
     void getcurrBalance();
     void gettotalBalance();
     void accountInfo();
-    bool is_digits(const std::string &str);
+    static bool numberVerify(const std::string &input);
     testProgram();
     void run();
 };

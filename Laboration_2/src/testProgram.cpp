@@ -77,46 +77,67 @@ void testProgram::setAccountNr() {
     std::cout << "Enter your social security number (12 digits)" << std::endl;
     std::string input;
     std::cin >> input;
-    do{
-        if(!is_digits(input)) {
+    while(!numberVerify(input) || input.length() != 12){
+        if(!numberVerify(input)) {
             std::cout << "Only integers!" << std::endl;
         }
         if(input.length() != 12){
             std::cout << "Input needs to be 12 numbers!" << std::endl;
         }
         std::cin >> input;
-    }while(!is_digits(input) || input.length() != 12);
+    }
     account.setAccountNr(input);
 }
 
 void testProgram::addcurrBalance() {
-
+    std::cout << "Enter balance, between 1 and 100 000" << std::endl;
+    int input=0;
+    std::cin >> input;
+    while(input<0 || input >100000){
+        std::cout << "Wrong input, please redo" << std::endl;
+        std::cin >> input;
+    }
+    account.addcurrBalance(input);
 }
 
 void testProgram::deductcurrBalance() {
-
+    std::cout << "Enter balance to deduct, between 1 and 100 000" << std::endl;
+    int input=0;
+    std::cin >> input;
+    while(input<0 || input >100000){
+        std::cout << "Wrong input, please redo" << std::endl;
+        std::cin >> input;
+    }
+    account.deductcurrBalance(input);
 }
 
 void testProgram::changeallCredit() {
-
+    std::cout << "Change all Credit, enter" << std::endl;
+    int input=0;
+    std::cin >> input;
+    while(input<0 || input >100000){
+        std::cout << "Wrong input, please redo" << std::endl;
+        std::cin >> input;
+    }
+    account.changeallCredit(input);
 }
 
 void testProgram::getcurrCredit() {
-
+    std::cout << account.getcurrCredit();
 }
 
 void testProgram::getcurrBalance() {
-
+    std::cout << account.getcurrBalance();
 }
 
 void testProgram::gettotalBalance() {
-
+    std::cout << account.gettotalBalance();
 }
 
 void testProgram::accountInfo() {
     std::cout << account.accountInfo();
 }
 
-bool testProgram::is_digits(const std::string &str) {
-    return str.find_first_not_of("0123456789") == std::string::npos;
+bool testProgram::numberVerify(const std::string &input) {
+    return input.find_first_not_of("987543210") == std::string::npos;
 }
