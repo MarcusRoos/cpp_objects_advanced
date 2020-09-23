@@ -6,16 +6,18 @@
 
 #ifndef DT060G_ACCOUNT_H
 #define DT060G_ACCOUNT_H
+const int DEFAULTSIZE = 0;
 class Account {
 private:
     int accountNr;
     int currBalance;
     int allCredit;
 public:
-    void setAccountNr();
-    void addcurrBalance();
-    void deductcurrBalance();
-    void changeallCredit();
+    Account();
+    void setAccountNr(int personNumber);
+    void addcurrBalance(int balance);
+    void deductcurrBalance(int balanceRemove);
+    void changeallCredit(int creditChange);
     int getcurrCredit();
     int getcurrBalance();
     int gettotalBalance();

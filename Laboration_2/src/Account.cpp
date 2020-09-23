@@ -6,34 +6,42 @@
 
 #include "Account.h"
 
-void Account::setAccountNr() {
-
+Account::Account() {
+    accountNr=0;
+    currBalance=0;
+    allCredit=0;
 }
 
-void Account::addcurrBalance() {
-
+void Account::setAccountNr(int personNumber) {
+    accountNr = personNumber;
 }
 
-void Account::deductcurrBalance() {
+void Account::addcurrBalance(int balance) {
+    currBalance += balance;
+}
 
+void Account::deductcurrBalance(int balanceRemove) {
+    currBalance -= balanceRemove;
+}
+
+void Account::changeallCredit(int creditChange) {
+    allCredit = creditChange;
 }
 
 int Account::getcurrCredit() {
-    return 0;
-}
-
-void Account::changeallCredit() {
-
+    return allCredit;
 }
 
 int Account::getcurrBalance() {
-    return 0;
+    return currBalance;
 }
 
 int Account::gettotalBalance() {
-    return 0;
+    int tot=0;
+    tot = currBalance+allCredit;
+    return tot;
 }
 
 int Account::accountInfo() {
-    return 0;
+    return accountNr;
 }
