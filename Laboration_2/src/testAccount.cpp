@@ -4,7 +4,7 @@
 // StudentID: Maro1904
 //
 
-#include "testProgram.h"
+#include "testAccount.h"
 #include <iostream>
 
 /**
@@ -15,7 +15,7 @@ The run function, this function will be called in the main program, from here a
  as well as the exit option,
  once a queue has been created the rest of the options will open up.
 */
-void testProgram::run() {
+void testAccount::run() {
     bool again = true;
     do
     {
@@ -59,7 +59,7 @@ void testProgram::run() {
 The testApp constructor, adds menu items to determine which items are enabled
  as well as disabled by default.
 */
-testProgram::testProgram() {
+testAccount::testAccount() {
     menu.setTitle("**** Array pointer queue ****");
     menu.addItem("Set account number", true);
     menu.addItem("Add current balance", true);
@@ -72,7 +72,7 @@ testProgram::testProgram() {
     menu.addItem("Exit", true);
 }
 
-void testProgram::setAccountNr() {
+void testAccount::setAccountNr() {
     std::cin.clear();
     std::cout << "Enter your social security number (12 digits)" << std::endl;
     std::string input;
@@ -89,7 +89,7 @@ void testProgram::setAccountNr() {
     account.setAccountNr(input);
 }
 
-void testProgram::addcurrBalance() {
+void testAccount::addcurrBalance() {
     std::cout << "Enter balance, between 1 and 100 000" << std::endl;
     int input=0;
     std::cin >> input;
@@ -100,7 +100,7 @@ void testProgram::addcurrBalance() {
     account.addcurrBalance(input);
 }
 
-void testProgram::deductcurrBalance() {
+void testAccount::deductcurrBalance() {
     std::cout << "Enter balance to deduct, between 1 and 100 000" << std::endl;
     int input=0;
     std::cin >> input;
@@ -111,7 +111,7 @@ void testProgram::deductcurrBalance() {
     account.deductcurrBalance(input);
 }
 
-void testProgram::changeallCredit() {
+void testAccount::changeallCredit() {
     std::cout << "Change all Credit, enter" << std::endl;
     int input=0;
     std::cin >> input;
@@ -122,22 +122,22 @@ void testProgram::changeallCredit() {
     account.changeallCredit(input);
 }
 
-void testProgram::getcurrCredit() {
+void testAccount::getcurrCredit() {
     std::cout << account.getcurrCredit();
 }
 
-void testProgram::getcurrBalance() {
+void testAccount::getcurrBalance() {
     std::cout << account.getcurrBalance();
 }
 
-void testProgram::gettotalBalance() {
+void testAccount::gettotalBalance() {
     std::cout << account.gettotalBalance();
 }
 
-void testProgram::accountInfo() {
+void testAccount::accountInfo() {
     std::cout << account.accountInfo();
 }
 
-bool testProgram::numberVerify(const std::string &input) {
+bool testAccount::numberVerify(const std::string &input) {
     return input.find_first_not_of("9876543210") == std::string::npos;
 }

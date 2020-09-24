@@ -4,14 +4,14 @@
 // StudentID: Maro1904
 //
 
-#ifndef DT060G_TESTPROGRAM_H
-#define DT060G_TESTPROGRAM_H
+#ifndef DT060G_TESTACCOUNT_H
+#define DT060G_TESTACCOUNT_H
 #include "Menu.h"
 #include <fstream>
 #include <vector>
 #include "Account.h"
 
-class testProgram {
+class testAccount {
 private:
     Menu menu;
     Account account;
@@ -25,7 +25,7 @@ public:
     void gettotalBalance();
     void accountInfo();
     static bool numberVerify(const std::string &input);
-    testProgram();
+    testAccount();
     void run();
 };
 #endif
