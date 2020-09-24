@@ -115,7 +115,7 @@ void testProgram::changeallCredit() {
     std::cout << "Change all Credit, enter" << std::endl;
     int input=0;
     std::cin >> input;
-    while(input<0 || input >100000){
+    while(input<-10000 || input >100000){
         std::cout << "Wrong input, please redo" << std::endl;
         std::cin >> input;
     }

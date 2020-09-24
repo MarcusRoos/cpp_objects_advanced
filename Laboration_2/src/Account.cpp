@@ -6,14 +6,16 @@
 
 #include "Account.h"
 
+#include <utility>
+
 Account::Account() {
     accountNr="";
     currBalance=0;
-    allCredit=0;
+    allCredit=DEFAULTSIZE;
 }
 
 void Account::setAccountNr(std::string personNumber) {
-    accountNr = personNumber;
+    accountNr = std::move(personNumber);
 }
 
 void Account::addcurrBalance(int balance) {
