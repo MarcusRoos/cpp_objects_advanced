@@ -139,5 +139,5 @@ void testProgram::accountInfo() {
 }
 
 bool testProgram::numberVerify(const std::string &input) {
-    return input.find_first_not_of("987543210") == std::string::npos;
+    return input.find_first_not_of("9876543210") == std::string::npos;
 }
