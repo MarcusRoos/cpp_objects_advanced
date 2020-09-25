@@ -25,14 +25,14 @@ std::string BankKund::returKontoNr() {
     return testAcc[0]->accountInfo();
 }
 
-int BankKund::returKontoInfo() {
-    for (auto & i : testAcc){
-        std::cout << "Account Number: "<<i->accountInfo() << std::endl;
-        std::cout << "Credit: " << i->getcurrCredit() << std::endl;
-        std::cout << "Saldo: " <<i->getcurrBalance() << std::endl;
-        std::cout << "Totalt belopp: " <<i->gettotalBalance() << std::endl;
+int BankKund::returKontoInfo(const int &index) {
+    if (testAcc[index]) {
+
+        return testAcc[index]->getcurrBalance(), testAcc[index]->getcurrCredit(),
+                testAcc[index]->gettotalBalance();
     }
-    return 0;
+    else
+        return 0;
 }
 
 int BankKund::returKundTillgang() {
