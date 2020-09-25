@@ -73,69 +73,35 @@ testAccount::testAccount() {
 }
 
 void testAccount::setAccountNr() {
-    std::cin.clear();
-    std::cout << "Enter your social security number (12 digits)" << std::endl;
-    std::string input;
-    std::cin >> input;
-    while(!numberVerify(input) || input.length() != 12){
-        if(!numberVerify(input)) {
-            std::cout << "Only integers!" << std::endl;
-        }
-        if(input.length() != 12){
-            std::cout << "Input needs to be 12 numbers!" << std::endl;
-        }
-        std::cin >> input;
-    }
-    account.setAccountNr(input);
+
 }
 
 void testAccount::addcurrBalance() {
-    std::cout << "Enter balance, between 1 and 100 000" << std::endl;
-    int input=0;
-    std::cin >> input;
-    while(input<0 || input >100000){
-        std::cout << "Wrong input, please redo" << std::endl;
-        std::cin >> input;
-    }
-    account.addcurrBalance(input);
+
 }
 
 void testAccount::deductcurrBalance() {
-    std::cout << "Enter balance to deduct, between 1 and 100 000" << std::endl;
-    int input=0;
-    std::cin >> input;
-    while(input<0 || input >100000){
-        std::cout << "Wrong input, please redo" << std::endl;
-        std::cin >> input;
-    }
-    account.deductcurrBalance(input);
+
 }
 
 void testAccount::changeallCredit() {
-    std::cout << "Change all Credit, enter" << std::endl;
-    int input=0;
-    std::cin >> input;
-    while(input<-10000 || input >100000){
-        std::cout << "Wrong input, please redo" << std::endl;
-        std::cin >> input;
-    }
-    account.changeallCredit(input);
+
 }
 
 void testAccount::getcurrCredit() {
-    std::cout << account.getcurrCredit();
+
 }
 
 void testAccount::getcurrBalance() {
-    std::cout << account.getcurrBalance();
+
 }
 
 void testAccount::gettotalBalance() {
-    std::cout << account.gettotalBalance();
+
 }
 
 void testAccount::accountInfo() {
-    std::cout << account.accountInfo();
+
 }
 
 bool testAccount::numberVerify(const std::string &input) {

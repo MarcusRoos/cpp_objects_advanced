@@ -16,16 +16,16 @@ private:
     std::string fornamn;
     std::string efternamn;
     std::string personnummer;
-    std::unique_ptr<Account[3]>bankArray;
+    std::unique_ptr<Account> testAcc[3];
 public:
     BankKund();
     std::string returNamn();
     std::string returPnummer();
     int returAntalKonton();
-    int returKontoNr();
+    std::string returKontoNr();
     int returKontoInfo();
     int returKundTillgang();
-    void skapaKonto();
+    void skapaKonto(const std::string& a, const std::string& b, const std::string& c);
     void tabortKonto();
     void utKonto(int input);
     void inKonto(int input);

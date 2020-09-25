@@ -9,12 +9,12 @@
 #include "Menu.h"
 #include <fstream>
 #include <vector>
-#include "Account.h"
+#include "BankKund.h"
 
 class testAccount {
 private:
     Menu menu;
-    Account account;
+    BankKund bankkund;
 public:
     void setAccountNr();
     void addcurrBalance();
