@@ -17,6 +17,7 @@ private:
     int allCredit;
 public:
     Account();
+    Account(std::string tmpNr, int tmpBal, int tmpCred);
     void addcurrBalance(int balance);
     void deductcurrBalance(int balanceRemove);
     void changeallCredit(int creditChange);

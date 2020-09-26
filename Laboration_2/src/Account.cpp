@@ -6,10 +6,18 @@
 
 #include "Account.h"
 
+#include <utility>
+
 Account::Account() {
     accountNr="";
     currBalance=0;
     allCredit=DEFAULTSIZE;
+}
+
+Account::Account(std::string tmpNr, int tmpBal, int tmpCred) {
+    accountNr=std::move(tmpNr);
+    currBalance=tmpBal;
+    allCredit=tmpCred;
 }
 
 

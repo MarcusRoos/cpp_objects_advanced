@@ -13,23 +13,23 @@
 
 class BankKund {
 private:
-    std::string fornamn;
-    std::string efternamn;
+    std::string namn;
     std::string personnummer;
     std::unique_ptr<Account> testAcc[3];
 public:
     BankKund();
+    BankKund(std::string tmpNamn, std::string tmpPrsn);
     std::string returNamn();
     std::string returPnummer();
     int returAntalKonton();
     std::string returKontoNr();
     int returKontoInfo(const int &index);
     int returKundTillgang();
-    void skapaKonto(const std::string& a, const std::string& b, const std::string& c);
-    void tabortKonto();
-    void utKonto(int input);
-    void inKonto(int input);
-    void andraKredit(int input);
+    void skapaKonto(const std::string& a, int b, int c);
+    void tabortKonto(int accNr);
+    void utKonto(int tmpAcc, int input);
+    void inKonto(int tmpAcc, int input);
+    void andraKredit(int tmpAcc, int input);
     void skrivtillFil();
     void lasfranFil();
 };
