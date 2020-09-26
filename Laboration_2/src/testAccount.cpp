@@ -60,15 +60,20 @@ The testApp constructor, adds menu items to determine which items are enabled
  as well as disabled by default.
 */
 testAccount::testAccount() {
-    menu.setTitle("**** Array pointer queue ****");
-    menu.addItem("Set account number", true);
-    menu.addItem("Add current balance", true);
-    menu.addItem("Deduct current balance", true);
+    menu.setTitle("**** Pointer menu ****");
+    menu.addItem("Fetch customers name", true);
+    menu.addItem("Fetch customers social security", true);
+    menu.addItem("Fetch amount of customer accounts", true);
+    menu.addItem("Fetch customers different account numbers", true);
+    menu.addItem("Fetch balance, credit and total from specific account number", true);
+    menu.addItem("Fetch customers total money", true);
+    menu.addItem("Create new account", true);
+    menu.addItem("Delete account", true);
+    menu.addItem("Withdraw from account", true);
+    menu.addItem("Deposit to account", true);
     menu.addItem("Change credit", true);
-    menu.addItem("Get current credit", true);
-    menu.addItem("Get current balance", true);
-    menu.addItem("Get current TOTAL balance", true);
-    menu.addItem("Show account info", true);
+    menu.addItem("Write to file", true);
+    menu.addItem("Read from file", true);
     menu.addItem("Exit", true);
 }
 
