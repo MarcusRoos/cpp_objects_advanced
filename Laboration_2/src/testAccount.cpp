@@ -23,30 +23,45 @@ void testAccount::run() {
         switch(menu.menuChoice())
         {
             case 1:
-                setAccountNr();
+
                 break;
             case 2:
-                addcurrBalance();
+
                 break;
             case 3:
-                deductcurrBalance();
+
                 break;
             case 4:
-                changeallCredit();
+
                 break;
             case 5:
-                getcurrCredit();
+
                 break;
             case 6:
-                getcurrBalance();
+
                 break;
             case 7:
-                gettotalBalance();
+
                 break;
             case 8:
-                accountInfo();
+
                 break;
             case 9:
+
+                break;
+            case 10:
+
+                break;
+            case 11:
+
+                break;
+            case 12:
+
+                break;
+            case 13:
+
+                break;
+            case 14:
                 again=false;
                 break;
         }
@@ -77,38 +92,58 @@ testAccount::testAccount() {
     menu.addItem("Exit", true);
 }
 
-void testAccount::setAccountNr() {
-
-}
-
-void testAccount::addcurrBalance() {
-
-}
-
-void testAccount::deductcurrBalance() {
-
-}
-
-void testAccount::changeallCredit() {
-
-}
-
-void testAccount::getcurrCredit() {
-
-}
-
-void testAccount::getcurrBalance() {
-
-}
-
-void testAccount::gettotalBalance() {
-
-}
-
-void testAccount::accountInfo() {
-
-}
-
 bool testAccount::numberVerify(const std::string &input) {
     return input.find_first_not_of("9876543210") == std::string::npos;
+}
+
+void testAccount::printName() {
+
+}
+
+void testAccount::printPrsnr() {
+
+}
+
+void testAccount::printAmountofAccount() {
+
+}
+
+void testAccount::printAccountInfo() {
+
+}
+
+void testAccount::printBalCredTot() {
+
+}
+
+void testAccount::printAllCash() {
+
+}
+
+void testAccount::createAccount() {
+
+}
+
+void testAccount::deleteAccount() {
+
+}
+
+void testAccount::withdrawAccount() {
+
+}
+
+void testAccount::depositAccont() {
+
+}
+
+void testAccount::changeCredit() {
+
+}
+
+void testAccount::writeToFile() {
+
+}
+
+void testAccount::readFromFile() {
+
 }

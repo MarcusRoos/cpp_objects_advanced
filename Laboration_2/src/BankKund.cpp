@@ -6,14 +6,15 @@
 
 #include "BankKund.h"
 #include <iostream>
-#include <utility>
 #include <fstream>
 
 BankKund::BankKund() = default;
 
 BankKund::BankKund(std::string tmpNamn, std::string tmpPrsn){
-    namn=std::move(tmpNamn);
-    personnummer=std::move(tmpPrsn);
+    tmpNamn = "Test namn";
+    tmpPrsn = "Test Personnummer";
+    namn=tmpNamn;
+    personnummer=tmpPrsn;
 }
 
 std::string BankKund::returNamn() {

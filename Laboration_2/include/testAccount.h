@@ -16,14 +16,19 @@ private:
     Menu menu;
     BankKund bankkund;
 public:
-    void setAccountNr();
-    void addcurrBalance();
-    void deductcurrBalance();
-    void changeallCredit();
-    void getcurrCredit();
-    void getcurrBalance();
-    void gettotalBalance();
-    void accountInfo();
+    void printName();
+    void printPrsnr();
+    void printAmountofAccount();
+    void printAccountInfo();
+    void printBalCredTot();
+    void printAllCash();
+    void createAccount();
+    void deleteAccount();
+    void withdrawAccount();
+    void depositAccont();
+    void changeCredit();
+    void writeToFile();
+    void readFromFile();
     static bool numberVerify(const std::string &input);
     testAccount();
     void run();

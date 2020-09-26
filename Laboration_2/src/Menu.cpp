@@ -43,7 +43,7 @@ int Menu::menuChoice() {
     int choice=0;
     cout << "Choice...";
     cin >> choice;
-    while (std::cin.fail() || choice <1 || choice >9){
+    while (std::cin.fail() || choice <1 || choice >14){
         std::cout << "Wrong input.\n";
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
