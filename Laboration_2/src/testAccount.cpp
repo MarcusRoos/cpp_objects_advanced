@@ -41,10 +41,10 @@ void testAccount::run() {
 
                 break;
             case 7:
-
+                createAccount();
                 break;
             case 8:
-
+                deleteAccount();
                 break;
             case 9:
 
@@ -122,7 +122,9 @@ void testAccount::printAllCash() {
 }
 
 void testAccount::createAccount() {
-
+    std::string tmpPrsn;
+    int tmpBal=0, tmpCred=0;
+bankkund.skapaKonto(tmpPrsn, tmpBal, tmpCred);
 }
 
 void testAccount::deleteAccount() {

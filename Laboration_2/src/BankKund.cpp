@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <utility>
+#include <sstream>
 
 BankKund::BankKund(){
     std::string tmpNamn, tmpPrsn;
@@ -60,9 +61,14 @@ int BankKund::returKundTillgang() {
 }
 
 void BankKund::skapaKonto(const std::string& a, int b, int c) {
+    int tmpInt=0;
     personnummer=a;
     std::string tmpAcc;
-    tmpAcc = a + "-1";
+    tmpInt = testAcc.size();
+    std::stringstream ss;
+    ss << tmpInt;
+    std::string tmpString = ss.str();
+    tmpAcc = a + "-" + tmpString;
     testAcc.push_back(std::unique_ptr<Account>(
             new Account(tmpAcc, b, c)));
 }
