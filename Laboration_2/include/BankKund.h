@@ -10,19 +10,20 @@
 #include <string>
 #include <memory>
 #include "Account.h"
+#include <vector>
 
 class BankKund {
 private:
     std::string namn;
     std::string personnummer;
-    std::unique_ptr<Account> testAcc[3];
+    std::vector<std::unique_ptr<Account>> testAcc;
 public:
     BankKund();
     BankKund(std::string tmpNamn, std::string tmpPrsn);
     std::string returNamn();
     std::string returPnummer();
     int returAntalKonton();
-    std::string returKontoNr();
+    std::string returKontoNr(int input);
     int returKontoInfo(const int &index);
     int returKundTillgang();
     void skapaKonto(const std::string& a, int b, int c);

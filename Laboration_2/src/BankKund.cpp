@@ -7,14 +7,19 @@
 #include "BankKund.h"
 #include <iostream>
 #include <fstream>
+#include <utility>
 
-BankKund::BankKund() = default;
-
-BankKund::BankKund(std::string tmpNamn, std::string tmpPrsn){
+BankKund::BankKund(){
+    std::string tmpNamn, tmpPrsn;
     tmpNamn = "Test namn";
     tmpPrsn = "Test Personnummer";
     namn=tmpNamn;
     personnummer=tmpPrsn;
+}
+
+BankKund::BankKund(std::string tmpNamn, std::string tmpPrsn){
+    namn=std::move(tmpNamn);
+    personnummer=std::move(tmpPrsn);
 }
 
 std::string BankKund::returNamn() {
@@ -26,11 +31,11 @@ std::string BankKund::returPnummer() {
 }
 
 int BankKund::returAntalKonton() {
-    return sizeof(testAcc) / sizeof(std::unique_ptr<Account>); // NOLINT(cppcoreguidelines-narrowing-conversions)
+    return testAcc.size(); // NOLINT(cppcoreguidelines-narrowing-conversions)
 }
 
-std::string BankKund::returKontoNr() {
-    return testAcc[0]->accountInfo();
+std::string BankKund::returKontoNr(int input) {
+    return testAcc[input]->accountInfo();
 }
 
 int BankKund::returKontoInfo(const int &index) {
@@ -58,7 +63,8 @@ void BankKund::skapaKonto(const std::string& a, int b, int c) {
     personnummer=a;
     std::string tmpAcc;
     tmpAcc = a + "-1";
-    testAcc[0] = std::unique_ptr<Account>(new Account(tmpAcc, b, c));
+    testAcc.push_back(std::unique_ptr<Account>(
+            new Account(tmpAcc, b, c)));
 }
 
 void BankKund::tabortKonto(int accNr) {
@@ -101,7 +107,8 @@ void BankKund::lasfranFil() {
             inFile >> tmpBalance;
             inFile >> tmpCredit;
             inFile.get();
-            testAcc[i] = std::unique_ptr<Account>(new Account(tmpANr, tmpCredit, tmpBalance));
+            testAcc.push_back(std::unique_ptr<Account>(
+                    new Account(tmpANr, tmpCredit, tmpBalance)));
             i++;
         }
     }

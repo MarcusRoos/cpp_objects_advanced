@@ -23,13 +23,13 @@ void testAccount::run() {
         switch(menu.menuChoice())
         {
             case 1:
-
+                printName();
                 break;
             case 2:
-
+                printPrsnr();
                 break;
             case 3:
-
+                printAmountofAccount();
                 break;
             case 4:
 
@@ -97,15 +97,16 @@ bool testAccount::numberVerify(const std::string &input) {
 }
 
 void testAccount::printName() {
-
+    std::cout << "NAME: " << bankkund.returNamn() << std::endl;
 }
 
 void testAccount::printPrsnr() {
-
+    std::cout << "Person Number: " << bankkund.returPnummer() << std::endl;
 }
 
 void testAccount::printAmountofAccount() {
-
+    std::cout << "Amount of accounts: " << bankkund.returAntalKonton() <<
+    std::endl;
 }
 
 void testAccount::printAccountInfo() {
