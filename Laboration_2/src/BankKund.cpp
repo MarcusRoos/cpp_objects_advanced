@@ -29,16 +29,22 @@ int BankKund::returAntalKonton() {
     return testAcc.size(); // NOLINT(cppcoreguidelines-narrowing-conversions)
 }
 
-std::string BankKund::returKontoNr(int input) {
-    return testAcc[input]->accountInfo();
+std::string BankKund::returKontoNr() {
+    for (auto & i : testAcc){
+        std::cout<< "AccNr: " << i->accountInfo() <<std::endl;
+        return i->accountInfo();
+    }
+    return nullptr;
 }
 
-int BankKund::returKontoInfo(const int &index) {
-        std::cout << "Account Number: "<<testAcc[index]->accountInfo() << std::endl;
-        std::cout << "Credit: " << testAcc[index]->getcurrCredit() << std::endl;
-        std::cout << "Saldo: " <<testAcc[index]->getcurrBalance() << std::endl;
-        std::cout << "Totalt belopp: " <<testAcc[index]->gettotalBalance() << std::endl;
-    return 0;
+std::string BankKund::returKontoInfo(const int &index) {
+
+    std::cout << "Account Number: " << testAcc[index]->accountInfo() << std::endl
+         << "Account Number: "<<testAcc[index]->accountInfo() << std::endl
+         << "Credit: " << testAcc[index]->getcurrCredit() << std::endl
+         << "Saldo: " <<testAcc[index]->getcurrBalance() << std::endl
+         << "Totalt belopp: " <<testAcc[index]->gettotalBalance() << std::endl;
+    return "stringOut";
 }
 
 int BankKund::returKundTillgang() {
@@ -53,13 +59,12 @@ void BankKund::skapaKonto(const std::string& a, int b, int c) {
     int tmpInt=0;
     personnummer=a;
     std::string tmpAcc;
-    tmpInt = testAcc.size();
+    tmpInt = testAcc.size()+1;
     std::stringstream ss;
     ss << tmpInt;
     std::string tmpString = ss.str();
     tmpAcc = a + "-" + tmpString;
-    testAcc.push_back(std::unique_ptr<Account>(
-            new Account(tmpAcc, b, c)));
+    testAcc.emplace_back(new Account( tmpAcc, b, c ));
 }
 
 void BankKund::tabortKonto(int accNr) {

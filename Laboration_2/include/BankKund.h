@@ -23,8 +23,8 @@ public:
     std::string returNamn();
     std::string returPnummer();
     int returAntalKonton();
-    std::string returKontoNr(int input);
-    int returKontoInfo(const int &index);
+    std::string returKontoNr();
+    std::string returKontoInfo(const int &index);
     int returKundTillgang();
     void skapaKonto(const std::string& a, int b, int c);
     void tabortKonto(int accNr);

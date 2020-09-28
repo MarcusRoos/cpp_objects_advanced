@@ -7,6 +7,7 @@
 #include "testAccount.h"
 #include <iostream>
 #include <tuple>
+#include <sstream>
 #include "Management.h"
 
 /**
@@ -112,11 +113,8 @@ void testAccount::printAmountofAccount() {
 }
 
 void testAccount::printAccountInfo() {
-    std::cout << "Enter 1, 2 or 3. " << std::endl;
-    int tmpNr=0;
-    std::cin >> tmpNr;
     std::string tmpAcc;
-    tmpAcc = bankkund.returKontoNr(tmpNr);
+    tmpAcc = bankkund.returKontoNr();
     std::cout << "Account number: " << tmpAcc << std::endl;
 }
 
@@ -124,9 +122,10 @@ void testAccount::printBalCredTot() {
     std::cout << "Enter 1, 2 or 3. " << std::endl;
     int tmpIdx=0;
     std::cin >> tmpIdx;
-    int tmpNr=0;
+    std::string tmpNr;
     tmpNr = bankkund.returKontoInfo(tmpIdx);
-    std::cout <<"Balance, credit, total: " <<tmpNr << std::endl;
+    std::cout << tmpNr;
+    std::cout <<"Balance, credit, total: " << tmpNr << std::endl;
 }
 
 void testAccount::printAllCash() {
@@ -146,6 +145,7 @@ void testAccount::createAccount() {
         std::cin >> tmpPrsn;
         bankkund = BankKund(tmpNamn, tmpPrsn);
     }
+    tmpPrsn = bankkund.returPnummer();
     bankkund.skapaKonto(tmpPrsn, tmpBal, tmpCred);
     }
     else
