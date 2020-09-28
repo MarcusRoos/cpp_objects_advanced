@@ -65,6 +65,7 @@ void testAccount::run() {
                 readFromFile();
                 break;
             case 14:
+                writeToFile();
                 again=false;
                 break;
         }
@@ -196,5 +197,8 @@ void testAccount::writeToFile() {
 }
 
 void testAccount::readFromFile() {
-    bankkund.lasfranFil();
+    std::cout << "Enter social security number: " << std::endl;
+    std::string tmpAcc;
+    std::getline(std::cin >> std::ws, tmpAcc);
+    bankkund.lasfranFil(tmpAcc);
 }

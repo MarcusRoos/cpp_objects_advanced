@@ -93,11 +93,11 @@ void BankKund::skrivtillFil() {
     outFile.close();
 }
 
-void BankKund::lasfranFil() {
+void BankKund::lasfranFil(const std::string& tmpAcc) {
     std::string tmpANr;
     int tmpBalance, tmpCredit;
 
-    std::ifstream inFile(personnummer +".knt");
+    std::ifstream inFile(tmpAcc +".knt");
     if (inFile.is_open()){
         getline(inFile, namn);
         getline(inFile, personnummer);
