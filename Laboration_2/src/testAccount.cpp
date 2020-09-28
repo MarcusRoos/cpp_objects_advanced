@@ -113,9 +113,11 @@ void testAccount::printAmountofAccount() {
 }
 
 void testAccount::printAccountInfo() {
-    std::string tmpAcc;
-    tmpAcc = bankkund.returKontoNr();
-    std::cout << "Account number: " << tmpAcc << std::endl;
+    for (int i=0; i<bankkund.returAntalKonton(); i++) {
+        std::string tmpAcc;
+        tmpAcc = bankkund.returKontoNr(i);
+        std::cout << "Account number: " << tmpAcc << std::endl;
+    }
 }
 
 void testAccount::printBalCredTot() {
@@ -125,7 +127,6 @@ void testAccount::printBalCredTot() {
     std::string tmpNr;
     tmpNr = bankkund.returKontoInfo(tmpIdx);
     std::cout << tmpNr;
-    std::cout <<"Balance, credit, total: " << tmpNr << std::endl;
 }
 
 void testAccount::printAllCash() {
