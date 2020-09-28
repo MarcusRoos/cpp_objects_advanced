@@ -6,6 +6,8 @@
 
 #include "testAccount.h"
 #include <iostream>
+#include <tuple>
+#include "Management.h"
 
 /**
 The run function, this function will be called in the main program, from here a
@@ -32,13 +34,13 @@ void testAccount::run() {
                 printAmountofAccount();
                 break;
             case 4:
-
+                printAccountInfo();
                 break;
             case 5:
-
+                printBalCredTot();
                 break;
             case 6:
-
+                printAllCash();
                 break;
             case 7:
                 createAccount();
@@ -47,19 +49,19 @@ void testAccount::run() {
                 deleteAccount();
                 break;
             case 9:
-
+                withdrawAccount();
                 break;
             case 10:
-
+                depositAccont();
                 break;
             case 11:
-
+                changeCredit();
                 break;
             case 12:
-
+                writeToFile();
                 break;
             case 13:
-
+                readFromFile();
                 break;
             case 14:
                 again=false;
@@ -110,43 +112,85 @@ void testAccount::printAmountofAccount() {
 }
 
 void testAccount::printAccountInfo() {
-
+    std::cout << "Enter 1, 2 or 3. " << std::endl;
+    int tmpNr=0;
+    std::cin >> tmpNr;
+    std::string tmpAcc;
+    tmpAcc = bankkund.returKontoNr(tmpNr);
+    std::cout << "Account number: " << tmpAcc << std::endl;
 }
 
 void testAccount::printBalCredTot() {
-
+    std::cout << "Enter 1, 2 or 3. " << std::endl;
+    int tmpIdx=0;
+    std::cin >> tmpIdx;
+    int tmpNr=0;
+    tmpNr = bankkund.returKontoInfo(tmpIdx);
+    std::cout <<"Balance, credit, total: " <<tmpNr << std::endl;
 }
 
 void testAccount::printAllCash() {
-
+    int tmpNr=0;
+    tmpNr = bankkund.returKundTillgang();
+    std::cout << "Total: " << tmpNr << std::endl;
 }
 
 void testAccount::createAccount() {
-    std::string tmpPrsn;
+    if (bankkund.returAntalKonton() <= 2){
+    std::string tmpPrsn, tmpNamn;
     int tmpBal=0, tmpCred=0;
-bankkund.skapaKonto(tmpPrsn, tmpBal, tmpCred);
+    if (bankkund.returAntalKonton() == 0){
+        std::cout << "Enter your firstname + last name " << std::endl;
+        std::getline(std::cin >> std::ws, tmpNamn);
+        std::cout << "Enter your social security number, 10 digits: " << std::endl;
+        std::cin >> tmpPrsn;
+        bankkund = BankKund(tmpNamn, tmpPrsn);
+    }
+    bankkund.skapaKonto(tmpPrsn, tmpBal, tmpCred);
+    }
+    else
+        std::cout << "Maximum 3 accounts! " << std::endl;
 }
 
 void testAccount::deleteAccount() {
-
+    std::cout << "Enter 1, 2 or 3. " << std::endl;
+    int tmpNr=0;
+    std::cin >> tmpNr;
+    tmpNr -= -1;
+    bankkund.tabortKonto(tmpNr);
 }
 
 void testAccount::withdrawAccount() {
-
+    std::cout << "Enter which account to withdraw from: " << std::endl;
+    int tmpNr=0, tmpAcc=0;
+    std::cin >> tmpAcc;
+    std::cout << "Enter amount to withdraw. " << std::endl;
+    std::cin >> tmpNr;
+    bankkund.utKonto(tmpAcc, tmpNr);
 }
 
 void testAccount::depositAccont() {
-
+    std::cout << "Enter which account to deposit to: " << std::endl;
+    int tmpNr=0, tmpAcc=0;
+    std::cin >> tmpAcc;
+    std::cout << "Enter amount to deposit. " << std::endl;
+    std::cin >> tmpNr;
+    bankkund.inKonto(tmpAcc, tmpNr);
 }
 
 void testAccount::changeCredit() {
-
+    std::cout << "Enter which account to credit for: " << std::endl;
+    int tmpNr=0, tmpAcc=0;
+    std::cin >> tmpAcc;
+    std::cout << "Change credit to which amount?. " << std::endl;
+    std::cin >> tmpNr;
+    bankkund.andraKredit(tmpAcc, tmpNr);
 }
 
 void testAccount::writeToFile() {
-
+    bankkund.skrivtillFil();
 }
 
 void testAccount::readFromFile() {
-
+    bankkund.lasfranFil();
 }

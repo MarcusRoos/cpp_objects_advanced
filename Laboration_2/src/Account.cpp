@@ -5,7 +5,6 @@
 //
 
 #include "Account.h"
-
 #include <utility>
 
 Account::Account() {

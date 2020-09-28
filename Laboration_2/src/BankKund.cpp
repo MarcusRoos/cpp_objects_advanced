@@ -10,13 +10,7 @@
 #include <utility>
 #include <sstream>
 
-BankKund::BankKund(){
-    std::string tmpNamn, tmpPrsn;
-    tmpNamn = "Test namn";
-    tmpPrsn = "Test Personnummer";
-    namn=tmpNamn;
-    personnummer=tmpPrsn;
-}
+BankKund::BankKund()= default;
 
 BankKund::BankKund(std::string tmpNamn, std::string tmpPrsn){
     namn=std::move(tmpNamn);
@@ -40,21 +34,16 @@ std::string BankKund::returKontoNr(int input) {
 }
 
 int BankKund::returKontoInfo(const int &index) {
-    if (testAcc[index]) {
-        return testAcc[index]->getcurrBalance(), testAcc[index]->getcurrCredit(),
-                testAcc[index]->gettotalBalance();
-    }
-    else
-        return 0;
+        std::cout << "Account Number: "<<testAcc[index]->accountInfo() << std::endl;
+        std::cout << "Credit: " << testAcc[index]->getcurrCredit() << std::endl;
+        std::cout << "Saldo: " <<testAcc[index]->getcurrBalance() << std::endl;
+        std::cout << "Totalt belopp: " <<testAcc[index]->gettotalBalance() << std::endl;
+    return 0;
 }
 
 int BankKund::returKundTillgang() {
     int tot=0;
     for (auto & i : testAcc){
-        std::cout << "Account Number: "<<i->accountInfo() << std::endl;
-        std::cout << "Credit: " << i->getcurrCredit() << std::endl;
-        std::cout << "Saldo: " <<i->getcurrBalance() << std::endl;
-        std::cout << "Totalt belopp: " <<i->gettotalBalance() << std::endl;
         tot += i->gettotalBalance();
     }
     return tot;
@@ -74,7 +63,7 @@ void BankKund::skapaKonto(const std::string& a, int b, int c) {
 }
 
 void BankKund::tabortKonto(int accNr) {
-    testAcc[accNr].reset();
+    testAcc.erase (testAcc.begin()+accNr);
 }
 
 void BankKund::utKonto(int tmpAcc, int input) {
