@@ -8,6 +8,7 @@
 #include <iostream>
 #include <tuple>
 #include <sstream>
+#include <limits>
 #include "Management.h"
 
 /**
@@ -101,22 +102,23 @@ bool testAccount::numberVerify(const std::string &input) {
 }
 
 void testAccount::printName() {
-    std::cout << "NAME: " << bankkund.returNamn() << std::endl;
+    std::cout << "NAME: " << bank.returNamn() << std::endl;
 }
 
 void testAccount::printPrsnr() {
-    std::cout << "Person Number: " << bankkund.returPnummer() << std::endl;
+    std::cout << "Person Number: " << bank.returPnummer() << std::endl;
+
 }
 
 void testAccount::printAmountofAccount() {
-    std::cout << "Amount of accounts: " << bankkund.returAntalKonton() <<
+    std::cout << "Amount of accounts: " << bank.returAntalKonton() <<
     std::endl;
 }
 
 void testAccount::printAccountInfo() {
-    for (int i=0; i<bankkund.returAntalKonton(); i++) {
+    for (int i=0; i<bank.returAntalKonton(); i++) {
         std::string tmpAcc;
-        tmpAcc = bankkund.returKontoNr(i);
+        tmpAcc = bank.returKontoNr(i);
         std::cout << "Account number: " << tmpAcc << std::endl;
     }
 }
@@ -126,29 +128,29 @@ void testAccount::printBalCredTot() {
     int tmpIdx=0;
     std::cin >> tmpIdx;
     std::string tmpNr;
-    tmpNr = bankkund.returKontoInfo(tmpIdx);
+    tmpNr = bank.returKontoInfo(tmpIdx);
     std::cout << tmpNr;
 }
 
 void testAccount::printAllCash() {
     int tmpNr=0;
-    tmpNr = bankkund.returKundTillgang();
+    tmpNr = bank.returKundTillgang();
     std::cout << "Total: " << tmpNr << std::endl;
 }
 
 bool testAccount::createAccount() {
-    if (bankkund.returAntalKonton() <= 2){
+    if (bank.returAntalKonton() <= 2){
     std::string tmpPrsn, tmpNamn;
     int tmpBal=0, tmpCred=0;
-    if (bankkund.returAntalKonton() == 0){
+    if (bank.returAntalKonton() == 0){
         std::cout << "Enter your firstname + last name " << std::endl;
         std::getline(std::cin >> std::ws, tmpNamn);
         std::cout << "Enter your social security number, 10 digits: " << std::endl;
         std::cin >> tmpPrsn;
-        bankkund = BankKund(tmpNamn, tmpPrsn);
+        bank.skapaKonto("TestNamn", 1500, 3000);
     }
-    tmpPrsn = bankkund.returPnummer();
-    bankkund.skapaKonto(tmpPrsn, tmpBal, tmpCred);
+    tmpPrsn = bank.returPnummer();
+
     return true;
     }
     else {
@@ -162,7 +164,7 @@ void testAccount::deleteAccount() {
     int tmpNr=0;
     std::cin >> tmpNr;
     tmpNr -= -1;
-    bankkund.tabortKonto(tmpNr);
+    bank.tabortKonto(tmpNr);
 }
 
 void testAccount::withdrawAccount() {
@@ -171,7 +173,7 @@ void testAccount::withdrawAccount() {
     std::cin >> tmpAcc;
     std::cout << "Enter amount to withdraw. " << std::endl;
     std::cin >> tmpNr;
-    bankkund.utKonto(tmpAcc, tmpNr);
+    bank.utKonto(tmpAcc, tmpNr);
 }
 
 void testAccount::depositAccont() {
@@ -180,7 +182,7 @@ void testAccount::depositAccont() {
     std::cin >> tmpAcc;
     std::cout << "Enter amount to deposit. " << std::endl;
     std::cin >> tmpNr;
-    bankkund.inKonto(tmpAcc, tmpNr);
+    bank.inKonto(tmpAcc, tmpNr);
 }
 
 void testAccount::changeCredit() {
@@ -189,16 +191,44 @@ void testAccount::changeCredit() {
     std::cin >> tmpAcc;
     std::cout << "Change credit to which amount?. " << std::endl;
     std::cin >> tmpNr;
-    bankkund.andraKredit(tmpAcc, tmpNr);
+    bank.andraKredit(tmpAcc, tmpNr);
 }
 
 void testAccount::writeToFile() {
-    bankkund.skrivtillFil();
+    bank.skrivtillFil();
 }
 
 void testAccount::readFromFile() {
     std::cout << "Enter social security number: " << std::endl;
     std::string tmpAcc;
     std::getline(std::cin >> std::ws, tmpAcc);
-    bankkund.lasfranFil(tmpAcc);
+    bank.lasfranFil(tmpAcc);
+}
+
+void testAccount::runSubMenu() {
+    std::cout << "1. Create account" << std::endl;
+    std::cout << "2. Read from file" << std::endl;
+    std::cout << "3. Exit" << std::endl;
+    std::cout << "Enter choice" << std::endl;
+    int choice = 0;
+    std::cin >> choice;
+    while (std::cin.fail() || choice < 1 || choice > 3) {
+        std::cout << "Wrong input.\n";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin >> choice;
+    }
+    switch (choice) {
+        case 1:
+            createAccount();
+            run();
+            break;
+        case 2:
+            readFromFile();
+            run();
+            break;
+        case 3:
+        default:
+            break;
+    }
 }

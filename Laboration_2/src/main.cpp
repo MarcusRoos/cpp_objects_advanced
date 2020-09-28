@@ -9,6 +9,6 @@
 
 int main() {
     testAccount mainmenu;
-    mainmenu.run();
+    mainmenu.runSubMenu();
     return 0;
 }

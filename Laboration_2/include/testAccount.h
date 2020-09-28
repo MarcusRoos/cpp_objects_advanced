@@ -9,12 +9,12 @@
 #include "Menu.h"
 #include <fstream>
 #include <vector>
-#include "BankKund.h"
+#include "Bank.h"
 
 class testAccount {
 private:
     Menu menu;
-    BankKund bankkund;
+    Bank bank;
 public:
     void printName();
     void printPrsnr();
@@ -32,5 +32,6 @@ public:
     static bool numberVerify(const std::string &input);
     testAccount();
     void run();
+    void runSubMenu();
 };
 #endif
