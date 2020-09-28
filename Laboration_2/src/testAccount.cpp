@@ -134,7 +134,7 @@ void testAccount::printAllCash() {
     std::cout << "Total: " << tmpNr << std::endl;
 }
 
-void testAccount::createAccount() {
+bool testAccount::createAccount() {
     if (bankkund.returAntalKonton() <= 2){
     std::string tmpPrsn, tmpNamn;
     int tmpBal=0, tmpCred=0;
@@ -147,9 +147,12 @@ void testAccount::createAccount() {
     }
     tmpPrsn = bankkund.returPnummer();
     bankkund.skapaKonto(tmpPrsn, tmpBal, tmpCred);
+    return true;
     }
-    else
-        std::cout << "Maximum 3 accounts! " << std::endl;
+    else {
+        std::cout << "Tmp text, max 3 accounts" << std::endl;
+        return false;
+    }
 }
 
 void testAccount::deleteAccount() {
