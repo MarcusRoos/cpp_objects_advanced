@@ -53,6 +53,7 @@ int Bank::returKundTillgang() {
 }
 
 void Bank::skapaKonto(std::string tmpNamn, std::string tmpPrsn) {
+    bankPtr.reset();
     std::unique_ptr<BankKund> my_ptr(new BankKund());
     my_ptr->skapaKonto(tmpNamn, tmpPrsn);
     bankPtr = std::move(my_ptr);

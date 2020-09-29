@@ -41,8 +41,8 @@ std::string BankKund::returKontoInfo(const int &index) {
     tmpCred = std::to_string(testAcc[index]->getcurrCredit());
     tmpBal = std::to_string(testAcc[index]->getcurrBalance());
     tmpTot = std::to_string(testAcc[index]->gettotalBalance());
-    std::string s1{"Account Number: " + tmpString + "\n" + "Credit: " + tmpCred
-    + "\n" + "Balance: " + tmpBal + "\n" + "Total: " + tmpTot + "\n"};
+    std::string s1{"====== " + tmpString + " ========\n\n" + "Balance: " + tmpBal
+    + "\n" + "Credit: " + tmpCred + "\n" + "Disposable: " + tmpTot + "\n\n"};
     return s1;
 }
 
@@ -54,7 +54,9 @@ int BankKund::returKundTillgang() {
     return tot;
 }
 
-void BankKund::skapaKonto(std::string tmpNamn, std::string tmpPrsn) {
+void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn) {
+    namn = std::move(tmpNamn);
+    personnummer = tmpPrsn;
     int tmpInt=0;
     std::string tmpAcc;
     tmpInt = testAcc.size();
@@ -82,6 +84,7 @@ void BankKund::andraKredit(int tmpAcc, int input) {
 }
 
 void BankKund::skrivtillFil() {
+
     std::ofstream outFile(personnummer + ".knt");
 
     outFile << namn << std::endl << personnummer << std::endl;

@@ -63,6 +63,7 @@ void testAccount::run() {
                 break;
             case 13:
                 std::cout << "Account Overview" << std::endl;
+                accountSummery();
                 break;
             case 14:
                 writeToFile();
@@ -91,8 +92,8 @@ testAccount::testAccount() {
     menu.addItem("Withdraw from account", true);
     menu.addItem("Deposit to account", true);
     menu.addItem("Change credit", true);
-    menu.addItem("Account overview", true);
     menu.addItem("Change customer", true);
+    menu.addItem("Account overview", true);
     menu.addItem("Exit", true);
 }
 
@@ -223,5 +224,13 @@ void testAccount::runSubMenu() {
         case 3:
         default:
             break;
+    }
+}
+
+void testAccount::accountSummery() {
+    for (int tmpIdx=0; tmpIdx<3; tmpIdx++) {
+        std::string tmpNr;
+        tmpNr = bank.returKontoInfo(tmpIdx);
+        std::cout << tmpNr;
     }
 }
