@@ -228,10 +228,16 @@ void testAccount::accountSummery() {
 void testAccount::startAccount() {
     std::cout << "Enter your firstname and lastname: " << std::endl;
     std::string tmpNamn;
-    std::cin >> tmpNamn;
-    std::cout << "Enter your social security number (person number):" << std::endl;
+    std::getline(std::cin >> std::ws, tmpNamn);
+    std::cout << "Enter your social security number (10 digits):" << std::endl;
     std::string tmpPrsn;
     std::cin >> tmpPrsn;
+    while (!numberVerify(tmpPrsn) || tmpPrsn.length() != 10){
+        std::cout << "Wrong input.\n";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin >> tmpPrsn;
+    }
     bank = Bank(tmpNamn, tmpPrsn);
 }
 

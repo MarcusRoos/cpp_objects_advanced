@@ -52,10 +52,8 @@ int Bank::returKundTillgang() {
 }
 
 void Bank::skapaKonto() {
-    std::string tmpNamn, tmpPrsn;
-    tmpNamn = bankPtr->returNamn();
-    tmpPrsn = bankPtr->returPnummer();
-    bankPtr->skapaKonto(std::move(tmpNamn), tmpPrsn);
+    bankPtr->skapaKonto(bankPtr->returNamn(),
+            bankPtr->returPnummer());
 }
 
 void Bank::tabortKonto(int accNr) {
