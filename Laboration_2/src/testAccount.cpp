@@ -139,8 +139,6 @@ void testAccount::printAllCash() {
 }
 
 bool testAccount::createAccount() {
-
-
         std::string tmpPrsn, tmpNamn;
         std::cout << "Enter your firstname + last name " << std::endl;
         std::getline(std::cin >> std::ws, tmpNamn);
@@ -213,7 +211,7 @@ void testAccount::runSubMenu() {
     }
     switch (choice) {
         case 1:
-            createAccount();
+            startAccount();
             run();
             break;
         case 2:
@@ -233,3 +231,14 @@ void testAccount::accountSummery() {
         std::cout << tmpNr;
     }
 }
+
+void testAccount::startAccount() {
+    std::cout << "Enter your firstname and lastname: " << std::endl;
+    std::string tmpNamn;
+    std::cin >> tmpNamn;
+    std::cout << "Enter your social security number (person number):" << std::endl;
+    std::string tmpPrsn;
+    std::cin >> tmpPrsn;
+    bank = Bank(tmpNamn, tmpPrsn);
+}
+

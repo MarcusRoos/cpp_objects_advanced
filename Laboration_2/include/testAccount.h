@@ -29,6 +29,7 @@ public:
     void changeCredit();
     void writeToFile();
     void readFromFile();
+    void startAccount();
     static bool numberVerify(const std::string &input);
     testAccount();
     void run();
