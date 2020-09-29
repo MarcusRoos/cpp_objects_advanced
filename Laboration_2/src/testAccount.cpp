@@ -138,23 +138,18 @@ void testAccount::printAllCash() {
 }
 
 bool testAccount::createAccount() {
-    if (bank.returAntalKonton() <= 2){
     std::string tmpPrsn, tmpNamn;
-    if (bank.returAntalKonton() == 0){
         std::cout << "Enter your firstname + last name " << std::endl;
         std::getline(std::cin >> std::ws, tmpNamn);
         std::cout << "Enter your social security number, 10 digits: " << std::endl;
         std::cin >> tmpPrsn;
+        bank.skapaKonto(tmpNamn, tmpPrsn);
         bank = Bank(tmpNamn, tmpPrsn);
-    }
+
     tmpPrsn = bank.returPnummer();
 
     return true;
-    }
-    else {
-        std::cout << "Tmp text, max 3 accounts" << std::endl;
-        return false;
-    }
+
 }
 
 void testAccount::deleteAccount() {
