@@ -7,9 +7,7 @@
 #include "testAccount.h"
 #include <iostream>
 #include <tuple>
-#include <sstream>
 #include <limits>
-#include "Management.h"
 
 /**
 The run function, this function will be called in the main program, from here a
@@ -60,10 +58,11 @@ void testAccount::run() {
                 changeCredit();
                 break;
             case 12:
-                writeToFile();
+                std::cout << "Change Customer" << std::endl;
+                readFromFile();
                 break;
             case 13:
-                readFromFile();
+                std::cout << "Account Overview" << std::endl;
                 break;
             case 14:
                 writeToFile();
@@ -92,8 +91,8 @@ testAccount::testAccount() {
     menu.addItem("Withdraw from account", true);
     menu.addItem("Deposit to account", true);
     menu.addItem("Change credit", true);
-    menu.addItem("Write to file", true);
-    menu.addItem("Read from file", true);
+    menu.addItem("Account overview", true);
+    menu.addItem("Change customer", true);
     menu.addItem("Exit", true);
 }
 

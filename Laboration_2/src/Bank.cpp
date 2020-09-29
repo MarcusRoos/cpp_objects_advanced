@@ -41,12 +41,14 @@ std::string Bank::returKontoNr(int idx) {
 }
 
 std::string Bank::returKontoInfo(const int &index) {
-    return std::string();
+    std::string tmpString;
+    tmpString = bankPtr->returKontoInfo(index);
+    return tmpString;
 }
 
 int Bank::returKundTillgang() {
     int tmpNr=0;
-    tmpNr= bankPtr->returKundTillgang();
+    tmpNr = bankPtr->returKundTillgang();
     return tmpNr;
 }
 
@@ -56,23 +58,23 @@ void Bank::skapaKonto(std::string tmpNamn, std::string tmpPrsn) {
 }
 
 void Bank::tabortKonto(int accNr) {
-
+    bankPtr->tabortKonto(accNr);
 }
 
 void Bank::utKonto(int tmpAcc, int input) {
-
+    bankPtr->utKonto(tmpAcc, input);
 }
 
 void Bank::inKonto(int tmpAcc, int input) {
-
+    bankPtr->inKonto(tmpAcc, input);
 }
 
 void Bank::andraKredit(int tmpAcc, int input) {
-
+    bankPtr->andraKredit(tmpAcc, input);
 }
 
 void Bank::skrivtillFil() {
-
+    bankPtr->skrivtillFil();
 }
 
 void Bank::lasfranFil(const std::string &tmpAcc) {
