@@ -6,12 +6,20 @@
 
 #include "Bank.h"
 
-Bank::Bank() {
+#include <utility>
 
+Bank::Bank()= default;
+
+Bank::Bank(std::string tmpNamn, std::string tmpPrsn) {
+    std::unique_ptr<BankKund> my_ptr(new BankKund(std::move(tmpNamn),
+                                                  std::move(tmpPrsn)));
+    bankPtr = std::move(my_ptr);
 }
 
 std::string Bank::returNamn() {
-    return bankPtr->returNamn();
+    std::string tmpString;
+    tmpString = bankPtr->returNamn();
+    return tmpString;
 }
 
 std::string Bank::returPnummer() {
@@ -31,15 +39,14 @@ std::string Bank::returKontoInfo(const int &index) {
 }
 
 int Bank::returKundTillgang() {
-    return 0;
+    int tmpNr=0;
+    tmpNr= bankPtr->returKundTillgang();
+    return tmpNr;
 }
 
-void Bank::skapaKonto(const std::string &a, int b, int c) {
-    std::string tmpNamn, tmpPrsn;
-    tmpNamn = "TEST";
-    tmpPrsn = "TEST2";
-    std::unique_ptr<BankKund> my_ptr(new BankKund(tmpNamn, tmpPrsn));
-
+void Bank::skapaKonto(std::string tmpNamn, std::string tmpPrsn) {
+    std::unique_ptr<BankKund> my_ptr(new BankKund(std::move(tmpNamn),
+            std::move(tmpPrsn)));
 }
 
 void Bank::tabortKonto(int accNr) {
@@ -63,5 +70,7 @@ void Bank::skrivtillFil() {
 }
 
 void Bank::lasfranFil(const std::string &tmpAcc) {
-
+    std::unique_ptr<BankKund> my_ptr(new BankKund());
+    my_ptr->lasfranFil(tmpAcc);
+    bankPtr = std::move(my_ptr);
 }

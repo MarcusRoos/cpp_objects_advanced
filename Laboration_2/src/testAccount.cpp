@@ -141,13 +141,12 @@ void testAccount::printAllCash() {
 bool testAccount::createAccount() {
     if (bank.returAntalKonton() <= 2){
     std::string tmpPrsn, tmpNamn;
-    int tmpBal=0, tmpCred=0;
     if (bank.returAntalKonton() == 0){
         std::cout << "Enter your firstname + last name " << std::endl;
         std::getline(std::cin >> std::ws, tmpNamn);
         std::cout << "Enter your social security number, 10 digits: " << std::endl;
         std::cin >> tmpPrsn;
-        bank.skapaKonto("TestNamn", 1500, 3000);
+        bank = Bank(tmpNamn, tmpPrsn);
     }
     tmpPrsn = bank.returPnummer();
 
@@ -201,7 +200,7 @@ void testAccount::writeToFile() {
 void testAccount::readFromFile() {
     std::cout << "Enter social security number: " << std::endl;
     std::string tmpAcc;
-    std::getline(std::cin >> std::ws, tmpAcc);
+    std::cin >> tmpAcc;
     bank.lasfranFil(tmpAcc);
 }
 

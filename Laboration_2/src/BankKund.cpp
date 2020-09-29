@@ -54,16 +54,15 @@ int BankKund::returKundTillgang() {
     return tot;
 }
 
-void BankKund::skapaKonto(const std::string& a, int b, int c) {
+void BankKund::skapaKonto(std::string tmpNamn, std::string tmpPrsn) {
     int tmpInt=0;
-    personnummer=a;
     std::string tmpAcc;
     tmpInt = testAcc.size();
     std::stringstream ss;
     ss << tmpInt;
     std::string tmpString = ss.str();
-    tmpAcc = a + "-" + tmpString;
-    testAcc.emplace_back(new Account( tmpAcc, b, c ));
+    tmpAcc = tmpPrsn + "-" + tmpString;
+    testAcc.emplace_back(new Account( tmpAcc, tmpInt, tmpInt ));
 }
 
 void BankKund::tabortKonto(int accNr) {

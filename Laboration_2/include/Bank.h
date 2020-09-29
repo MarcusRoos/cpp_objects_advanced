@@ -12,16 +12,16 @@
 class Bank {
 private:
     std::unique_ptr<BankKund>bankPtr;
-    BankKund testBankKund;
 public:
     Bank();
+    Bank(std::string tmpNamn, std::string tmpPrsn);
     std::string returNamn();
     std::string returPnummer();
     int returAntalKonton();
     std::string returKontoNr(int idx);
     std::string returKontoInfo(const int &index);
     int returKundTillgang();
-    void skapaKonto(const std::string& a, int b, int c);
+    void skapaKonto(std::string tmpNamn, std::string tmpPrsn);
     void tabortKonto(int accNr);
     void utKonto(int tmpAcc, int input);
     void inKonto(int tmpAcc, int input);
