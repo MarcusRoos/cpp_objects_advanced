@@ -92,12 +92,17 @@ void BankKund::tabortKonto(int accNr) {
     testAcc.erase (testAcc.begin()+accNr);
 }
 
-void BankKund::utKonto(int tmpAcc, int input) {
-    testAcc[tmpAcc]->deductcurrBalance(input);
+bool BankKund::utKonto(int tmpAcc, int input) {
+    if (testAcc[tmpAcc]->gettotalBalance() >= input) {
+        testAcc[tmpAcc]->deductcurrBalance(input);
+        return true;
+    }
+    else
+        return false;
 }
 
 void BankKund::inKonto(int tmpAcc, int input) {
-    testAcc[tmpAcc]->addcurrBalance(input);
+        testAcc[tmpAcc]->addcurrBalance(input);
 }
 
 void BankKund::andraKredit(int tmpAcc, int input) {
@@ -105,9 +110,7 @@ void BankKund::andraKredit(int tmpAcc, int input) {
 }
 
 void BankKund::skrivtillFil() {
-
     std::ofstream outFile(personnummer + ".knt");
-
     outFile << namn << std::endl << personnummer << std::endl;
     for (auto &idx : testAcc){
         outFile << idx->accountInfo() << std::endl << idx->getcurrBalance() <<

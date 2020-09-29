@@ -23,7 +23,7 @@ public:
     int returKundTillgang();
     bool skapaKonto();
     bool tabortKonto(int accNr);
-    void utKonto(int tmpAcc, int input);
+    bool utKonto(int tmpAcc, int input);
     void inKonto(int tmpAcc, int input);
     void andraKredit(int tmpAcc, int input);
     void skrivtillFil();

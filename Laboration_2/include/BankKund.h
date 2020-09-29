@@ -28,7 +28,7 @@ public:
     int returKundTillgang();
     void skapaKonto(std::string tmpNamn, const std::string& tmpPrsn);
     void tabortKonto(int accNr);
-    void utKonto(int tmpAcc, int input);
+    bool utKonto(int tmpAcc, int input);
     void inKonto(int tmpAcc, int input);
     void andraKredit(int tmpAcc, int input);
     void skrivtillFil();

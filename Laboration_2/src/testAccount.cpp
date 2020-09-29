@@ -116,7 +116,7 @@ void testAccount::printAmountofAccount() {
 
 void testAccount::printAccountInfo() {
     for (int i=0; i<bank.returAntalKonton(); i++) {
-        std::string tmpAcc;
+        std::string tmpAcc, test;
         tmpAcc = bank.returKontoNr(i);
         std::cout << "Account number: " << tmpAcc << std::endl;
     }
@@ -146,16 +146,18 @@ void testAccount::createAccount() {
 }
 
 void testAccount::deleteAccount() {
-    for (int i=0; i<bank.returAntalKonton(); i++) {
-        std::string tmpAcc;
-        tmpAcc = bank.returKontoNr(i);
-        std::cout << "Account number: " << tmpAcc << std::endl;
-    }
-    std::cout << "Delete which account?" << std::endl;
-    int tmpNr=0;
-    std::cin >> tmpNr;
-    if (bank.tabortKonto(tmpNr)){
-        std::cout << "Account deleted! " << std::endl;
+    if (bank.returAntalKonton()>0) {
+        for (int i = 0; i < bank.returAntalKonton(); i++) {
+            std::string tmpAcc;
+            tmpAcc = bank.returKontoNr(i);
+            std::cout << "Account number: " << tmpAcc << std::endl;
+        }
+        std::cout << "Delete which account?" << std::endl;
+        int tmpNr = 0;
+        std::cin >> tmpNr;
+        if (bank.tabortKonto(tmpNr)) {
+            std::cout << "Account deleted! " << std::endl;
+        }
     }
     else
         std::cout << "No accounts to delete! " << std::endl;
@@ -173,21 +175,37 @@ void testAccount::withdrawAccount() {
     std::cin >> tmpAcc;
     std::cout << "Enter amount to withdraw. " << std::endl;
     std::cin >> tmpNr;
-    bank.utKonto(tmpAcc, tmpNr);
+    if (bank.utKonto(tmpAcc, tmpNr)){
+        std::cout << "Withdrew "<< tmpNr << " from account " << tmpAcc <<
+        " successfully! "<<std::endl;
+    }
+    else
+        std::cout << "Not enough balance, withdrawal unsuccessful! "
+        << std::endl;
 }
 
 void testAccount::depositAccont() {
+    int tmpAccnr=0;
+    std::string tmpString;
     for (int i=0; i<bank.returAntalKonton(); i++) {
         std::string tmpAcc;
         tmpAcc = bank.returKontoNr(i);
         std::cout << "Account number: " << tmpAcc << std::endl;
     }
     std::cout << "Deposit to which account? " << std::endl;
-    int tmpNr=0, tmpAcc=0;
-    std::cin >> tmpAcc;
+    std::cin >> tmpString;
+    for (int i=0; i<bank.returAntalKonton(); i++) {
+        std::string tmpAcc;
+        tmpAcc = bank.returKontoNr(i);
+            if (tmpAcc == tmpString){
+                tmpString = tmpString.back();
+                tmpAccnr = std::stoi(tmpString);
+            }
+    }
+    int tmpNr=0;
     std::cout << "Enter amount to deposit. " << std::endl;
     std::cin >> tmpNr;
-    bank.inKonto(tmpAcc, tmpNr);
+    bank.inKonto(tmpAccnr, tmpNr);
 }
 
 void testAccount::changeCredit() {

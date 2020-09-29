@@ -9,6 +9,7 @@
 #include "Menu.h"
 #include <fstream>
 #include <vector>
+#include <string>
 #include "Bank.h"
 
 class testAccount {

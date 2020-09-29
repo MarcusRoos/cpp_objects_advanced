@@ -70,9 +70,10 @@ bool Bank::tabortKonto(int accNr) {
         return false;
 }
 
-void Bank::utKonto(int tmpAcc, int input) {
-    bankPtr->utKonto(tmpAcc, input);
+bool Bank::utKonto(int tmpAcc, int input) {
+    return bankPtr->utKonto(tmpAcc, input);
 }
+
 
 void Bank::inKonto(int tmpAcc, int input) {
     bankPtr->inKonto(tmpAcc, input);
