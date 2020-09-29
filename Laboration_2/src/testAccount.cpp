@@ -145,12 +145,7 @@ bool testAccount::createAccount() {
         std::cout << "Enter your social security number, 10 digits: " << std::endl;
         std::cin >> tmpPrsn;
         bank.skapaKonto(tmpNamn, tmpPrsn);
-        bank = Bank(tmpNamn, tmpPrsn);
-
-    tmpPrsn = bank.returPnummer();
-
     return true;
-
 }
 
 void testAccount::deleteAccount() {

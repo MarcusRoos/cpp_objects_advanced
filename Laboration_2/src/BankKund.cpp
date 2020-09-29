@@ -64,7 +64,29 @@ void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn) {
     ss << tmpInt;
     std::string tmpString = ss.str();
     tmpAcc = tmpPrsn + "-" + tmpString;
-    testAcc.emplace_back(new Account( tmpAcc, tmpInt, tmpInt ));
+    std::cout << "TEMP ACC: " << tmpAcc << std::endl;
+    testAcc.push_back(std::unique_ptr<Account>(
+            new Account(tmpAcc, 0, 0)));
+}
+
+void BankKund::lasfranFil(const std::string& tmpAcc) {
+    std::string tmpANr;
+    int tmpBalance, tmpCredit;
+
+    std::ifstream inFile(tmpAcc +".knt");
+    if (inFile.is_open()){
+        getline(inFile, namn);
+        getline(inFile, personnummer);
+        int i=0;
+        while (getline(inFile, tmpANr)){
+            inFile >> tmpBalance;
+            inFile >> tmpCredit;
+            inFile.get();
+            testAcc.push_back(std::unique_ptr<Account>(
+                    new Account(tmpANr, tmpCredit, tmpBalance)));
+            i++;
+        }
+    }
 }
 
 void BankKund::tabortKonto(int accNr) {
@@ -95,22 +117,4 @@ void BankKund::skrivtillFil() {
     outFile.close();
 }
 
-void BankKund::lasfranFil(const std::string& tmpAcc) {
-    std::string tmpANr;
-    int tmpBalance, tmpCredit;
 
-    std::ifstream inFile(tmpAcc +".knt");
-    if (inFile.is_open()){
-        getline(inFile, namn);
-        getline(inFile, personnummer);
-        int i=0;
-        while (getline(inFile, tmpANr)){
-            inFile >> tmpBalance;
-            inFile >> tmpCredit;
-            inFile.get();
-            testAcc.push_back(std::unique_ptr<Account>(
-                    new Account(tmpANr, tmpCredit, tmpBalance)));
-            i++;
-        }
-    }
-}
