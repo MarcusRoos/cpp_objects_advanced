@@ -23,15 +23,21 @@ std::string Bank::returNamn() {
 }
 
 std::string Bank::returPnummer() {
-    return std::string();
+    std::string tmpString;
+    tmpString = bankPtr->returPnummer();
+    return tmpString;
 }
 
 int Bank::returAntalKonton() {
-    return 0;
+    int tmpNr;
+    tmpNr = bankPtr->returAntalKonton();
+    return tmpNr;
 }
 
 std::string Bank::returKontoNr(int idx) {
-    return std::string();
+    std::string tmpString;
+    tmpString = bankPtr->returKontoNr(idx);
+    return tmpString;
 }
 
 std::string Bank::returKontoInfo(const int &index) {
