@@ -22,7 +22,7 @@ public:
     void printAccountInfo();
     void printBalCredTot();
     void printAllCash();
-    bool createAccount();
+    void createAccount();
     void deleteAccount();
     void withdrawAccount();
     void depositAccont();

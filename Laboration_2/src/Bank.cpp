@@ -51,9 +51,14 @@ int Bank::returKundTillgang() {
     return tmpNr;
 }
 
-void Bank::skapaKonto() {
-    bankPtr->skapaKonto(bankPtr->returNamn(),
-            bankPtr->returPnummer());
+bool Bank::skapaKonto() {
+    if(bankPtr->returAntalKonton()<3) {
+        bankPtr->skapaKonto(bankPtr->returNamn(),
+                            bankPtr->returPnummer());
+        return true;
+    }
+    else
+        return false;
 }
 
 void Bank::tabortKonto(int accNr) {

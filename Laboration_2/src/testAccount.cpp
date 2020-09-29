@@ -6,7 +6,6 @@
 
 #include "testAccount.h"
 #include <iostream>
-#include <tuple>
 #include <limits>
 
 /**
@@ -138,21 +137,33 @@ void testAccount::printAllCash() {
     std::cout << "Total: " << tmpNr << std::endl;
 }
 
-bool testAccount::createAccount() {
-        bank.skapaKonto();
-        return true;
+void testAccount::createAccount() {
+        if (bank.skapaKonto()){
+            std::cout << "Account created! " << std::endl;
+        }
+        else
+            std::cout << "Maximum accounts reached! " << std::endl;
 }
 
 void testAccount::deleteAccount() {
-    std::cout << "Enter 1, 2 or 3. " << std::endl;
+    for (int i=0; i<bank.returAntalKonton(); i++) {
+        std::string tmpAcc;
+        tmpAcc = bank.returKontoNr(i);
+        std::cout << "Account number: " << tmpAcc << std::endl;
+    }
+    std::cout << "Delete which account?" << std::endl;
     int tmpNr=0;
     std::cin >> tmpNr;
-    tmpNr -= -1;
     bank.tabortKonto(tmpNr);
 }
 
 void testAccount::withdrawAccount() {
-    std::cout << "Enter which account to withdraw from: " << std::endl;
+    for (int i=0; i<bank.returAntalKonton(); i++) {
+        std::string tmpAcc;
+        tmpAcc = bank.returKontoNr(i);
+        std::cout << "Account number: " << tmpAcc << std::endl;
+    }
+    std::cout << "Withdraw from which account? " << std::endl;
     int tmpNr=0, tmpAcc=0;
     std::cin >> tmpAcc;
     std::cout << "Enter amount to withdraw. " << std::endl;
@@ -161,7 +172,12 @@ void testAccount::withdrawAccount() {
 }
 
 void testAccount::depositAccont() {
-    std::cout << "Enter which account to deposit to: " << std::endl;
+    for (int i=0; i<bank.returAntalKonton(); i++) {
+        std::string tmpAcc;
+        tmpAcc = bank.returKontoNr(i);
+        std::cout << "Account number: " << tmpAcc << std::endl;
+    }
+    std::cout << "Deposit to which account? " << std::endl;
     int tmpNr=0, tmpAcc=0;
     std::cin >> tmpAcc;
     std::cout << "Enter amount to deposit. " << std::endl;
@@ -170,9 +186,15 @@ void testAccount::depositAccont() {
 }
 
 void testAccount::changeCredit() {
-    std::cout << "Enter which account to credit for: " << std::endl;
+    for (int i=0; i<bank.returAntalKonton(); i++) {
+        std::string tmpAcc;
+        tmpAcc = bank.returKontoNr(i);
+        std::cout << "Account number: " << tmpAcc << std::endl;
+    }
+    std::cout << "Change credit for which account? " << std::endl;
     int tmpNr=0, tmpAcc=0;
     std::cin >> tmpAcc;
+    tmpAcc -= 1;
     std::cout << "Change credit to which amount?. " << std::endl;
     std::cin >> tmpNr;
     bank.andraKredit(tmpAcc, tmpNr);
@@ -239,5 +261,6 @@ void testAccount::startAccount() {
         std::cin >> tmpPrsn;
     }
     bank = Bank(tmpNamn, tmpPrsn);
+    bank.skapaKonto();
 }
 

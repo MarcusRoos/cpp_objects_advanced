@@ -64,7 +64,6 @@ void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn) {
     ss << tmpInt;
     std::string tmpString = ss.str();
     tmpAcc = tmpPrsn + "-" + tmpString;
-    std::cout << "TEMP ACC: " << tmpAcc << std::endl;
     testAcc.push_back(std::unique_ptr<Account>(
             new Account(tmpAcc, 0, 0)));
 }
