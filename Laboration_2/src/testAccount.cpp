@@ -139,15 +139,8 @@ void testAccount::printAllCash() {
 }
 
 bool testAccount::createAccount() {
-        std::string tmpPrsn, tmpNamn;
-        std::cout << "Enter your firstname + last name " << std::endl;
-        std::getline(std::cin >> std::ws, tmpNamn);
-        std::cout << "Enter your social security number, 10 digits: "
-                  << std::endl;
-        std::cin >> tmpPrsn;
-        bank.skapaKonto(tmpNamn, tmpPrsn);
+        bank.skapaKonto();
         return true;
-
 }
 
 void testAccount::deleteAccount() {

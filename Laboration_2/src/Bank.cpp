@@ -5,7 +5,6 @@
 //
 
 #include "Bank.h"
-
 #include <utility>
 
 Bank::Bank()= default;
@@ -52,11 +51,11 @@ int Bank::returKundTillgang() {
     return tmpNr;
 }
 
-void Bank::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn) {
-    bankPtr.reset();
-    std::unique_ptr<BankKund> my_ptr(new BankKund());
-    my_ptr->skapaKonto(std::move(tmpNamn), tmpPrsn);
-    bankPtr = std::move(my_ptr);
+void Bank::skapaKonto() {
+    std::string tmpNamn, tmpPrsn;
+    tmpNamn = bankPtr->returNamn();
+    tmpPrsn = bankPtr->returPnummer();
+    bankPtr->skapaKonto(std::move(tmpNamn), tmpPrsn);
 }
 
 void Bank::tabortKonto(int accNr) {
