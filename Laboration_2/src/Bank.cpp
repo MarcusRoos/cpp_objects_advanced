@@ -52,10 +52,10 @@ int Bank::returKundTillgang() {
     return tmpNr;
 }
 
-void Bank::skapaKonto(std::string tmpNamn, std::string tmpPrsn) {
+void Bank::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn) {
     bankPtr.reset();
     std::unique_ptr<BankKund> my_ptr(new BankKund());
-    my_ptr->skapaKonto(tmpNamn, tmpPrsn);
+    my_ptr->skapaKonto(std::move(tmpNamn), tmpPrsn);
     bankPtr = std::move(my_ptr);
 }
 
