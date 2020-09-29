@@ -61,8 +61,13 @@ bool Bank::skapaKonto() {
         return false;
 }
 
-void Bank::tabortKonto(int accNr) {
-    bankPtr->tabortKonto(accNr);
+bool Bank::tabortKonto(int accNr) {
+    if(bankPtr->returAntalKonton()>0) {
+        bankPtr->tabortKonto(accNr);
+        return true;
+    }
+    else
+        return false;
 }
 
 void Bank::utKonto(int tmpAcc, int input) {

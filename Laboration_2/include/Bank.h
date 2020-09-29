@@ -22,7 +22,7 @@ public:
     std::string returKontoInfo(const int &index);
     int returKundTillgang();
     bool skapaKonto();
-    void tabortKonto(int accNr);
+    bool tabortKonto(int accNr);
     void utKonto(int tmpAcc, int input);
     void inKonto(int tmpAcc, int input);
     void andraKredit(int tmpAcc, int input);

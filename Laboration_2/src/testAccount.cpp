@@ -154,7 +154,12 @@ void testAccount::deleteAccount() {
     std::cout << "Delete which account?" << std::endl;
     int tmpNr=0;
     std::cin >> tmpNr;
-    bank.tabortKonto(tmpNr);
+    if (bank.tabortKonto(tmpNr)){
+        std::cout << "Account deleted! " << std::endl;
+    }
+    else
+        std::cout << "No accounts to delete! " << std::endl;
+
 }
 
 void testAccount::withdrawAccount() {
@@ -240,7 +245,7 @@ void testAccount::runSubMenu() {
 }
 
 void testAccount::accountSummery() {
-    for (int tmpIdx=0; tmpIdx<3; tmpIdx++) {
+    for (int tmpIdx=0; tmpIdx<bank.returAntalKonton(); tmpIdx++) {
         std::string tmpNr;
         tmpNr = bank.returKontoInfo(tmpIdx);
         std::cout << tmpNr;
