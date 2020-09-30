@@ -90,8 +90,7 @@ void Bank::skrivtillFil() {
 bool Bank::lasfranFil(const std::string &tmpAcc) {
     std::unique_ptr<BankKund> my_ptr(new BankKund());
     bankPtr.reset();
-    if (my_ptr->lasfranFil(tmpAcc)){
-        my_ptr->lasfranFil(tmpAcc);
+    if (my_ptr->lasfranFil(tmpAcc)){;
         bankPtr = std::move(my_ptr);
         return true;
     }

@@ -287,7 +287,7 @@ void testAccount::readFromFile() {
     std::string tmpPrsn;
     std::cin >> tmpPrsn;
     while (!numberVerify(tmpPrsn) || tmpPrsn.length() != 10 || !bank.lasfranFil(tmpPrsn)){
-        std::cout << "Wrong input.\n";
+        std::cout << "Wrong input or could not find file, please retry.\n";
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cin >> tmpPrsn;
