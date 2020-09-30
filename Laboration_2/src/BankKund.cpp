@@ -57,16 +57,27 @@ int BankKund::returKundTillgang() {
 void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn) {
     namn = std::move(tmpNamn);
     std::string tmpAcc, tmpInit;
-    int i=0;
-    while (i<2) {
-        std::stringstream ss;
-        ss << i;
-        std::string tmpString = ss.str();
-        tmpAcc = personnummer + "-" + tmpString;
-        if (tmpAcc != testAcc[i]->accountInfo()) {
-            tmpInit = tmpAcc;
+    int i = 0;
+    while (i < 2) {
+        for (int k = 0; k < 3; k++) {
+            std::stringstream ss;
+            ss << i;
+            std::string tmpString = ss.str();
+            tmpAcc = personnummer + "-" + tmpString;
+            if (tmpAcc != testAcc[i]->accountInfo()) {
+                tmpInit = tmpAcc;
+                i=1;
+                break;
+            }
         }
         i++;
+    }
+    if (tmpInit.length() <12){
+        std::stringstream ss;
+        ss << 2;
+        std::string tmpString = ss.str();
+        tmpAcc = personnummer + "-" + tmpString;
+        tmpInit = tmpAcc;
     }
     testAcc.push_back(std::unique_ptr<Account>(
             new Account(tmpInit, 0, 0)));
