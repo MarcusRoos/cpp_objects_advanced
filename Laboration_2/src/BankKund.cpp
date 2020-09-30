@@ -68,7 +68,7 @@ void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn) {
             new Account(tmpAcc, 0, 0)));
 }
 
-void BankKund::lasfranFil(const std::string& tmpAcc) {
+bool BankKund::lasfranFil(const std::string& tmpAcc) {
     std::string tmpANr;
     int tmpBalance, tmpCredit;
 
@@ -85,7 +85,10 @@ void BankKund::lasfranFil(const std::string& tmpAcc) {
                     new Account(tmpANr, tmpCredit, tmpBalance)));
             i++;
         }
+        return true;
     }
+    else
+        return false;
 }
 
 void BankKund::tabortKonto(int accNr) {

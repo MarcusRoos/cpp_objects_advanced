@@ -32,7 +32,7 @@ public:
     void inKonto(int tmpAcc, int input);
     void andraKredit(int tmpAcc, int input);
     void skrivtillFil();
-    void lasfranFil(const std::string& tmpAcc);
+    bool lasfranFil(const std::string& tmpAcc);
 };
 
 #endif //const DT060G_BANK&KUND_H

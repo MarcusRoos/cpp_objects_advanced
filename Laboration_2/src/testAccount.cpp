@@ -57,11 +57,9 @@ void testAccount::run() {
                 changeCredit();
                 break;
             case 12:
-                std::cout << "Change Customer" << std::endl;
                 readFromFile();
                 break;
             case 13:
-                std::cout << "Account Overview" << std::endl;
                 accountSummery();
                 break;
             case 14:
@@ -285,10 +283,19 @@ void testAccount::writeToFile() {
 }
 
 void testAccount::readFromFile() {
-    std::cout << "Enter social security number: " << std::endl;
-    std::string tmpAcc;
-    std::cin >> tmpAcc;
-    bank.lasfranFil(tmpAcc);
+    std::cout << "Enter your social security number (10 digits):" << std::endl;
+    std::string tmpPrsn;
+    std::cin >> tmpPrsn;
+    while (!numberVerify(tmpPrsn) || tmpPrsn.length() != 10 || !bank.lasfranFil(tmpPrsn)){
+        std::cout << "Wrong input.\n";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin >> tmpPrsn;
+        if (bank.lasfranFil(tmpPrsn)){
+            std::cout << "File read successfully! " << std::endl;
+            break;
+        }
+    }
 }
 
 void testAccount::runSubMenu() {

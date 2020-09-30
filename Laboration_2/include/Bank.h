@@ -27,6 +27,6 @@ public:
     void inKonto(int tmpAcc, int input);
     void andraKredit(int tmpAcc, int input);
     void skrivtillFil();
-    void lasfranFil(const std::string& tmpAcc);
+    bool lasfranFil(const std::string& tmpAcc);
 };
 #endif //DT060G_BANK_H
