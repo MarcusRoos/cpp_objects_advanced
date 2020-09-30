@@ -183,27 +183,34 @@ void testAccount::withdrawAccount() {
         std::cout << "Account number: " << tmpAcc << std::endl;
     }
     std::cout << "Deposit to which account? " << std::endl;
-    std::string tmpString;
+    std::string tmpString, accNr;
     std::cin >> tmpString;
     int tmpAccnr=0;
+    std::string tmpAcc;
     for (int i=0; i<bank.returAntalKonton(); i++) {
-        std::string tmpAcc;
         tmpAcc = bank.returKontoNr(i);
         if (tmpAcc == tmpString){
-            tmpString = tmpString.back();
-            tmpAccnr = std::stoi(tmpString);
+            accNr = tmpAcc;
+            std::string converter;
+            converter = tmpString.back();
+            tmpAccnr = std::stoi(converter);
+            break;
         }
     }
-    int tmpNr=0, tmpAcc=0;
-    std::cout << "Enter amount to withdraw. " << std::endl;
-    std::cin >> tmpNr;
-    if (bank.utKonto(tmpAccnr, tmpNr)){
-        std::cout << "Withdrew "<< tmpNr << " from account " << tmpAcc <<
-        " successfully! "<<std::endl;
+    int tmpNr=0;
+    if (accNr == tmpString) {
+        std::cout << "Enter amount to withdraw. " << std::endl;
+        std::cin >> tmpNr;
+        if (bank.utKonto(tmpAccnr, tmpNr)) {
+            std::cout << "Withdrew " << tmpNr << " from account " << accNr <<
+                      " successfully! " << std::endl;
+        } else
+            std::cout << "Not enough balance, withdrawal unsuccessful! "
+                      << std::endl;
     }
     else
-        std::cout << "Not enough balance, withdrawal unsuccessful! "
-        << std::endl;
+        std::cout << "No such account " << std::endl;
+
 }
 
 void testAccount::depositAccont() {
@@ -213,21 +220,31 @@ void testAccount::depositAccont() {
         std::cout << "Account number: " << tmpAcc << std::endl;
     }
     std::cout << "Deposit to which account? " << std::endl;
-    std::string tmpString;
+    std::string tmpString, accNr;
     std::cin >> tmpString;
     int tmpAccnr=0;
+    std::string tmpAcc;
     for (int i=0; i<bank.returAntalKonton(); i++) {
-        std::string tmpAcc;
         tmpAcc = bank.returKontoNr(i);
             if (tmpAcc == tmpString){
-                tmpString = tmpString.back();
-                tmpAccnr = std::stoi(tmpString);
+                accNr = tmpAcc;
+                std::string converter;
+                converter = tmpString.back();
+                tmpAccnr = std::stoi(converter);
+                break;
             }
     }
-    int tmpNr=0;
-    std::cout << "Enter amount to deposit. " << std::endl;
-    std::cin >> tmpNr;
-    bank.inKonto(tmpAccnr, tmpNr);
+    if (accNr == tmpString){
+        int tmpNr=0;
+        std::cout << "Enter amount to deposit. " << std::endl;
+        std::cin >> tmpNr;
+        bank.inKonto(tmpAccnr, tmpNr);
+        std::cout << "Successfully deposited " << tmpNr << " into account " <<
+        accNr << "!"<<std::endl;
+    }
+    else
+        std::cout << "No such account. " << std::endl;
+
 }
 
 void testAccount::changeCredit() {
@@ -237,21 +254,30 @@ void testAccount::changeCredit() {
         std::cout << "Account number: " << tmpAcc << std::endl;
     }
     std::cout << "Deposit to which account? " << std::endl;
-    std::string tmpString;
+    std::string tmpString, accNr;
     std::cin >> tmpString;
+    std::string tmpAcc;
     int tmpAccnr=0;
     for (int i=0; i<bank.returAntalKonton(); i++) {
-        std::string tmpAcc;
         tmpAcc = bank.returKontoNr(i);
         if (tmpAcc == tmpString){
-            tmpString = tmpString.back();
-            tmpAccnr = std::stoi(tmpString);
+            accNr = tmpAcc;
+            std::string converter;
+            converter = tmpString.back();
+            tmpAccnr = std::stoi(converter);
+            break;
         }
     }
-    int tmpNr=0;
-    std::cout << "Enter amount to deposit. " << std::endl;
-    std::cin >> tmpNr;
-    bank.andraKredit(tmpAccnr, tmpNr);
+    if (accNr == tmpString){
+        int tmpNr=0;
+        std::cout << "Enter amount to change credit to" << std::endl;
+        std::cin >> tmpNr;
+        bank.andraKredit(tmpAccnr, tmpNr);
+        std::cout << "Successfully changed credit of account " << accNr <<
+        " to " << tmpNr << "!"<<std::endl;
+    }
+    else
+        std::cout << "No such account. " << std::endl;
 }
 
 void testAccount::writeToFile() {
