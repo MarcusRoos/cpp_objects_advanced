@@ -47,5 +47,5 @@ int Account::gettotalBalance() {
 }
 
 std::string Account::accountInfo() {
-    return accountNr;
+        return accountNr;
 }

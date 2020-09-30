@@ -175,7 +175,6 @@ void testAccount::deleteAccount() {
                 break;
             }
         }
-
         if (accNr == tmpString) {
             if (bank.tabortKonto(tmpAccnr)) {
                 std::cout << "Deleted" << std::endl;

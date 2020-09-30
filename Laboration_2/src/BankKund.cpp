@@ -56,22 +56,21 @@ int BankKund::returKundTillgang() {
 
 void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn) {
     namn = std::move(tmpNamn);
-    personnummer = tmpPrsn;
-    int tmpInt=0;
-    std::string tmpAcc, tmpPuller;
-    for (int i=0; i<3; i++) {
+    std::string tmpAcc, tmpPuller, tmpInit;
+    int i=0;
+    while (i<3) {
         std::stringstream ss;
-        ss << tmpInt;
+        ss << i;
         std::string tmpString = ss.str();
-        tmpPuller = testAcc[i]->accountInfo();
-        tmpAcc = tmpPrsn + "-" + tmpString;
-        tmpInt++;
-        if (tmpAcc != testAcc[i]->accountInfo()) {
-            testAcc.push_back(std::unique_ptr<Account>(
-                    new Account(tmpAcc, 0, 0)));
-            break;
-        }
+        //tmpPuller = testAcc[i]->accountInfo();
+        tmpAcc = personnummer + "-" + tmpString;
+        //if (tmpAcc != testAcc[i]->accountInfo()) {
+            tmpInit = tmpAcc;
+       // }
+        i++;
     }
+    testAcc.push_back(std::unique_ptr<Account>(
+            new Account(tmpInit, 0, 0)));
 }
 
 bool BankKund::lasfranFil(const std::string& tmpAcc) {
