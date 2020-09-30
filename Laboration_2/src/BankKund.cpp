@@ -58,7 +58,7 @@ void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn) {
     namn = std::move(tmpNamn);
     std::string tmpAcc, tmpInit;
     int i = 0;
-    while (i < 2) {
+    while (i < 2) { // Crashes when there are 0 or 1 account, 2 accounts is fine.
         for (int k = 0; k < 3; k++) {
             std::stringstream ss;
             ss << i;
