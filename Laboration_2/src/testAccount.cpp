@@ -156,23 +156,36 @@ void testAccount::createAccount() {
 }
 
 void testAccount::deleteAccount() {
-    if (bank.returAntalKonton()>0) {
+    if (bank.returAntalKonton() > 0) {
         for (int i = 0; i < bank.returAntalKonton(); i++) {
             std::string tmpAcc;
             tmpAcc = bank.returKontoNr(i);
             std::cout << "Account number: " << tmpAcc << std::endl;
         }
-        std::cout << "Delete which account?" << std::endl;
-        int tmpNr = 0;
-        std::cin >> tmpNr;
-        if (bank.tabortKonto(tmpNr)) {
-            std::cout << "Account deleted! " << std::endl;
+        std::cout << "Delete which account? " << std::endl;
+        std::string tmpString, accNr;
+        std::cin >> tmpString;
+        int tmpAccnr = 0;
+        std::string tmpAcc;
+        for (int i = 0; i < bank.returAntalKonton(); i++) {
+            tmpAcc = bank.returKontoNr(i);
+            if (tmpAcc == tmpString) {
+                accNr = tmpAcc;
+                tmpAccnr = i;
+                break;
+            }
         }
-    }
-    else
-        std::cout << "No accounts to delete! " << std::endl;
 
+        if (accNr == tmpString) {
+            if (bank.tabortKonto(tmpAccnr)) {
+                std::cout << "Deleted" << std::endl;
+            } else
+                std::cout << "Not deleted" << std::endl;
+        } else
+            std::cout << "No such account " << std::endl;
+    }
 }
+
 
 void testAccount::withdrawAccount() {
     for (int i=0; i<bank.returAntalKonton(); i++) {
@@ -180,10 +193,10 @@ void testAccount::withdrawAccount() {
         tmpAcc = bank.returKontoNr(i);
         std::cout << "Account number: " << tmpAcc << std::endl;
     }
-    std::cout << "Deposit to which account? " << std::endl;
+    std::cout << "Withdraw from which account? " << std::endl;
     std::string tmpString, accNr;
     std::cin >> tmpString;
-    int tmpAccnr=0;
+    int tmpAccnr = 0;
     std::string tmpAcc;
     for (int i=0; i<bank.returAntalKonton(); i++) {
         tmpAcc = bank.returKontoNr(i);
