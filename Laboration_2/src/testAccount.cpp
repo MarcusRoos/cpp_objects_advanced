@@ -134,8 +134,7 @@ void testAccount::printBalCredTot() {
         std::string tmpAcc;
         tmpAcc = bank.returKontoNr(i);
         if (tmpAcc == tmpString){
-            tmpString = tmpString.back();
-            tmpAccnr = std::stoi(tmpString);
+            tmpAccnr = i;
         }
     }
     std::cout << bank.returKontoInfo(tmpAccnr);
@@ -148,11 +147,12 @@ void testAccount::printAllCash() {
 }
 
 void testAccount::createAccount() {
-        if (bank.skapaKonto()){
+        if (bank.skapaKonto(acc)){
             std::cout << "Account created! " << std::endl;
         }
         else
             std::cout << "Maximum accounts reached! " << std::endl;
+        acc++;
 }
 
 void testAccount::deleteAccount() {
@@ -200,10 +200,7 @@ void testAccount::withdrawAccount() {
     for (int i=0; i<bank.returAntalKonton(); i++) {
         tmpAcc = bank.returKontoNr(i);
         if (tmpAcc == tmpString){
-            accNr = tmpAcc;
-            std::string converter;
-            converter = tmpString.back();
-            tmpAccnr = std::stoi(converter);
+            tmpAccnr = i;
             break;
         }
     }
@@ -238,9 +235,7 @@ void testAccount::depositAccont() {
         tmpAcc = bank.returKontoNr(i);
             if (tmpAcc == tmpString){
                 accNr = tmpAcc;
-                std::string converter;
-                converter = tmpString.back();
-                tmpAccnr = std::stoi(converter);
+                tmpAccnr = i;
                 break;
             }
     }
@@ -272,9 +267,7 @@ void testAccount::changeCredit() {
         tmpAcc = bank.returKontoNr(i);
         if (tmpAcc == tmpString){
             accNr = tmpAcc;
-            std::string converter;
-            converter = tmpString.back();
-            tmpAccnr = std::stoi(converter);
+            tmpAccnr = i;
             break;
         }
     }
@@ -360,6 +353,7 @@ void testAccount::startAccount() {
         std::cin >> tmpPrsn;
     }
     bank = Bank(tmpNamn, tmpPrsn);
-    bank.skapaKonto();
+    bank.skapaKonto(acc);
+    acc++;
 }
 

@@ -54,33 +54,13 @@ int BankKund::returKundTillgang() {
     return tot;
 }
 
-void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn) {
-    namn = std::move(tmpNamn);
-    std::string tmpAcc, tmpInit;
-    int i = 0;
-    while (i < testAcc.size()) { // Crashes when there are 0 or 1 account, 2 accounts is fine.
-        for (unsigned int k = 0; k < testAcc.size(); k++) {
-            std::stringstream ss;
-            ss << i;
-            std::string tmpString = ss.str();
-            tmpAcc = personnummer + "-" + tmpString;
-            if (tmpAcc != testAcc[i]->accountInfo()) {
-                tmpInit = tmpAcc;
-                i=1;
-                break;
-            }
-        }
-        i++;
-    }
-    if (tmpInit.length() <12){
-        std::stringstream ss;
-        ss << 2;
-        std::string tmpString = ss.str();
-        tmpAcc = personnummer + "-" + tmpString;
-        tmpInit = tmpAcc;
-    }
+void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn, int acc) {
+        namn = std::move(tmpNamn);
+        std::string tmpAcc, tmpInit;
+        tmpInit = std::to_string(acc);
+        tmpAcc = personnummer + "-" + tmpInit;
     testAcc.push_back(std::unique_ptr<Account>(
-            new Account(tmpInit, 0, 0)));
+            new Account(tmpAcc, 0, 0)));
 }
 
 bool BankKund::lasfranFil(const std::string& tmpAcc) {
