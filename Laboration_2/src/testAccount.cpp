@@ -200,6 +200,7 @@ void testAccount::withdrawAccount() {
     for (int i=0; i<bank.returAntalKonton(); i++) {
         tmpAcc = bank.returKontoNr(i);
         if (tmpAcc == tmpString){
+            accNr = tmpAcc;
             tmpAccnr = i;
             break;
         }
