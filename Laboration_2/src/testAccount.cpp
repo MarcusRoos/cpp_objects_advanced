@@ -147,12 +147,11 @@ void testAccount::printAllCash() {
 }
 
 void testAccount::createAccount() {
-        if (bank.skapaKonto(acc)){
+        if (bank.skapaKonto()){
             std::cout << "Account created! " << std::endl;
         }
         else
             std::cout << "Maximum accounts reached! " << std::endl;
-        acc++;
 }
 
 void testAccount::deleteAccount() {
@@ -354,7 +353,6 @@ void testAccount::startAccount() {
         std::cin >> tmpPrsn;
     }
     bank = Bank(tmpNamn, tmpPrsn);
-    bank.skapaKonto(acc);
-    acc++;
+    bank.skapaKonto();
 }
 

@@ -51,10 +51,10 @@ int Bank::returKundTillgang() {
     return tmpNr;
 }
 
-bool Bank::skapaKonto(int acc) {
+bool Bank::skapaKonto() {
     if(bankPtr->returAntalKonton()<3) {
         bankPtr->skapaKonto(bankPtr->returNamn(),
-                            bankPtr->returPnummer(), acc);
+                            bankPtr->returPnummer());
         return true;
     }
     else

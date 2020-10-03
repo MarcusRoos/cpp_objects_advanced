@@ -8,7 +8,6 @@
 #include <iostream>
 #include <fstream>
 #include <utility>
-#include <sstream>
 
 BankKund::BankKund()= default;
 
@@ -54,13 +53,24 @@ int BankKund::returKundTillgang() {
     return tot;
 }
 
-void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn, int acc) {
+void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn) {
         namn = std::move(tmpNamn);
-        std::string tmpAcc, tmpInit;
-        tmpInit = std::to_string(acc);
-        tmpAcc = personnummer + "-" + tmpInit;
-    testAcc.push_back(std::unique_ptr<Account>(
-            new Account(tmpAcc, 0, 0)));
+        personnummer = tmpPrsn;
+        std::string tmpString, intString, tmpPush;
+        std::vector<std::string>tmpVec;
+        for (auto & p : testAcc){
+            tmpVec.push_back(p->accountInfo());
+        }
+    for (int i=0; i<=2; i++){
+        intString = std::to_string(i);
+        tmpString = personnummer + "-" + intString;
+       if (std::find(tmpVec.begin(), tmpVec.end(), tmpString) == tmpVec.end())
+        {
+            testAcc.push_back(std::unique_ptr<Account>(
+                    new Account(tmpString, 0, 0)));
+            break;
+        }
+    }
 }
 
 bool BankKund::lasfranFil(const std::string& tmpAcc) {

@@ -11,6 +11,7 @@
 #include <memory>
 #include "Account.h"
 #include <vector>
+#include <algorithm>
 
 class BankKund {
 private:
@@ -26,7 +27,7 @@ public:
     std::string returKontoNr(int idx);
     std::string returKontoInfo(const int &index);
     int returKundTillgang();
-    void skapaKonto(std::string tmpNamn, const std::string& tmpPrsn, int acc);
+    void skapaKonto(std::string tmpNamn, const std::string& tmpPrsn);
     void tabortKonto(int accNr);
     bool utKonto(int tmpAcc, int input);
     void inKonto(int tmpAcc, int input);

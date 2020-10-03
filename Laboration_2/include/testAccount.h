@@ -14,7 +14,6 @@
 
 class testAccount {
 private:
-    int acc=0;
     Menu menu;
     Bank bank;
 public:
