@@ -57,6 +57,7 @@ void testAccount::run() {
                 changeCredit();
                 break;
             case 12:
+                writeToFile();
                 readFromFile();
                 break;
             case 13:
