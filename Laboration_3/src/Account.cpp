@@ -46,8 +46,12 @@ TransactionAccount::TransactionAccount(std::string aNr1, int b1,
     accountNr = aNr;
 }
 
+/**
+ * SAVINGS ACCOUNT
+ * **/
+
 void SavingsAccount::withdrawal(int sum) {
-    if (maxWithdrawals < withdrawals) {
+    if (maxWithdrawals < withdrawals && sum < balance) {
         balance -= sum;
         withdrawals++;
     }
@@ -55,19 +59,19 @@ void SavingsAccount::withdrawal(int sum) {
         balance = balance;
 }
 
-/**
- * SAVINGS ACCOUNT
- * **/
 SavingsAccount::SavingsAccount(std::string aNr, int b) : Account(aNr, b) {
     interest = 1.02;
-    maxWithdrawals = 4;
+    maxWithdrawals = 0;
+    withdrawals = 0;
 }
 
 SavingsAccount::SavingsAccount(std::string aNr1, int b1, std::string aNr,
-                               int withdrawals, int b) : Account(aNr1, b1) {
+                               int b) : Account(aNr1, b1) {
     accountNr = aNr;
-    maxWithdrawals = withdrawals;
+    maxWithdrawals = 4;
     balance = b;
+    interest = 1.02;
+    withdrawals = 0;
 }
 
 std::string SavingsAccount::getAccountType() {
@@ -78,12 +82,12 @@ void SavingsAccount::setInterest(double inter) {
     interest = inter;
 }
 
-double SavingsAccount::getInterest() {
+double SavingsAccount::getInterest() const {
     return interest;
 }
 
 int SavingsAccount::getDisposable() const {
-    return (balance * interest);
+    return balance;
 }
 
 int SavingsAccount::getMaxWithdrawals() const {
@@ -106,9 +110,9 @@ bool SavingsAccount::hasMaxWithdrawals() const {
  * LONG SAVINGS ACCOUNT
  * **/
 void LongSavingsAccount::withdrawal(int sum) {
-    if (maxWithdrawals > 0) {
+    if (withdrawals == 0 && sum < balance) {
         balance -= sum;
-        withdrawals = 0;
+        withdrawals = 1;
     }
     else
         balance = balance;
@@ -118,7 +122,7 @@ std::string LongSavingsAccount::getAccountType() {
     return "Long Savings Account";
 }
 
-double LongSavingsAccount::getInterest() {
+double LongSavingsAccount::getInterest() const {
     return interest;
 }
 
@@ -126,9 +130,6 @@ void LongSavingsAccount::setInterest(double inter) {
     interest = inter;
 }
 
-int LongSavingsAccount::getDisposable() const {
-    return (balance * interest);
-}
 
 int LongSavingsAccount::getMaxWithdrawals() const {
     return maxWithdrawals;
@@ -136,9 +137,4 @@ int LongSavingsAccount::getMaxWithdrawals() const {
 
 int LongSavingsAccount::getNrOfWithdrawals() const {
     return withdrawals;
-}
-
-LongSavingsAccount::LongSavingsAccount(std::string aNr, int b)
-        : SavingsAccount(aNr, b) {
-
 }

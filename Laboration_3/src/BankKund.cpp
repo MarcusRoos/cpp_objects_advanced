@@ -36,14 +36,28 @@ std::string BankKund::returKontoNr(int idx) {
 
 std::string BankKund::returKontoInfo(const int &index) {
     std::string tmpString = testAcc[index]->accountInfo();
-    std::string tmpCred, tmpBal, tmpTot, Type;
-    tmpCred = std::to_string(testAcc[index]->getCredit());
+    size_t pos = tmpString.find("-"); //find location of word
+    tmpString.erase(0,pos+1); //delete everything prior to location found
+    std::string tmpCred, tmpBal, tmpTot, Type, tmpInt, tmpWith, tmpMaxWith;
+    double tmpInterest;
+    Type = testAcc[index]->getAccountType();
     tmpBal = std::to_string(testAcc[index]->getBalance());
     tmpTot = std::to_string(testAcc[index]->getDisposable());
-    Type = testAcc[index]->getAccountType();
-    std::string s1{"====== " + tmpString + " ========\n\n" + "Type: " + Type + "\n" + "Balance: " + tmpBal
-    + "\n" + "Credit: " + tmpCred + "\n" + "Disposable: " + tmpTot + "\n\n"};
-    return s1;
+    if (Type == "Transaction Account"){
+        tmpCred = std::to_string(testAcc[index]->getCredit());
+        std::string s1{Type + " nr  " + tmpString + "\n" + "Balance: " + tmpBal
+                       + "\n" + "Credit: " + tmpCred + "\n" + "Available: " + tmpTot + "\n\n"};
+        return s1;
+    }
+    else {
+        tmpInterest = testAcc[index]->getInterest();
+        tmpInt = std::to_string(tmpInterest);
+        tmpMaxWith = std::to_string(testAcc[index]->getMaxWithdrawals());
+        tmpWith = std::to_string(testAcc[index]->getNrOfWithdrawals());
+        std::string s1{Type + " nr " + tmpString + "\n" + "Balance: " + tmpBal
+                       + "\n" + "Interest: " + tmpInt + "\n" + "Available: " + tmpTot + "\n\n" + "maxWith: " + tmpMaxWith + "\n" + "nrOfWith: " + tmpWith + "\n\n"};
+        return s1;
+    }
 }
 
 int BankKund::returKundTillgang() {
@@ -69,17 +83,17 @@ void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn, int t
         {
            if (type == 1){
                testAcc.push_back(std::unique_ptr<Account>(
-                       new TransactionAccount(std::string(), 0, tmpString, 2, 3)));
+                       new TransactionAccount(std::string(), 0, tmpString, 0, 0)));
                break;
            }
            if (type == 2){testAcc.push_back(std::unique_ptr<Account>(
                    new SavingsAccount(std::string(), 0,
-                           tmpString, 2, 3)));
+                           tmpString,  0)));
            break;
            }
            if (type == 3){testAcc.push_back(std::unique_ptr<Account>(
                    new LongSavingsAccount(std::string(), 0,
-                           tmpString, 2, 3)));
+                           tmpString, 1, 0)));
            break;
            }
 

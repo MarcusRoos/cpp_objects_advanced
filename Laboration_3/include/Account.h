@@ -6,7 +6,7 @@
 
 #ifndef DT060G_ACCOUNT_H
 #define DT060G_ACCOUNT_H
-
+#include <iostream>
 #include <string>
 
 const int DEFAULTSIZE = 0;
@@ -63,11 +63,11 @@ protected:
 public:
     SavingsAccount(std::string aNr, int b);
     SavingsAccount(std::string aNr1, int b1, std::string aNr,
-                   int withdrawals, int b);
+                   int b);
     virtual void setInterest(double inter);
     virtual void withdrawal(int sum);
     virtual std::string getAccountType();
-    virtual double getInterest();
+    virtual double getInterest() const;
     virtual int getDisposable() const;
     virtual int getMaxWithdrawals() const;
     virtual int getNrOfWithdrawals() const;
@@ -81,18 +81,18 @@ public:
  * **/
 class LongSavingsAccount : public SavingsAccount{
 public:
-    LongSavingsAccount(std::string aNr, int b);
     LongSavingsAccount(std::string aNr1, int b1, std::string aNr,
                        int withdrawals = 0, int b = 0) : SavingsAccount(aNr1, b1) {
         maxWithdrawals = 1;
         balance = b;
         accountNr = aNr;
+        interest = SavingsAccount::getInterest() + .02;
+        withdrawals = 0;
     }
     virtual std::string getAccountType();
     virtual void withdrawal(int sum);
-    virtual double getInterest();
+    virtual double getInterest() const;
     virtual void setInterest(double inter);
-    virtual int getDisposable() const;
     virtual int getMaxWithdrawals() const;
     virtual int getNrOfWithdrawals() const;
 };
