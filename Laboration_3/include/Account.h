@@ -18,7 +18,7 @@ public:
     Account(std::string aNr, int b =0);
     virtual ~Account() = default;;
     void deposit(int sum) {balance +=sum;}
-    virtual void withdrawal(int sum)=0;
+    virtual bool withdrawal(int sum)=0;
     virtual void setCredit(int cr){};
     virtual void setInterest(double inter){};
     int getBalance() const {return balance;}
@@ -46,7 +46,7 @@ public:
     virtual std::string getAccountType();
     virtual void setCredit(int cr);
     virtual int getCredit() const;
-    virtual void withdrawal(int sum);
+    virtual bool withdrawal(int sum);
     virtual int getDisposable() const;
     virtual bool hasCredit() const;
 };
@@ -65,7 +65,7 @@ public:
     SavingsAccount(std::string aNr1, int b1, std::string aNr,
                    int b);
     virtual void setInterest(double inter);
-    virtual void withdrawal(int sum);
+    virtual bool withdrawal(int sum);
     virtual std::string getAccountType();
     virtual double getInterest() const;
     virtual int getDisposable() const;
@@ -87,10 +87,9 @@ public:
         balance = b;
         accountNr = aNr;
         interest = SavingsAccount::getInterest() + .02;
-        withdrawals = 0;
     }
     virtual std::string getAccountType();
-    virtual void withdrawal(int sum);
+    virtual bool withdrawal(int sum);
     virtual double getInterest() const;
     virtual void setInterest(double inter);
     virtual int getMaxWithdrawals() const;

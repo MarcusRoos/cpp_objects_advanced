@@ -14,8 +14,13 @@ Account::Account(std::string aNr, int b) {
 /**
  * TRANSACTION ACCOUNT
  * **/
-void TransactionAccount::withdrawal(int sum) {
-    balance -= sum;
+bool TransactionAccount::withdrawal(int sum) {
+    if (balance > sum) {
+        balance -= sum;
+        return true;
+    }
+    else
+        return false;
 }
 
 int TransactionAccount::getDisposable() const {
@@ -50,13 +55,16 @@ TransactionAccount::TransactionAccount(std::string aNr1, int b1,
  * SAVINGS ACCOUNT
  * **/
 
-void SavingsAccount::withdrawal(int sum) {
-    if (maxWithdrawals < withdrawals && sum < balance) {
+bool SavingsAccount::withdrawal(int sum) {
+    std::cout << "MAX SAVING " << maxWithdrawals << std::endl;
+    std::cout << "WITH SAVING " << withdrawals << std::endl;
+    if (withdrawals < maxWithdrawals && balance > sum) {
         balance -= sum;
         withdrawals++;
+        return true;
     }
     else
-        balance = balance;
+        return false;
 }
 
 SavingsAccount::SavingsAccount(std::string aNr, int b) : Account(aNr, b) {
@@ -109,13 +117,14 @@ bool SavingsAccount::hasMaxWithdrawals() const {
 /**
  * LONG SAVINGS ACCOUNT
  * **/
-void LongSavingsAccount::withdrawal(int sum) {
+bool LongSavingsAccount::withdrawal(int sum) {
     if (withdrawals == 0 && sum < balance) {
         balance -= sum;
         withdrawals = 1;
+        return true;
     }
     else
-        balance = balance;
+        return false;
 }
 
 std::string LongSavingsAccount::getAccountType() {
