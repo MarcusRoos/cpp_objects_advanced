@@ -153,7 +153,8 @@ void testAccount::createAccount() {
     std::cout << "2. Savings Account" << std::endl;
     std::cout << "3. Long Savings Account" << std::endl;
     int input=0;
-    while (input <0 || input > 2){
+    std::cin >> input;
+    while (input <1 || input > 3){
         std::cin >> input;
     }
         if (bank.skapaKonto(type)){
