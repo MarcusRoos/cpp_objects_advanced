@@ -147,7 +147,16 @@ void testAccount::printAllCash() {
 }
 
 void testAccount::createAccount() {
-        if (bank.skapaKonto()){
+    std::string type;
+    std::cout << "Open which type of account?";
+    std::cout << "1. Transaction Account" << std::endl;
+    std::cout << "2. Savings Account" << std::endl;
+    std::cout << "3. Long Savings Account" << std::endl;
+    int input=0;
+    while (input <0 || input > 2){
+        std::cin >> input;
+    }
+        if (bank.skapaKonto(type)){
             std::cout << "Account created! " << std::endl;
         }
         else

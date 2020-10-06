@@ -37,9 +37,9 @@ std::string BankKund::returKontoNr(int idx) {
 std::string BankKund::returKontoInfo(const int &index) {
     std::string tmpString = testAcc[index]->accountInfo();
     std::string tmpCred, tmpBal, tmpTot;
-    tmpCred = std::to_string(testAcc[index]->getcurrCredit());
-    tmpBal = std::to_string(testAcc[index]->getcurrBalance());
-    tmpTot = std::to_string(testAcc[index]->gettotalBalance());
+    tmpCred = std::to_string(testAcc[index]->getCredit());
+    tmpBal = std::to_string(testAcc[index]->getBalance());
+    tmpTot = std::to_string(testAcc[index]->getDisposable());
     std::string s1{"====== " + tmpString + " ========\n\n" + "Balance: " + tmpBal
     + "\n" + "Credit: " + tmpCred + "\n" + "Disposable: " + tmpTot + "\n\n"};
     return s1;
@@ -48,12 +48,14 @@ std::string BankKund::returKontoInfo(const int &index) {
 int BankKund::returKundTillgang() {
     int tot=0;
     for (auto & i : testAcc){
-        tot += i->gettotalBalance();
+        tot += i->getDisposable();
     }
     return tot;
 }
 
-void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn) {
+void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn, std::string type) {
+
+    std::cout << "Type: " << type << std::endl;
         namn = std::move(tmpNamn);
         personnummer = tmpPrsn;
         std::string tmpString, intString, tmpPush;
@@ -67,7 +69,7 @@ void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn) {
        if (std::find(tmpVec.begin(), tmpVec.end(), tmpString) == tmpVec.end())
         {
             testAcc.push_back(std::unique_ptr<Account>(
-                    new Account(tmpString, 0, 0)));
+                    new Account(tmpString)));
             break;
         }
     }
@@ -101,8 +103,8 @@ void BankKund::tabortKonto(int accNr) {
 }
 
 bool BankKund::utKonto(int tmpAcc, int input) {
-    if (testAcc[tmpAcc]->gettotalBalance() >= input) {
-        testAcc[tmpAcc]->deductcurrBalance(input);
+    if (testAcc[tmpAcc]->getDisposable() >= input) {
+        testAcc[tmpAcc]->withdrawal(input);
         return true;
     }
     else
@@ -110,19 +112,19 @@ bool BankKund::utKonto(int tmpAcc, int input) {
 }
 
 void BankKund::inKonto(int tmpAcc, int input) {
-        testAcc[tmpAcc]->addcurrBalance(input);
+        testAcc[tmpAcc]->deposit(input);
 }
 
 void BankKund::andraKredit(int tmpAcc, int input) {
-    testAcc[tmpAcc]->changeallCredit(input);
+    testAcc[tmpAcc]->setCredit(input);
 }
 
 void BankKund::skrivtillFil() {
     std::ofstream outFile(personnummer + ".knt");
     outFile << namn << std::endl << personnummer << std::endl;
     for (auto &idx : testAcc){
-        outFile << idx->accountInfo() << std::endl << idx->getcurrBalance() <<
-        std::endl << idx->getcurrCredit() << std::endl;
+        outFile << idx->accountInfo() << std::endl << idx->getBalance() <<
+        std::endl << idx->getCredit() << std::endl;
     }
     outFile.close();
 }

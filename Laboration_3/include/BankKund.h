@@ -27,7 +27,7 @@ public:
     std::string returKontoNr(int idx);
     std::string returKontoInfo(const int &index);
     int returKundTillgang();
-    void skapaKonto(std::string tmpNamn, const std::string& tmpPrsn);
+    void skapaKonto(std::string tmpNamn, const std::string& tmpPrsn, std::string type);
     void tabortKonto(int accNr);
     bool utKonto(int tmpAcc, int input);
     void inKonto(int tmpAcc, int input);

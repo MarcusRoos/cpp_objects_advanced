@@ -7,45 +7,131 @@
 #include "Account.h"
 #include <utility>
 
-Account::Account() {
-    accountNr="";
-    currBalance=0;
-    allCredit=DEFAULTSIZE;
+Account::Account(std::string aNr, int b) {
+    accountNr = std::move(aNr);
+    balance = b;
 }
 
-Account::Account(std::string tmpNr, int tmpBal, int tmpCred) {
-    accountNr=std::move(tmpNr);
-    currBalance=tmpBal;
-    allCredit=tmpCred;
+/**
+ * TRANSACTION ACCOUNT
+ * **/
+void TransactionAccount::withdrawal(int sum) {
+    balance -= sum;
 }
 
-
-void Account::addcurrBalance(int balance) {
-    currBalance += balance;
+int TransactionAccount::getDisposable() const {
+    return (balance + credit);
 }
 
-void Account::deductcurrBalance(int balanceRemove) {
-    currBalance -= balanceRemove;
+std::string TransactionAccount::getAccountType() {
+    return "Transaction Account";
 }
 
-void Account::changeallCredit(int creditChange) {
-    allCredit = creditChange;
+void TransactionAccount::setCredit(int cr) {
+    credit = cr;
 }
 
-int Account::getcurrCredit() {
-    return allCredit;
+int TransactionAccount::getCredit() const {
+    return credit;
 }
 
-int Account::getcurrBalance() {
-    return currBalance;
+bool TransactionAccount::hasCredit() const {
+    return credit > 0;
 }
 
-int Account::gettotalBalance() {
-    int tot=0;
-    tot = currBalance+allCredit;
-    return tot;
+void SavingsAccount::withdrawal(int sum) {
+    if (maxWithdrawals < withdrawals) {
+        balance -= sum;
+        withdrawals++;
+    }
+    else
+        balance = balance;
 }
 
-std::string Account::accountInfo() {
-        return accountNr;
+/**
+ * SAVINGS ACCOUNT
+ * **/
+SavingsAccount::SavingsAccount() {
+    interest = 1.02;
+    maxWithdrawals = 4;
+}
+
+SavingsAccount::SavingsAccount(std::string aNr, int withdrawals, int b) {
+    accountNr = aNr;
+    maxWithdrawals = withdrawals;
+    balance = b;
+}
+
+std::string SavingsAccount::getAccountType() {
+    return "Savings Account";
+}
+
+void SavingsAccount::setInterest(double inter) {
+    interest = inter;
+}
+
+double SavingsAccount::getInterest() {
+    return interest;
+}
+
+int SavingsAccount::getDisposable() const {
+    return (balance * interest);
+}
+
+int SavingsAccount::getMaxWithdrawals() const {
+    return maxWithdrawals;
+}
+
+int SavingsAccount::getNrOfWithdrawals() const {
+    return withdrawals;
+}
+
+bool SavingsAccount::hasInterest() const {
+    return interest > 0;
+}
+
+bool SavingsAccount::hasMaxWithdrawals() const {
+    return maxWithdrawals > 0;
+}
+
+/**
+ * LONG SAVINGS ACCOUNT
+ * **/
+void LongSavingsAccount::withdrawal(int sum) {
+    if (maxWithdrawals > 0) {
+        balance -= sum;
+        withdrawals = 0;
+    }
+    else
+        balance = balance;
+}
+
+std::string LongSavingsAccount::getAccountType() {
+    return "Long Savings Account";
+}
+
+double LongSavingsAccount::getInterest() {
+    return interest;
+}
+
+void LongSavingsAccount::setInterest(double inter) {
+    interest = inter;
+}
+
+int LongSavingsAccount::getDisposable() const {
+    return (balance * interest);
+}
+
+int LongSavingsAccount::getMaxWithdrawals() const {
+    return maxWithdrawals;
+}
+
+int LongSavingsAccount::getNrOfWithdrawals() const {
+    return withdrawals;
+}
+
+LongSavingsAccount::LongSavingsAccount() {
+    withdrawals = 0;
+    maxWithdrawals = 1;
+    interest += getInterest();
 }
