@@ -36,11 +36,12 @@ std::string BankKund::returKontoNr(int idx) {
 
 std::string BankKund::returKontoInfo(const int &index) {
     std::string tmpString = testAcc[index]->accountInfo();
-    std::string tmpCred, tmpBal, tmpTot;
+    std::string tmpCred, tmpBal, tmpTot, Type;
     tmpCred = std::to_string(testAcc[index]->getCredit());
     tmpBal = std::to_string(testAcc[index]->getBalance());
     tmpTot = std::to_string(testAcc[index]->getDisposable());
-    std::string s1{"====== " + tmpString + " ========\n\n" + "Balance: " + tmpBal
+    Type = testAcc[index]->getAccountType();
+    std::string s1{"====== " + tmpString + " ========\n\n" + "Type: " + Type + "\n" + "Balance: " + tmpBal
     + "\n" + "Credit: " + tmpCred + "\n" + "Disposable: " + tmpTot + "\n\n"};
     return s1;
 }
@@ -53,9 +54,7 @@ int BankKund::returKundTillgang() {
     return tot;
 }
 
-void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn, std::string type) {
-
-    std::cout << "Type: " << type << std::endl;
+void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn, int type) {
         namn = std::move(tmpNamn);
         personnummer = tmpPrsn;
         std::string tmpString, intString, tmpPush;
@@ -68,9 +67,22 @@ void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn, std::
         tmpString = personnummer + "-" + intString;
        if (std::find(tmpVec.begin(), tmpVec.end(), tmpString) == tmpVec.end())
         {
-            testAcc.push_back(std::unique_ptr<Account>(
-                    new TransactionAccount(std::string(), 0, "Test", 2, 3)));
-            break;
+           if (type == 1){
+               testAcc.push_back(std::unique_ptr<Account>(
+                       new TransactionAccount(std::string(), 0, tmpString, 2, 3)));
+               break;
+           }
+               if (type == 2){
+                   testAcc.push_back(std::unique_ptr<Account>(
+                           new SavingsAccount(std::string(), 0, tmpString, 2, 3)));
+                   break;
+               }
+                   if (type == 3){
+                       testAcc.push_back(std::unique_ptr<Account>(
+                               new LongSavingsAccount(std::string(), 0, tmpString, 2, 3)));
+                       break;
+                   }
+
         }
     }
 }

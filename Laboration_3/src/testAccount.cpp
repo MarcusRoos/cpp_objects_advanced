@@ -147,6 +147,7 @@ void testAccount::printAllCash() {
 }
 
 void testAccount::createAccount() {
+    if(bank.returAntalKonton() < 3) {
     std::string type;
     std::cout << "Open which type of account?";
     std::cout << "1. Transaction Account" << std::endl;
@@ -154,14 +155,14 @@ void testAccount::createAccount() {
     std::cout << "3. Long Savings Account" << std::endl;
     int input=0;
     std::cin >> input;
-    while (input <1 || input > 3){
-        std::cin >> input;
-    }
-        if (bank.skapaKonto(type)){
-            std::cout << "Account created! " << std::endl;
+        while (input < 1 || input > 3 || std::cin.fail()) {
+            std::cin >> input;
+            std::cout << "Invalid input, enter 1, 2 or 3." << std::endl;
         }
-        else
-            std::cout << "Maximum accounts reached! " << std::endl;
+        bank.skapaKonto(input);
+    }
+    else
+        std::cout << "Maximum accounts reached! " << std::endl;
 }
 
 void testAccount::deleteAccount() {
