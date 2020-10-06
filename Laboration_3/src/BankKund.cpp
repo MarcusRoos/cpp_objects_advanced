@@ -69,7 +69,7 @@ void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn, std::
        if (std::find(tmpVec.begin(), tmpVec.end(), tmpString) == tmpVec.end())
         {
             testAcc.push_back(std::unique_ptr<Account>(
-                    new Account(tmpString)));
+                    new TransactionAccount(std::string(), 0, "Test", 2, 3)));
             break;
         }
     }
@@ -89,7 +89,8 @@ bool BankKund::lasfranFil(const std::string& tmpAcc) {
             inFile >> tmpCredit;
             inFile.get();
             testAcc.push_back(std::unique_ptr<Account>(
-                    new Account(tmpANr, tmpCredit, tmpBalance)));
+                    new TransactionAccount(std::string(), 0, tmpANr, tmpCredit,
+                                           tmpBalance)));
             i++;
         }
         return true;

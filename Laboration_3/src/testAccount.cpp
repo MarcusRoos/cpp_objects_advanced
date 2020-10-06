@@ -362,6 +362,5 @@ void testAccount::startAccount() {
         std::cin >> tmpPrsn;
     }
     bank = Bank(tmpNamn, tmpPrsn);
-    bank.skapaKonto();
 }
 

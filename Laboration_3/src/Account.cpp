@@ -5,10 +5,9 @@
 //
 
 #include "Account.h"
-#include <utility>
 
 Account::Account(std::string aNr, int b) {
-    accountNr = std::move(aNr);
+    accountNr = aNr;
     balance = b;
 }
 
@@ -39,6 +38,14 @@ bool TransactionAccount::hasCredit() const {
     return credit > 0;
 }
 
+TransactionAccount::TransactionAccount(std::string aNr1, int b1,
+                                       std::string aNr, int b, int c)
+        : Account(aNr1, b1) {
+    credit = c;
+    balance = b;
+    accountNr = aNr;
+}
+
 void SavingsAccount::withdrawal(int sum) {
     if (maxWithdrawals < withdrawals) {
         balance -= sum;
@@ -51,12 +58,13 @@ void SavingsAccount::withdrawal(int sum) {
 /**
  * SAVINGS ACCOUNT
  * **/
-SavingsAccount::SavingsAccount() {
+SavingsAccount::SavingsAccount(std::string aNr, int b) : Account(aNr, b) {
     interest = 1.02;
     maxWithdrawals = 4;
 }
 
-SavingsAccount::SavingsAccount(std::string aNr, int withdrawals, int b) {
+SavingsAccount::SavingsAccount(std::string aNr1, int b1, std::string aNr,
+                               int withdrawals, int b) : Account(aNr1, b1) {
     accountNr = aNr;
     maxWithdrawals = withdrawals;
     balance = b;
@@ -130,8 +138,7 @@ int LongSavingsAccount::getNrOfWithdrawals() const {
     return withdrawals;
 }
 
-LongSavingsAccount::LongSavingsAccount() {
-    withdrawals = 0;
-    maxWithdrawals = 1;
-    interest += getInterest();
+LongSavingsAccount::LongSavingsAccount(std::string aNr, int b)
+        : SavingsAccount(aNr, b) {
+
 }

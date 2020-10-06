@@ -15,15 +15,14 @@ protected:
     std::string accountNr;
     int balance;
 public:
-    Account();
     Account(std::string aNr, int b =0);
     virtual ~Account() = default;;
     void deposit(int sum) {balance +=sum;}
-    virtual void withdrawal(int sum);
+    virtual void withdrawal(int sum)=0;
     virtual void setCredit(int cr){};
     virtual void setInterest(double inter){};
     int getBalance() const {return balance;}
-    virtual std::string getAccountType() const =0;
+    virtual std::string getAccountType() {return 0;}
     virtual int getDisposable() const {return balance;}
     std::string accountInfo() const {return accountNr;}
     virtual int getMaxWithdrawals() const {return 0;}
@@ -42,6 +41,8 @@ class TransactionAccount : public Account{
 private:
     int credit;
 public:
+    TransactionAccount(std::string aNr1, int b1,
+                       std::string aNr, int b, int c);
     virtual std::string getAccountType();
     virtual void setCredit(int cr);
     virtual int getCredit() const;
@@ -60,8 +61,9 @@ protected:
     int maxWithdrawals;
     double interest;
 public:
-    SavingsAccount();
-    SavingsAccount(std::string aNr, int withdrawals=0, int b=0);
+    SavingsAccount(std::string aNr, int b);
+    SavingsAccount(std::string aNr1, int b1, std::string aNr,
+                   int withdrawals, int b);
     virtual void setInterest(double inter);
     virtual void withdrawal(int sum);
     virtual std::string getAccountType();
@@ -79,8 +81,9 @@ public:
  * **/
 class LongSavingsAccount : public SavingsAccount{
 public:
-    LongSavingsAccount();
-    LongSavingsAccount(std::string aNr, int withdrawals=0, int b=0){
+    LongSavingsAccount(std::string aNr, int b);
+    LongSavingsAccount(std::string aNr1, int b1, std::string aNr,
+                       int withdrawals = 0, int b = 0) : SavingsAccount(aNr1, b1) {
         maxWithdrawals = 1;
         balance = b;
         accountNr = aNr;
