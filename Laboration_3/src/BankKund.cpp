@@ -130,12 +130,7 @@ void BankKund::tabortKonto(int accNr) {
 }
 
 bool BankKund::utKonto(int tmpAcc, int input) {
-    if (testAcc[tmpAcc]->getDisposable() >= input) {
-        testAcc[tmpAcc]->withdrawal(input);
-        return true;
-    }
-    else
-        return false;
+    return testAcc[tmpAcc]->withdrawal(input);
 }
 
 void BankKund::inKonto(int tmpAcc, int input) {

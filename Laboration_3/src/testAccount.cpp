@@ -223,7 +223,9 @@ void testAccount::withdrawAccount() {
             std::cout << "Withdrew " << tmpNr << " from account " << accNr <<
                       " successfully! " << std::endl;
         } else
-            std::cout << "Not enough balance, withdrawal unsuccessful! "
+            std::cout << "Withdrawal unsuccessful! Either insufficient balance "
+                         "or maximum withdrawals has been reached, please check "
+                         "your account summery."
                       << std::endl;
     }
     else
