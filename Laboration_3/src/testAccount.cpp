@@ -267,7 +267,7 @@ void testAccount::depositAccont() {
 
 void testAccount::changeCredit() {
     for (int i=0; i<bank.returAntalKonton(); i++) {
-        std::string tmpAcc;
+        std::string tmpAcc, type;
         tmpAcc = bank.returKontoNr(i);
         std::cout << "Account number: " << tmpAcc << std::endl;
     }
@@ -288,9 +288,12 @@ void testAccount::changeCredit() {
         int tmpNr=0;
         std::cout << "Enter amount to change credit to" << std::endl;
         std::cin >> tmpNr;
-        bank.andraKredit(tmpAccnr, tmpNr);
-        std::cout << "Successfully changed credit of account " << accNr <<
-        " to " << tmpNr << "!"<<std::endl;
+        if (bank.andraKredit(tmpAccnr, tmpNr)) {
+            std::cout << "Successfully changed credit of account " << accNr <<
+                      " to " << tmpNr << "!" << std::endl;
+        }
+        else
+            std::cout << "Not a transaction account, failed. " << std::endl;
     }
     else
         std::cout << "No such account. " << std::endl;

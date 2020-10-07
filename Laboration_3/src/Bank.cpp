@@ -79,8 +79,8 @@ void Bank::inKonto(int tmpAcc, int input) {
     bankPtr->inKonto(tmpAcc, input);
 }
 
-void Bank::andraKredit(int tmpAcc, int input) {
-    bankPtr->andraKredit(tmpAcc, input);
+bool Bank::andraKredit(int tmpAcc, int input) {
+    return bankPtr->andraKredit(tmpAcc, input);
 }
 
 void Bank::skrivtillFil() {

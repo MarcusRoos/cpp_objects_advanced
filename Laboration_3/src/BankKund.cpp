@@ -137,16 +137,29 @@ void BankKund::inKonto(int tmpAcc, int input) {
         testAcc[tmpAcc]->deposit(input);
 }
 
-void BankKund::andraKredit(int tmpAcc, int input) {
-    testAcc[tmpAcc]->setCredit(input);
+bool BankKund::andraKredit(int tmpAcc, int input) {
+    if (testAcc[tmpAcc]->getAccountType() == "Transaction Account") {
+        testAcc[tmpAcc]->setCredit(input);
+        return true;
+    }
+    else
+        return false;
 }
 
 void BankKund::skrivtillFil() {
     std::ofstream outFile(personnummer + ".knt");
     outFile << namn << std::endl << personnummer << std::endl;
     for (auto &idx : testAcc){
-        outFile << idx->accountInfo() << std::endl << idx->getBalance() <<
-        std::endl << idx->getCredit() << std::endl;
+        if (idx->getAccountType() == "Transaction Account") {
+            outFile << idx->getAccountType() << std::endl << idx->accountInfo()
+                    << std::endl << idx->getBalance() <<
+                    std::endl << idx->getCredit() << std::endl;
+        }
+        else{
+            outFile << idx->getAccountType() << std::endl << idx->accountInfo()
+                    << std::endl << idx->getBalance() <<
+                    std::endl << idx->getInterest() << std::endl;
+        }
     }
     outFile.close();
 }

@@ -31,7 +31,7 @@ public:
     void tabortKonto(int accNr);
     bool utKonto(int tmpAcc, int input);
     void inKonto(int tmpAcc, int input);
-    void andraKredit(int tmpAcc, int input);
+    bool andraKredit(int tmpAcc, int input);
     void skrivtillFil();
     bool lasfranFil(const std::string& tmpAcc);
 };
