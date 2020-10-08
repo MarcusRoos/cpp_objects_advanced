@@ -35,8 +35,8 @@ std::string BankKund::returKontoNr(int idx) {
 
 std::string BankKund::returKontoInfo(const int &index) {
     std::string tmpString = testAcc[index]->accountInfo();
-    size_t pos = tmpString.find("-"); //find location of word
-    tmpString.erase(0,pos+1); //delete everything prior to location found
+    size_t pos = tmpString.find("-");
+    tmpString.erase(0,pos+1);
     std::string tmpCred, tmpBal, tmpTot, Type, tmpInt, withdrawals;
     int tmpWith=0, tmpMaxWith=0;
     double tmpInterest;
