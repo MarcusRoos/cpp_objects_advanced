@@ -5,6 +5,8 @@
 //
 
 #include "BankKund.h"
+#include "../../Laboration_3/include/BankKund.h"
+
 #include <iostream>
 #include <fstream>
 #include <utility>

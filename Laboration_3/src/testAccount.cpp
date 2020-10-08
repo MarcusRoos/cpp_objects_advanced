@@ -271,7 +271,7 @@ void testAccount::changeCredit() {
         tmpAcc = bank.returKontoNr(i);
         std::cout << "Account number: " << tmpAcc << std::endl;
     }
-    std::cout << "Deposit to which account? " << std::endl;
+    std::cout << "Change credit of which account? " << std::endl;
     std::string tmpString, accNr;
     std::cin >> tmpString;
     std::string tmpAcc;
@@ -284,7 +284,7 @@ void testAccount::changeCredit() {
             break;
         }
     }
-    if (accNr == tmpString){
+    if (accNr == tmpString && bank.getAccountType(tmpAccnr) == "Transaction Account"){
         int tmpNr=0;
         std::cout << "Enter amount to change credit to" << std::endl;
         std::cin >> tmpNr;
@@ -293,9 +293,12 @@ void testAccount::changeCredit() {
                       " to " << tmpNr << "!" << std::endl;
         }
         else
-            std::cout << "Account is ineligible for credit. " << std::endl;
+            std::cout << "Failed to change credit. " << std::endl;
     }
-    else
+    if (accNr == tmpString && bank.getAccountType(tmpAccnr) != "Transaction Account"){
+        std::cout << "Saving accounts are ineligible for credit! " << std::endl;
+    }
+    else if (accNr != tmpString)
         std::cout << "No such account. " << std::endl;
 }
 

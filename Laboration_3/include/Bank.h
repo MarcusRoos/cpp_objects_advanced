@@ -28,5 +28,6 @@ public:
     bool andraKredit(int tmpAcc, int input);
     void skrivtillFil();
     bool lasfranFil(const std::string& tmpAcc);
+    std::string getAccountType(int idx);
 };
 #endif //DT060G_BANK_H

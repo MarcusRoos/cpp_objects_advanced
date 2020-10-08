@@ -96,3 +96,7 @@ bool Bank::lasfranFil(const std::string &tmpAcc) {
     }
     return false;
 }
+
+std::string Bank::getAccountType(int idx) {
+    return bankPtr->getAccountType(idx);
+}

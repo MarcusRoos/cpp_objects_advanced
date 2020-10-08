@@ -183,4 +183,6 @@ void BankKund::skrivtillFil() {
     outFile.close();
 }
 
-
+std::string BankKund::getAccountType(int idx) {
+    return testAcc[idx]->getAccountType();
+}
