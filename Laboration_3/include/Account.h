@@ -92,7 +92,7 @@ public:
     virtual std::string getAccountType();
     virtual bool withdrawal(int sum);
     virtual double getInterest() const;
-    virtual void setInterest(double inter);
+    virtual void setInterest();
     virtual int getMaxWithdrawals() const;
     virtual int getNrOfWithdrawals() const;
 };

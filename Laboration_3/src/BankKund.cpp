@@ -88,6 +88,7 @@ void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn, int t
            }
            if (type == 2){testAcc.push_back(std::unique_ptr<Account>(
                    new SavingsAccount(tmpString, 0)));
+
            break;
            }
            if (type == 3){testAcc.push_back(std::unique_ptr<Account>(

@@ -143,8 +143,8 @@ double LongSavingsAccount::getInterest() const {
     return interest;
 }
 
-void LongSavingsAccount::setInterest(double inter) {
-    interest = inter;
+void LongSavingsAccount::setInterest() {
+    interest = SavingsAccount::getInterest() + .02;
 }
 
 
