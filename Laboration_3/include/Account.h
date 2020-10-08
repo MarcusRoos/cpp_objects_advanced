@@ -6,7 +6,6 @@
 
 #ifndef DT060G_ACCOUNT_H
 #define DT060G_ACCOUNT_H
-#include <iostream>
 #include <string>
 
 const int DEFAULTSIZE = 0;

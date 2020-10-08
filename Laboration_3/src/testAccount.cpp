@@ -356,6 +356,7 @@ void testAccount::accountSummery() {
         tmpNr = bank.returKontoInfo(tmpIdx);
         std::cout << tmpNr;
     }
+    std::cout << "Withdrawals resets annually!" << std::endl;
 }
 
 void testAccount::startAccount() {

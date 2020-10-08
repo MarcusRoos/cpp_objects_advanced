@@ -5,7 +5,6 @@
 //
 
 #include "BankKund.h"
-#include <iostream>
 #include <fstream>
 #include <utility>
 
@@ -38,7 +37,8 @@ std::string BankKund::returKontoInfo(const int &index) {
     std::string tmpString = testAcc[index]->accountInfo();
     size_t pos = tmpString.find("-"); //find location of word
     tmpString.erase(0,pos+1); //delete everything prior to location found
-    std::string tmpCred, tmpBal, tmpTot, Type, tmpInt, tmpWith, tmpMaxWith;
+    std::string tmpCred, tmpBal, tmpTot, Type, tmpInt, withdrawals;
+    int tmpWith=0, tmpMaxWith=0;
     double tmpInterest;
     Type = testAcc[index]->getAccountType();
     tmpBal = std::to_string(testAcc[index]->getBalance());
@@ -46,16 +46,18 @@ std::string BankKund::returKontoInfo(const int &index) {
     if (Type == "Transaction Account"){
         tmpCred = std::to_string(testAcc[index]->getCredit());
         std::string s1{Type + " nr  " + tmpString + "\n" + "Balance: " + tmpBal
-                       + "\n" + "Credit: " + tmpCred + "\n" + "Available: " + tmpTot + "\n\n"};
+                       + "\n" + "Credit: " + tmpCred + "\n" + "Available: " + tmpTot + "\n" + "Remaining withdrawals: Unlimited\n\n"};
         return s1;
     }
     else {
         tmpInterest = testAcc[index]->getInterest();
         tmpInt = std::to_string(tmpInterest);
-        tmpMaxWith = std::to_string(testAcc[index]->getMaxWithdrawals());
-        tmpWith = std::to_string(testAcc[index]->getNrOfWithdrawals());
+        tmpMaxWith = testAcc[index]->getMaxWithdrawals();
+        tmpWith = testAcc[index]->getNrOfWithdrawals();
+        tmpWith = tmpMaxWith - tmpWith;
+        withdrawals = std::to_string(tmpWith);
         std::string s1{Type + " nr " + tmpString + "\n" + "Balance: " + tmpBal
-                       + "\n" + "Interest: " + tmpInt + "\n" + "Available: " + tmpTot + "\n\n" + "maxWith: " + tmpMaxWith + "\n" + "nrOfWith: " + tmpWith + "\n\n"};
+                       + "\n" + "Interest: " + tmpInt + "\n" + "Available: " + tmpTot + "\n" + "Remaining withdrawals: " + withdrawals + "\n\n"};
         return s1;
     }
 }
@@ -112,7 +114,6 @@ bool BankKund::lasfranFil(const std::string& tmpAcc) {
         int i=0;
         while (getline(inFile, tmpANr)){
             getline(inFile, tmpType);
-            std::cout << "TYPE: " << tmpType << std::endl;
             if (tmpType == "Transaction Account") {
                 inFile >> tmpBalance;
                 inFile >> tmpCredit;
