@@ -69,16 +69,16 @@ bool SavingsAccount::withdrawal(int sum) {
 
 SavingsAccount::SavingsAccount(std::string aNr, int b) : Account(aNr, b) {
     interest = 1.02;
-    maxWithdrawals = 0;
+    maxWithdrawals = 4;
     withdrawals = 0;
 }
 
 SavingsAccount::SavingsAccount(std::string aNr1, int b1, std::string aNr,
-                               int b) : Account(aNr1, b1) {
+                               int b, double c) : Account(aNr1, b1) {
     accountNr = aNr;
     maxWithdrawals = 4;
     balance = b;
-    interest = 1.02;
+    interest = c;
     withdrawals = 0;
 }
 
@@ -117,6 +117,14 @@ bool SavingsAccount::hasMaxWithdrawals() const {
 /**
  * LONG SAVINGS ACCOUNT
  * **/
+
+LongSavingsAccount::LongSavingsAccount(std::string aNr, int b) : SavingsAccount(aNr,
+                                                                         b) {
+    interest = SavingsAccount::getInterest() + .02;
+    withdrawals = 0;
+    maxWithdrawals = 1;
+}
+
 bool LongSavingsAccount::withdrawal(int sum) {
     if (withdrawals == 0 && sum < balance) {
         balance -= sum;

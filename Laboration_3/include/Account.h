@@ -63,7 +63,7 @@ protected:
 public:
     SavingsAccount(std::string aNr, int b);
     SavingsAccount(std::string aNr1, int b1, std::string aNr,
-                   int b);
+                   int b, double c);
     virtual void setInterest(double inter);
     virtual bool withdrawal(int sum);
     virtual std::string getAccountType();
@@ -81,12 +81,13 @@ public:
  * **/
 class LongSavingsAccount : public SavingsAccount{
 public:
+    LongSavingsAccount(std::string aNr, int b);
     LongSavingsAccount(std::string aNr1, int b1, std::string aNr,
-                       int withdrawals = 0, int b = 0) : SavingsAccount(aNr1, b1) {
+                       int b = 0, double c = 0) : SavingsAccount(aNr1, b1) {
         maxWithdrawals = 1;
         balance = b;
         accountNr = aNr;
-        interest = SavingsAccount::getInterest() + .02;
+        interest = c;
     }
     virtual std::string getAccountType();
     virtual bool withdrawal(int sum);

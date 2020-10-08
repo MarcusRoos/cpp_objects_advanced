@@ -87,13 +87,11 @@ void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn, int t
                break;
            }
            if (type == 2){testAcc.push_back(std::unique_ptr<Account>(
-                   new SavingsAccount(std::string(), 0,
-                           tmpString,  0)));
+                   new SavingsAccount(tmpString, 0)));
            break;
            }
            if (type == 3){testAcc.push_back(std::unique_ptr<Account>(
-                   new LongSavingsAccount(std::string(), 0,
-                           tmpString, 1, 0)));
+                   new LongSavingsAccount(tmpString, 0)));
            break;
            }
 
@@ -102,21 +100,42 @@ void BankKund::skapaKonto(std::string tmpNamn, const std::string& tmpPrsn, int t
 }
 
 bool BankKund::lasfranFil(const std::string& tmpAcc) {
-    std::string tmpANr;
-    int tmpBalance=0, tmpCredit=0;
-
+    std::string tmpANr, tmpType;
+    int tmpBalance, tmpCredit;
+    double tmpInterest;
     std::ifstream inFile(tmpAcc +".knt");
+    std::ifstream exFile(tmpAcc +".knt");
     if (inFile.is_open()){
         getline(inFile, namn);
         getline(inFile, personnummer);
         int i=0;
         while (getline(inFile, tmpANr)){
-            inFile >> tmpBalance;
-            inFile >> tmpCredit;
-            inFile.get();
-            testAcc.push_back(std::unique_ptr<Account>(
-                    new TransactionAccount(std::string(), 0, tmpANr, tmpCredit,
-                                           tmpBalance)));
+            getline(inFile, tmpType);
+            std::cout << "TYPE: " << tmpType << std::endl;
+            if (tmpType == "Transaction Account") {
+                inFile >> tmpBalance;
+                inFile >> tmpCredit;
+                inFile.get();
+                testAcc.push_back(std::unique_ptr<Account>(
+                        new TransactionAccount(std::string(), 0, tmpANr,
+                                               tmpBalance, tmpCredit)));
+            }
+            if (tmpType == "Savings Account") {
+                inFile >> tmpBalance;
+                inFile >> tmpInterest;
+                inFile.get();
+                testAcc.push_back(std::unique_ptr<Account>(
+                        new SavingsAccount(std::string(), 0, tmpANr,
+                                               tmpBalance, tmpInterest)));
+            }
+            if (tmpType == "Long Savings Account") {
+                inFile >> tmpBalance;
+                inFile >> tmpInterest;
+                inFile.get();
+                testAcc.push_back(std::unique_ptr<Account>(
+                        new LongSavingsAccount(std::string(), 0, tmpANr,
+                                               tmpBalance, tmpInterest)));
+            }
             i++;
         }
         return true;
@@ -151,13 +170,13 @@ void BankKund::skrivtillFil() {
     outFile << namn << std::endl << personnummer << std::endl;
     for (auto &idx : testAcc){
         if (idx->getAccountType() == "Transaction Account") {
-            outFile << idx->getAccountType() << std::endl << idx->accountInfo()
-                    << std::endl << idx->getBalance() <<
+            outFile << idx->accountInfo() << std::endl << idx->getAccountType() << std::endl
+                    << idx->getBalance() <<
                     std::endl << idx->getCredit() << std::endl;
         }
         else{
-            outFile << idx->getAccountType() << std::endl << idx->accountInfo()
-                    << std::endl << idx->getBalance() <<
+            outFile << idx->accountInfo() << std::endl << idx->getAccountType() << std::endl
+                    << idx->getBalance() <<
                     std::endl << idx->getInterest() << std::endl;
         }
     }

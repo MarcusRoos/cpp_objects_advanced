@@ -149,7 +149,7 @@ void testAccount::printAllCash() {
 void testAccount::createAccount() {
     if(bank.returAntalKonton() < 3) {
     std::string type;
-    std::cout << "Open which type of account?";
+    std::cout << "Open which type of account?" << std::endl;
     std::cout << "1. Transaction Account" << std::endl;
     std::cout << "2. Savings Account" << std::endl;
     std::cout << "3. Long Savings Account" << std::endl;
@@ -293,7 +293,7 @@ void testAccount::changeCredit() {
                       " to " << tmpNr << "!" << std::endl;
         }
         else
-            std::cout << "Not a transaction account, failed. " << std::endl;
+            std::cout << "Account is ineligible for credit. " << std::endl;
     }
     else
         std::cout << "No such account. " << std::endl;
