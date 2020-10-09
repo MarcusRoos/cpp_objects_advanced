@@ -194,7 +194,7 @@ bool LongSavingsAccount::withdrawal(int sum) {
         balance *= interest;
         balance -= sum;
         withdrawals = 1;
-        return true; 
+        return true;
     }
     else
         return false;
