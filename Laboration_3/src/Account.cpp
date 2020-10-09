@@ -52,7 +52,8 @@ TransactionAccount::TransactionAccount(std::string aNr1, int b1,
  * **/
 
 bool SavingsAccount::withdrawal(int sum) {
-    if (withdrawals < maxWithdrawals && balance > sum) {
+    if (withdrawals < maxWithdrawals && (balance*interest) > sum) {
+        balance *= interest;
         balance -= sum;
         withdrawals++;
         return true;
@@ -108,7 +109,8 @@ LongSavingsAccount::LongSavingsAccount(std::string aNr, int b) : SavingsAccount(
 }
 
 bool LongSavingsAccount::withdrawal(int sum) {
-    if (withdrawals == 0 && sum < balance) {
+    if (withdrawals == 0 && sum < (balance*interest)) {
+        balance *= interest;
         balance -= sum;
         withdrawals = 1;
         return true;
