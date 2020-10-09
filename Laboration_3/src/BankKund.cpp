@@ -46,7 +46,7 @@ std::string BankKund::returKontoInfo(const int &index) {
     if (Type == "Transaction Account"){
         tmpCred = std::to_string(testAcc[index]->getCredit());
         std::string s1{Type + " nr  " + tmpString + "\n" + "Balance: " + tmpBal
-                       + "\n" + "Credit: " + tmpCred + "\n" + "Available: " + tmpTot + "\n" + "Remaining withdrawals: Unlimited\n\n"};
+                       + "kr\n" + "Credit: " + tmpCred + "kr\n" + "Available: " + tmpTot + "kr\n" + "Remaining withdrawals: Unlimited\n\n"};
         return s1;
     }
     else {
@@ -58,7 +58,7 @@ std::string BankKund::returKontoInfo(const int &index) {
         tmpWith = tmpMaxWith - tmpWith;
         withdrawals = std::to_string(tmpWith);
         std::string s1{Type + " nr " + tmpString + "\n" + "Balance: " + tmpBal
-                       + "\n" + "Interest: " + tmpInt + "%\n" + "Available: " + tmpTot + "\n" + "Remaining withdrawals: " + withdrawals + "\n\n"};
+                       + "kr\n" + "Interest: " + tmpInt + "%\n" + "Available: " + tmpTot + "kr\n" + "Remaining withdrawals: " + withdrawals + "\n\n"};
         return s1;
     }
 }
