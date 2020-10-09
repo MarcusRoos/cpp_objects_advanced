@@ -6,7 +6,12 @@
 
 #include "Bank.h"
 #include <utility>
-
+/**
+The functions in this class won't be documented one by one, this class simply
+ works as a function caller between the users input/output function (testacc),
+ and the processing function BankKund, this will be very beneficial if more,
+ different functions and classes are being introduced to this program
+*/
 Bank::Bank()= default;
 
 Bank::Bank(std::string tmpNamn, std::string tmpPrsn) {

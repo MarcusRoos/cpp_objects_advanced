@@ -12,9 +12,7 @@
 The run function, this function will be called in the main program, from here a
  it will enter a switch which will call another function from the menu class.
  Here the user will be able to choose what they would like to do with the
- program, at first only the first "create Queue" option will be a available
- as well as the exit option,
- once a queue has been created the rest of the options will open up.
+ program.
 */
 void testAccount::run() {
     bool again = true;
@@ -70,11 +68,10 @@ void testAccount::run() {
     }while(again);
 }
 
-
-
 /**
-The testApp constructor, adds menu items to determine which items are enabled
- as well as disabled by default.
+The testAccount constructor, adds menu items to determine which items are enabled
+ as well as disabled by default, in this case all the options are available from
+ the get go as a submenu is handling this part in this case.
 */
 testAccount::testAccount() {
     menu.setTitle("**** Pointer menu ****");
@@ -94,24 +91,41 @@ testAccount::testAccount() {
     menu.addItem("Exit", true);
 }
 
+/**
+Tests whether the string parameter only contains integers or not, if
+ only integers are found it will return true, otherwise false
+*/
 bool testAccount::numberVerify(const std::string &input) {
     return input.find_first_not_of("9876543210") == std::string::npos;
 }
 
+/**
+Prints name of the current customer
+*/
 void testAccount::printName() {
     std::cout << "NAME: " << bank.returNamn() << std::endl;
 }
 
+/**
+Prints personnummer of the current customer
+*/
 void testAccount::printPrsnr() {
     std::cout << "Person Number: " << bank.returPnummer() << std::endl;
 
 }
 
+/**
+Print the total amount of accounts the customer currently possess
+*/
 void testAccount::printAmountofAccount() {
     std::cout << "Amount of accounts: " << bank.returAntalKonton() <<
     std::endl;
 }
 
+/**
+Prints the different account numbers for all the current accounts the customer
+ has
+*/
 void testAccount::printAccountInfo() {
     for (int i=0; i<bank.returAntalKonton(); i++) {
         std::string tmpAcc, test;
@@ -120,13 +134,17 @@ void testAccount::printAccountInfo() {
     }
 }
 
+/**
+Prints the information about one specific account, specified by user account
+ number input
+*/
 void testAccount::printBalCredTot() {
     for (int i=0; i<bank.returAntalKonton(); i++) {
         std::string tmpAcc;
         tmpAcc = bank.returKontoNr(i);
         std::cout << "Account number: " << tmpAcc << std::endl;
     }
-    std::cout << "Deposit to which account? " << std::endl;
+    std::cout << "Print information for which account? " << std::endl;
     std::string tmpString;
     std::cin >> tmpString;
     int tmpAccnr=0;
@@ -140,12 +158,22 @@ void testAccount::printBalCredTot() {
     std::cout << bank.returKontoInfo(tmpAccnr);
 }
 
+/**
+Prints the total amount of funds the customer have across all accounts
+*/
 void testAccount::printAllCash() {
     int tmpNr=0;
     tmpNr = bank.returKundTillgang();
     std::cout << "Total: " << tmpNr << std::endl;
 }
 
+/**
+Creates an account, allows the user to specify whether its a transaction, savings
+  or long savings account. Customer is free to choose freely between the three
+  types as they wish. An account creation is only allowed if the size of the
+  vector is less than 3, meaning 3 or less accounts exist. The newly created
+  account will be void of any funds and use the default interest rates.
+*/
 void testAccount::createAccount() {
     if(bank.returAntalKonton() < 3) {
     std::string type;
@@ -165,6 +193,11 @@ void testAccount::createAccount() {
         std::cout << "Maximum accounts reached! " << std::endl;
 }
 
+/**
+Deletes an account specified by the user, user will enter the
+ account number they wish to delete and it will be removed.
+  Will inform the user whether the operation was successful or not.
+*/
 void testAccount::deleteAccount() {
     if (bank.returAntalKonton() > 0) {
         for (int i = 0; i < bank.returAntalKonton(); i++) {
@@ -195,7 +228,11 @@ void testAccount::deleteAccount() {
     }
 }
 
-
+/**
+Withdraws funds from the specified account, the user will specify which account
+ they wish to withdraw from, and the amount they wish to withdraw.
+ Will inform the user whether the operation was successful or not.
+*/
 void testAccount::withdrawAccount() {
     for (int i=0; i<bank.returAntalKonton(); i++) {
         std::string tmpAcc;
@@ -233,6 +270,11 @@ void testAccount::withdrawAccount() {
 
 }
 
+/**
+Deposts funds to the specified account, the user will specify which account
+ they wish to deposit to, and the amount they wish to deposit.
+ Will inform the user whether the operation was successful or not.
+*/
 void testAccount::depositAccont() {
     for (int i=0; i<bank.returAntalKonton(); i++) {
         std::string tmpAcc;
@@ -265,6 +307,11 @@ void testAccount::depositAccont() {
 
 }
 
+/**
+Changes the credit on the specified account, the user will specify which account
+ they wish to change credits for, and the amount they wish to change it to.
+ Will inform the user whether the operation was successful or not.
+*/
 void testAccount::changeCredit() {
     for (int i=0; i<bank.returAntalKonton(); i++) {
         std::string tmpAcc, type;
@@ -302,16 +349,28 @@ void testAccount::changeCredit() {
         std::cout << "No such account. " << std::endl;
 }
 
+/**
+Saves the customer to a file specified by their personnummer
+*/
 void testAccount::writeToFile() {
     bank.skrivtillFil();
 }
 
+/**
+Loads in an already existing customer to the program, the user will be prompted
+ to enter their personnummer, the function will loop until a valid personnummer
+ has been entered or until the user return to the submenu by entering "0".
+*/
 void testAccount::readFromFile() {
     std::cout << "Enter your social security number (10 digits):" << std::endl;
     std::string tmpPrsn;
     std::cin >> tmpPrsn;
     while (!numberVerify(tmpPrsn) || tmpPrsn.length() != 10 || !bank.lasfranFil(tmpPrsn)){
-        std::cout << "Wrong input or could not find file, please retry.\n";
+        if (tmpPrsn == "0"){
+            runSubMenu();
+        }
+        std::cout << "Wrong input or could not find file, please retry. Enter 0 "
+                     "to return to the sub menu.\n";
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cin >> tmpPrsn;
@@ -322,6 +381,11 @@ void testAccount::readFromFile() {
     }
 }
 
+/**
+Runs the submenu which will be called whenever the program has started, allows
+ the user to either create a new account, load in an already existing customer
+ by entering their personnummer, or exiting entirely.
+*/
 void testAccount::runSubMenu() {
     std::cout << "1. Create account" << std::endl;
     std::cout << "2. Read from file" << std::endl;
@@ -350,6 +414,9 @@ void testAccount::runSubMenu() {
     }
 }
 
+/**
+Prints an account summery of the current customers accounts
+*/
 void testAccount::accountSummery() {
     for (int tmpIdx=0; tmpIdx<bank.returAntalKonton(); tmpIdx++) {
         std::string tmpNr;
@@ -359,6 +426,10 @@ void testAccount::accountSummery() {
     std::cout << "Withdrawals resets annually!" << std::endl;
 }
 
+/**
+Will be called through the submenu when no customer has been made yet, will
+ initialize the name and personnummer of the new customer.
+*/
 void testAccount::startAccount() {
     std::cout << "Enter your firstname and lastname: " << std::endl;
     std::string tmpNamn;
