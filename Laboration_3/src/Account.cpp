@@ -39,10 +39,6 @@ int TransactionAccount::getCredit() const {
     return credit;
 }
 
-bool TransactionAccount::hasCredit() const {
-    return credit > 0;
-}
-
 TransactionAccount::TransactionAccount(std::string aNr1, int b1,
                                        std::string aNr, int b, int c)
         : Account(aNr1, b1) {
@@ -56,8 +52,6 @@ TransactionAccount::TransactionAccount(std::string aNr1, int b1,
  * **/
 
 bool SavingsAccount::withdrawal(int sum) {
-    std::cout << "MAX SAVING " << maxWithdrawals << std::endl;
-    std::cout << "WITH SAVING " << withdrawals << std::endl;
     if (withdrawals < maxWithdrawals && balance > sum) {
         balance -= sum;
         withdrawals++;
@@ -86,16 +80,12 @@ std::string SavingsAccount::getAccountType() {
     return "Savings Account";
 }
 
-void SavingsAccount::setInterest(double inter) {
-    interest = inter;
-}
-
 double SavingsAccount::getInterest() const {
     return interest;
 }
 
 int SavingsAccount::getDisposable() const {
-    return balance;
+    return (balance * interest);
 }
 
 int SavingsAccount::getMaxWithdrawals() const {
@@ -104,14 +94,6 @@ int SavingsAccount::getMaxWithdrawals() const {
 
 int SavingsAccount::getNrOfWithdrawals() const {
     return withdrawals;
-}
-
-bool SavingsAccount::hasInterest() const {
-    return interest > 0;
-}
-
-bool SavingsAccount::hasMaxWithdrawals() const {
-    return maxWithdrawals > 0;
 }
 
 /**
@@ -137,21 +119,4 @@ bool LongSavingsAccount::withdrawal(int sum) {
 
 std::string LongSavingsAccount::getAccountType() {
     return "Long Savings Account";
-}
-
-double LongSavingsAccount::getInterest() const {
-    return interest;
-}
-
-void LongSavingsAccount::setInterest() {
-    interest = SavingsAccount::getInterest() + .02;
-}
-
-
-int LongSavingsAccount::getMaxWithdrawals() const {
-    return maxWithdrawals;
-}
-
-int LongSavingsAccount::getNrOfWithdrawals() const {
-    return withdrawals;
 }
