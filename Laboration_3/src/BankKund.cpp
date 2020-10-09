@@ -38,7 +38,7 @@ std::string BankKund::returKontoInfo(const int &index) {
     size_t pos = tmpString.find("-");
     tmpString.erase(0,pos+1);
     std::string tmpCred, tmpBal, tmpTot, Type, tmpInt, withdrawals;
-    int tmpWith=0, tmpMaxWith=0;
+    int tmpWith=0, tmpMaxWith=0, interest=0;
     double tmpInterest;
     Type = testAcc[index]->getAccountType();
     tmpBal = std::to_string(testAcc[index]->getBalance());
@@ -51,13 +51,14 @@ std::string BankKund::returKontoInfo(const int &index) {
     }
     else {
         tmpInterest = testAcc[index]->getInterest();
-        tmpInt = std::to_string(tmpInterest);
+        interest = ((tmpInterest * 100)-100);
+        tmpInt = std::to_string(interest);
         tmpMaxWith = testAcc[index]->getMaxWithdrawals();
         tmpWith = testAcc[index]->getNrOfWithdrawals();
         tmpWith = tmpMaxWith - tmpWith;
         withdrawals = std::to_string(tmpWith);
         std::string s1{Type + " nr " + tmpString + "\n" + "Balance: " + tmpBal
-                       + "\n" + "Interest: " + tmpInt + "\n" + "Available: " + tmpTot + "\n" + "Remaining withdrawals: " + withdrawals + "\n\n"};
+                       + "\n" + "Interest: " + tmpInt + "%\n" + "Available: " + tmpTot + "\n" + "Remaining withdrawals: " + withdrawals + "\n\n"};
         return s1;
     }
 }
