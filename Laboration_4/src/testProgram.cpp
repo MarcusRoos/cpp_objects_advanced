@@ -6,23 +6,27 @@
 
 #include "testProgram.h"
 #include <iostream>
+#include <limits>
 
 void testProgram::run() {
-    bool again = true;
-    do
-    {
-        menu.printMenuItems();
-        switch(menu.menuChoice())
+    int choice = 0;
+    std::cout << "Choice..." << std::endl;
+    std::cin >> choice;
+    while (std::cin.fail() || choice <1 || choice >14){
+        std::cout << "Wrong input.\n";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin >> choice;
+    }
+   switch(choice)
         {
             case 1:
-                std::cout << "Case 1 start" << std::endl
+                std::cout << "Case 1 start" << std::endl;
                 break;
             case 2:
-                std::cout << "Case 2 exit" << std::endl
-                again=false;
+                std::cout << "Case 2 exit" << std::endl;
                 break;
         }
-    }while(again);
 }
 
 /**
@@ -31,7 +35,7 @@ The testAccount constructor, adds menu items to determine which items are enable
  the get go as a submenu is handling this part in this case.
 */
 testProgram::testProgram() {
-    menu.setTitle("**** Pointer menu ****");
-    menu.addItem("Run", true);
-    menu.addItem("Exit", true);
+std::cout << "TITLE " << std::endl;
+std::cout << "1. Run the program " << std::endl;
+std::cout << "2. Exit the program " << std::endl;
 }
