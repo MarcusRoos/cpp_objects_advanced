@@ -3,6 +3,6 @@
 
 int main() {
     testProgram mainmenu;
-    mainmenu.runSubMenu();
+    mainmenu.run();
     return 0;
 }
