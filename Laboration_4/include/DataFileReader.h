@@ -33,42 +33,43 @@ DataFileReader<T>::DataFileReader(std::string aDataFileName,
 
 template<typename T>
 void DataFileReader<T>::openFiles() {
+    std::cout << "openfiles" << std::endl;
     std::ifstream error(errorFile);
     error.open(errorFile);
     if (!error.is_open())
         throw std::runtime_error("could not open errorfile");
     std::ifstream data(dataFile);
-    data.open(errorFile);
+    data.open(dataFile);
     if (!data.is_open())
         throw std::runtime_error("could not open datafile");
-
 }
 
 template<typename T>
 bool DataFileReader<T>::readNextValue(T &aValue) {
+    std::ifstream data(dataFile);
+    std::ofstream readError(errorFile);
+    using namespace std;
     std::cout << "TestRead" << std::endl;
-    /*
-    ios_base::iostate mask = ios::eofbit | ios::failbit | ios::badbit;
-    dataFile.exceptions(mask);
+    std::ios_base::iostate mask = ios::eofbit | ios::failbit | ios::badbit;
+    data.exceptions(mask);
     try{
-        dataFile >> aValue;
+        data >> aValue;
         return true;
     }
     catch (ios_base::failure &eo){
-        ios_base::iostate flags = dataFile.rdstate();
+        ios_base::iostate flags = data.rdstate();
         if (flags & ios::eofbit){
-            dataFile.clear();
+            data.clear();
             return false;
         }
         else{
             std::string error;
-            dataFile.clear();
-            getline(dataFile,error);
-            errorFile << error << std::endl;
+            data.clear();
+            getline(data,error);
+            readError << error << std::endl;
+            return true;
         }
     }
-     */
-    return true;
 }
 
 template<typename T>

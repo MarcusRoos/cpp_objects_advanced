@@ -17,7 +17,19 @@ public:
 private:
     DataFileReader<T> *reader;
     T minRange;
-    T manRange;
+    T maxRange;
 };
+
+template<typename T>
+DataFilter<T>::DataFilter(DataFileReader <T> *aReader, T aMin, T aMax) {
+    *reader = aReader;
+    minRange = aMin;
+    maxRange = aMax;
+}
+
+template<typename T>
+bool DataFilter<T>::getNextValue(T &aValue) {
+    return false;
+}
 
 #endif //DT060G_DATAFILTER_H
