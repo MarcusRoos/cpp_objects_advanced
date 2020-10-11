@@ -6,12 +6,15 @@
 
 #ifndef DT060G_TESTPROGRAM_H
 #define DT060G_TESTPROGRAM_H
+#include "DataFileReader.h"
+#include "DataFilter.h"
 
 class testProgram {
 private:
+    DataFileReader<std::string> dataFileReader;
 public:
-    testProgram();
-    static void run();
+    testProgram(DataFileReader<std::string> dataFileReader);
+    void run();
 };
 
 #endif //DT060G_TESTPROGRAM_H
