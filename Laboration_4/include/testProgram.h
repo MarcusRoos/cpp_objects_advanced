@@ -11,10 +11,13 @@
 
 class testProgram {
 private:
-    DataFileReader<std::string> dataFileReader;
+    double dummy=0;
+    std::string datafilename = "Values.dat";
+    std::string errorfilename = "ReadErrors.dat";
 public:
-    testProgram(DataFileReader<std::string> dataFileReader);
+    testProgram();
     void run();
+    void mainProgram();
 };
 
 #endif //DT060G_TESTPROGRAM_H

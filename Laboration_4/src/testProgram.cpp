@@ -8,7 +8,9 @@
 #include <iostream>
 #include <limits>
 
+
 void testProgram::run() {
+    DataFileReader<double> dataFileReader(datafilename,errorfilename);
     int choice = 0;
     std::cout << "Choice..." << std::endl;
     std::cin >> choice;
@@ -18,16 +20,17 @@ void testProgram::run() {
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cin >> choice;
     }
-   switch(choice)
-        {
-            case 1:
-                std::cout << "Case 1 start" << std::endl;
-                dataFileReader.openFiles();
-                break;
-            case 2:
-                std::cout << "Case 2 exit" << std::endl;
-                break;
-        }
+    switch(choice)
+    {
+        case 1:
+            dataFileReader.openFiles();
+            while(dataFileReader.readNextValue(dummy)) {
+                std::cout << "Dummy: " << dummy << std::endl;
+            }
+            break;
+        case 2:
+            break;
+    }
 }
 
 /**
@@ -35,9 +38,12 @@ The testAccount constructor, adds menu items to determine which items are enable
  as well as disabled by default, in this case all the options are available from
  the get go as a submenu is handling this part in this case.
 */
-testProgram::testProgram(DataFileReader<std::string> dataFileReader)
-        : dataFileReader(dataFileReader) {
-std::cout << "TITLE " << std::endl;
-std::cout << "1. Run the program " << std::endl;
-std::cout << "2. Exit the program " << std::endl;
+testProgram::testProgram(){
+    std::cout << "TITLE " << std::endl;
+    std::cout << "1. Run the program " << std::endl;
+    std::cout << "2. Exit the program " << std::endl;
+}
+
+void testProgram::mainProgram() {
+
 }

@@ -22,6 +22,9 @@ public:
 private:
     std::string dataFile;
     std::string errorFile;
+    std::ifstream data;
+    std::ofstream readError;
+    double sum=0, median=0, amount=0;
 };
 
 template<typename T>
@@ -34,11 +37,10 @@ DataFileReader<T>::DataFileReader(std::string aDataFileName,
 template<typename T>
 void DataFileReader<T>::openFiles() {
     std::cout << "openfiles" << std::endl;
-    std::ifstream error(errorFile);
-    error.open(errorFile);
+    std::ofstream error(errorFile);
+    readError.open(errorFile);
     if (!error.is_open())
         throw std::runtime_error("could not open errorfile");
-    std::ifstream data(dataFile);
     data.open(dataFile);
     if (!data.is_open())
         throw std::runtime_error("could not open datafile");
@@ -46,14 +48,15 @@ void DataFileReader<T>::openFiles() {
 
 template<typename T>
 bool DataFileReader<T>::readNextValue(T &aValue) {
-    std::ifstream data(dataFile);
-    std::ofstream readError(errorFile);
     using namespace std;
     std::cout << "TestRead" << std::endl;
     std::ios_base::iostate mask = ios::eofbit | ios::failbit | ios::badbit;
     data.exceptions(mask);
     try{
         data >> aValue;
+        sum += aValue;
+        amount++;
+        data.get();
         return true;
     }
     catch (ios_base::failure &eo){
@@ -67,7 +70,6 @@ bool DataFileReader<T>::readNextValue(T &aValue) {
             data.clear();
             getline(data,error);
             readError << error << std::endl;
-            return true;
         }
     }
 }
