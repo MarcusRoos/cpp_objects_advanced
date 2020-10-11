@@ -22,13 +22,14 @@ private:
 
 template<typename T>
 DataFilter<T>::DataFilter(DataFileReader <T> *aReader, T aMin, T aMax) {
-    *reader = aReader;
+//    reader = new DataFileReader<T>(*aReader);
     minRange = aMin;
     maxRange = aMax;
 }
 
 template<typename T>
 bool DataFilter<T>::getNextValue(T &aValue) {
+    std::cout << "Hej" << std::endl;
     return false;
 }
 

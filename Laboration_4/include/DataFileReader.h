@@ -72,6 +72,7 @@ bool DataFileReader<T>::readNextValue(T &aValue) {
             readError << error << std::endl;
         }
     }
+    return true;
 }
 
 template<typename T>
