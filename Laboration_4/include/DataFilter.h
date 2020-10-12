@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include "DataFileReader.h"
+#include <stdexcept>
 
 template<typename T>
 class DataFilter {
@@ -21,7 +22,7 @@ private:
     T minRange;
     T maxRange;
     double sum, amount, average;
-    int outside;
+    int outside=0;
 };
 
 template<typename T>
@@ -35,18 +36,24 @@ bool DataFilter<T>::getNextValue(T &aValue) {
             notEndOfFile = reader->readNextValue(aValue);
             value = aValue;
             if (notEndOfFile){
+                if (value <= minRange || value >= maxRange) {
+                    throw std::range_error("Some error in the range!");
+                }
                 sum += value;
                 amount++;
                 average = sum/amount;
                 std::cout << "aValue: " << aValue << std::endl;
             }
         }
-        catch (std::range_error &e){
-            outside++;
-            std::cout << "outside" << outside << std::endl;
-            rangeError << e.what() << std::endl;
-        }
+            catch (std::range_error & e)
+            {
+                outside++;
+                std::cout << "outside" << outside << std::endl;
+                rangeError << e.what() << std::endl;
+            }
+
     }
+    rangeError.close();
     return false;
 }
 
