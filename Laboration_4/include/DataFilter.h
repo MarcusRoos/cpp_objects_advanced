@@ -21,7 +21,7 @@ private:
     DataFileReader<T> *reader;
     T minRange;
     T maxRange;
-    double sum, amount, average;
+    double sum=0, amount=0, average=0;
     int outside=0;
 };
 
@@ -36,13 +36,12 @@ bool DataFilter<T>::getNextValue(T &aValue) {
             notEndOfFile = reader->readNextValue(aValue);
             value = aValue;
             if (notEndOfFile){
-                if (value <= minRange || value >= maxRange) {
+                if (value < minRange || value > maxRange) {
                     throw std::range_error("Some error in the range!");
                 }
                 sum += value;
                 amount++;
                 average = sum/amount;
-                std::cout << "aValue: " << aValue << std::endl;
             }
         }
             catch (std::range_error & e)
@@ -53,6 +52,10 @@ bool DataFilter<T>::getNextValue(T &aValue) {
             }
 
     }
+    std::cout << "Amount: " << amount << std::endl;
+    std::cout << "Outside: " << outside << std::endl;
+    std::cout << "Sum: " << sum << std::endl;
+    std::cout << "Avg: " << average << std::endl;
     rangeError.close();
     return false;
 }
