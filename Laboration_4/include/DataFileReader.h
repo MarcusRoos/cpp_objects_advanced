@@ -24,7 +24,6 @@ private:
     std::string errorFile;
     std::ifstream data;
     std::ofstream readError;
-    double sum=0, median=0, amount=0, outside=0;
 };
 
 template<typename T>
@@ -54,13 +53,9 @@ bool DataFileReader<T>::readNextValue(T &aValue) {
     data.exceptions(mask);
     try{
         data >> aValue;
-        sum += aValue;
-        amount++;
-        data.get();
         return true;
     }
     catch (ios_base::failure &eo){
-        outside++;
         ios_base::iostate flags = data.rdstate();
         if (flags & ios::eofbit){
             data.clear();
