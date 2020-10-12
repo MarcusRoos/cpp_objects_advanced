@@ -47,7 +47,6 @@ bool DataFilter<T>::getNextValue(T &aValue) {
                 rangeError << e.what() << aValue << std::endl;
                 outside++;
             }
-
     }
     rangeError.close();
 
@@ -60,7 +59,6 @@ bool DataFilter<T>::getNextValue(T &aValue) {
         totalLines ++;
     }
     totalLines-=1;
-
     deleteLines.close();
 
     amount -= totalLines;

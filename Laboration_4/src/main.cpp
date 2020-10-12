@@ -1,10 +1,6 @@
 #include "DataFilter.h"
 #include "DataFileReader.h"
 #include <string>
-#include <exception>
-#include <stdexcept>
-#include <iostream>
-#include <fstream>
 //#include "memstat.hpp"
 
 int main() {
