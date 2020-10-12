@@ -27,15 +27,15 @@ private:
 
 template<typename T>
 bool DataFilter<T>::getNextValue(T &aValue) {
-    std::ofstream rangeError("ReadErrors.dat");
-    bool notEndOfFile;
-    notEndOfFile = true;
+    std::string errorstring="Value outside interval: ";
+    std::ofstream rangeError("RangeErrors.dat");
+    bool notEndOfFile = true;
     while (notEndOfFile){
         try{
             notEndOfFile = reader->readNextValue(aValue);
             if (notEndOfFile){
                 if (aValue < minRange || aValue > maxRange) {
-                    throw std::range_error("Value outside interval: ");
+                    throw std::range_error(errorstring);
                 }
                 else
                 sum += aValue;
@@ -44,12 +44,26 @@ bool DataFilter<T>::getNextValue(T &aValue) {
         }
             catch (std::range_error & e)
             {
-                outside++;
                 rangeError << e.what() << aValue << std::endl;
+                outside++;
             }
 
     }
     rangeError.close();
+
+    std::string s;
+    int totalLines=0;
+    std::ifstream deleteLines;
+    deleteLines.open("readErrors.dat");
+    while(!deleteLines.eof()) {
+        getline(deleteLines, s);
+        totalLines ++;
+    }
+    totalLines-=1;
+
+    deleteLines.close();
+
+    amount -= totalLines;
     average = sum/amount;
     std::cout << "Amount: " << amount << std::endl;
     std::cout << "Outside: " << outside << std::endl;
