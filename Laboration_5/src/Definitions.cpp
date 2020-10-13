@@ -1,6 +1,7 @@
 #include "Prototypes.h"
 #include <iostream>
 #include <limits>
+#include <list>
 
 void startFunc() {
     std::cout << "Int or Double?" << std::endl;
@@ -16,12 +17,12 @@ void startFunc() {
     }
     switch (tmpInt){
         case 1: {
-            int initInt = 0;
+            std::list<int>intList;
             std::cout << "Integer." << std::endl;
             break;
         }
         case 2: {
-            double initDouble=0;
+            std::list<double>dblList;
             std::cout << "Double." << std::endl;
             break;
         }
