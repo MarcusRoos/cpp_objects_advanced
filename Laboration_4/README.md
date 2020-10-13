@@ -98,6 +98,18 @@ I still got the amount counter to tick up for all the values stored in
 like my current solution is very crude, however it gets the job done and 
 produces the wanted results without any kind of cheesing. 
 
+To find the "ReadErrors.dat" and "Values.dat" files I decided to simply 
+move those two files from the _Resources folder and initialize 
+two strings in the main.cpp with their respective names. 
+I preferred to do it this way as file structure can be different 
+from user to user and if the files are always next to the 
+source folder different file structure won't be be the cause to failing 
+to find those files. If it wasn't allowed to move those files I would simply 
+use ("../../_Resources/Lab_4/Values.dat", "../../_Resources/Lab_4/ReadErrors.dat")
+when initializing the strings and using those parameters for opening the files.
+It would take two steps up to where the _Resources folder is located, enter it, 
+navigate to Lab_4 and find the "Values.dat" and "ReadErrors.dat" files.
+
 The pre/post conditions were a bit strange to handle at times, the 
 getNextValues precondition were meant to check whether an earlier call to 
 getNextValue had returned true or false, if true getNextValue can keep on 
