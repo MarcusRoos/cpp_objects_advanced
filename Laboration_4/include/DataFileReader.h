@@ -63,7 +63,8 @@ The openFiles function will try to open the in and outstreams
  */
 template<typename T>
 void DataFileReader<T>::openFiles() {
-    readError.open(errorFile);
+    std::ifstream tmpErrorFile;
+    tmpErrorFile.open(errorFile);
     if (!readError.is_open())
         throw std::runtime_error("could not open errorfile");
     data.open(dataFile);
