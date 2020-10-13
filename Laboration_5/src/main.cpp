@@ -1,7 +1,7 @@
 #include "Prototypes.h"
-#include "memstat.hpp"
+//#include "memstat.hpp"
 
 int main() {
-    assignmentFunction();
+    startFunc();
     return 0;
 }
