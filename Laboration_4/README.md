@@ -79,3 +79,45 @@ final results printed on the screen. This is all done within the getNextValue
 function.
 
 ## Discussion
+This assignment proved to be more challenging than I had initially thought. 
+While the concept of templates and exceptions both seem straight forward enough 
+it's everything around as well as the restrictions that made it tougher, not
+being able to use a h/cpp combo threw me off at first, and while I found a few 
+different solutions I decided to put all the code in .h files, after some more 
+reading this seems to be the standard, but the .h files should be refractored 
+into .hpp files which I will definitely do for assignment 5 at the start. 
+While there is no different between .h and .hpp files its used to distinguish 
+the different between a regular header file, and a template file. 
+
+I had no bigger issues getting the exceptions working as they should, but I did 
+have a few hiccups with the templates but they were all very minor and were 
+resolved within the minute. Biggest challenge I had were getting the reading 
+of files working as I wanted, while it worked close to what it were ought to, 
+I still got the amount counter to tick up for all the values stored in 
+"ReadErrors.dat". I didn't manage any "clean" solution for this, and it feels 
+like my current solution is very crude, however it gets the job done and 
+produces the wanted results without any kind of cheesing. 
+
+The pre/post conditions were a bit strange to handle at times, the 
+getNextValues precondition were meant to check whether an earlier call to 
+getNextValue had returned true or false, if true getNextValue can keep on 
+running, if false it should not be called. I had a bit trouble getting this 
+to work as calling a function within itself would cause an endless loop 
+and crash the program. I could solve this by either adding another variable and
+extending the code, this variable would be calling the getNextValue function,
+store the result in itself and keep being called at the start of the getNextValue.
+
+However I didn't really see a smooth implementation for this and it didn't feel
+natural whatsoever, instead I let the getNextValue function call the 
+readNextValue function from the DataFileReader instead, as that function will 
+return false once end of file has been reached, and thats when I want the getNextValue
+function to stop running, besides, that's where the value is coming from, so
+somehow letting getnextvalue call itself, or store the result in a different 
+variable just to verify that it hasn't been ran yet when we in fact know for sure
+it won't ever happen with the current code. I would deem this necessary if the 
+program had a menu where the user could choose to run the program, in that case 
+a bool would be declared and changed to false once getNextValue returns false, 
+and calling the getNextValue function again would be impossible to do.
+It just seems like a lot of extra work for no purpose at this point, if I 
+have to change it, Fx me and I will put together a fix for this within 
+the main.cpp file.
