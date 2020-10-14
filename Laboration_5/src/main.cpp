@@ -1,4 +1,4 @@
-#include "Prototypes.h"
+#include "mainProgram.h"
 //#include "memstat.hpp"
 
 int main() {
