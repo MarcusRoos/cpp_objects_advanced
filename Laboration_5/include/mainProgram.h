@@ -9,6 +9,7 @@
 
 #include <list>
 #include <iostream>
+#include <limits>
 
 void startFunc();
 void fillList();
@@ -23,7 +24,7 @@ void saveToFile();
 void readFromFile();
 
 template<typename T>
-T mainMenu(std::list<T> &myList){
+void mainMenu(std::list<T> &myList){
     std::cout << "1. Fill list with random numbers" << std::endl;
     std::cout << "2. Summerizes the values in the list" << std::endl;
     std::cout << "3. Average of numbers" << std::endl;

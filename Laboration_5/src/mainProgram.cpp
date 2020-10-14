@@ -3,8 +3,6 @@
 // Mittuniversitet
 // StudentID: Maro1904
 //
-
-#include <limits>
 #include "mainProgram.h"
 
 void startFunc() {
