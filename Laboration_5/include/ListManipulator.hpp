@@ -43,10 +43,18 @@ ListManipulator<T>::ListManipulator(std::list<T> *aList) {
 
 template<typename T>
 void ListManipulator<T>::fillList() {
-    generate( theList->begin(), theList->end(), rand );
+    theList->clear();
+    std::random_device rd;
+    std::default_random_engine generator(rd());
+    for (int i=0; i<20; i++){
+        std::uniform_real_distribution<double> distribution(1000,2000);
+        double number = distribution(generator);
+        theList->push_back(number);
+    }
     auto start = theList->begin(), stop = theList->end();
     for (auto it = start; it != stop; it++)
         std::cout << (*it) << std::endl;
+
 }
 
 template<typename T>
@@ -105,6 +113,5 @@ void ListManipulator<T>::readFromFile() {
         for (auto it = start; it != stop; it++)
             std::cout << (*it) << std::endl;
 }
-
 
 #endif //DT060G_LISTMANIPULATOR_HPP
