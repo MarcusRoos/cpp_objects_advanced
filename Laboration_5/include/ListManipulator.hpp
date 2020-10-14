@@ -13,9 +13,7 @@ class ListManipulator{
 private:
     std::list<T> *theList;
 public:
-    ListManipulator(std::list<T> *aList){
-
-    }
+    ListManipulator(std::list<T> *aList);
     ~ListManipulator(){};
     void fillList();
     T sumList() const;
@@ -30,6 +28,11 @@ public:
     void saveToFile() const;
     void readFromFile();
 };
+
+template<typename T>
+ListManipulator<T>::ListManipulator(std::list<T> *aList) {
+    theList = aList;
+}
 
 template<typename T>
 void ListManipulator<T>::fillList() {
@@ -88,7 +91,10 @@ void ListManipulator<T>::saveToFile() const {
 
 template<typename T>
 void ListManipulator<T>::readFromFile() {
-
+    theList->push_back(5);
+    auto start = theList->begin(), stop = theList->end();
+        for (auto it = start; it != stop; it++)
+            std::cout << (*it) << std::endl;
 }
 
 

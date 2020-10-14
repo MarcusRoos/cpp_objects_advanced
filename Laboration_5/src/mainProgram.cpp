@@ -32,3 +32,22 @@ void startFunc() {
         }
     }
 }
+void testList(){
+    std::cout << "Test" << std::endl;
+}
+
+void printMenu(){
+    std::cout << "1. Fill list with random numbers" << std::endl;
+    std::cout << "2. Summerizes the values in the list" << std::endl;
+    std::cout << "3. Average of numbers" << std::endl;
+    std::cout << "4. Find first number between 1500 and 1900" << std::endl;
+    std::cout << "5. Divide by two" << std::endl;
+    std::cout << "6. Swap places" << std::endl;
+    std::cout << "7. Find largest and smallest number" << std::endl;
+    std::cout << "8. Sort" << std::endl;
+    std::cout << "9. Clear list" << std::endl;
+    std::cout << "10. Write to file" << std::endl;
+    std::cout << "11. Read from file" << std::endl;
+    std::cout << "12. Print numbers" << std::endl;
+    std::cout << "13. Exit" << std::endl;
+}

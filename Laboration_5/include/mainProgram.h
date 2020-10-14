@@ -10,8 +10,11 @@
 #include <list>
 #include <iostream>
 #include <limits>
+#include "ListManipulator.hpp"
 
 void startFunc();
+void testList();
+void printMenu();
 void fillList();
 void listAvarage();
 void findFirst1500_1900();
@@ -24,23 +27,12 @@ void saveToFile();
 void readFromFile();
 
 template<typename T>
-void mainMenu(std::list<T> &myList){
-    std::cout << "1. Fill list with random numbers" << std::endl;
-    std::cout << "2. Summerizes the values in the list" << std::endl;
-    std::cout << "3. Average of numbers" << std::endl;
-    std::cout << "4. Find first number between 1500 and 1900" << std::endl;
-    std::cout << "5. Divide by two" << std::endl;
-    std::cout << "6. Swap places" << std::endl;
-    std::cout << "7. Find largest and smallest number" << std::endl;
-    std::cout << "8. Sort" << std::endl;
-    std::cout << "9. Clear list" << std::endl;
-    std::cout << "10. Write to file" << std::endl;
-    std::cout << "11. Read from file" << std::endl;
-    std::cout << "12. Print numbers" << std::endl;
-    std::cout << "13. Exit" << std::endl;
+void mainMenu(std::list<T> myList){
+    ListManipulator<T> listManipulator(&myList);
     int tmpInt=0;
     bool loop=true;
     while (loop) {
+        printMenu();
         std::cin >> tmpInt;
         while (tmpInt < 1 || tmpInt > 13 || std::cin.fail()) {
             std::cout << "Wrong input.\n";
@@ -50,6 +42,7 @@ void mainMenu(std::list<T> &myList){
         }
         switch (tmpInt) {
             case 1: {
+                listManipulator.readFromFile();
                 break;
             }
             case 2: {
