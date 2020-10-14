@@ -14,6 +14,9 @@
 #include <cstdlib>
 #include <functional>
 #include <iterator>
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctime>
 
 template<typename T>
 class ListManipulator{
@@ -44,10 +47,9 @@ ListManipulator<T>::ListManipulator(std::list<T> *aList) {
 template<typename T>
 void ListManipulator<T>::fillList() {
     theList->clear();
-    std::random_device rd;
-    std::default_random_engine generator(rd());
+    static std::default_random_engine generator(unsigned(time(0)));
+    std::uniform_real_distribution<double> distribution(1000, 2000);
     for (int i=0; i<20; i++){
-        std::uniform_real_distribution<double> distribution(1000,2000);
         double number = distribution(generator);
         theList->push_back(number);
     }
@@ -94,12 +96,15 @@ void ListManipulator<T>::sortList() {
 
 template<typename T>
 void ListManipulator<T>::clearList() {
-
+    theList->clear();
 }
 
 template<typename T>
 std::list<T> ListManipulator<T>::getList() const {
-    return std::list<T>();
+    auto start = theList->begin(), stop = theList->end();
+    for (auto it = start; it != stop; it++)
+        std::cout << (*it) << std::endl;
+    return theList;
 }
 
 template<typename T>
