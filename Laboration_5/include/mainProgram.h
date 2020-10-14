@@ -13,7 +13,6 @@
 #include "ListManipulator.hpp"
 
 void startFunc();
-void testList();
 void printMenu();
 void fillList();
 void listAvarage();
@@ -42,7 +41,6 @@ void mainMenu(std::list<T> myList){
         }
         switch (tmpInt) {
             case 1: {
-                listManipulator.readFromFile();
                 break;
             }
             case 2: {
@@ -73,6 +71,7 @@ void mainMenu(std::list<T> myList){
                 break;
             }
             case 11: {
+                listManipulator.readFromFile();
                 break;
             }
             case 12: {

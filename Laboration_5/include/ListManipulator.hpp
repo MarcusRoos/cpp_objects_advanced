@@ -92,6 +92,7 @@ void ListManipulator<T>::saveToFile() const {
 template<typename T>
 void ListManipulator<T>::readFromFile() {
     theList->push_back(5);
+    theList->push_back(6.87);
     auto start = theList->begin(), stop = theList->end();
         for (auto it = start; it != stop; it++)
             std::cout << (*it) << std::endl;

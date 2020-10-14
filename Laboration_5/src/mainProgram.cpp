@@ -32,9 +32,6 @@ void startFunc() {
         }
     }
 }
-void testList(){
-    std::cout << "Test" << std::endl;
-}
 
 void printMenu(){
     std::cout << "1. Fill list with random numbers" << std::endl;
