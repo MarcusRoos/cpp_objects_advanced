@@ -19,13 +19,13 @@ void startFunc() {
     }
     switch (tmpInt){
         case 1: {
-            std::list<int>intList;
+            std::list<int>intList(20);
             std::cout << "Integer." << std::endl;
             mainMenu(intList);
             break;
         }
         case 2: {
-            std::list<double>dblList;
+            std::list<double>dblList(20);
             std::cout << "Double." << std::endl;
             mainMenu(dblList);
             break;
@@ -47,4 +47,8 @@ void printMenu(){
     std::cout << "11. Read from file" << std::endl;
     std::cout << "12. Print numbers" << std::endl;
     std::cout << "13. Exit" << std::endl;
+}
+
+void fillList(){
+    std::cout << "Filling list with 20 numbers! " << std::endl;
 }

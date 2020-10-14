@@ -7,6 +7,13 @@
 #ifndef DT060G_LISTMANIPULATOR_HPP
 #define DT060G_LISTMANIPULATOR_HPP
 #include <list>
+#include <random>
+#include <iostream>
+#include <fstream>
+#include <algorithm>
+#include <cstdlib>
+#include <functional>
+#include <iterator>
 
 template<typename T>
 class ListManipulator{
@@ -36,7 +43,10 @@ ListManipulator<T>::ListManipulator(std::list<T> *aList) {
 
 template<typename T>
 void ListManipulator<T>::fillList() {
-
+    generate( theList->begin(), theList->end(), rand );
+    auto start = theList->begin(), stop = theList->end();
+    for (auto it = start; it != stop; it++)
+        std::cout << (*it) << std::endl;
 }
 
 template<typename T>
@@ -91,8 +101,6 @@ void ListManipulator<T>::saveToFile() const {
 
 template<typename T>
 void ListManipulator<T>::readFromFile() {
-    theList->push_back(5);
-    theList->push_back(6.87);
     auto start = theList->begin(), stop = theList->end();
         for (auto it = start; it != stop; it++)
             std::cout << (*it) << std::endl;

@@ -41,6 +41,8 @@ void mainMenu(std::list<T> myList){
         }
         switch (tmpInt) {
             case 1: {
+                fillList();
+                listManipulator.fillList();
                 break;
             }
             case 2: {
