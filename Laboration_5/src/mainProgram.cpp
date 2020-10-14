@@ -48,7 +48,3 @@ void printMenu(){
     std::cout << "12. Print numbers" << std::endl;
     std::cout << "13. Exit" << std::endl;
 }
-
-void fillList(){
-    std::cout << "Filling list with 20 numbers! " << std::endl;
-}

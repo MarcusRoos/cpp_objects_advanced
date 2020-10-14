@@ -34,7 +34,7 @@ public:
     void findMinMax(T &min, T &max) const;
     void sortList();
     void clearList();
-    std::list<T> getList() const;
+    void getList() const;
     void saveToFile() const;
     void readFromFile();
 };
@@ -54,9 +54,6 @@ void ListManipulator<T>::fillList() {
         T number = distribution(rng);
         return number;
     });
-    auto start = theList->begin(), stop = theList->end();
-    for (auto it = start; it != stop; it++)
-        std::cout << (*it) << std::endl;
 }
 
 template<typename T>
@@ -67,11 +64,29 @@ T ListManipulator<T>::sumList() const {
 
 template<typename T>
 T ListManipulator<T>::listAverage() const {
-    return nullptr;
+    T avg = std::accumulate(theList->begin(), theList->end(), 0.0);
+    int amount = theList->size();
+    avg /= amount;
+    return avg;
 }
 
 template<typename T>
 bool ListManipulator<T>::findFirst1500_1900(T &num) const {
+    std::list<T> tmpList;
+    auto start = theList->begin(), stop = theList->end();
+    for (auto it = start; it != stop; it++) {
+        tmpList.push_back(*it);
+    }
+    tmpList.sort();
+    auto it = find_if(tmpList.begin(), tmpList.end(), [](T a) {
+        return a >= 1500 && a <=1900;
+    });
+    if (it != tmpList.end()){
+        num = *it;
+        std::cout <<"NUM: " <<num << std::endl;
+        return true;
+    }
+    else
     return false;
 }
 
@@ -101,11 +116,10 @@ void ListManipulator<T>::clearList() {
 }
 
 template<typename T>
-std::list<T> ListManipulator<T>::getList() const {
+void ListManipulator<T>::getList() const {
     auto start = theList->begin(), stop = theList->end();
     for (auto it = start; it != stop; it++)
         std::cout << (*it) << std::endl;
-    return theList;
 }
 
 template<typename T>
@@ -115,9 +129,7 @@ void ListManipulator<T>::saveToFile() const {
 
 template<typename T>
 void ListManipulator<T>::readFromFile() {
-    auto start = theList->begin(), stop = theList->end();
-        for (auto it = start; it != stop; it++)
-            std::cout << (*it) << std::endl;
 }
+
 
 #endif //DT060G_LISTMANIPULATOR_HPP

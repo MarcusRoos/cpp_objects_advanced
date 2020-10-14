@@ -14,22 +14,13 @@
 
 void startFunc();
 void printMenu();
-void fillList();
-void listAvarage();
-void findFirst1500_1900();
-void divideByTwo();
-void findMinMax();
-void sortList();
-void clearList();
-void printList();
-void saveToFile();
-void readFromFile();
 
 template<typename T>
 void mainMenu(std::list<T> myList){
     ListManipulator<T> listManipulator(&myList);
     int tmpInt=0;
     T sum;
+    T tmp;
     bool loop=true;
     while (loop) {
         printMenu();
@@ -42,7 +33,6 @@ void mainMenu(std::list<T> myList){
         }
         switch (tmpInt) {
             case 1: {
-                fillList();
                 listManipulator.fillList();
                 break;
             }
@@ -52,9 +42,11 @@ void mainMenu(std::list<T> myList){
                 break;
             }
             case 3: {
+                std::cout << "Avg: "<< listManipulator.listAverage()<<std::endl;
                 break;
             }
             case 4: {
+                listManipulator.findFirst1500_1900(tmp);
                 break;
             }
             case 5: {
@@ -80,6 +72,7 @@ void mainMenu(std::list<T> myList){
                 break;
             }
             case 12: {
+                listManipulator.getList();
                 break;
             }
             case 13: {
