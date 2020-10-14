@@ -47,12 +47,13 @@ ListManipulator<T>::ListManipulator(std::list<T> *aList) {
 template<typename T>
 void ListManipulator<T>::fillList() {
     theList->clear();
-    static std::default_random_engine generator(unsigned(time(0)));
+    theList->resize(20);
+    static std::default_random_engine rng(unsigned(time(0)));
     std::uniform_real_distribution<double> distribution(1000, 2000);
-    for (int i=0; i<20; i++){
-        double number = distribution(generator);
-        theList->push_back(number);
-    }
+    std::generate(theList->begin(), theList->end(), [&]{
+        T number = distribution(rng);
+        return number;
+    });
     auto start = theList->begin(), stop = theList->end();
     for (auto it = start; it != stop; it++)
         std::cout << (*it) << std::endl;
