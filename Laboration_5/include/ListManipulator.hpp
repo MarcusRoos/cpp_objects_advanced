@@ -54,12 +54,12 @@ void ListManipulator<T>::fillList() {
     auto start = theList->begin(), stop = theList->end();
     for (auto it = start; it != stop; it++)
         std::cout << (*it) << std::endl;
-
 }
 
 template<typename T>
 T ListManipulator<T>::sumList() const {
-    return nullptr;
+    T sum = std::accumulate(theList->begin(), theList->end(), 0.0);
+    return sum;
 }
 
 template<typename T>

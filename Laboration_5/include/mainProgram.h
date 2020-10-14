@@ -29,6 +29,7 @@ template<typename T>
 void mainMenu(std::list<T> myList){
     ListManipulator<T> listManipulator(&myList);
     int tmpInt=0;
+    T sum;
     bool loop=true;
     while (loop) {
         printMenu();
@@ -46,6 +47,8 @@ void mainMenu(std::list<T> myList){
                 break;
             }
             case 2: {
+                sum = listManipulator.sumList();
+                std::cout << "Sum: " << sum << std::endl;
                 break;
             }
             case 3: {
