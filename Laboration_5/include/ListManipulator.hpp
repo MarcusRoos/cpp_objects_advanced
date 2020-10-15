@@ -17,6 +17,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <ctime>
+#include <typeinfo>
 
 template<typename T>
 class ListManipulator{
@@ -83,7 +84,7 @@ bool ListManipulator<T>::findFirst1500_1900(T &num) const {
     });
     if (it != tmpList.end()){
         num = *it;
-        std::cout <<"NUM: " <<num << std::endl;
+        std::cout <<"Smallest value between 1500 and 190 = " <<num << std::endl;
         return true;
     }
     else
@@ -102,17 +103,26 @@ void ListManipulator<T>::swapPlaces() {
 
 template<typename T>
 void ListManipulator<T>::findMinMax(T &min, T &max) const {
-
+    std::list<T> tmpList;
+    auto start = theList->begin(), stop = theList->end();
+    for (auto it = start; it != stop; it++) {
+        tmpList.push_back(*it);
+    }
+    tmpList.sort();
+    min = *std::min_element(theList->begin(), theList->end());
+    max = *std::max_element(theList->begin(), theList->end());
 }
 
 template<typename T>
 void ListManipulator<T>::sortList() {
-
+    theList->sort();
+    std::cout << "List sorted." << std::endl;
 }
 
 template<typename T>
 void ListManipulator<T>::clearList() {
     theList->clear();
+    std::cout << "List cleared." << std::endl;
 }
 
 template<typename T>

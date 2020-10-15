@@ -21,6 +21,7 @@ void mainMenu(std::list<T> myList){
     int tmpInt=0;
     T sum;
     T tmp;
+    T min, max;
     bool loop=true;
     while (loop) {
         printMenu();
@@ -56,12 +57,17 @@ void mainMenu(std::list<T> myList){
                 break;
             }
             case 7: {
+                listManipulator.findMinMax(min, max);
+                std::cout << "min: " << min << std::endl;
+                std::cout << "max: " << max << std::endl;
                 break;
             }
             case 8: {
+                listManipulator.sortList();
                 break;
             }
             case 9: {
+                listManipulator.clearList();
                 break;
             }
             case 10: {
