@@ -18,6 +18,7 @@
 #include <stdlib.h>
 #include <ctime>
 #include <typeinfo>
+#include <string>
 
 template<typename T>
 class ListManipulator{
@@ -93,12 +94,18 @@ bool ListManipulator<T>::findFirst1500_1900(T &num) const {
 
 template<typename T>
 void ListManipulator<T>::DivideByTwo() {
-
+    std::cout << "Divide by two" << std::endl;
 }
 
 template<typename T>
 void ListManipulator<T>::swapPlaces() {
-
+    std::_List_iterator<T> fIt=theList->begin(), bIt=theList->end();
+    bIt--;
+    for (size_t i=0; i<theList->size()/2; i++) {
+        std::iter_swap(fIt, bIt);
+        fIt++;
+        bIt--;
+    }
 }
 
 template<typename T>
@@ -134,11 +141,12 @@ void ListManipulator<T>::getList() const {
 
 template<typename T>
 void ListManipulator<T>::saveToFile() const {
-
+    std::cout << "Save to file" << std::endl;
 }
 
 template<typename T>
 void ListManipulator<T>::readFromFile() {
+    std::cout << "Read from file" << std::endl;
 }
 
 

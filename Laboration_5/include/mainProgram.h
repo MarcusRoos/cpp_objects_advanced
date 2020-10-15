@@ -51,9 +51,11 @@ void mainMenu(std::list<T> myList){
                 break;
             }
             case 5: {
+                listManipulator.DivideByTwo();
                 break;
             }
             case 6: {
+                listManipulator.swapPlaces();
                 break;
             }
             case 7: {
@@ -71,6 +73,7 @@ void mainMenu(std::list<T> myList){
                 break;
             }
             case 10: {
+                listManipulator.saveToFile();
                 break;
             }
             case 11: {
