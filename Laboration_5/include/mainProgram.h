@@ -38,12 +38,11 @@ void mainMenu(std::list<T> myList){
                 break;
             }
             case 2: {
-                sum = listManipulator.sumList();
-                std::cout << "Sum: " << sum << std::endl;
+                listManipulator.sumList();
                 break;
             }
             case 3: {
-                std::cout << "Avg: "<< listManipulator.listAverage()<<std::endl;
+                listManipulator.listAverage();
                 break;
             }
             case 4: {
@@ -60,8 +59,6 @@ void mainMenu(std::list<T> myList){
             }
             case 7: {
                 listManipulator.findMinMax(min, max);
-                std::cout << "min: " << min << std::endl;
-                std::cout << "max: " << max << std::endl;
                 break;
             }
             case 8: {

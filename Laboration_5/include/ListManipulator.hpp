@@ -25,8 +25,8 @@ public:
     ListManipulator(std::list<T> *aList);
     ~ListManipulator(){};
     void fillList();
-    T sumList() const;
-    T listAverage() const;
+    void sumList() const;
+    void listAverage() const;
     bool findFirst1500_1900(T &num) const;
     void DivideByTwo();
     void swapPlaces();
@@ -56,14 +56,17 @@ void ListManipulator<T>::fillList() {
 }
 
 template<typename T>
-T ListManipulator<T>::sumList() const {
-    T sum = std::accumulate(theList->begin(), theList->end(), 0.0);
-    return sum;
+void ListManipulator<T>::sumList() const {
+   std::cout << "Summary: " <<std::accumulate(theList->begin(), theList->end(),
+           0.0) << std::endl;
 }
 
 template<typename T>
-T ListManipulator<T>::listAverage() const {
-    return std::accumulate(theList->begin(), theList->end(), T(0)/theList->size());
+void ListManipulator<T>::listAverage() const {
+    T avg=0;
+    avg = std::accumulate(theList->begin(), theList->end(), 0.0);
+    avg = avg/20;
+    std::cout << "Average: " << avg << std::endl;
 }
 
 template<typename T>
@@ -133,6 +136,8 @@ void ListManipulator<T>::findMinMax(T &min, T &max) const {
     tmpList.sort();
     min = *std::min_element(theList->begin(), theList->end());
     max = *std::max_element(theList->begin(), theList->end());
+    std::cout <<"Min: " <<min << std::endl;
+    std::cout <<"Max: " <<max << std::endl;
 }
 
 template<typename T>
