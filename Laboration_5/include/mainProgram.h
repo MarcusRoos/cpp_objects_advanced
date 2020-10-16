@@ -12,14 +12,19 @@
 #include <limits>
 #include "ListManipulator.hpp"
 
+/*Two help functions, startFunc is there to ask which type the user want to use.
+ * Print menu is there to print the actual menu options. */
 void startFunc();
 void printMenu();
 
+/*The mainmenu function, this will initialize the constructor for the
+ * listManipulator and enter a switch which will run until the user decide
+ * they want to exit out of the program. This function will handle all
+ * the function calls done to the listManipulator.*/
 template<typename T>
 void mainMenu(std::list<T> myList){
     ListManipulator<T> listManipulator(&myList);
     int tmpInt=0;
-    T sum;
     T tmp;
     T min, max;
     bool loop=true;

@@ -5,6 +5,8 @@
 //
 #include "mainProgram.h"
 
+/*Implementation for the startFunc, basically a switch which allows
+ * the user to choose if they want to use double or int with the list.*/
 void startFunc() {
     std::cout << "Int or Double?" << std::endl;
     std::cout << "1. Int" << std::endl;
@@ -33,6 +35,7 @@ void startFunc() {
     }
 }
 
+/*Prints the main menus options when called, does nothing else.*/
 void printMenu(){
     std::cout << "1. Fill list with random numbers" << std::endl;
     std::cout << "2. Summerizes the values in the list" << std::endl;
