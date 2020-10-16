@@ -67,5 +67,55 @@ that I need to be able to distinguish between double and integer values
 even when the values were stored on a file, to achieve this I simply created two
 different files, one for integers and one for doubles.
 
-
 ## Discussion
+Everything that we did in this assignment felt like something we had done before,
+but in a more complicated manner. For instance we used lists here instead of 
+array or vector, we used iterators to fill a list instead of push_back, 
+we used pre-determined algorithms with iterators to find minimum and
+maximum values instead of writing our own search algorithm as we had done in the 
+past. However there were a lot of different tasks that the program should be able
+to accomplish, and almost everything that we had to do here with the requirements
+we had to conform to made it new. 
+
+We had to conform to different standard libraries to achieve the expected
+results instead of using the methods we've grown used to. For instance we 
+used the accumulate function to calculate the sum of a list, in the past 
+we have had to calculate the sum in a vector or array of values, and 
+previously we initialized a variable of the same type as the vector, 
+created a loop for the whole vector and added the values to the sum
+variable, one by one, before finally returning it. With the accumulate function 
+it seemed like it achieved all of this all by it self, but in reality I think 
+this function, and all the rest of similar structure is simply hiding the crudeness
+beneath the surface and making it easier for the programmer. We've grown used
+to the harsh and more complicated ways, instead of learning the easy way
+first. 
+
+I made note about this in the ListManipulator.hpp file as well but I wasn't 
+entirely sure of how the "find first 1500-1900" function were meant to work,
+so I included the two ways I struggled between. By default it will create a 
+dummy list with the same contents as the main list, sort it ascending and return
+the first value within the said interval, as this would be the "first value 
+in the interval" in my mind. I wasn't entirely sure that has the intended result, 
+so I included the other way of doing it as well, which will basically return 
+the very first value encountered which lies in the 1500-1900 interval, despite 
+not being the closest one to 1500, I added comment section so its a matter of 
+simply deleting and adding comment blocks to switch between the two. 
+
+I hadn't really used lambda functions prior to this assignment but realized 
+pretty quickly they are really handy to have. For instance for filling up 
+the vector with randomized numbers I had a whole separate function created 
+which the generate called over and over to populate the list until the 
+20 mark was reached. However I had no use for this function elsewhere 
+and I knew exactly when and how it will be used, when filling up the list. A 
+lambda expression made this much easier and neater of a solution as I could 
+include it in the generate function as a lambda function instead of a whole
+separate function. Besides, it saves a lot of redundant code.
+
+All in all I really enjoyed this assignment, everything felt so easy while still
+being foreign to me, thanks to the methods we've used in the past I never got 
+stuck for more than a couple of minutes at a time, as I knew how it worked at 
+a more basic and raw level. Except this time around I got to use already developed,
+proven functions and libraries which do the job for me, so I don't have to 
+rewrite what's already done basically. The libraries are there for a reason, to
+be used, and if there's something I don't like about them I can always write my 
+own functions and algorithms as I know how they will work at the basic level.
