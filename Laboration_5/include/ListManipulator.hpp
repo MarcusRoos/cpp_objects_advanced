@@ -19,6 +19,7 @@
 #include <ctime>
 #include <typeinfo>
 #include <string>
+#include <cstring>
 
 template<typename T>
 class ListManipulator{
@@ -139,11 +140,33 @@ void ListManipulator<T>::getList() const {
 
 template<typename T>
 void ListManipulator<T>::saveToFile() const {
+    std::ofstream fs;
+    const std::type_info& ti1 = typeid(T);
+    if (strncmp (ti1.name(),"i", 1) == 0){
+        fs.open("list_integer.dat");
+    }
+    if (strncmp (ti1.name(),"d", 1) == 0){
+        fs.open("list_double.dat");
+    }
+    std::copy(theList->begin(), theList->end(), std::ostream_iterator<T>(fs, "\n"));
+    fs << "\n";
     std::cout << "Save to file" << std::endl;
 }
 
 template<typename T>
 void ListManipulator<T>::readFromFile() {
+    std::ifstream inFile;
+    const std::type_info& ti1 = typeid(T);
+    if (strncmp (ti1.name(),"i", 1) == 0){
+        inFile.open("list_integer.dat");
+    }
+    if (strncmp (ti1.name(),"d", 1) == 0){
+        inFile.open("list_double.dat");
+    }
+    std::istream_iterator<T> eos;
+    std::istream_iterator<T> iit(inFile);
+    std::copy(iit, eos, std::back_inserter(*theList));
+
     std::cout << "Read from file" << std::endl;
 }
 
