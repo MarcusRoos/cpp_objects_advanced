@@ -84,7 +84,7 @@ bool ListManipulator<T>::findFirst1500_1900(T &num) const {
     });
     if (it != theList->end()){
         num = *it;
-        std::cout <<"Smallest value between 1500 and 190 = " <<num << std::endl;
+        std::cout <<"Smallest value between 1500 and 1900 = " <<num << std::endl;
         return true;
     }
     else
@@ -102,7 +102,7 @@ bool ListManipulator<T>::findFirst1500_1900(T &num) const {
     });
     if (it != tmpList.end()){
         num = *it;
-        std::cout <<"Smallest value between 1500 and 190 = " <<num << std::endl;
+        std::cout <<"Smallest value between 1500 and 1900 = " <<num << std::endl;
         return true;
     }
     else
@@ -184,11 +184,18 @@ void ListManipulator<T>::readFromFile() {
     if (strncmp (ti1.name(),"d", 1) == 0){
         inFile.open("list_double.dat");
     }
-    std::istream_iterator<T> tmpIt;
-    std::istream_iterator<T> in(inFile);
-    std::copy(in, tmpIt, std::back_inserter(*theList));
+    if(!inFile.is_open()){
+        std::cout << "Could not locate any file of loaded type."
+                     " \nPlease create a list first with "
+                     "your currently loaded type, then proceed"
+                     " to save it." << std::endl;
+    }
+    else {
+        std::istream_iterator<T> tmpIt;
+        std::istream_iterator<T> in(inFile);
+        std::copy(in, tmpIt, std::back_inserter(*theList));
+    }
 
-    std::cout << "Loaded." << std::endl;
 }
 
 
