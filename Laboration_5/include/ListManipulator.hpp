@@ -11,14 +11,10 @@
 #include <iostream>
 #include <fstream>
 #include <algorithm>
-#include <cstdlib>
 #include <functional>
 #include <iterator>
-#include <stdio.h>
-#include <stdlib.h>
 #include <ctime>
 #include <typeinfo>
-#include <string>
 #include <cstring>
 
 template<typename T>
@@ -197,6 +193,5 @@ void ListManipulator<T>::readFromFile() {
     }
 
 }
-
 
 #endif //DT060G_LISTMANIPULATOR_HPP
