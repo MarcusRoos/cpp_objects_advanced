@@ -72,6 +72,25 @@ T ListManipulator<T>::listAverage() const {
 
 template<typename T>
 bool ListManipulator<T>::findFirst1500_1900(T &num) const {
+    /*I wasn't entirely sure if we were meant to find the first number
+ * between 1500-1900 as in the lowest number in this interval, or simply
+ * the first one in an unsorted list (i.e. 1678 at #1 in the list but
+ * 1675 at #3 would return 1678 as its the first value "found".
+ * If that was the plan, simply remove everything the comments below, and add
+     * comments to the active code.*/
+/**         //  Inactive code
+    auto it = find_if(theList->begin(), theList->end(), [](T a) {
+        return a >= 1500 && a <=1900;
+    });
+    if (it != theList->end()){
+        num = *it;
+        std::cout <<"Smallest value between 1500 and 190 = " <<num << std::endl;
+        return true;
+    }
+    else
+        return false;
+    **/
+
     std::list<T> tmpList;
     auto start = theList->begin(), stop = theList->end();
     for (auto it = start; it != stop; it++) {
@@ -88,6 +107,7 @@ bool ListManipulator<T>::findFirst1500_1900(T &num) const {
     }
     else
     return false;
+
 }
 
 template<typename T>
@@ -150,7 +170,8 @@ void ListManipulator<T>::saveToFile() const {
     }
     std::copy(theList->begin(), theList->end(), std::ostream_iterator<T>(fs, "\n"));
     fs << "\n";
-    std::cout << "Save to file" << std::endl;
+    fs.close();
+    std::cout << "Saved." << std::endl;
 }
 
 template<typename T>
@@ -163,11 +184,11 @@ void ListManipulator<T>::readFromFile() {
     if (strncmp (ti1.name(),"d", 1) == 0){
         inFile.open("list_double.dat");
     }
-    std::istream_iterator<T> eos;
-    std::istream_iterator<T> iit(inFile);
-    std::copy(iit, eos, std::back_inserter(*theList));
+    std::istream_iterator<T> tmpIt;
+    std::istream_iterator<T> in(inFile);
+    std::copy(in, tmpIt, std::back_inserter(*theList));
 
-    std::cout << "Read from file" << std::endl;
+    std::cout << "Loaded." << std::endl;
 }
 
 
