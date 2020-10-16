@@ -66,10 +66,7 @@ T ListManipulator<T>::sumList() const {
 
 template<typename T>
 T ListManipulator<T>::listAverage() const {
-    T avg = std::accumulate(theList->begin(), theList->end(), 0.0);
-    int amount = theList->size();
-    avg /= amount;
-    return avg;
+    return std::accumulate(theList->begin(), theList->end(), T(0)/theList->size());
 }
 
 template<typename T>
@@ -94,7 +91,8 @@ bool ListManipulator<T>::findFirst1500_1900(T &num) const {
 
 template<typename T>
 void ListManipulator<T>::DivideByTwo() {
-    std::cout << "Divide by two" << std::endl;
+    std::transform(theList->begin(), theList->end(), theList->begin(),
+            std::bind(std::divides<T>(),std::placeholders::_1, 2));
 }
 
 template<typename T>
