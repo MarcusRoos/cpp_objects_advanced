@@ -1,7 +1,8 @@
-#include "Prototypes.h"
-#include "memstat.hpp"
+#include "SimulationProgram.h"
+//#include "memstat.hpp"
 
 int main() {
-    assignmentFunction();
+    SimulationProgram mainmenu;
+    mainmenu.runSubMenu();
     return 0;
 }

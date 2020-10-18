@@ -17,23 +17,23 @@
  */
 class Vehicle {
 protected:
-    std::string type;
+    int type;
     int ID;
+    int Coach=0, Sleeping=1, Open=2, Covered=3, Diesel=4, Electrical=5;
 public:
     Vehicle();
     virtual ~Vehicle() = default;
     virtual void setId(int aID){}
-    int getId(){return ID};
-    std::string getType(){return type};
+    int getId(){return ID;}
+    int getType(){return type;}
     virtual void setType(std::string){};
     virtual void setSeats(int aSeat){};
-    virtual int getSeats(){};
+    virtual int getSeats(){return 0;}
 };
 
 class CoachCar : public Vehicle{
 protected:
     int seats, internet;
-    int const type = 0;
 public:
     CoachCar();
 };
@@ -41,7 +41,6 @@ public:
 class SleepingCar : public Vehicle{
 protected:
     int beds;
-    int const type = 1;
 public:
     SleepingCar();
 };
@@ -49,7 +48,6 @@ public:
 class OpenFreight : public Vehicle{
 protected:
     int capacityTons, areaSqm;
-    int const type = 2;
 public:
     OpenFreight();
 };
@@ -57,7 +55,6 @@ public:
 class CoveredFreight : public Vehicle{
 protected:
     int capacityCubicm;
-    const int type = 3;
 public:
     CoveredFreight();
 };
@@ -65,7 +62,6 @@ public:
 class DieselEngine : public Vehicle{
 private:
     int maxSpeed, fuelConsump;
-    int const type = 5;
 public:
     DieselEngine();
 };
@@ -74,7 +70,6 @@ public:
 class ElectricalEngine : public Vehicle{
 protected:
     int maxSpeed, powerKW;
-    int const type = 4;
 public:
     ElectricalEngine();
 };

@@ -31,7 +31,8 @@ SleepingCar::SleepingCar() {
  * CLASS OPENFREIGHT
  * **/
 OpenFreight::OpenFreight() {
-
+    type = Open;
+    ID = 50;
 }
 
 /**
