@@ -21,7 +21,7 @@ protected:
     int ID;
     int Coach=0, Sleeping=1, Open=2, Covered=3, Diesel=4, Electrical=5;
 public:
-    Vehicle();
+    Vehicle(int aID, int aType);
     virtual ~Vehicle() = default;
     virtual void setId(int aID){}
     int getId(){return ID;}
@@ -35,35 +35,35 @@ class CoachCar : public Vehicle{
 protected:
     int seats, internet;
 public:
-    CoachCar(int aID);
+    CoachCar(int aId, int aType, int aSeats, int aInternet);
 };
 
 class SleepingCar : public Vehicle{
 protected:
     int beds;
 public:
-    SleepingCar(int aID);
+    SleepingCar(int aId, int aType, int aBeds);
 };
 
 class OpenFreight : public Vehicle{
 protected:
     int capacityTons, areaSqm;
 public:
-    OpenFreight(int aID);
+    OpenFreight(int aId, int aType, int aCapacity, int aSquaremt);
 };
 
 class CoveredFreight : public Vehicle{
 protected:
     int capacityCubicm;
 public:
-    CoveredFreight(int aID);
+    CoveredFreight(int aId, int aType, int aCapacityC);
 };
 
 class DieselEngine : public Vehicle{
 private:
     int maxSpeed, fuelConsump;
 public:
-    DieselEngine(int aID);
+    DieselEngine(int aId, int aType, int aMaxspeed, int aFuelcon);
 };
 
 
@@ -71,7 +71,8 @@ class ElectricalEngine : public Vehicle{
 protected:
     int maxSpeed, powerKW;
 public:
-    ElectricalEngine(int aID);
+    ElectricalEngine(int aId, int aType, int aMaxspeed,
+                     int aPowerKW);
 };
 
 #endif //DT060G_VEHICLE_H

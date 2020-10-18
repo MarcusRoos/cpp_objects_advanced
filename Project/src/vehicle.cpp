@@ -9,54 +9,56 @@
 /**
  * CLASS VEHICLE
  * **/
-Vehicle::Vehicle() {
-
+Vehicle::Vehicle(int aID, int aType) {
+    ID = aID;
+    type = aType;
 }
 
 /**
  * CLASS COACH
  * **/
-CoachCar::CoachCar(int aID) {
-    type = Coach;
-    ID = aID;
+CoachCar::CoachCar(int aId, int aType, int aSeats, int aInternet) : Vehicle(aId, aType) {
+    seats = aSeats;
+    internet = aInternet;
 }
 
 /**
  * CLASS SLEEPINGCAR
  * **/
-SleepingCar::SleepingCar(int aID) {
-    type = Sleeping;
-    ID = aID;
+SleepingCar::SleepingCar(int aId, int aType, int aBeds) : Vehicle(aId, aType) {
+    beds = aBeds;
 }
 
 /**
  * CLASS OPENFREIGHT
  * **/
-OpenFreight::OpenFreight(int aID) {
-    type = Open;
-    ID = aID;
+OpenFreight::OpenFreight(int aId, int aType, int aCapacity, int aSquaremt)
+        : Vehicle(aId, aType) {
+    capacityTons = aCapacity;
+    areaSqm = aSquaremt;
 }
 
 /**
  * CLASS COVEREDFREIGHT
  * **/
-CoveredFreight::CoveredFreight(int aID) {
-    type = Covered;
-    ID = aID;
+CoveredFreight::CoveredFreight(int aId, int aType, int aCapacityC) : Vehicle(aId, aType) {
+    capacityCubicm = aCapacityC;
 }
 
 /**
  * CLASS DIESELENGINE
  * **/
-DieselEngine::DieselEngine(int aID) {
-    type = Diesel;
-    ID = aID;
+DieselEngine::DieselEngine(int aId, int aType, int aMaxspeed, int aFuelcon)
+        : Vehicle(aId, aType) {
+    maxSpeed = aMaxspeed;
+    fuelConsump = aFuelcon;
 }
 
 /**
  * CLASS ELECTRICALENGINE
  * **/
-ElectricalEngine::ElectricalEngine(int aID) {
-    type = Electrical;
-    ID = aID;
+ElectricalEngine::ElectricalEngine(int aId, int aType, int aMaxspeed,
+                                   int aPowerKW) : Vehicle(aId, aType) {
+    maxSpeed = aMaxspeed;
+    powerKW = aPowerKW;
 }

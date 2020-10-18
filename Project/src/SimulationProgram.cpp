@@ -115,15 +115,15 @@ void SimulationProgram::getID() {
 
 void SimulationProgram::testTrain() {
     testVehicle.push_back(std::unique_ptr<Vehicle>(
-            new CoachCar(1)));
+            new CoachCar(1, 0, 50, 0)));
     testVehicle.push_back(std::unique_ptr<Vehicle>(
-            new SleepingCar(2)));
+            new SleepingCar(2, 1, 2)));
     testVehicle.push_back(std::unique_ptr<Vehicle>(
-            new OpenFreight(3)));
+            new OpenFreight(3, 2, 500, 37)));
     testVehicle.push_back(std::unique_ptr<Vehicle>(
-            new CoveredFreight(4)));
+            new CoveredFreight(4, 3, 4)));
     testVehicle.push_back(std::unique_ptr<Vehicle>(
-            new DieselEngine(5)));
+            new DieselEngine(5, 4, 270, 15)));
     testVehicle.push_back(std::unique_ptr<Vehicle>(
-            new ElectricalEngine(6)));
+            new ElectricalEngine(6, 5, 300, 2700)));
 }
