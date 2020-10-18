@@ -17,7 +17,7 @@
 class Train {
 protected:
     std::string dummy;
-    std::vector<Vehicle>vehiclePtr;
+    std::vector<std::unique_ptr<Vehicle>> assembleVehicles;
 public:
     Train();
     virtual ~Train() = default;;

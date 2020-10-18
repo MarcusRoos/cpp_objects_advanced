@@ -31,19 +31,19 @@ void SimulationProgram::run() {
                 getID();
                 break;
             case 3:
-                std::cout << "Boop 3" << std::endl;
+                getSeats();
                 break;
             case 4:
-                std::cout << "Boop 4" << std::endl;
+                getInternet();
                 break;
             case 5:
                 std::cout << "Boop 5" << std::endl;
                 break;
             case 6:
-                std::cout << "Boop 6" << std::endl;
+                assembleTrain();
                 break;
             case 7:
-                testTrain();
+                trainTest();
                 break;
             case 8:
                 again = false;
@@ -103,7 +103,6 @@ void SimulationProgram::getType() {
     for (int i = 0; i < testVehicle.size(); i++) {
         std::cout << "Type:" << testVehicle[i]->getType() << std::endl;
     }
-
 }
 
 void SimulationProgram::getID() {
@@ -112,8 +111,25 @@ void SimulationProgram::getID() {
         std::cout << "ID:" << testVehicle[i]->getId() << std::endl;
     }
 }
+void SimulationProgram::getSeats() {
+    std::cout << "Test Seats " << std::endl;
+    for (int i = 0; i < testVehicle.size(); i++) {
+        if (testVehicle[i]->getType() == 0) {
+            std::cout << "Seats:" << testVehicle[i]->getSeats() << std::endl;
+        }
+    }
+}
+void SimulationProgram::getInternet() {
+    std::cout << "Test Internet " << std::endl;
+    for (int i = 0; i < testVehicle.size(); i++) {
+        if (testVehicle[i]->getType() == 0) {
+            std::cout << "Internet:" << testVehicle[i]->getInternet()
+                      << std::endl;
+        }
+    }
+}
 
-void SimulationProgram::testTrain() {
+void SimulationProgram::trainTest() {
     testVehicle.push_back(std::unique_ptr<Vehicle>(
             new CoachCar(1, 0, 50, 0)));
     testVehicle.push_back(std::unique_ptr<Vehicle>(
@@ -126,4 +142,10 @@ void SimulationProgram::testTrain() {
             new DieselEngine(5, 4, 270, 15)));
     testVehicle.push_back(std::unique_ptr<Vehicle>(
             new ElectricalEngine(6, 5, 300, 2700)));
+
+}
+
+void SimulationProgram::assembleTrain() {
+    std::cout << "Assembling train" << std::endl;
+
 }

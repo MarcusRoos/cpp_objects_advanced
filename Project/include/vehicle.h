@@ -29,6 +29,7 @@ public:
     virtual void setType(std::string){};
     virtual void setSeats(int aSeat){};
     virtual int getSeats(){return 0;}
+    virtual int getInternet() {return 0;}
 };
 
 class CoachCar : public Vehicle{
@@ -36,6 +37,8 @@ protected:
     int seats, internet;
 public:
     CoachCar(int aId, int aType, int aSeats, int aInternet);
+    int getSeats();
+    int getInternet();
 };
 
 class SleepingCar : public Vehicle{

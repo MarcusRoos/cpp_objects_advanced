@@ -9,6 +9,7 @@
 
 #include "Menu.h"
 #include "vehicle.h"
+#include "train.h"
 #include <fstream>
 #include <vector>
 #include <memory>
@@ -25,13 +26,19 @@ class SimulationProgram {
 private:
     Menu menu;
     std::vector<std::unique_ptr<Vehicle>> testVehicle;
+    std::vector<std::unique_ptr<Train>> testTrain;
+    std::vector<std::string>Stations;
+    std::vector<Vehicle> tmpVehicle;
 public:
     SimulationProgram();
     void runSubMenu();
     void run();
     void getType();
     void getID();
-    void testTrain();
+    void trainTest();
+    void getSeats();
+    void getInternet();
+    void assembleTrain();
 };
 
 #endif //DT060G_SIMULATIONPROGRAM_H

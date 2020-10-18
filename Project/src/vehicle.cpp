@@ -22,6 +22,14 @@ CoachCar::CoachCar(int aId, int aType, int aSeats, int aInternet) : Vehicle(aId,
     internet = aInternet;
 }
 
+int CoachCar::getSeats() {
+    return seats;
+}
+
+int CoachCar::getInternet() {
+    return internet;
+}
+
 /**
  * CLASS SLEEPINGCAR
  * **/
