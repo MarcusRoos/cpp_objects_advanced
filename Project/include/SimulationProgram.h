@@ -29,7 +29,9 @@ public:
     SimulationProgram();
     void runSubMenu();
     void run();
-    void testPtr();
+    void getType();
+    void getID();
+    void testTrain();
 };
 
 #endif //DT060G_SIMULATIONPROGRAM_H

@@ -25,11 +25,10 @@ void SimulationProgram::run() {
         switch(menu.menuChoice())
         {
             case 1:
-                std::cout << "Boop 1" << std::endl;
-                testPtr();
+                getType();
                 break;
             case 2:
-                std::cout << "Boop 2" << std::endl;
+                getID();
                 break;
             case 3:
                 std::cout << "Boop 3" << std::endl;
@@ -44,7 +43,7 @@ void SimulationProgram::run() {
                 std::cout << "Boop 6" << std::endl;
                 break;
             case 7:
-                std::cout << "Boop 7" << std::endl;
+                testTrain();
                 break;
             case 8:
                 again = false;
@@ -54,43 +53,77 @@ void SimulationProgram::run() {
 }
 
 SimulationProgram::SimulationProgram() {
-    menu.setTitle("**** Array pointer queue ****");
-    menu.addItem("Create queue", true);
-    menu.addItem("Add element to queue", false);
-    menu.addItem("Delete element from queue", false);
-    menu.addItem("Check Empty", false);
-    menu.addItem("Check Full", false);
-    menu.addItem("Check number of elements", false);
-    menu.addItem("Check maximum capacity", false);
+    menu.setTitle("**** Class test menu ****");
+    menu.addItem("Get type", true);
+    menu.addItem("Get ID", true);
+    menu.addItem("---", true);
+    menu.addItem("---", true);
+    menu.addItem("---", true);
+    menu.addItem("---", true);
+    menu.addItem("Construct test train", true);
     menu.addItem("Exit", true);
 }
 
 void SimulationProgram::runSubMenu() {
-    std::cout << "1. Create Queue" << std::endl;
-    std::cout << "2. Exit" << std::endl;
+    std::cout << "===== Start Menu =====" << std::endl;
+    std::cout << "1. Change start time [00:00]" << std::endl;
+    std::cout << "2. Change end time [23:59]" << std::endl;
+    std::cout << "3. Start simulation" << std::endl;
+    std::cout << "0. Exit" << std::endl;
     std::cout << "Enter choice" << std::endl;
     int choice = 0;
     std::cin >> choice;
-    while (std::cin.fail() || choice < 1 || choice > 2) {
+    while (std::cin.fail() || choice < 0 || choice > 3) {
         std::cout << "Wrong input.\n";
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
         std::cin >> choice;
+    }
+    if (choice == 0){
+        choice = 4;
     }
     switch (choice) {
         case 1:
             run();
             break;
         case 2:
+            run();
+            break;
+        case 3:
+            run();
+            break;
+        case 4:
         default:
             break;
     }
 }
 
-void SimulationProgram::testPtr() {
-    std::cout << "Test PTR " << std::endl;
-    testVehicle.push_back(std::unique_ptr<OpenFreight>(
-                new OpenFreight()));
-    std::cout << "ID:" << testVehicle[0]->getId() << std::endl;
-    std::cout << "Type:" << testVehicle[0]->getType() << std::endl;
+void SimulationProgram::getType() {
+    std::cout << "Test Type " << std::endl;
+    for (int i = 0; i < testVehicle.size(); i++) {
+        std::cout << "Type:" << testVehicle[i]->getType() << std::endl;
+    }
+
+}
+
+void SimulationProgram::getID() {
+    std::cout << "Test ID " << std::endl;
+    for (int i = 0; i < testVehicle.size(); i++) {
+        std::cout << "ID:" << testVehicle[i]->getId() << std::endl;
+    }
+}
+
+void SimulationProgram::testTrain() {
+    testVehicle.push_back(std::unique_ptr<Vehicle>(
+            new CoachCar(1)));
+    testVehicle.push_back(std::unique_ptr<Vehicle>(
+            new SleepingCar(2)));
+    testVehicle.push_back(std::unique_ptr<Vehicle>(
+            new OpenFreight(3)));
+    testVehicle.push_back(std::unique_ptr<Vehicle>(
+            new CoveredFreight(4)));
+    testVehicle.push_back(std::unique_ptr<Vehicle>(
+            new DieselEngine(5)));
+    testVehicle.push_back(std::unique_ptr<Vehicle>(
+            new ElectricalEngine(6)));
 }

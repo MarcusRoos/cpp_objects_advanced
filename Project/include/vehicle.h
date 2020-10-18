@@ -35,35 +35,35 @@ class CoachCar : public Vehicle{
 protected:
     int seats, internet;
 public:
-    CoachCar();
+    CoachCar(int aID);
 };
 
 class SleepingCar : public Vehicle{
 protected:
     int beds;
 public:
-    SleepingCar();
+    SleepingCar(int aID);
 };
 
 class OpenFreight : public Vehicle{
 protected:
     int capacityTons, areaSqm;
 public:
-    OpenFreight();
+    OpenFreight(int aID);
 };
 
 class CoveredFreight : public Vehicle{
 protected:
     int capacityCubicm;
 public:
-    CoveredFreight();
+    CoveredFreight(int aID);
 };
 
 class DieselEngine : public Vehicle{
 private:
     int maxSpeed, fuelConsump;
 public:
-    DieselEngine();
+    DieselEngine(int aID);
 };
 
 
@@ -71,7 +71,7 @@ class ElectricalEngine : public Vehicle{
 protected:
     int maxSpeed, powerKW;
 public:
-    ElectricalEngine();
+    ElectricalEngine(int aID);
 };
 
 #endif //DT060G_VEHICLE_H

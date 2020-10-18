@@ -16,42 +16,47 @@ Vehicle::Vehicle() {
 /**
  * CLASS COACH
  * **/
-CoachCar::CoachCar() {
-
+CoachCar::CoachCar(int aID) {
+    type = Coach;
+    ID = aID;
 }
 
 /**
  * CLASS SLEEPINGCAR
  * **/
-SleepingCar::SleepingCar() {
-
+SleepingCar::SleepingCar(int aID) {
+    type = Sleeping;
+    ID = aID;
 }
 
 /**
  * CLASS OPENFREIGHT
  * **/
-OpenFreight::OpenFreight() {
+OpenFreight::OpenFreight(int aID) {
     type = Open;
-    ID = 50;
+    ID = aID;
 }
 
 /**
  * CLASS COVEREDFREIGHT
  * **/
-CoveredFreight::CoveredFreight() {
-
+CoveredFreight::CoveredFreight(int aID) {
+    type = Covered;
+    ID = aID;
 }
 
 /**
  * CLASS DIESELENGINE
  * **/
-DieselEngine::DieselEngine() {
-
+DieselEngine::DieselEngine(int aID) {
+    type = Diesel;
+    ID = aID;
 }
 
 /**
  * CLASS ELECTRICALENGINE
  * **/
-ElectricalEngine::ElectricalEngine() {
-
+ElectricalEngine::ElectricalEngine(int aID) {
+    type = Electrical;
+    ID = aID;
 }
