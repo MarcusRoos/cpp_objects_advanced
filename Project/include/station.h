@@ -9,6 +9,7 @@
 #include "vehicle.h"
 #include <memory>
 #include <vector>
+#include <iostream>
 /**
  Class Train
 
@@ -19,63 +20,10 @@ protected:
     std::vector<std::unique_ptr<Vehicle>> stationVehicles;
 public:
     Station();
-    virtual ~Station() = default;;
-    virtual std::string getStationname(){return stationName;}
+    Station(std::string aStationname, std::vector<std::unique_ptr<Vehicle>> aVehicle);
+    ~Station() = default;;
+    std::string getStationname(){return stationName;}
+    void testStat();
 };
 
-class GrandCentral : public Station{
-protected:
-
-public:
-    GrandCentral();
-};
-
-class LiegeGuillemins : public Station{
-protected:
-
-public:
-    LiegeGuillemins();
-};
-
-class STPancras : public Station{
-protected:
-
-public:
-    STPancras();
-};
-
-class Dunedin : public Station{
-protected:
-
-public:
-    Dunedin();
-};
-
-class MilanoCentrale : public Station{
-protected:
-
-public:
-    MilanoCentrale();
-};
-
-class Luz : public Station{
-protected:
-
-public:
-    Luz();
-};
-
-class Shinjuku : public Station{
-protected:
-
-public:
-    Shinjuku();
-};
-
-class Hauptbahnhof : public Station{
-protected:
-
-public:
-    Hauptbahnhof();
-};
 #endif //DT060G_STATION_H

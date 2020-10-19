@@ -19,15 +19,13 @@ class Vehicle {
 protected:
     int type;
     int ID;
-    int Coach=0, Sleeping=1, Open=2, Covered=3, Diesel=4, Electrical=5;
 public:
+    Vehicle();
     Vehicle(int aID, int aType);
     virtual ~Vehicle() = default;
     virtual void setId(int aID){}
     int getId(){return ID;}
     int getType(){return type;}
-    virtual void setType(std::string){};
-    virtual void setSeats(int aSeat){};
     virtual int getSeats(){return 0;}
     virtual int getInternet() {return 0;}
 };

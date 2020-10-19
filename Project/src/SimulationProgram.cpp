@@ -100,52 +100,31 @@ void SimulationProgram::runSubMenu() {
 
 void SimulationProgram::getType() {
     std::cout << "Test Type " << std::endl;
-    for (int i = 0; i < testVehicle.size(); i++) {
-        std::cout << "Type:" << testVehicle[i]->getType() << std::endl;
-    }
 }
 
 void SimulationProgram::getID() {
     std::cout << "Test ID " << std::endl;
-    for (int i = 0; i < testVehicle.size(); i++) {
-        std::cout << "ID:" << testVehicle[i]->getId() << std::endl;
-    }
+
 }
 void SimulationProgram::getSeats() {
     std::cout << "Test Seats " << std::endl;
-    for (int i = 0; i < testVehicle.size(); i++) {
-        if (testVehicle[i]->getType() == 0) {
-            std::cout << "Seats:" << testVehicle[i]->getSeats() << std::endl;
-        }
-    }
+
 }
 void SimulationProgram::getInternet() {
     std::cout << "Test Internet " << std::endl;
-    for (int i = 0; i < testVehicle.size(); i++) {
-        if (testVehicle[i]->getType() == 0) {
-            std::cout << "Internet:" << testVehicle[i]->getInternet()
-                      << std::endl;
-        }
-    }
+
 }
 
 void SimulationProgram::trainTest() {
-    testVehicle.push_back(std::unique_ptr<Vehicle>(
-            new CoachCar(1, 0, 50, 0)));
-    testVehicle.push_back(std::unique_ptr<Vehicle>(
-            new SleepingCar(2, 1, 2)));
-    testVehicle.push_back(std::unique_ptr<Vehicle>(
-            new OpenFreight(3, 2, 500, 37)));
-    testVehicle.push_back(std::unique_ptr<Vehicle>(
-            new CoveredFreight(4, 3, 4)));
-    testVehicle.push_back(std::unique_ptr<Vehicle>(
-            new DieselEngine(5, 4, 270, 15)));
-    testVehicle.push_back(std::unique_ptr<Vehicle>(
-            new ElectricalEngine(6, 5, 300, 2700)));
-
+    testStation.testStat();
 }
 
 void SimulationProgram::assembleTrain() {
     std::cout << "Assembling train" << std::endl;
 
 }
+
+void SimulationProgram::loadFiles() {
+
+}
+

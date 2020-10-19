@@ -4,7 +4,7 @@
 // StudentID: Maro1904
 //
 
-#ifndef DT060G_BANKKUND_H
+
 #define DT060G_BANKKUND_H
 
 #include <string>

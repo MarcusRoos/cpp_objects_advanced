@@ -14,6 +14,10 @@ Vehicle::Vehicle(int aID, int aType) {
     type = aType;
 }
 
+Vehicle::Vehicle() {
+
+}
+
 /**
  * CLASS COACH
  * **/
