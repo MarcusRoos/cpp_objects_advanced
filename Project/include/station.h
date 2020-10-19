@@ -25,7 +25,8 @@ public:
     Station(std::string aStationname, std::vector<std::unique_ptr<Vehicle>> aVehicle);
     ~Station() = default;;
     std::string getStationname(){return stationName;}
-    void testStat();
+    void testStat(std::string aName);
+    void printStation();
 };
 
 #endif //DT060G_STATION_H

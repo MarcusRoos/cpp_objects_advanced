@@ -21,8 +21,9 @@
 class SimulationProgram {
 private:
     Menu menu;
-    Station testStation;
-    Train testTrain;
+    std::vector<std::unique_ptr<Vehicle>> testVehicle;
+    std::vector<std::unique_ptr<Station>> testStation;
+    std::vector<std::vector<Train>> testTrain;
 public:
     SimulationProgram();
     void runSubMenu();

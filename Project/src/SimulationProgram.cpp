@@ -116,7 +116,23 @@ void SimulationProgram::getInternet() {
 }
 
 void SimulationProgram::trainTest() {
-    testStation.testStat();
+    std::string input;
+    testVehicle.clear();
+    input = "Grand Central";
+    testVehicle.push_back(std::unique_ptr<Vehicle>(
+            new CoachCar(0,0,0,0)
+            ));
+    testVehicle.push_back(std::unique_ptr<Vehicle>(
+            new OpenFreight(1,2,400,500)
+    ));
+    testVehicle.push_back(std::unique_ptr<Vehicle>(
+            new DieselEngine(2,5,280,40)
+    ));
+    std::vector<std::unique_ptr<Vehicle>> b;
+    testStation.push_back(std::unique_ptr<Station>(
+            new Station (input, std::move(testVehicle))));
+    std::cout << testStation[0]->getStationname();
+    testStation[0]->printStation();
 }
 
 void SimulationProgram::assembleTrain() {

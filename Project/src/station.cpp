@@ -15,7 +15,19 @@ Station::Station(std::string aStationname, std::vector<std::unique_ptr<Vehicle>>
     stationVehicles = std::move(aVehicle);
 }
 
-void Station::testStat() {
+void Station::testStat(std::string aName) {
+    stationName = aName;
+}
+
+void Station::printStation() {
+    for (int i=0; i<stationVehicles.size(); i++){
+        std::cout << "Type:" <<stationVehicles[i]->getType() << std::endl;
+        std::cout << "ID: "<<stationVehicles[i]->getId() << std::endl;
+        std::cout << "Seats: "<<stationVehicles[i]->getSeats() << std::endl;
+        std::cout << "Internet?: "<<stationVehicles[i]->getInternet() << std::endl;
+    }
+}
+/*
     const char startDelim='(', endDelim = ')';
     std::string namn;
     int aID, aType, c, d;
@@ -41,7 +53,7 @@ void Station::testStat() {
     }
 }
 
-
+*/
 
 
 
