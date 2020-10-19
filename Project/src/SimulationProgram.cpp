@@ -43,7 +43,7 @@ void SimulationProgram::run() {
                 assembleTrain();
                 break;
             case 7:
-                trainTest();
+                populateTrain();
                 break;
             case 8:
                 again = false;
@@ -115,10 +115,22 @@ void SimulationProgram::getInternet() {
 
 }
 
-void SimulationProgram::trainTest() {
+void SimulationProgram::populateTrain() {
     std::string input;
     testVehicle.clear();
     input = "Grand Central";
+    std::ifstream inFile("TrainStations.txt");
+    std::string line;
+    std::vector<std::string> tmpStat;
+    while (std::getline(inFile, line))
+    {
+        tmpStat.push_back(line);
+    }
+    for (int i=0; i<tmpStat.size(); i++){
+        std::cout << tmpStat[i] << std::endl;
+    }
+
+/*
     testVehicle.push_back(std::unique_ptr<Vehicle>(
             new CoachCar(0,0,0,0)
             ));
@@ -131,8 +143,13 @@ void SimulationProgram::trainTest() {
     std::vector<std::unique_ptr<Vehicle>> b;
     testStation.push_back(std::unique_ptr<Station>(
             new Station (input, std::move(testVehicle))));
+    testStation.push_back(std::unique_ptr<Station>(
+            new Station ("Liege", std::move(testVehicle))));
     std::cout << testStation[0]->getStationname();
     testStation[0]->printStation();
+    std::cout << testStation[1]->getStationname();
+    testStation[1]->printStation();
+*/
 }
 
 void SimulationProgram::assembleTrain() {

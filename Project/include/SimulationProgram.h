@@ -30,7 +30,7 @@ public:
     void run();
     void getType();
     void getID();
-    void trainTest();
+    void populateTrain();
     void getSeats();
     void getInternet();
     void assembleTrain();
