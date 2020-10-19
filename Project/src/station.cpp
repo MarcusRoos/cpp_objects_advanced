@@ -19,17 +19,29 @@ void Station::testStat() {
     const char startDelim='(', endDelim = ')';
     std::string namn;
     int aID, aType, c, d;
-    std::ifstream inFile("TrainStation.txt");
+    std::ifstream inFile("TrainStations.txt");
     if (inFile.is_open()) {
-        getline(inFile, namn, startDelim);
-
-        while (getline(inFile, tmpANr)) {
-            getline(inFile, tmpType);
-
+        while (getline(inFile, namn, startDelim)) {
+            inFile >> aID;
+            inFile >> aType;
+            inFile >> c;
+            if (c == startDelim || c == endDelim) {
+                inFile.get();
+            }
+            inFile >> d;
+            if (d == startDelim || d == endDelim) {
+                inFile.get();
+            } else
+                inFile.get();
+            std::cout << "ID: " << aID << std::endl;
+            std::cout << "aType: " << aType << std::endl;
+            std::cout << "c: " << c << std::endl;
+            std::cout << "d: " << d << std::endl;
         }
     }
-
 }
+
+
 
 
 
