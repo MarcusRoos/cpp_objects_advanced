@@ -21,9 +21,9 @@ void Station::testStat(std::string aName) {
 
 void Station::printStation() {
     for (int i=0; i<stationVehicles.size(); i++){
-        std::cout << "ID: "<<stationVehicles[i]->getId() << std::endl;
-        std::cout << "Type:" <<stationVehicles[i]->getType() << std::endl;
-        std::cout << "Seats: "<<stationVehicles[i]->getSeats() << std::endl;
-        std::cout << "Internet?: "<<stationVehicles[i]->getInternet() << std::endl;
+        if (stationVehicles[i]->getType() == 5) {
+            std::cout << "ID: " << stationVehicles[i]->getId() << std::endl;
+            std::cout << "Type:" << stationVehicles[i]->getType() << std::endl;
+        }
     }
 }

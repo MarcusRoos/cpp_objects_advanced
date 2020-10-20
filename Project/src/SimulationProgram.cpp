@@ -25,7 +25,7 @@ void SimulationProgram::run() {
         switch(menu.menuChoice())
         {
             case 1:
-                getType();
+                testTrain->trainTester();
                 break;
             case 2:
                 getID();
@@ -63,6 +63,8 @@ SimulationProgram::SimulationProgram() {
     menu.addItem("Print vehicles at start of simulation.", true);
     menu.addItem("Exit", true);
     populateTrain();
+    std::unique_ptr<Train> tmpTrain(new Train());
+    testTrain = std::move(tmpTrain);
 }
 
 void SimulationProgram::runSubMenu() {
@@ -127,11 +129,9 @@ void SimulationProgram::populateTrain() {
     {
         tmpStat.push_back(line);
     }
-
     for (int i=0; i<tmpStat.size(); i++) {
         std::stringstream ss;
         char dud;
-
         std::string stationName;
         int tmpID = 0, tmpType = 2, param1 = 0, param2 = 0, choice;
         ss << tmpStat[i];
@@ -201,7 +201,6 @@ void SimulationProgram::populateTrain() {
                     default:
                         break;
                 }
-
             }
         }
         testStation.push_back(std::unique_ptr<Station>(
@@ -214,13 +213,10 @@ void SimulationProgram::assembleTrain() {
 
 }
 
-void SimulationProgram::loadFiles() {
-
-}
-
 void SimulationProgram::printVehicleStart() {
     std::cout << "Number of vehicles at start of simulation:" << std::endl;
     for (int k=0; k<testStation.size(); k++){
+        testStation[k]->printStation();
         std::cout << testStation[k]->getStationname() << " = " ;
         std::cout <<testStation[k]->getvecSize() << std::endl;
     }

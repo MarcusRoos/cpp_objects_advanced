@@ -10,17 +10,22 @@
 #include <memory>
 #include <vector>
 #include "vehicle.h"
+#include <list>
+#include <iostream>
 /**
  Class Train
 
  */
 class Train {
 protected:
-    int trainID;
+    std::list<int> trainlist;
+    int trainID, speed;
+    std::string typeEngine, depStat, destStat, depTime, arrTime;
     std::vector<std::unique_ptr<Vehicle>> assembleVehicles;
 public:
     Train();
-    virtual ~Train() = default;;
+    ~Train() = default;;
+    void trainTester();
 };
 
 #endif //DT060G_TRAIN_H

@@ -10,6 +10,7 @@
 #include "Menu.h"
 #include "train.h"
 #include "station.h"
+#include "map.h"
 #include <fstream>
 #include <vector>
 #include <memory>
@@ -23,7 +24,7 @@ private:
     Menu menu;
     std::vector<std::unique_ptr<Vehicle>> testVehicle;
     std::vector<std::unique_ptr<Station>> testStation;
-    std::vector<std::vector<Train>> testTrain;
+    std::unique_ptr<Train> testTrain;
 public:
     SimulationProgram();
     void runSubMenu();
