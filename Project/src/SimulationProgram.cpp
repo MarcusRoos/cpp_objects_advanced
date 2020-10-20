@@ -127,90 +127,91 @@ void SimulationProgram::populateTrain() {
         tmpStat.push_back(line);
     }
 
-std::stringstream ss;
-    char dud;
-std::string tmpString;
-tmpString = tmpStat[0];
-std::string stationName;
-    int tmpID=0, tmpType=2, param1=0, param2=0, choice;
-ss << tmpString;
-ss >> stationName;
-    ss >> dud;
-for (int i=0; i<3; i++) {
-    ss >> tmpID;
-    ss >> tmpType;
-    choice = tmpType;
-    choice++;
-    switch (choice){
-        case 1: {
-            ss >> param1;
-            ss >> param2;
-            ss >> dud;
-            ss >> dud;
-            testVehicle.push_back(std::unique_ptr<Vehicle>(
-                    new CoachCar(tmpID,tmpType,param1,param2)));
-            break;
-        }
-        case 2: {
-            ss >> param1;
-            ss >> dud;
-            ss >> dud;
-            testVehicle.push_back(std::unique_ptr<Vehicle>(
-                    new SleepingCar(tmpID,tmpType,param1)));
-            break;
-        }
-        case 3: {
-            ss >> param1;
-            ss >> param2;
-            ss >> dud;
-            ss >> dud;
-            testVehicle.push_back(std::unique_ptr<Vehicle>(
-                    new OpenFreight(tmpID,tmpType,param1,param2)));
-            break;
-        }
-        case 4:{
-            ss >> param1;
-            ss >> dud;
-            ss >> dud;
-            testVehicle.push_back(std::unique_ptr<Vehicle>(
-                    new CoveredFreight(tmpID,tmpType,param1)));
-            break;
-        }
-        case 5: {
-            ss >> param1;
-            ss >> param2;
-            ss >> dud;
-            ss >> dud;
-            testVehicle.push_back(std::unique_ptr<Vehicle>(
-                    new ElectricalEngine(tmpID,tmpType,param1,param2)));
-            break;
-        }
-        case 6: {
-            ss >> param1;
-            ss >> param2;
-            ss >> dud;
-            ss >> dud;
-            testVehicle.push_back(std::unique_ptr<Vehicle>(
-                    new DieselEngine(tmpID,tmpType,param1,param2)));
-            break;
-        }
-        case 7: {
-            std::cout << "Type is null" << std::endl;
-            default:
-                break;
-        }
+    for (int i=0; i<8; i++) {
+        std::stringstream ss;
+        char dud;
+        std::string tmpString;
+        tmpString = tmpStat[i];
+        std::string stationName;
+        int tmpID = 0, tmpType = 2, param1 = 0, param2 = 0, choice;
+        ss << tmpString;
+        ss >> stationName;
+        ss >> dud;
+        while (!ss.eof()) {
+            ss >> tmpID;
+            ss >> tmpType;
+            choice = tmpType;
+            choice++;
+            switch (choice) {
+                case 1: {
+                    ss >> param1;
+                    ss >> param2;
+                    ss >> dud;
+                    ss >> dud;
+                    testVehicle.push_back(std::unique_ptr<Vehicle>(
+                            new CoachCar(tmpID, tmpType, param1, param2)));
+                    break;
+                }
+                case 2: {
+                    ss >> param1;
+                    ss >> dud;
+                    ss >> dud;
+                    testVehicle.push_back(std::unique_ptr<Vehicle>(
+                            new SleepingCar(tmpID, tmpType, param1)));
+                    break;
+                }
+                case 3: {
+                    ss >> param1;
+                    ss >> param2;
+                    ss >> dud;
+                    ss >> dud;
+                    testVehicle.push_back(std::unique_ptr<Vehicle>(
+                            new OpenFreight(tmpID, tmpType, param1, param2)));
+                    break;
+                }
+                case 4: {
+                    ss >> param1;
+                    ss >> dud;
+                    ss >> dud;
+                    testVehicle.push_back(std::unique_ptr<Vehicle>(
+                            new CoveredFreight(tmpID, tmpType, param1)));
+                    break;
+                }
+                case 5: {
+                    ss >> param1;
+                    ss >> param2;
+                    ss >> dud;
+                    ss >> dud;
+                    testVehicle.push_back(std::unique_ptr<Vehicle>(
+                            new ElectricalEngine(tmpID, tmpType, param1,
+                                                 param2)));
+                    break;
+                }
+                case 6: {
+                    ss >> param1;
+                    ss >> param2;
+                    ss >> dud;
+                    ss >> dud;
+                    testVehicle.push_back(std::unique_ptr<Vehicle>(
+                            new DieselEngine(tmpID, tmpType, param1, param2)));
+                    break;
+                }
+                case 7: {
+                    std::cout << "Type is null" << std::endl;
+                    default:
+                        break;
+                }
 
+            }
+            std::cout << "Namn: " << stationName << std::endl;
+            std::cout << "ID: " << tmpID << std::endl;
+            std::cout << "Type: " << tmpType << std::endl;
+            std::cout << "Param1: " << param1 << std::endl;
+            std::cout << "Param2: " << param2 << std::endl;
+        }
+        testStation.push_back(std::unique_ptr<Station>(
+                new Station(stationName, std::move(testVehicle))));
     }
-    std::cout << "Namn: " << stationName << std::endl;
-    std::cout << "ID: " << tmpID << std::endl;
-    std::cout << "Type: " << tmpType << std::endl;
-    std::cout << "Param1: " << param1 << std::endl;
-    std::cout << "Param2: " << param2 << std::endl;
-}
-    testStation.push_back(std::unique_ptr<Station>(
-            new Station (stationName, std::move(testVehicle))));
-    std::cout << testStation[0]->getStationname() << std::endl;
-    testStation[0]->printStation();
 
 }
 
