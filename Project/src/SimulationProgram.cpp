@@ -116,7 +116,7 @@ void SimulationProgram::getInternet() {
 }
 
 void SimulationProgram::populateTrain() {
-/*    std::string input;
+  std::string input;
     testVehicle.clear();
     input = "Grand Central";
     std::ifstream inFile("TrainStations.txt");
@@ -126,47 +126,35 @@ void SimulationProgram::populateTrain() {
     {
         tmpStat.push_back(line);
     }
-    for (int i=0; i<tmpStat.size(); i++){
-        std::cout << tmpStat[i] << std::endl;
-    }
-    std::string tmpStream;
-*/
 
-/*string firstString;
-file >> firstString;
-string rest;
-getline(file, rest);
-str.find and str.substr to parse
- */
-    const char startDelim='(', endDelim = ')';
-    std::string namn, tmpNamn;
-    int aID, aType, c, d;
-    bool testbool=true;
-    std::ifstream inFile("TrainStations.txt");
-    if (inFile.is_open()) {
-        while (getline(inFile, namn, startDelim)) {
-            if (testbool){
-                tmpNamn = namn;
-                testbool = false;
-            }
+std::stringstream ss;
+    char dud;
+bool namebool=true;
+std::string tmpString, testTmp;
+tmpString = tmpStat[0];
+std::string stationName;
+    int tmpID=0, tmpType=2, param1=0, param2=0;
+ss << tmpString;
+ss >> stationName;
+    ss >> dud;
+for (int i=0; i<3; i++) {
+    ss >> tmpID;
+    ss >> tmpType;
+    ss >> param1;
+    ss >> param2;
+    ss >> dud;
+    ss >> dud;
+    std::cout << "Namn: " << stationName << std::endl;
+    std::cout << "ID: " << tmpID << std::endl;
+    std::cout << "Type: " << tmpType << std::endl;
+    std::cout << "Param1: " << param1 << std::endl;
+    std::cout << "Param2: " << param2 << std::endl;
+}
+    int posStart = tmpString.find('(');
+    int posEnd = tmpString.find(')');
 
-            inFile >> aID;
-            inFile >> aType;
-            inFile >> c;
-            inFile >> d;
-            inFile.get();
-            std::cout << "C: " << c << std::endl;
-            testVehicle.push_back(std::unique_ptr<Vehicle>(
-                    new CoachCar(aID,aType,c,d)
-            ));
-        }
-        testStation.push_back(std::unique_ptr<Station>(
-                new Station (tmpNamn, std::move(testVehicle))));
-    }
-    std::cout << testStation[0]->getStationname() << std::endl;
-    testStation[0]->printStation();
 
-    int tmpID=0, tmpType=0, param1=0, param2=0;
+
 
 /*
     testVehicle.push_back(std::unique_ptr<Vehicle>(
