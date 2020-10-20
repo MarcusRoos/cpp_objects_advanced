@@ -203,16 +203,15 @@ void SimulationProgram::populateTrain() {
                 }
 
             }
-            std::cout << "Namn: " << stationName << std::endl;
-            std::cout << "ID: " << tmpID << std::endl;
-            std::cout << "Type: " << tmpType << std::endl;
-            std::cout << "Param1: " << param1 << std::endl;
-            std::cout << "Param2: " << param2 << std::endl;
         }
         testStation.push_back(std::unique_ptr<Station>(
                 new Station(stationName, std::move(testVehicle))));
     }
-
+    std::cout << "Loaded stations" << std::endl;
+    for (int k=0; k<testStation.size(); k++){
+        std::cout <<"Name: " <<testStation[k]->getStationname() << std::endl;
+        std::cout <<"Size: " <<testStation[k]->getvecSize() << std::endl;
+    }
 }
 
 void SimulationProgram::assembleTrain() {

@@ -27,6 +27,7 @@ public:
     std::string getStationname(){return stationName;}
     void testStat(std::string aName);
     void printStation();
+    int getvecSize(){return stationVehicles.size();}
 };
 
 #endif //DT060G_STATION_H
