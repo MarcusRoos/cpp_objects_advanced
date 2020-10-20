@@ -43,7 +43,7 @@ void SimulationProgram::run() {
                 assembleTrain();
                 break;
             case 7:
-                populateTrain();
+                printVehicleStart();
                 break;
             case 8:
                 again = false;
@@ -60,8 +60,9 @@ SimulationProgram::SimulationProgram() {
     menu.addItem("---", true);
     menu.addItem("---", true);
     menu.addItem("---", true);
-    menu.addItem("Construct test train", true);
+    menu.addItem("Print vehicles at start of simulation.", true);
     menu.addItem("Exit", true);
+    populateTrain();
 }
 
 void SimulationProgram::runSubMenu() {
@@ -127,14 +128,13 @@ void SimulationProgram::populateTrain() {
         tmpStat.push_back(line);
     }
 
-    for (int i=0; i<8; i++) {
+    for (int i=0; i<tmpStat.size(); i++) {
         std::stringstream ss;
         char dud;
-        std::string tmpString;
-        tmpString = tmpStat[i];
+
         std::string stationName;
         int tmpID = 0, tmpType = 2, param1 = 0, param2 = 0, choice;
-        ss << tmpString;
+        ss << tmpStat[i];
         ss >> stationName;
         ss >> dud;
         while (!ss.eof()) {
@@ -207,11 +207,6 @@ void SimulationProgram::populateTrain() {
         testStation.push_back(std::unique_ptr<Station>(
                 new Station(stationName, std::move(testVehicle))));
     }
-    std::cout << "Loaded stations" << std::endl;
-    for (int k=0; k<testStation.size(); k++){
-        std::cout <<"Name: " <<testStation[k]->getStationname() << std::endl;
-        std::cout <<"Size: " <<testStation[k]->getvecSize() << std::endl;
-    }
 }
 
 void SimulationProgram::assembleTrain() {
@@ -221,5 +216,13 @@ void SimulationProgram::assembleTrain() {
 
 void SimulationProgram::loadFiles() {
 
+}
+
+void SimulationProgram::printVehicleStart() {
+    std::cout << "Number of vehicles at start of simulation:" << std::endl;
+    for (int k=0; k<testStation.size(); k++){
+        std::cout << testStation[k]->getStationname() << " = " ;
+        std::cout <<testStation[k]->getvecSize() << std::endl;
+    }
 }
 

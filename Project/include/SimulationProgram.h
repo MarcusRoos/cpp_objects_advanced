@@ -35,6 +35,7 @@ public:
     void getInternet();
     void assembleTrain();
     void loadFiles();
+    void printVehicleStart();
 };
 
 #endif //DT060G_SIMULATIONPROGRAM_H

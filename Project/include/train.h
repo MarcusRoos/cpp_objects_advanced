@@ -16,7 +16,7 @@
  */
 class Train {
 protected:
-    std::string dummy;
+    int trainID;
     std::vector<std::unique_ptr<Vehicle>> assembleVehicles;
 public:
     Train();
