@@ -27,7 +27,6 @@ void SimulationProgram::run() {
             case 1:
                 break;
             case 2:
-                getID();
                 break;
             case 3:
                 populateTrain();
@@ -39,7 +38,6 @@ void SimulationProgram::run() {
                 std::cout << "Boop 5" << std::endl;
                 break;
             case 6:
-                assembleTrain();
                 break;
             case 7:
                 printVehicleStart();
@@ -53,16 +51,17 @@ void SimulationProgram::run() {
 
 SimulationProgram::SimulationProgram() {
     menu.setTitle("**** Class test menu ****");
-    menu.addItem("Get type", true);
-    menu.addItem("Get ID", true);
-    menu.addItem("Populate Train", true);
-    menu.addItem("Populate Map", true);
     menu.addItem("---", true);
     menu.addItem("---", true);
-    menu.addItem("Print vehicles at start of simulation.", true);
+    menu.addItem("---", true);
+    menu.addItem("---", true);
+    menu.addItem("---", true);
+    menu.addItem("---", true);
+    menu.addItem("Test loaded files, for now.", true);
     menu.addItem("Exit", true);
     populateStation();
     populateMap();
+    populateTrain();
 }
 
 void SimulationProgram::runSubMenu() {
@@ -99,23 +98,24 @@ void SimulationProgram::runSubMenu() {
     }
 }
 
-void SimulationProgram::getType() {
-    std::cout << "Test Type " << std::endl;
+void SimulationProgram::printVehicleStart() {
+    std::cout << "Number of vehicles at start of simulation:" << std::endl;
+    for (int k=0; k<testStation.size(); k++){
+        testStation[k]->printStation();
+        std::cout << testStation[k]->getStationname() << " = " ;
+        std::cout <<testStation[k]->getvecSize() << std::endl;
+    }
+    for (int k=0; k<testTrain.size(); k++){
+        testTrain[k]->trainTester();
+    }
+    for (int k=0; k<testMap.size(); k++){
+        testMap[k]->printMap();
+    }
 }
 
-void SimulationProgram::getID() {
-    std::cout << "Test ID " << std::endl;
-
-}
-void SimulationProgram::getSeats() {
-    std::cout << "Test Seats " << std::endl;
-
-}
-void SimulationProgram::getInternet() {
-    std::cout << "Test Internet " << std::endl;
-
-}
-
+/**
+ * Populators, reads in the three files and stores them in their
+ * respective class with pointers.**/
 void SimulationProgram::populateStation() {
     testVehicle.clear();
     std::ifstream inFile("TrainStations.txt");
@@ -143,7 +143,7 @@ void SimulationProgram::populateStation() {
                     ss >> param2;
                     ss >> delim;
                     ss >> delim;
-                    testVehicle.push_back(std::unique_ptr<Vehicle>(
+                    testVehicle.push_back(std::shared_ptr<Vehicle>(
                             new CoachCar(tmpID, tmpType, param1, param2)));
                     break;
                 }
@@ -151,7 +151,7 @@ void SimulationProgram::populateStation() {
                     ss >> param1;
                     ss >> delim;
                     ss >> delim;
-                    testVehicle.push_back(std::unique_ptr<Vehicle>(
+                    testVehicle.push_back(std::shared_ptr<Vehicle>(
                             new SleepingCar(tmpID, tmpType, param1)));
                     break;
                 }
@@ -160,7 +160,7 @@ void SimulationProgram::populateStation() {
                     ss >> param2;
                     ss >> delim;
                     ss >> delim;
-                    testVehicle.push_back(std::unique_ptr<Vehicle>(
+                    testVehicle.push_back(std::shared_ptr<Vehicle>(
                             new OpenFreight(tmpID, tmpType, param1, param2)));
                     break;
                 }
@@ -168,7 +168,7 @@ void SimulationProgram::populateStation() {
                     ss >> param1;
                     ss >> delim;
                     ss >> delim;
-                    testVehicle.push_back(std::unique_ptr<Vehicle>(
+                    testVehicle.push_back(std::shared_ptr<Vehicle>(
                             new CoveredFreight(tmpID, tmpType, param1)));
                     break;
                 }
@@ -177,7 +177,7 @@ void SimulationProgram::populateStation() {
                     ss >> param2;
                     ss >> delim;
                     ss >> delim;
-                    testVehicle.push_back(std::unique_ptr<Vehicle>(
+                    testVehicle.push_back(std::shared_ptr<Vehicle>(
                             new ElectricalEngine(tmpID, tmpType, param1,
                                                  param2)));
                     break;
@@ -187,7 +187,7 @@ void SimulationProgram::populateStation() {
                     ss >> param2;
                     ss >> delim;
                     ss >> delim;
-                    testVehicle.push_back(std::unique_ptr<Vehicle>(
+                    testVehicle.push_back(std::shared_ptr<Vehicle>(
                             new DieselEngine(tmpID, tmpType, param1, param2)));
                     break;
                 }
@@ -198,7 +198,7 @@ void SimulationProgram::populateStation() {
                 }
             }
         }
-        testStation.push_back(std::unique_ptr<Station>(
+        testStation.push_back(std::shared_ptr<Station>(
                 new Station(stationName, std::move(testVehicle))));
     }
 }
@@ -220,7 +220,7 @@ void SimulationProgram::populateMap() {
         ss >> tmpDep;
         ss >> tmpDest;
         ss >> tmpDist;
-        testMap.push_back(std::unique_ptr<Map>(
+        testMap.push_back(std::shared_ptr<Map>(
                 new Map(tmpDep, tmpDest, tmpDist)));
     }
 }
@@ -253,27 +253,9 @@ void SimulationProgram::populateTrain() {
             else
                 amountVehicles.push_back(tmpInt);
         }
-        testTrain.push_back(std::unique_ptr<Train>(
+        testTrain.push_back(std::shared_ptr<Train>(
                 new Train(tmpID, afromStation, atoStation, adepartureTime, aarrivalTime, amaxSpeed, amountVehicles)));
         amountVehicles.clear();
-    }
-
-    for (int i=0; i<testTrain.size(); i++){
-        testTrain[i]->trainTester();
-    }
-}
-
-void SimulationProgram::assembleTrain() {
-    std::cout << "Assembling train" << std::endl;
-
-}
-
-void SimulationProgram::printVehicleStart() {
-    std::cout << "Number of vehicles at start of simulation:" << std::endl;
-    for (int k=0; k<testStation.size(); k++){
-        testStation[k]->printStation();
-        std::cout << testStation[k]->getStationname() << " = " ;
-        std::cout <<testStation[k]->getvecSize() << std::endl;
     }
 }
 

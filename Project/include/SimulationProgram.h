@@ -22,22 +22,17 @@
 class SimulationProgram {
 private:
     Menu menu;
-    std::vector<std::unique_ptr<Vehicle>> testVehicle;
-    std::vector<std::unique_ptr<Station>> testStation;
-    std::vector<std::unique_ptr<Train>> testTrain;
-    std::vector<std::unique_ptr<Map>> testMap;
+    std::vector<std::shared_ptr<Vehicle>> testVehicle;
+    std::vector<std::shared_ptr<Station>> testStation;
+    std::vector<std::shared_ptr<Train>> testTrain;
+    std::vector<std::shared_ptr<Map>> testMap;
 public:
     SimulationProgram();
     void runSubMenu();
     void run();
-    void getType();
-    void getID();
     void populateStation();
     void populateMap();
     void populateTrain();
-    void getSeats();
-    void getInternet();
-    void assembleTrain();
     void printVehicleStart();
 };
 

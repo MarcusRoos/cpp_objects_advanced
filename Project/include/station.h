@@ -19,13 +19,12 @@
 class Station {
 protected:
     std::string stationName;
-    std::vector<std::unique_ptr<Vehicle>> stationVehicles;
+    std::vector<std::shared_ptr<Vehicle>> stationVehicles;
 public:
     Station();
-    Station(std::string aStationname, std::vector<std::unique_ptr<Vehicle>> aVehicle);
+    Station(std::string aStationname, std::vector<std::shared_ptr<Vehicle>> aVehicle);
     ~Station() = default;;
     std::string getStationname(){return stationName;}
-    void testStat(std::string aName);
     void printStation();
     int getvecSize(){return stationVehicles.size();}
 };

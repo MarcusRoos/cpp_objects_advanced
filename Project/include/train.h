@@ -22,7 +22,7 @@ protected:
     std::string fromStation, toStation, departureTime, arrivalTime;
     double maxSpeed;
     std::vector<int> logicalVehicles;
-    std::vector<std::unique_ptr<Vehicle>> trainVehicles;
+    std::vector<std::shared_ptr<Vehicle>> trainVehicles;
 public:
     Train();
     ~Train() = default;;
