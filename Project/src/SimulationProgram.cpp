@@ -62,6 +62,7 @@ SimulationProgram::SimulationProgram() {
     menu.addItem("Print vehicles at start of simulation.", true);
     menu.addItem("Exit", true);
     populateStation();
+    populateMap();
 }
 
 void SimulationProgram::runSubMenu() {
@@ -219,26 +220,46 @@ void SimulationProgram::populateMap() {
         ss >> tmpDep;
         ss >> tmpDest;
         ss >> tmpDist;
-
         testMap.push_back(std::unique_ptr<Map>(
                 new Map(tmpDep, tmpDest, tmpDist)));
-    }
-    for (int i=0; i<testMap.size(); i++){
-        testMap[i]->printMap();
     }
 }
 
 void SimulationProgram::populateTrain() {
-    testMap.clear();
+    testTrain.clear();
     std::ifstream inFile("Trains.txt");
     std::string line;
+    std::vector<int> amountVehicles;
     std::vector<std::string> tmpTrain;
     while (std::getline(inFile, line))
     {
         tmpTrain.push_back(line);
     }
-    for (int i=0; i<tmpTrain.size(); i++){
-        std::cout << "TmpTrain: " <<tmpTrain[i] << std::endl;
+    int tmpID=0, tmpInt=0;
+    std::string afromStation, atoStation, adepartureTime, aarrivalTime;
+    double amaxSpeed;
+    for (int i=0; i<tmpTrain.size(); i++) {
+        std::stringstream ss;
+        ss << tmpTrain[i];
+        ss >> tmpID;
+        ss >> afromStation;
+        ss >> atoStation;
+        ss >> adepartureTime;
+        ss >> aarrivalTime;
+        ss >> amaxSpeed;
+        while (ss >> tmpInt){
+            if (ss.peek() == '\n')
+                break;
+            else
+                amountVehicles.push_back(tmpInt);
+        }
+        testTrain.push_back(std::unique_ptr<Train>(
+                new Train(tmpID, afromStation, atoStation, adepartureTime, aarrivalTime, amaxSpeed, amountVehicles)));
+        amountVehicles.clear();
+    }
+
+    for (int i=0; i<testTrain.size(); i++){
+        testTrain[i]->trainTester();
     }
 }
 
