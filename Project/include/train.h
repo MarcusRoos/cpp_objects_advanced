@@ -18,13 +18,15 @@
  */
 class Train {
 protected:
-    std::list<int> trainlist;
-    int trainID, speed;
-    std::string typeEngine, depStat, destStat, depTime, arrTime;
-    std::vector<std::unique_ptr<Vehicle>> assembleVehicles;
+    int trainId;
+    std::string fromStation, toStation, departureTime, arrivalTime;
+    double maxSpeed;
+    std::vector<int> logicalVehicles;
+    std::vector<std::unique_ptr<Vehicle>> trainVehicles;
 public:
     Train();
     ~Train() = default;;
+    Train(int aID, std::string aFrom, std::string aTo, std::string aDtime, std::string aAtime, double aSpeed, std::vector<int> aLogicalVehicles);
     void trainTester();
 };
 

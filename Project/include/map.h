@@ -21,7 +21,9 @@ protected:
     std::string depStat, destStat;
 public:
     Map();
-    ~Map() = default;;
+    ~Map() = default;
+    Map(std::string aDepstat, std::string adestStat, int aDist);
+    void printMap();
 };
 
 #endif //DT060G_MAP_H

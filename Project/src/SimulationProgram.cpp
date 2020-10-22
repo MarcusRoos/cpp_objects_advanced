@@ -25,16 +25,15 @@ void SimulationProgram::run() {
         switch(menu.menuChoice())
         {
             case 1:
-                testTrain->trainTester();
                 break;
             case 2:
                 getID();
                 break;
             case 3:
-                getSeats();
+                populateTrain();
                 break;
             case 4:
-                getInternet();
+                populateMap();
                 break;
             case 5:
                 std::cout << "Boop 5" << std::endl;
@@ -56,15 +55,13 @@ SimulationProgram::SimulationProgram() {
     menu.setTitle("**** Class test menu ****");
     menu.addItem("Get type", true);
     menu.addItem("Get ID", true);
-    menu.addItem("---", true);
-    menu.addItem("---", true);
+    menu.addItem("Populate Train", true);
+    menu.addItem("Populate Map", true);
     menu.addItem("---", true);
     menu.addItem("---", true);
     menu.addItem("Print vehicles at start of simulation.", true);
     menu.addItem("Exit", true);
-    populateTrain();
-    std::unique_ptr<Train> tmpTrain(new Train());
-    testTrain = std::move(tmpTrain);
+    populateStation();
 }
 
 void SimulationProgram::runSubMenu() {
@@ -118,10 +115,8 @@ void SimulationProgram::getInternet() {
 
 }
 
-void SimulationProgram::populateTrain() {
-  std::string input;
+void SimulationProgram::populateStation() {
     testVehicle.clear();
-    input = "Grand Central";
     std::ifstream inFile("TrainStations.txt");
     std::string line;
     std::vector<std::string> tmpStat;
@@ -131,72 +126,71 @@ void SimulationProgram::populateTrain() {
     }
     for (int i=0; i<tmpStat.size(); i++) {
         std::stringstream ss;
-        char dud;
+        char delim;
         std::string stationName;
-        int tmpID = 0, tmpType = 2, param1 = 0, param2 = 0, choice;
+        int tmpID = 0, tmpType = 6, param1 = 0, param2 = 0, choice;
         ss << tmpStat[i];
         ss >> stationName;
-        ss >> dud;
+        ss >> delim;
         while (!ss.eof()) {
             ss >> tmpID;
             ss >> tmpType;
             choice = tmpType;
-            choice++;
             switch (choice) {
-                case 1: {
+                case 0: {
                     ss >> param1;
                     ss >> param2;
-                    ss >> dud;
-                    ss >> dud;
+                    ss >> delim;
+                    ss >> delim;
                     testVehicle.push_back(std::unique_ptr<Vehicle>(
                             new CoachCar(tmpID, tmpType, param1, param2)));
                     break;
                 }
-                case 2: {
+                case 1: {
                     ss >> param1;
-                    ss >> dud;
-                    ss >> dud;
+                    ss >> delim;
+                    ss >> delim;
                     testVehicle.push_back(std::unique_ptr<Vehicle>(
                             new SleepingCar(tmpID, tmpType, param1)));
                     break;
                 }
-                case 3: {
+                case 2: {
                     ss >> param1;
                     ss >> param2;
-                    ss >> dud;
-                    ss >> dud;
+                    ss >> delim;
+                    ss >> delim;
                     testVehicle.push_back(std::unique_ptr<Vehicle>(
                             new OpenFreight(tmpID, tmpType, param1, param2)));
                     break;
                 }
-                case 4: {
+                case 3: {
                     ss >> param1;
-                    ss >> dud;
-                    ss >> dud;
+                    ss >> delim;
+                    ss >> delim;
                     testVehicle.push_back(std::unique_ptr<Vehicle>(
                             new CoveredFreight(tmpID, tmpType, param1)));
                     break;
                 }
-                case 5: {
+                case 4: {
                     ss >> param1;
                     ss >> param2;
-                    ss >> dud;
-                    ss >> dud;
+                    ss >> delim;
+                    ss >> delim;
                     testVehicle.push_back(std::unique_ptr<Vehicle>(
                             new ElectricalEngine(tmpID, tmpType, param1,
                                                  param2)));
                     break;
                 }
-                case 6: {
+                case 5: {
                     ss >> param1;
                     ss >> param2;
-                    ss >> dud;
-                    ss >> dud;
+                    ss >> delim;
+                    ss >> delim;
                     testVehicle.push_back(std::unique_ptr<Vehicle>(
                             new DieselEngine(tmpID, tmpType, param1, param2)));
                     break;
                 }
-                case 7: {
+                case 6: {
                     std::cout << "Type is null" << std::endl;
                     default:
                         break;
@@ -205,6 +199,46 @@ void SimulationProgram::populateTrain() {
         }
         testStation.push_back(std::unique_ptr<Station>(
                 new Station(stationName, std::move(testVehicle))));
+    }
+}
+
+void SimulationProgram::populateMap() {
+    testMap.clear();
+    std::ifstream inFile("TrainMap.txt");
+    std::string line;
+    std::vector<std::string> tmpMap;
+    while (std::getline(inFile, line))
+    {
+        tmpMap.push_back(line);
+    }
+    int tmpDist=0;
+    std::string tmpDep, tmpDest;
+    for (int i=0; i<tmpMap.size(); i++) {
+        std::stringstream ss;
+        ss << tmpMap[i];
+        ss >> tmpDep;
+        ss >> tmpDest;
+        ss >> tmpDist;
+
+        testMap.push_back(std::unique_ptr<Map>(
+                new Map(tmpDep, tmpDest, tmpDist)));
+    }
+    for (int i=0; i<testMap.size(); i++){
+        testMap[i]->printMap();
+    }
+}
+
+void SimulationProgram::populateTrain() {
+    testMap.clear();
+    std::ifstream inFile("Trains.txt");
+    std::string line;
+    std::vector<std::string> tmpTrain;
+    while (std::getline(inFile, line))
+    {
+        tmpTrain.push_back(line);
+    }
+    for (int i=0; i<tmpTrain.size(); i++){
+        std::cout << "TmpTrain: " <<tmpTrain[i] << std::endl;
     }
 }
 

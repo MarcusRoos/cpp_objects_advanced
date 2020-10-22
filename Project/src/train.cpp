@@ -8,24 +8,21 @@
 
 Train::Train() {
 
-    trainID = 0;
-    speed = 0;
-    typeEngine = "testEngine";
-    depStat = "testDep";
-    destStat = "testDest";
-    depTime = "testDepTime";
-    arrTime = "testArrTime";
+
 }
 
 void Train::trainTester() {
-    trainlist.push_back(5);
-    trainlist.push_back(3);
-    trainlist.push_back(3);
-    trainlist.push_back(3);
-    typeEngine = "Test";
-    for (auto v : trainlist){
-        std::cout << v << std::endl;
-    }
 
 
+}
+
+Train::Train(int aID, std::string aFrom, std::string aTo, std::string aDtime,
+        std::string aAtime, double aSpeed, std::vector<int> aLogicalVehicles) {
+    trainId = aID;
+    fromStation = aFrom;
+    toStation = aTo;
+    departureTime = aDtime;
+    arrivalTime = aAtime;
+    maxSpeed = aSpeed;
+    logicalVehicles = std::move(aLogicalVehicles);
 }
