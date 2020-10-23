@@ -4,6 +4,7 @@
 // StudentID: Maro1904
 //
 
+#include <algorithm>
 #include "station.h"
 
 Station::Station() {
@@ -27,7 +28,6 @@ void Station::printStation(int aType) {
 std::shared_ptr<Vehicle> Station::outgoingVehicle(int atype) {
     for (int i=0; i<stationVehicles.size(); i++){
         if (stationVehicles[i]->getType() == atype){
-            std::cout << "Internal size: " << stationVehicles.size();
             std::cout << "Found!" << std::endl;
             return stationVehicles[i];
         }

@@ -40,8 +40,12 @@ Train::assembleVehicle(std::vector<std::shared_ptr<Vehicle>> atrainVehicles) {
     trainVehicles = std::move(atrainVehicles);
     int k=0;
     for (int i=0; i<trainVehicles.size(); i++){
-        k++;
+        std::cout << "Boop: " << trainVehicles.size();
     }
-    std::cout << "Loaded train: " <<k << std::endl;
+    std::cout << "Loaded train: " << k << std::endl;
     std::cout << "Name: " << getDepname() << std::endl;
+}
+
+void Train::printTest() {
+    std::cout  << "Train Vehicles: " << trainVehicles.size() << std::endl;
 }

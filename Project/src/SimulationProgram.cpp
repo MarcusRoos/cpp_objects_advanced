@@ -463,11 +463,15 @@ void SimulationProgram::testMenu() {
     std::cout << "Dedicated to testing functions" << std::endl;
     std::string namn = "GrandCentral";
     int uttype = 1, amount=4;
+    std::cout << "teststation size: " << testStation.size() << std::endl;
     for (int i=0; i<testStation.size(); i++){
         if (namn == testStation[i]->getStationname()){
             std::cout << "Hittade station" << std::endl;
-            if (tmpVehicle.size() < amount)
+            for (int p=0; p<amount; p++) {
+                if (namn == testStation[i]->getStationname())
                 tmpVehicle.push_back(testStation[i]->outgoingVehicle(uttype));
+            }
+            break;
         }
     }
 
@@ -476,5 +480,6 @@ void SimulationProgram::testMenu() {
             testTrain[i]->assembleVehicle(tmpVehicle);
         }
     }
+
 }
 

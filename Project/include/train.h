@@ -30,6 +30,7 @@ public:
     void assembleVehicle(std::vector<std::shared_ptr<Vehicle>> atrainVehicles);
     void trainTester();
     std::string getDepname(){return fromStation;}
+    void printTest();
 };
 
 #endif //DT060G_TRAIN_H
