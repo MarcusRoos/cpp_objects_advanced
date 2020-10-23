@@ -10,6 +10,7 @@
 #include <memory>
 #include <vector>
 #include "vehicle.h"
+#include "constants.h"
 #include <list>
 #include <iostream>
 /**
@@ -18,6 +19,7 @@
  */
 class Train {
 protected:
+    enum State state = UNASSMEBLED;
     int trainId;
     std::string fromStation, toStation, departureTime, arrivalTime;
     double maxSpeed;
