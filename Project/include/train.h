@@ -27,7 +27,9 @@ public:
     Train();
     ~Train() = default;;
     Train(int aID, std::string aFrom, std::string aTo, std::string aDtime, std::string aAtime, double aSpeed, std::vector<int> aLogicalVehicles);
+    void assembleVehicle(std::vector<std::shared_ptr<Vehicle>> atrainVehicles);
     void trainTester();
+    std::string getDepname(){return fromStation;}
 };
 
 #endif //DT060G_TRAIN_H

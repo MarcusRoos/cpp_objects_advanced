@@ -113,7 +113,6 @@ void SimulationProgram::runSubMenu() {
 void SimulationProgram::printVehicleStart() {
     std::cout << "Number of vehicles at start of simulation:" << std::endl;
     for (int k=0; k<testStation.size(); k++){
-        testStation[k]->printStation();
         std::cout << testStation[k]->getStationname() << " = " ;
         std::cout <<testStation[k]->getvecSize() << std::endl;
     }
@@ -305,7 +304,6 @@ void SimulationProgram::runLogmenu() {
 void SimulationProgram::printStatistics() {
     std::cout << "Number of vehicles at start of simulation:" << std::endl;
     for (int k=0; k<testStation.size(); k++){
-        testStation[k]->printStation();
         std::cout << testStation[k]->getStationname() << " = " ;
         std::cout <<testStation[k]->getvecSize() << std::endl;
     }
@@ -461,7 +459,22 @@ void SimulationProgram::vehicleMenu() {
 }
 
 void SimulationProgram::testMenu() {
+    std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
     std::cout << "Dedicated to testing functions" << std::endl;
+    std::string namn = "GrandCentral";
+    int uttype = 1, amount=4;
+    for (int i=0; i<testStation.size(); i++){
+        if (namn == testStation[i]->getStationname()){
+            std::cout << "Hittade station" << std::endl;
+            if (tmpVehicle.size() < amount)
+                tmpVehicle.push_back(testStation[i]->outgoingVehicle(uttype));
+        }
+    }
 
+    for (int i=0; i<testTrain.size(); i++) {
+        if (namn == testTrain[i]->getDepname()) {
+            testTrain[i]->assembleVehicle(tmpVehicle);
+        }
+    }
 }
 

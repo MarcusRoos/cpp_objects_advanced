@@ -15,7 +15,22 @@ Station::Station(std::string aStationname, std::vector<std::shared_ptr<Vehicle>>
     stationVehicles = std::move(aVehicle);
 }
 
-void Station::printStation() {
+void Station::printStation(int aType) {
+    int k=0;
     for (int i=0; i<stationVehicles.size(); i++){
+        if (stationVehicles[i]->getType() == aType)
+            k++;
     }
+    std::cout << "K: " << k << std::endl;
+}
+
+std::shared_ptr<Vehicle> Station::outgoingVehicle(int atype) {
+    for (int i=0; i<stationVehicles.size(); i++){
+        if (stationVehicles[i]->getType() == atype){
+            std::cout << "Internal size: " << stationVehicles.size();
+            std::cout << "Found!" << std::endl;
+            return stationVehicles[i];
+        }
+    }
+    return 0;
 }
