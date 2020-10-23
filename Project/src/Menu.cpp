@@ -26,13 +26,11 @@ void Menu::addItem(const std::string& pmenuText, bool penabler) {
 // Prints menu
 void Menu::printMenuItems() const {
     using namespace std;
-    int i = 0;
     string title;
     title = getTitle();
     cout << title << endl;
-    for (const auto& e : menuItem){
-        i++;
-        cout << i << ".  " << e.getMenuText() << "\n";
+    for (const auto &e : menuItem) {
+        cout << e.getMenuText() << "\n";
     }
 }
 
@@ -42,7 +40,7 @@ int Menu::menuChoice() {
     int choice=0;
     cout << "Choice...";
     cin >> choice;
-    while (std::cin.fail() || choice <1 || choice >14){
+    while (std::cin.fail() || choice <0 || choice >10){
         std::cout << "Wrong input.\n";
         std::cin.clear();
         std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

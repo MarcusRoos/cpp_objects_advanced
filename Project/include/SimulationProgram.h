@@ -11,9 +11,11 @@
 #include "train.h"
 #include "station.h"
 #include "map.h"
+#include "Management.h"
 #include <fstream>
 #include <vector>
 #include <memory>
+
 /**
  Class SimulationProgram
 
@@ -30,10 +32,16 @@ public:
     SimulationProgram();
     void runSubMenu();
     void run();
+    void runLogmenu();
     void populateStation();
     void populateMap();
     void populateTrain();
     void printVehicleStart();
+    void statisticsMenu();
+    void printStatistics();
+    void vehicleMenu();
+    void stationMenu();
+    void trainMenu();
 };
 
 #endif //DT060G_SIMULATIONPROGRAM_H
