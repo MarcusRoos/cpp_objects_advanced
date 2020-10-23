@@ -18,8 +18,6 @@
 
 /**
  Class SimulationProgram
-
-
  */
 class SimulationProgram {
 private:
@@ -42,6 +40,7 @@ public:
     void vehicleMenu();
     void stationMenu();
     void trainMenu();
+    void testMenu();
 };
 
 #endif //DT060G_SIMULATIONPROGRAM_H

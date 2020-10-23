@@ -6,17 +6,14 @@
 #include <algorithm>
 #include "Management.h"
 using namespace std;
-/*
-void pauseFunction(const std::string& text){ Function used when program
- * should wait for user input before it continues
-    std::cout << text; // Prints function parameter on screen
+
+void pauseFunction(const std::string& text){
     std::cin.clear(); // Clear stream
     std::cin.sync(); // Synchronizes the input stream
-    std::cin.get(); // Waits for user input before it continues
     std::cin.clear(); // Clear stream once again to remove leftovers
     std::cin.sync(); // Synchronizes the input stream
 }
-*/
+
 std::string validate(std::string input){ // Validate input
     bool valid;
     do {

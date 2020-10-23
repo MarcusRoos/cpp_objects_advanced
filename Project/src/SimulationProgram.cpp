@@ -43,13 +43,16 @@ void SimulationProgram::run() {
                 statisticsMenu();
                 break;
             case 6:
+                trainMenu();
                 break;
             case 7:
+                stationMenu();
                 break;
             case 8:
+                vehicleMenu();
                 break;
             case 9:
-                printVehicleStart();
+                testMenu();
                 break;
         }
     }while(again);
@@ -65,7 +68,7 @@ SimulationProgram::SimulationProgram() {
     menu.addItem("6. Train menu", true);
     menu.addItem("7. Station menu", true);
     menu.addItem("8. Vehicle menu", true);
-    menu.addItem("9. Test loaded files, for now.", true);
+    menu.addItem("9. Tester.", true);
     menu.addItem("0. Return", true);
     populateStation();
     populateMap();
@@ -455,5 +458,10 @@ void SimulationProgram::vehicleMenu() {
                 break;
         }
     }
+}
+
+void SimulationProgram::testMenu() {
+    std::cout << "Dedicated to testing functions" << std::endl;
+
 }
 
