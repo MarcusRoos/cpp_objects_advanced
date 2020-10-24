@@ -12,6 +12,7 @@
 #include "station.h"
 #include "map.h"
 #include "Management.h"
+#include "constants.h"
 #include <fstream>
 #include <vector>
 #include <memory>
@@ -26,6 +27,7 @@ private:
     std::vector<std::shared_ptr<Station>> testStation;
     std::vector<std::shared_ptr<Train>> testTrain;
     std::vector<std::shared_ptr<Map>> testMap;
+    std::shared_ptr<Station> testStat;
 public:
     SimulationProgram();
     void runSubMenu();

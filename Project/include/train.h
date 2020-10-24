@@ -19,7 +19,7 @@
  */
 class Train {
 protected:
-    enum State state = UNASSMEBLED;
+    enum State state;
     int trainId;
     std::string fromStation, toStation, departureTime, arrivalTime;
     double maxSpeed;
@@ -31,8 +31,10 @@ public:
     Train(int aID, std::string aFrom, std::string aTo, std::string aDtime, std::string aAtime, double aSpeed, std::vector<int> aLogicalVehicles);
     void assembleVehicle(std::vector<std::shared_ptr<Vehicle>> atrainVehicles);
     void trainTester();
+    std::vector<int> getLogicalVehicles();
     std::string getDepname(){return fromStation;}
     void printTest();
+    void MegaTest();
 };
 
 #endif //DT060G_TRAIN_H

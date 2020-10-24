@@ -333,10 +333,11 @@ void SimulationProgram::statisticsMenu() {
                 std::cout << "Low log level" << std::endl;
                 runLogmenu();
                 break;
-            case 2:
+            case 2: {
                 std::cout << "Print statistics" << std::endl;
                 printStatistics();
                 break;
+            }
             case 3:
                 trainMenu();
                 break;
@@ -459,17 +460,29 @@ void SimulationProgram::vehicleMenu() {
 }
 
 void SimulationProgram::testMenu() {
+    std::cout << "innan" << std::endl;
+    for (int i=0; i<testTrain.size(); i++) {
+        testTrain[i]->MegaTest();
+    }
+    system("pause");
+    std::vector<int> tmpVec;
+    for (int i=0; i<testTrain.size(); i++){
+        tmpVec = testTrain[1]->getLogicalVehicles();
+    }
+    for (int i=0; i<tmpVec.size(); i++){
+        std::cout << "Tmpvec" << std::endl;
+        std::cout << tmpVec[i] << std::endl;
+    }
     std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
     std::cout << "Dedicated to testing functions" << std::endl;
     std::string namn = "GrandCentral";
-    int uttype = 1, amount=4;
     std::cout << "teststation size: " << testStation.size() << std::endl;
     for (int i=0; i<testStation.size(); i++){
         if (namn == testStation[i]->getStationname()){
             std::cout << "Hittade station" << std::endl;
-            for (int p=0; p<amount; p++) {
+            for (int p=0; p<tmpVec.size(); p++) {
                 if (namn == testStation[i]->getStationname())
-                tmpVehicle.push_back(testStation[i]->outgoingVehicle(uttype));
+                tmpVehicle.push_back(testStation[i]->outgoingVehicle(tmpVec[p]));
             }
             break;
         }
@@ -480,6 +493,9 @@ void SimulationProgram::testMenu() {
             testTrain[i]->assembleVehicle(tmpVehicle);
         }
     }
-
+    system("pause");
+    for (int i=0; i<testTrain.size(); i++) {
+            testTrain[i]->MegaTest();
+    }
 }
 

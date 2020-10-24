@@ -34,3 +34,7 @@ std::shared_ptr<Vehicle> Station::outgoingVehicle(int atype) {
     }
     return 0;
 }
+
+void Station::manipulateVehicleTest() {
+    stationName = stationName + "b";
+}

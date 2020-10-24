@@ -7,6 +7,7 @@
 #ifndef DT060G_STATION_H
 #define DT060G_STATION_H
 #include "vehicle.h"
+#include "constants.h"
 #include <memory>
 #include <vector>
 #include <iostream>
@@ -28,6 +29,7 @@ public:
     void printStation(int aType);
     int getvecSize(){return stationVehicles.size();}
     std::shared_ptr<Vehicle> outgoingVehicle(int atype);
+    void manipulateVehicleTest();
 };
 
 #endif //DT060G_STATION_H

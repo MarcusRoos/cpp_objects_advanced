@@ -6,7 +6,7 @@
 
 #ifndef DT060G_VEHICLE_H
 #define DT060G_VEHICLE_H
-
+#include "constants.h"
 #include <string>
 //------------------------------------------------------------------------------
 // Class definition

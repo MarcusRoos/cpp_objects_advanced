@@ -33,6 +33,7 @@ Train::Train(int aID, std::string aFrom, std::string aTo, std::string aDtime,
     arrivalTime = aAtime;
     maxSpeed = aSpeed;
     logicalVehicles = std::move(aLogicalVehicles);
+    state = UNASSMEBLED;
 }
 
 void
@@ -48,4 +49,19 @@ Train::assembleVehicle(std::vector<std::shared_ptr<Vehicle>> atrainVehicles) {
 
 void Train::printTest() {
     std::cout  << "Train Vehicles: " << trainVehicles.size() << std::endl;
+}
+
+std::vector<int> Train::getLogicalVehicles() {
+    std::vector<int> tmpVec;
+
+    for (int i=0; i<logicalVehicles.size(); i++){
+         tmpVec.push_back(logicalVehicles[i]);
+    }
+    return tmpVec;
+}
+
+void Train::MegaTest(){
+    for (int i=0; i<trainVehicles.size(); i++){
+        std::cout << "Type: " << trainVehicles[i]->getType()<<std::endl;
+    }
 }
