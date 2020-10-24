@@ -110,20 +110,6 @@ void SimulationProgram::runSubMenu() {
     }
 }
 
-void SimulationProgram::printVehicleStart() {
-    std::cout << "Number of vehicles at start of simulation:" << std::endl;
-    for (int k=0; k<testStation.size(); k++){
-        std::cout << testStation[k]->getStationname() << " = " ;
-        std::cout <<testStation[k]->getvecSize() << std::endl;
-    }
-    for (int k=0; k<testTrain.size(); k++){
-        testTrain[k]->trainTester();
-    }
-    for (int k=0; k<testMap.size(); k++){
-        testMap[k]->printMap();
-    }
-}
-
 /**
  * Populators, reads in the three files and stores them in their
  * respective class with pointers.**/
@@ -460,9 +446,11 @@ void SimulationProgram::vehicleMenu() {
 }
 
 void SimulationProgram::testMenu() {
+
     std::vector<int> tmpVec;
     std::string tmpName;
     int tmpPull=9;
+    
     for (int i=0; i<testTrain.size(); i++){
         tmpVec = testTrain[tmpPull]->getLogicalVehicles();
         tmpName = testTrain[tmpPull]->getDepname();
@@ -486,8 +474,17 @@ void SimulationProgram::testMenu() {
             break;
         }
     }
-    for (int i=0; i<testTrain.size(); i++) {
-            testTrain[i]->MegaTest();
-    }
+
 }
 
+/**
+  bool pusher=true;
+    for (int i=0; i<testTrain.size(); i++) {
+        if (pusher) {
+            std::cout << "In the end: " << std::endl;
+            testTrain[i]->MegaTest();
+            pusher = false;
+        }
+    }
+
+    */

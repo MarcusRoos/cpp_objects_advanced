@@ -35,7 +35,6 @@ public:
     void populateStation();
     void populateMap();
     void populateTrain();
-    void printVehicleStart();
     void statisticsMenu();
     void printStatistics();
     void vehicleMenu();
