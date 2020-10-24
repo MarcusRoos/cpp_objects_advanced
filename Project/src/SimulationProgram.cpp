@@ -461,22 +461,19 @@ void SimulationProgram::vehicleMenu() {
 
 void SimulationProgram::testMenu() {
     std::vector<int> tmpVec;
+    std::string tmpName;
+    int tmpPull=9;
     for (int i=0; i<testTrain.size(); i++){
-        tmpVec = testTrain[1]->getLogicalVehicles();
-    }
-    for (int i=0; i<tmpVec.size(); i++){
-        std::cout << "Tmpvec" << std::endl;
-        std::cout << tmpVec[i] << std::endl;
+        tmpVec = testTrain[tmpPull]->getLogicalVehicles();
+        tmpName = testTrain[tmpPull]->getDepname();
     }
     std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
     std::cout << "Dedicated to testing functions" << std::endl;
-    std::string namn = "GrandCentral";
-    std::cout << "teststation size: " << testStation.size() << std::endl;
     for (int i=0; i<testStation.size(); i++){
-        if (namn == testStation[i]->getStationname()){
+        if (tmpName == testStation[i]->getStationname()){
             std::cout << "Hittade station" << std::endl;
             for (int p=0; p<tmpVec.size(); p++) {
-                if (namn == testStation[i]->getStationname())
+                if (tmpName == testStation[i]->getStationname())
                 tmpVehicle.push_back(testStation[i]->outgoingVehicle(tmpVec[p]));
             }
             break;
@@ -484,7 +481,7 @@ void SimulationProgram::testMenu() {
     }
 
     for (int i=0; i<testTrain.size(); i++) {
-        if (namn == testTrain[i]->getDepname()) {
+        if (tmpName == testTrain[i]->getDepname()) {
             testTrain[i]->assembleVehicle(tmpVehicle);
             break;
         }
