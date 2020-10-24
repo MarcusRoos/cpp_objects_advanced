@@ -27,7 +27,7 @@ private:
     std::vector<std::shared_ptr<Station>> testStation;
     std::vector<std::shared_ptr<Train>> testTrain;
     std::vector<std::shared_ptr<Map>> testMap;
-    std::shared_ptr<Station> testStat;
+    std::shared_ptr<Train> train;
 public:
     SimulationProgram();
     void runSubMenu();

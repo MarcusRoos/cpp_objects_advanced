@@ -460,11 +460,6 @@ void SimulationProgram::vehicleMenu() {
 }
 
 void SimulationProgram::testMenu() {
-    std::cout << "innan" << std::endl;
-    for (int i=0; i<testTrain.size(); i++) {
-        testTrain[i]->MegaTest();
-    }
-    system("pause");
     std::vector<int> tmpVec;
     for (int i=0; i<testTrain.size(); i++){
         tmpVec = testTrain[1]->getLogicalVehicles();
@@ -491,9 +486,9 @@ void SimulationProgram::testMenu() {
     for (int i=0; i<testTrain.size(); i++) {
         if (namn == testTrain[i]->getDepname()) {
             testTrain[i]->assembleVehicle(tmpVehicle);
+            break;
         }
     }
-    system("pause");
     for (int i=0; i<testTrain.size(); i++) {
             testTrain[i]->MegaTest();
     }

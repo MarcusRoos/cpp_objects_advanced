@@ -35,6 +35,7 @@ public:
     std::string getDepname(){return fromStation;}
     void printTest();
     void MegaTest();
+    int sizeVehicle(){return trainVehicles.size();};
 };
 
 #endif //DT060G_TRAIN_H
