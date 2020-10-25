@@ -17,7 +17,7 @@ enum State {
     FINISHED
 };
 
-const int TICK = 50;
+const int TICK = 100;
 const int DELAYTIME = 10;
 const int BUILDTIME = 20;
 const int READYTIME = 20;

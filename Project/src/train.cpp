@@ -29,19 +29,6 @@ bool Train::assembleVehicle() {
     return true;
 }
 
-void Train::printTest() {
-    std::cout  << "Train Vehicles: " << trainVehicles.size() << std::endl;
-}
-
-std::vector<int> Train::getLogicalVehicles() {
-    std::vector<int> tmpVec;
-
-    for (int i=0; i<logicalVehicles.size(); i++){
-         tmpVec.push_back(logicalVehicles[i]);
-    }
-    return tmpVec;
-}
-
 void Train::MegaTest(){
     std::cout << "From Station: " <<fromStation << std::endl;
     std::cout << "To Station: " << toStation << std::endl;

@@ -526,18 +526,28 @@ void SimulationProgram::scheduleEvents() {
 }
 
 bool SimulationProgram::tryBuild(int trainId) {
-    std::map<int, Train*> trains;
-    Train* tmpTrain = trains.find(trainId)->second;
+    std::map<int, Train*> tmpMap;
+    Train* tmpTrain = tmpMap.find(trainId)->second;
+    std::string tmpTo, tmpFrom;
+    int tmpDistance=0;
     if (tmpTrain && tmpTrain->assembleVehicle())
     {
-        std::cout << "time " << simulation->getTime() << ": Train " << trainId << " started building at station " << testTrain[trainId-1]->getFromStation() << " To " << testTrain[trainId-1]->getToStation() << std::endl ;
+        tmpFrom = testTrain[trainId-1]->getFromStation();
+        tmpTo = testTrain[trainId-1]->getToStation();
+        std::cout << "Started building train ID " << trainId << " at station "
+        << testTrain[trainId-1]->getFromStation() << " with destination to "
+        << testTrain[trainId-1]->getToStation() << std::endl;
+        for (int i=0; i<testMap.size(); i++){
+
+        }
+        std::cout << "This route got a distance of: " << tmpDistance << std::endl;
 
         //set state
         tmpTrain->setState(ASSEMBLED);
         return true;
     }
-    std::cout << std::endl << std::endl << "time " << simulation->getTime() << ": Train " << trainId << " could not finish build at station " << testTrain[trainId-1]->getFromStation();
-    std::cout << std::endl << "Trying again in " << DELAYTIME << " minutes";
+    std::cout << " Train " << trainId << " couldn't be built at station "
+    << testTrain[trainId-1]->getFromStation();
 
     testTrain[trainId-1]->delay(DELAYTIME);
 
