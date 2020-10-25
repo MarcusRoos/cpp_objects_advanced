@@ -526,8 +526,14 @@ void SimulationProgram::scheduleEvents() {
 }
 
 bool SimulationProgram::tryBuild(int trainId) {
-    std::map<int, Train*> tmpMap;
-    Train* tmpTrain = tmpMap.find(trainId)->second;
+    std::shared_ptr<Train> tmpTrain;
+    for (int i=0; i<testTrain.size(); i++){
+        if (trainId == testTrain[i]->getID()){
+            tmpTrain = testTrain[i];
+            break;
+        }
+    }
+
     std::string tmpTo, tmpFrom;
     int tmpDistance=0;
     if (tmpTrain && tmpTrain->assembleVehicle())
