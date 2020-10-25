@@ -52,5 +52,5 @@ void FinishTrain::processEvent()
 
 void EndTrain::processEvent()
 {
-    simmer->closeTracks();
+    simmer->disassembleTrain();
 }

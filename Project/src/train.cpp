@@ -24,8 +24,8 @@ void Train::trainTester() {
     }
 }
 
-Train::Train(int aID, std::string aFrom, std::string aTo, std::string aDtime,
-        std::string aAtime, double aSpeed, std::vector<int> aLogicalVehicles) {
+Train::Train(int aID, std::string aFrom, std::string aTo, int aDtime,
+        int aAtime, double aSpeed, std::vector<int> aLogicalVehicles) {
     trainId = aID;
     fromStation = aFrom;
     toStation = aTo;
@@ -61,4 +61,8 @@ void Train::MegaTest(){
         std::cout << "Type: " << trainVehicles[i]->getType()<<std::endl;
 
     }
+}
+
+bool Train::assembleTrain() {
+    return false;
 }

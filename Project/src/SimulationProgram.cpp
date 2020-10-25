@@ -232,8 +232,8 @@ void SimulationProgram::populateTrain() {
     {
         tmpTrain.push_back(line);
     }
-    int tmpID=0, tmpInt=0;
-    std::string afromStation, atoStation, adepartureTime, aarrivalTime;
+    int tmpID=0, tmpInt=0, adepartureTime=0, aarrivalTime=0;
+    std::string afromStation, atoStation, tmpdepartureTime, tmparrivalTime;
     double amaxSpeed;
     for (int i=0; i<tmpTrain.size(); i++) {
         std::stringstream ss;
@@ -241,8 +241,12 @@ void SimulationProgram::populateTrain() {
         ss >> tmpID;
         ss >> afromStation;
         ss >> atoStation;
-        ss >> adepartureTime;
-        ss >> aarrivalTime;
+        ss >> tmpdepartureTime;
+        tmpdepartureTime.erase(remove(tmpdepartureTime.begin(), tmpdepartureTime.end(), ':'), tmpdepartureTime.end());
+        adepartureTime = std::stoi(tmpdepartureTime);
+        ss >> tmparrivalTime;
+        tmparrivalTime.erase(remove(tmparrivalTime.begin(), tmparrivalTime.end(), ':'), tmparrivalTime.end());
+        aarrivalTime = std::stoi(tmparrivalTime);
         ss >> amaxSpeed;
         while (ss >> tmpInt){
             if (ss.peek() == '\n')
@@ -297,7 +301,7 @@ void SimulationProgram::printStatistics() {
         std::cout <<testStation[k]->getvecSize() << std::endl;
     }
     for (int i=0; i<testTrain.size(); i++){
-        std::cout << "ID" <<testTrain[i]->getID() << std::endl;
+        std::cout << "Time " <<testTrain[i]->getDepTime() << std::endl;
     }
 }
 
@@ -497,7 +501,7 @@ void SimulationProgram::testMenu() {
     */
 
 void SimulationProgram::scheduleEvents() {
-        std::cout << "Schedule Events" << std::endl;
+
 }
 
 bool SimulationProgram::tryBuild(int trainId) {

@@ -21,15 +21,15 @@
 class Train {
 protected:
     enum State state;
-    int trainId;
-    std::string fromStation, toStation, departureTime, arrivalTime;
+    int trainId, departureTime, arrivalTime;
+    std::string fromStation, toStation;
     double maxSpeed;
     std::vector<int> logicalVehicles;
     std::vector<std::shared_ptr<Vehicle>> trainVehicles;
 public:
     Train();
     ~Train() = default;;
-    Train(int aID, std::string aFrom, std::string aTo, std::string aDtime, std::string aAtime, double aSpeed, std::vector<int> aLogicalVehicles);
+    Train(int aID, std::string aFrom, std::string aTo, int aDtime, int aAtime, double aSpeed, std::vector<int> aLogicalVehicles);
     void assembleVehicle(std::vector<std::shared_ptr<Vehicle>> atrainVehicles);
     void trainTester();
     std::vector<int> getLogicalVehicles();
@@ -37,10 +37,11 @@ public:
     void MegaTest();
     int sizeVehicle(){return trainVehicles.size();}
     int getID(){return trainId;}
+    bool assembleTrain();
     std::string getFromStation(){return fromStation;}
     std::string getToStation(){return toStation;}
-    std::string getDepTime(){return departureTime;}
-    std::string getArrTime(){return arrivalTime;}
+    int getDepTime(){return departureTime;}
+    int getArrTime(){return arrivalTime;}
 };
 
 #endif //DT060G_TRAIN_H
