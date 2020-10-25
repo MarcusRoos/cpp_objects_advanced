@@ -9,7 +9,7 @@
 
 enum State {
     UNASSMEBLED,
-    NOT_READY,
+    ASSEMBLED,
     INCOMPLETE,
     READY,
     RUNNING,

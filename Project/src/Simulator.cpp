@@ -11,9 +11,9 @@
 
 Simulator::~Simulator() {
     while( ! eventQueue.empty()) {
-        std::shared_ptr<Event> delEvent = eventQueue.top();
+        Event* delEvent = eventQueue.top();
         eventQueue.pop();
-        delEvent.reset();
+        delEvent = NULL;
     }
 }
 
@@ -21,10 +21,9 @@ bool Simulator::advance(int time)
 
 {
     currTime += time;
-
     while(eventQueue.top()->getTime() <= currTime) {
 
-        std::shared_ptr<Event> nextEvent = eventQueue.top();
+        Event* nextEvent = eventQueue.top();
         eventQueue.pop();
         nextEvent->processEvent();
 
@@ -32,13 +31,13 @@ bool Simulator::advance(int time)
         {
             return false;
         }
-        nextEvent.reset();
+        nextEvent = NULL;
     }
 
     return currTime < SIMMING;
 
 }
 
-void Simulator::scheduleEvent(std::shared_ptr<Event> newEvent) {
+void Simulator::scheduleEvent(Event* newEvent) {
     eventQueue.push(newEvent);
 }

@@ -17,13 +17,13 @@ class Simulator {
 public:
     Simulator () : eventQueue(), currTime(0) { }
     ~Simulator();
-    void scheduleEvent (std::shared_ptr<Event> newEvent);
+    void scheduleEvent (Event * newEvent);
     int getTime() const { return currTime; }
     bool advance(int time);
 
 private:
     int currTime;
-    std::priority_queue<std::shared_ptr<Event>, std::vector<std::shared_ptr<Event>>, EventComparison> eventQueue;
+    std::priority_queue<Event*, std::vector<Event*>, EventComparison> eventQueue;
 };
 
 #endif //DT060G_SIMULATOR_H

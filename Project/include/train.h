@@ -42,6 +42,7 @@ public:
     std::string getToStation(){return toStation;}
     int getDepTime(){return departureTime;}
     int getArrTime(){return arrivalTime;}
+    State getState(){return state;}
 };
 
 #endif //DT060G_TRAIN_H

@@ -100,6 +100,7 @@ void SimulationProgram::runSubMenu() {
                 std::cout << "Change end time" << std::endl;
                 break;
             case 3:
+                scheduleEvents();
                 run();
                 break;
             case 0:
@@ -242,10 +243,12 @@ void SimulationProgram::populateTrain() {
         ss >> afromStation;
         ss >> atoStation;
         ss >> tmpdepartureTime;
-        tmpdepartureTime.erase(remove(tmpdepartureTime.begin(), tmpdepartureTime.end(), ':'), tmpdepartureTime.end());
+        tmpdepartureTime.erase(remove(tmpdepartureTime.begin(),
+                tmpdepartureTime.end(), ':'), tmpdepartureTime.end());
         adepartureTime = std::stoi(tmpdepartureTime);
         ss >> tmparrivalTime;
-        tmparrivalTime.erase(remove(tmparrivalTime.begin(), tmparrivalTime.end(), ':'), tmparrivalTime.end());
+        tmparrivalTime.erase(remove(tmparrivalTime.begin(),
+                tmparrivalTime.end(), ':'), tmparrivalTime.end());
         aarrivalTime = std::stoi(tmparrivalTime);
         ss >> amaxSpeed;
         while (ss >> tmpInt){
@@ -300,8 +303,9 @@ void SimulationProgram::printStatistics() {
         std::cout << testStation[k]->getStationname() << " = " ;
         std::cout <<testStation[k]->getvecSize() << std::endl;
     }
-    for (int i=0; i<testTrain.size(); i++){
-        std::cout << "Time " <<testTrain[i]->getDepTime() << std::endl;
+    for (int k=0; k<testTrain.size(); k++){
+        std::cout << testTrain[k]->getDepTime() << std::endl;
+        std::cout << "State: " << testTrain[k]->getState() <<std::endl;
     }
 }
 
@@ -456,22 +460,28 @@ void SimulationProgram::vehicleMenu() {
 }
 
 void SimulationProgram::testMenu() {
-    tryBuild(2);
+    std::cout << "Dedicated to testing functions" << std::endl;
+
+    tryBuild(5);
+
+    /*
     std::vector<int> tmpVec;
-    std::string tmpName;
+    std::string tmpFrom, tmpTo;
     int tmpPull=9;
 
     for (int i=0; i<testTrain.size(); i++){
         tmpVec = testTrain[tmpPull]->getLogicalVehicles();
-        tmpName = testTrain[tmpPull]->getFromStation();
+        tmpFrom = testTrain[tmpPull]->getFromStation();
+        tmpTo = testTrain[tmpPull]->getToStation();
     }
     std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
-    std::cout << "Dedicated to testing functions" << std::endl;
+
+
     for (int i=0; i<testStation.size(); i++){
-        if (tmpName == testStation[i]->getStationname()){
+        if (tmpFrom == testStation[i]->getStationname()){
             std::cout << "Hittade station" << std::endl;
             for (int p=0; p<tmpVec.size(); p++) {
-                if (tmpName == testStation[i]->getStationname())
+                if (tmpFrom == testStation[i]->getStationname())
                 tmpVehicle.push_back(testStation[i]->outgoingVehicle(tmpVec[p]));
             }
             break;
@@ -479,13 +489,16 @@ void SimulationProgram::testMenu() {
     }
 
     for (int i=0; i<testTrain.size(); i++) {
-        if (tmpName == testTrain[i]->getFromStation()) {
+        if (tmpFrom == testTrain[i]->getFromStation() && tmpTo == testTrain[i]->getToStation()) {
             testTrain[i]->assembleVehicle(tmpVehicle);
             std::cout << "Deptime: " << testTrain[i]->getDepTime() << std::endl;
+            std::cout << "FROM: " << testTrain[i]->getFromStation() << std::endl;
+            std::cout << "TO: " << testTrain[i]->getToStation() << std::endl;
+            std::cout << "ID: " << testTrain[i]->getID() << std::endl;
             break;
         }
     }
-
+     */
 }
 
 /**
@@ -501,7 +514,14 @@ void SimulationProgram::testMenu() {
     */
 
 void SimulationProgram::scheduleEvents() {
-
+    for (int i=0; i<testTrain.size(); i++) {
+        std::cout << "Test" << std::endl;
+        int depTime = testTrain[i]->getDepTime() - BUILDTIME; //build should happen 30 minutes before departure
+        int ID = testTrain[i]->getID();
+        std::cout << "Time: " << depTime << std::endl;
+        std::cout << "ID: " << ID << std::endl;
+        simulation->scheduleEvent(new BuildTrain(simulation,this,depTime,1));
+    }
 }
 
 bool SimulationProgram::tryBuild(int trainId) {

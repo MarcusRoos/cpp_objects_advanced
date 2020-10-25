@@ -8,6 +8,7 @@
 #define DT060G_EVENTS_H
 #include <memory>
 #include "constants.h"
+#include "train.h"
 
 // Forward declarations
 class Simulator;
@@ -30,7 +31,7 @@ protected:
 
 class EventComparison {
 public:
-    bool operator() (std::shared_ptr<Event> left, std::shared_ptr<Event> right) {
+    bool operator() (Event * left, Event * right) {
         return left->getTime() > right->getTime();
     }
 };
@@ -39,85 +40,85 @@ public:
 
 class BuildTrain : public Event {
 public:
-    BuildTrain (std::shared_ptr<Simulator> sim, std::shared_ptr<SimulationProgram> simmer, int time, int trainId)
+    BuildTrain (Simulator *sim, SimulationProgram *simmer, int time, int trainId)
             : Event(time),theSim(sim),simmer(simmer),trainId(trainId) { }
 
     virtual void processEvent();
 
 protected:
     int trainId;
-    std::shared_ptr<Simulator> theSim;
-    std::shared_ptr<SimulationProgram> simmer;
+    Simulator* theSim;
+    SimulationProgram* simmer;
 };
 
 class ReadyTrain : public Event {
 public:
-    ReadyTrain (std::shared_ptr<Simulator> sim, std::shared_ptr<SimulationProgram> simmer, int time, int trainId)
+    ReadyTrain (Simulator *sim, SimulationProgram *simmer, int time, int trainId)
             : Event(time),theSim(sim),simmer(simmer),trainId(trainId) { }
 
     virtual void processEvent();
 
 protected:
     int trainId;
-    std::shared_ptr<Simulator> theSim;
-    std::shared_ptr<SimulationProgram> simmer;
+    Simulator* theSim;
+    SimulationProgram* simmer;
 };
 
 
 
 class LeaveTrain : public Event {
 public:
-    LeaveTrain(std::shared_ptr<Simulator> sim, std::shared_ptr<SimulationProgram> simmer, int time, int trainId )
+    LeaveTrain(Simulator *sim, SimulationProgram *simmer, int time, int trainId)
             :Event(time),theSim(sim),simmer(simmer),trainId(trainId) { }
 
     virtual void processEvent();
 
 protected:
     int trainId;
-    std::shared_ptr<Simulator> theSim;
-    std::shared_ptr<SimulationProgram> simmer;
+    Simulator* theSim;
+    SimulationProgram* simmer;
 };
 
 
 
 class ArriveTrain : public Event {
 public:
-    ArriveTrain(std::shared_ptr<Simulator> sim, std::shared_ptr<SimulationProgram> simmer, int time, int trainId )
+    ArriveTrain(Simulator *sim, SimulationProgram *simmer, int time, int trainId)
             :Event(time),theSim(sim),simmer(simmer),trainId(trainId) { }
 
     virtual void processEvent();
 
 protected:
     int trainId;
-    std::shared_ptr<Simulator> theSim;
-    std::shared_ptr<SimulationProgram> simmer;
+    Simulator* theSim;
+    SimulationProgram* simmer;
 };
 
 
 class FinishTrain : public Event {
 public:
-    FinishTrain (std::shared_ptr<Simulator> sim, std::shared_ptr<SimulationProgram> simmer, int time, int trainId)
+    FinishTrain (Simulator *sim, SimulationProgram *simmer, int time, int trainId)
             :Event(time),theSim(sim),simmer(simmer),trainId(trainId) { }
 
     virtual void processEvent();
 
 protected:
     int trainId;
-    std::shared_ptr<Simulator> theSim;
-    std::shared_ptr<SimulationProgram> simmer;
+    Simulator* theSim;
+    SimulationProgram* simmer;
 };
 
 
 class EndTrain : public Event {
 public:
-    EndTrain (std::shared_ptr<Simulator> sim, std::shared_ptr<SimulationProgram> simmer, int time)
+    EndTrain (Simulator *sim, SimulationProgram *simmer, int time, int trainId)
             : Event(time),theSim(sim),simmer(simmer) { }
 
     virtual void processEvent();
 
 protected:
-    std::shared_ptr<Simulator> theSim;
-    std::shared_ptr<SimulationProgram> simmer;
+    Simulator* theSim;
+    SimulationProgram* simmer;
 };
 
 #endif //DT060G_EVENTS_H

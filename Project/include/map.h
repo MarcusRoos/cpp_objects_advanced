@@ -24,6 +24,9 @@ public:
     ~Map() = default;
     Map(std::string aDepstat, std::string adestStat, int aDist);
     void printMap();
+    std::string getDepstat(){return depStat;}
+    std::string getDestStat(){return destStat;}
+    int getDistance(){return distance;}
 };
 
 #endif //DT060G_MAP_H

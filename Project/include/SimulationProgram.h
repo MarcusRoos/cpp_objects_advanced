@@ -23,19 +23,21 @@
 #include <map>
 #include <algorithm>
 
+class Simulator;
+
 /**
  Class SimulationProgram
  */
+
 class SimulationProgram {
 private:
     Menu menu;
-    std::map<int, std::shared_ptr<Train>> trains;
     std::vector<std::shared_ptr<Vehicle>> testVehicle;
     std::vector<std::shared_ptr<Station>> testStation;
     std::vector<std::shared_ptr<Train>> testTrain;
     std::vector<std::shared_ptr<Map>> testMap;
-    std::shared_ptr<Simulator> theSim;
     std::unordered_map<int, std::shared_ptr<Map>> map;
+    Simulator* simulation;
 public:
     SimulationProgram();
     void runSubMenu();
