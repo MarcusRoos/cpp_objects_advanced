@@ -28,13 +28,9 @@ void Station::printStation(int aType) {
 std::shared_ptr<Vehicle> Station::outgoingVehicle(int atype) {
     for (int i=0; i<stationVehicles.size(); i++){
         if (stationVehicles[i]->getType() == atype){
-            std::cout << "Found!" << std::endl;
+            std::cout << "Found!" << stationVehicles[i]->getType() <<std::endl;
             return stationVehicles[i];
         }
     }
     return 0;
-}
-
-void Station::manipulateVehicleTest() {
-    stationName = stationName + "b";
 }

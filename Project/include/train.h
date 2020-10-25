@@ -33,10 +33,7 @@ public:
     Train();
     ~Train() = default;;
     Train(int aID, std::string aFrom, std::string aTo, int aDtime, int aAtime, double aSpeed, std::vector<int> aLogicalVehicles);
-    bool assembleVehicle();
-    void trainTester();
-    std::vector<int> getLogicalVehicles();
-    void printTest();
+    bool assembleVehicle(std::vector<std::shared_ptr<Station>> aStation);
     void MegaTest();
     int sizeVehicle(){return trainVehicles.size();}
     int getID(){return trainId;}
@@ -48,6 +45,7 @@ public:
     void setState( State aState ){state = aState;}
     void delay(int time){arrivalTime+=time;departureTime+=time;}
     void setDelayed(bool nDelayed){delayed = nDelayed;}
+    double getSpeed(){return maxSpeed;}
     bool getDelayed(){return delayed;}
 };
 

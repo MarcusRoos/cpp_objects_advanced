@@ -37,9 +37,9 @@ private:
     std::vector<std::shared_ptr<Train>> testTrain;
     std::vector<std::shared_ptr<Map>> testMap;
     Simulator* simulation;
-    int delayedTrips;
-    int successTrips;
-    int totalLateMins;
+    int amountDelayed;
+    int amountSuccess;
+    int totalLate;
 public:
     SimulationProgram(Simulator* simulation);
     void runSubMenu();

@@ -29,7 +29,6 @@ public:
     void printStation(int aType);
     int getvecSize(){return stationVehicles.size();}
     std::shared_ptr<Vehicle> outgoingVehicle(int atype);
-    void manipulateVehicleTest();
 };
 
 #endif //DT060G_STATION_H

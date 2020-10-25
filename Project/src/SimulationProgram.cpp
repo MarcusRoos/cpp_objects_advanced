@@ -19,7 +19,7 @@ The run function, this function will be called in the main program, from here a
 */
 
 SimulationProgram::SimulationProgram(Simulator* simulation)
-        : simulation(simulation), delayedTrips(0), successTrips(0), totalLateMins(0){
+        : simulation(simulation), amountDelayed(0), amountSuccess(0), totalLate(0){
     menu.setTitle("**** Class test menu ****");
     menu.addItem("1. Change interval [00:10]", true);
     menu.addItem("2. Run next interval", true);
@@ -526,39 +526,37 @@ void SimulationProgram::scheduleEvents() {
 }
 
 bool SimulationProgram::tryBuild(int trainId) {
+    int tmpIdx=0;
     std::shared_ptr<Train> tmpTrain;
     for (int i=0; i<testTrain.size(); i++){
         if (trainId == testTrain[i]->getID()){
             tmpTrain = testTrain[i];
+            tmpIdx = i;
             break;
         }
     }
 
     std::string tmpTo, tmpFrom;
     int tmpDistance=0;
-    if (tmpTrain && tmpTrain->assembleVehicle())
-    {
-        tmpFrom = testTrain[trainId-1]->getFromStation();
-        tmpTo = testTrain[trainId-1]->getToStation();
+    if (tmpTrain && tmpTrain->assembleVehicle(testStation)){
+        tmpFrom = testTrain[tmpIdx]->getFromStation();
+        tmpTo = testTrain[tmpIdx]->getToStation();
         std::cout << "Started building train ID " << trainId << " at station "
-        << testTrain[trainId-1]->getFromStation() << " with destination to "
-        << testTrain[trainId-1]->getToStation() << std::endl;
+        << testTrain[tmpIdx]->getFromStation() << " with destination to "
+        << testTrain[tmpIdx]->getToStation() << std::endl;
         for (int i=0; i<testMap.size(); i++){
 
         }
         std::cout << "This route got a distance of: " << tmpDistance << std::endl;
 
-        //set state
         tmpTrain->setState(ASSEMBLED);
         return true;
     }
     std::cout << " Train " << trainId << " couldn't be built at station "
-    << testTrain[trainId-1]->getFromStation();
+    << testTrain[tmpIdx]->getFromStation();
 
-    testTrain[trainId-1]->delay(DELAYTIME);
+    testTrain[tmpIdx]->delay(DELAYTIME);
 
-
-    //set train to late
     if ( ! tmpTrain->getDelayed()){
         tmpTrain->setDelayed(true);
     }
