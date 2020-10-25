@@ -34,6 +34,7 @@ SimulationProgram::SimulationProgram(Simulator* simulation)
     populateStation();
     populateMap();
     populateTrain();
+    scheduleEvents();
 }
 
 void SimulationProgram::run() {
@@ -49,7 +50,7 @@ void SimulationProgram::run() {
             case 1:
                 break;
             case 2:
-                std::cout << "Run next interval. Current time [00:40 VAR]" <<std::endl;
+                simulation->advance(TICK);
                 break;
             case 3:
                 std::cout << "Next event" <<std::endl;
@@ -102,7 +103,6 @@ void SimulationProgram::runSubMenu() {
                 std::cout << "Change end time" << std::endl;
                 break;
             case 3:
-                scheduleEvents();
                 run();
                 break;
             case 0:
@@ -263,7 +263,6 @@ void SimulationProgram::populateTrain() {
                 new Train(tmpID, afromStation, atoStation, adepartureTime, aarrivalTime, amaxSpeed, amountVehicles)));
         amountVehicles.clear();
     }
-    std::sort(testTrain.begin(), testTrain.end(), sortByName);
 }
 
 
@@ -516,18 +515,38 @@ void SimulationProgram::testMenu() {
     */
 
 void SimulationProgram::scheduleEvents() {
-    for (int i=0; i<testTrain.size(); i++) {
-        std::cout << "Test" << std::endl;
-        int depTime = testTrain[i]->getDepTime() - BUILDTIME;
-        int ID = testTrain[i]->getID();
-        std::cout << "Time: " << depTime << std::endl;
-        std::cout << "ID: " << ID << std::endl;
+    std::vector<std::shared_ptr<Train>> tmpTrain;
+    tmpTrain = testTrain;
+    std::sort(tmpTrain.begin(), tmpTrain.end(), sortByName);
+    for (int i=0; i<tmpTrain.size(); i++) {
+        int depTime = tmpTrain[i]->getDepTime() - BUILDTIME;
+        int ID = tmpTrain[i]->getID();
         simulation->scheduleEvent(new BuildTrain(simulation,this,depTime,ID));
     }
 }
 
 bool SimulationProgram::tryBuild(int trainId) {
-    std::cout << "Try build" << std::endl;
+    std::map<int, Train*> trains;
+    Train* tmpTrain = trains.find(trainId)->second;
+    if (tmpTrain && tmpTrain->assembleVehicle())
+    {
+        std::cout << "time " << simulation->getTime() << ": Train " << trainId << " started building at station " << testTrain[trainId-1]->getFromStation() << " To " << testTrain[trainId-1]->getToStation() << std::endl ;
+
+        //set state
+        tmpTrain->setState(ASSEMBLED);
+        return true;
+    }
+    std::cout << std::endl << std::endl << "time " << simulation->getTime() << ": Train " << trainId << " could not finish build at station " << testTrain[trainId-1]->getFromStation();
+    std::cout << std::endl << "Trying again in " << DELAYTIME << " minutes";
+
+    testTrain[trainId-1]->delay(DELAYTIME);
+
+
+    //set train to late
+    if ( ! tmpTrain->getDelayed()){
+        tmpTrain->setDelayed(true);
+    }
+    std::cout << "trainID: " << trainId << std::endl;
     return false;
 }
 

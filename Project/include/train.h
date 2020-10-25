@@ -11,6 +11,7 @@
 #include <vector>
 #include "vehicle.h"
 #include "constants.h"
+#include "station.h"
 #include <list>
 #include <iostream>
 #include <algorithm>
@@ -24,25 +25,30 @@ protected:
     int trainId, departureTime, arrivalTime;
     std::string fromStation, toStation;
     double maxSpeed;
+    bool delayed;
     std::vector<int> logicalVehicles;
     std::vector<std::shared_ptr<Vehicle>> trainVehicles;
+    std::shared_ptr<Station> from, to;
 public:
     Train();
     ~Train() = default;;
     Train(int aID, std::string aFrom, std::string aTo, int aDtime, int aAtime, double aSpeed, std::vector<int> aLogicalVehicles);
-    void assembleVehicle(std::vector<std::shared_ptr<Vehicle>> atrainVehicles);
+    bool assembleVehicle();
     void trainTester();
     std::vector<int> getLogicalVehicles();
     void printTest();
     void MegaTest();
     int sizeVehicle(){return trainVehicles.size();}
     int getID(){return trainId;}
-    bool assembleTrain();
     std::string getFromStation(){return fromStation;}
     std::string getToStation(){return toStation;}
     int getDepTime(){return departureTime;}
     int getArrTime(){return arrivalTime;}
     State getState(){return state;}
+    void setState( State aState ){state = aState;}
+    void delay(int time){arrivalTime+=time;departureTime+=time;}
+    void setDelayed(bool nDelayed){delayed = nDelayed;}
+    bool getDelayed(){return delayed;}
 };
 
 #endif //DT060G_TRAIN_H

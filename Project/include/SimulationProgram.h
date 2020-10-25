@@ -36,7 +36,6 @@ private:
     std::vector<std::shared_ptr<Station>> testStation;
     std::vector<std::shared_ptr<Train>> testTrain;
     std::vector<std::shared_ptr<Map>> testMap;
-    std::unordered_map<int, std::shared_ptr<Map>> map;
     Simulator* simulation;
     int delayedTrips;
     int successTrips;

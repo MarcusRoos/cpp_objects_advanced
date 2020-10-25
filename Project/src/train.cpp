@@ -11,19 +11,6 @@ Train::Train() {
 
 }
 
-void Train::trainTester() {
-    std::cout << std::endl;
-    std::cout << "ID: " << trainId << std::endl;
-    std::cout << "From: " << fromStation << std::endl;
-    std::cout << "To: " << toStation << std::endl;
-    std::cout << "Dep Time: " << departureTime << std::endl;
-    std::cout << "Arr Time: " << arrivalTime << std::endl;
-    std::cout << "Speed: " << maxSpeed << std::endl;
-    for (int i=0; i<logicalVehicles.size(); i++){
-        std::cout << "Vehicle: " << logicalVehicles[i] << std::endl;
-    }
-}
-
 Train::Train(int aID, std::string aFrom, std::string aTo, int aDtime,
         int aAtime, double aSpeed, std::vector<int> aLogicalVehicles) {
     trainId = aID;
@@ -34,12 +21,12 @@ Train::Train(int aID, std::string aFrom, std::string aTo, int aDtime,
     maxSpeed = aSpeed;
     logicalVehicles = std::move(aLogicalVehicles);
     state = UNASSMEBLED;
+    delayed = true;
 }
 
-void
-Train::assembleVehicle(std::vector<std::shared_ptr<Vehicle>> atrainVehicles) {
-    trainVehicles = std::move(atrainVehicles);
-    state = ASSEMBLED;
+
+bool Train::assembleVehicle() {
+    return true;
 }
 
 void Train::printTest() {
@@ -63,8 +50,4 @@ void Train::MegaTest(){
         std::cout << "Type: " << trainVehicles[i]->getType()<<std::endl;
 
     }
-}
-
-bool Train::assembleTrain() {
-    return false;
 }
