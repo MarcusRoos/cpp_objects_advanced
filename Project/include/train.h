@@ -13,6 +13,7 @@
 #include "constants.h"
 #include <list>
 #include <iostream>
+#include <algorithm>
 /**
  Class Train
 
@@ -32,10 +33,14 @@ public:
     void assembleVehicle(std::vector<std::shared_ptr<Vehicle>> atrainVehicles);
     void trainTester();
     std::vector<int> getLogicalVehicles();
-    std::string getDepname(){return fromStation;}
     void printTest();
     void MegaTest();
-    int sizeVehicle(){return trainVehicles.size();};
+    int sizeVehicle(){return trainVehicles.size();}
+    int getID(){return trainId;}
+    std::string getFromStation(){return fromStation;}
+    std::string getToStation(){return toStation;}
+    std::string getDepTime(){return departureTime;}
+    std::string getArrTime(){return arrivalTime;}
 };
 
 #endif //DT060G_TRAIN_H

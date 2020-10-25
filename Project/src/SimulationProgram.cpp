@@ -254,7 +254,10 @@ void SimulationProgram::populateTrain() {
                 new Train(tmpID, afromStation, atoStation, adepartureTime, aarrivalTime, amaxSpeed, amountVehicles)));
         amountVehicles.clear();
     }
+
 }
+
+
 
 void SimulationProgram::runLogmenu() {
     bool loop=true;
@@ -288,10 +291,14 @@ void SimulationProgram::runLogmenu() {
 }
 
 void SimulationProgram::printStatistics() {
+    std::sort(testTrain.begin(), testTrain.end(), sortByName);
     std::cout << "Number of vehicles at start of simulation:" << std::endl;
     for (int k=0; k<testStation.size(); k++){
         std::cout << testStation[k]->getStationname() << " = " ;
         std::cout <<testStation[k]->getvecSize() << std::endl;
+    }
+    for (int i=0; i<testTrain.size(); i++){
+        std::cout << testTrain[i]->getDepTime() << std::endl;
     }
 }
 
@@ -446,14 +453,14 @@ void SimulationProgram::vehicleMenu() {
 }
 
 void SimulationProgram::testMenu() {
-
+    tryBuild(2);
     std::vector<int> tmpVec;
     std::string tmpName;
     int tmpPull=9;
-    
+
     for (int i=0; i<testTrain.size(); i++){
         tmpVec = testTrain[tmpPull]->getLogicalVehicles();
-        tmpName = testTrain[tmpPull]->getDepname();
+        tmpName = testTrain[tmpPull]->getFromStation();
     }
     std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
     std::cout << "Dedicated to testing functions" << std::endl;
@@ -469,8 +476,9 @@ void SimulationProgram::testMenu() {
     }
 
     for (int i=0; i<testTrain.size(); i++) {
-        if (tmpName == testTrain[i]->getDepname()) {
+        if (tmpName == testTrain[i]->getFromStation()) {
             testTrain[i]->assembleVehicle(tmpVehicle);
+            std::cout << "Deptime: " << testTrain[i]->getDepTime() << std::endl;
             break;
         }
     }
@@ -488,3 +496,42 @@ void SimulationProgram::testMenu() {
     }
 
     */
+
+void SimulationProgram::scheduleEvents() {
+        std::cout << "Schedule Events" << std::endl;
+}
+
+bool SimulationProgram::tryBuild(int trainId) {
+    std::cout << "Try build" << std::endl;
+    return false;
+}
+
+void SimulationProgram::readyTrain(int trainId) {
+    std::cout << "ready train" << std::endl;
+}
+
+int SimulationProgram::dispatchTrain(int trainId) {
+    std::cout << "dispatch train" << std::endl;
+    return 0;
+}
+
+void SimulationProgram::arriveTrain(int trainId) {
+    std::cout << "Arrive train " << std::endl;
+}
+
+void SimulationProgram::stripTrain(int trainId) {
+    std::cout << " Strip train" << std::endl;
+}
+
+void SimulationProgram::closeTracks() {
+    std::cout << " Close tracks" << std::endl;
+}
+
+bool SimulationProgram::sortByName(const std::shared_ptr<Train> &a,
+                                   const std::shared_ptr<Train> &b) {
+    return a->getDepTime() < b->getDepTime();
+}
+
+
+
+
