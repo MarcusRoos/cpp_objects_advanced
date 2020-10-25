@@ -254,7 +254,7 @@ void SimulationProgram::populateTrain() {
                 new Train(tmpID, afromStation, atoStation, adepartureTime, aarrivalTime, amaxSpeed, amountVehicles)));
         amountVehicles.clear();
     }
-
+    std::sort(testTrain.begin(), testTrain.end(), sortByName);
 }
 
 
@@ -291,14 +291,13 @@ void SimulationProgram::runLogmenu() {
 }
 
 void SimulationProgram::printStatistics() {
-    std::sort(testTrain.begin(), testTrain.end(), sortByName);
     std::cout << "Number of vehicles at start of simulation:" << std::endl;
     for (int k=0; k<testStation.size(); k++){
         std::cout << testStation[k]->getStationname() << " = " ;
         std::cout <<testStation[k]->getvecSize() << std::endl;
     }
     for (int i=0; i<testTrain.size(); i++){
-        std::cout << testTrain[i]->getDepTime() << std::endl;
+        std::cout << "ID" <<testTrain[i]->getID() << std::endl;
     }
 }
 
@@ -523,7 +522,7 @@ void SimulationProgram::stripTrain(int trainId) {
     std::cout << " Strip train" << std::endl;
 }
 
-void SimulationProgram::closeTracks() {
+void SimulationProgram::disassembleTrain() {
     std::cout << " Close tracks" << std::endl;
 }
 

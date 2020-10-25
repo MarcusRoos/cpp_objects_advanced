@@ -13,9 +13,15 @@
 #include "map.h"
 #include "Management.h"
 #include "constants.h"
+#include "Events.h"
+#include "Simulator.h"
+#include <unordered_map>
 #include <fstream>
 #include <vector>
 #include <memory>
+#include <set>
+#include <map>
+#include <algorithm>
 
 /**
  Class SimulationProgram
@@ -23,10 +29,13 @@
 class SimulationProgram {
 private:
     Menu menu;
+    std::map<int, std::shared_ptr<Train>> trains;
     std::vector<std::shared_ptr<Vehicle>> testVehicle;
     std::vector<std::shared_ptr<Station>> testStation;
     std::vector<std::shared_ptr<Train>> testTrain;
     std::vector<std::shared_ptr<Map>> testMap;
+    std::shared_ptr<Simulator> theSim;
+    std::unordered_map<int, std::shared_ptr<Map>> map;
 public:
     SimulationProgram();
     void runSubMenu();
@@ -41,6 +50,14 @@ public:
     void stationMenu();
     void trainMenu();
     void testMenu();
+    void scheduleEvents();
+    bool tryBuild(int trainId);
+    void readyTrain( int trainId );
+    int dispatchTrain( int trainId );
+    void arriveTrain( int trainId );
+    void stripTrain( int trainId );
+    void disassembleTrain();
+    static bool sortByName( const std::shared_ptr<Train>& d1, const std::shared_ptr<Train>& d2 );
 };
 
 #endif //DT060G_SIMULATIONPROGRAM_H
