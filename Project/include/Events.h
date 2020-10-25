@@ -41,7 +41,7 @@ public:
 class BuildTrain : public Event {
 public:
     BuildTrain (Simulator *sim, SimulationProgram *simmer, int time, int trainId)
-            : Event(time),theSim(sim),simmer(simmer),trainId(trainId) { }
+            : Event(time),theSim(sim),simmer(simmer),trainId(trainId) {}
 
     virtual void processEvent();
 

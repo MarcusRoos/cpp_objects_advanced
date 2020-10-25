@@ -38,8 +38,11 @@ private:
     std::vector<std::shared_ptr<Map>> testMap;
     std::unordered_map<int, std::shared_ptr<Map>> map;
     Simulator* simulation;
+    int delayedTrips;
+    int successTrips;
+    int totalLateMins;
 public:
-    SimulationProgram();
+    SimulationProgram(Simulator* simulation);
     void runSubMenu();
     void run();
     void runLogmenu();

@@ -17,6 +17,25 @@ The run function, this function will be called in the main program, from here a
  as well as the exit option,
  once a queue has been created the rest of the options will open up.
 */
+
+SimulationProgram::SimulationProgram(Simulator* simulation)
+        : simulation(simulation), delayedTrips(0), successTrips(0), totalLateMins(0){
+    menu.setTitle("**** Class test menu ****");
+    menu.addItem("1. Change interval [00:10]", true);
+    menu.addItem("2. Run next interval", true);
+    menu.addItem("3. Next event", true);
+    menu.addItem("4. Finish (Complete simulation)", true);
+    menu.addItem("5. Statistics menu", true);
+    menu.addItem("6. Train menu", true);
+    menu.addItem("7. Station menu", true);
+    menu.addItem("8. Vehicle menu", true);
+    menu.addItem("9. Tester.", true);
+    menu.addItem("0. Return", true);
+    populateStation();
+    populateMap();
+    populateTrain();
+}
+
 void SimulationProgram::run() {
     bool again = true;
     do
@@ -56,23 +75,6 @@ void SimulationProgram::run() {
                 break;
         }
     }while(again);
-}
-
-SimulationProgram::SimulationProgram() {
-    menu.setTitle("**** Class test menu ****");
-    menu.addItem("1. Change interval [00:10]", true);
-    menu.addItem("2. Run next interval", true);
-    menu.addItem("3. Next event", true);
-    menu.addItem("4. Finish (Complete simulation)", true);
-    menu.addItem("5. Statistics menu", true);
-    menu.addItem("6. Train menu", true);
-    menu.addItem("7. Station menu", true);
-    menu.addItem("8. Vehicle menu", true);
-    menu.addItem("9. Tester.", true);
-    menu.addItem("0. Return", true);
-    populateStation();
-    populateMap();
-    populateTrain();
 }
 
 void SimulationProgram::runSubMenu() {
@@ -516,11 +518,11 @@ void SimulationProgram::testMenu() {
 void SimulationProgram::scheduleEvents() {
     for (int i=0; i<testTrain.size(); i++) {
         std::cout << "Test" << std::endl;
-        int depTime = testTrain[i]->getDepTime() - BUILDTIME; //build should happen 30 minutes before departure
+        int depTime = testTrain[i]->getDepTime() - BUILDTIME;
         int ID = testTrain[i]->getID();
         std::cout << "Time: " << depTime << std::endl;
         std::cout << "ID: " << ID << std::endl;
-        simulation->scheduleEvent(new BuildTrain(simulation,this,depTime,1));
+        simulation->scheduleEvent(new BuildTrain(simulation,this,depTime,ID));
     }
 }
 
