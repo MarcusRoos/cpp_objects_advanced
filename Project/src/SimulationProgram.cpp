@@ -568,7 +568,7 @@ bool SimulationProgram::tryBuild(int trainId) {
 }
 
 void SimulationProgram::EndTrain(int trainId) {
-    std::cout << "Trying to disassemble..." << std::endl;
+    std::cout << "Trying to disassemble... " << trainId <<"....."<< std::endl;
     std::shared_ptr<Train> tmpTrain;
     for (int i=0; i<testTrain.size(); i++){
         if (trainId == testTrain[i]->getID()){
