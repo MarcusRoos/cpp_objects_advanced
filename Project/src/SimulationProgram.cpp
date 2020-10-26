@@ -20,17 +20,7 @@ The run function, this function will be called in the main program, from here a
 
 SimulationProgram::SimulationProgram(Simulator* simulation)
         : simulation(simulation), amountDelayed(0), amountSuccess(0), totalLate(0){
-    menu.setTitle("**** Class test menu ****");
-    menu.addItem("1. Change interval [00:10]", true);
-    menu.addItem("2. Run next interval", true);
-    menu.addItem("3. Next event", true);
-    menu.addItem("4. Finish (Complete simulation)", true);
-    menu.addItem("5. Statistics menu", true);
-    menu.addItem("6. Train menu", true);
-    menu.addItem("7. Station menu", true);
-    menu.addItem("8. Vehicle menu", true);
-    menu.addItem("9. Tester.", true);
-    menu.addItem("0. Return", true);
+    TICK = 10;
     populateStation();
     populateMap();
     populateTrain();
@@ -39,15 +29,34 @@ SimulationProgram::SimulationProgram(Simulator* simulation)
 
 void SimulationProgram::run() {
     bool again = true;
-    do
-    {
-        menu.printMenuItems();
-        switch(menu.menuChoice())
+    do{
+        std::cout << "===== Train Station Program =====" << std::endl;
+        std::cout << "1. Change interval [00:" + std::to_string(TICK) +"]" << std::endl;
+        std::cout << "2. Run next interval" << std::endl;
+        std::cout << "3. Next event" << std::endl;
+        std::cout << "4. Finish (Complete simulation)" << std::endl;
+        std::cout << "5. Statistics menu" << std::endl;
+        std::cout << "6. Train menu" << std::endl;
+        std::cout << "7. Station menu" << std::endl;
+        std::cout << "8. Vehicle menu"<< std::endl;
+        std::cout << "9. Tester." << std::endl;
+        std::cout << "0. Exit" << std::endl;
+        std::cout << "Enter choice" << std::endl;
+        int choice = 0;
+        std::cin >> choice;
+        while (std::cin.fail() || choice < 0 || choice > 3) {
+            std::cout << "Wrong input.\n";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cin >> choice;
+        }
+        switch(choice)
         {
             case 0:
                 again = false;
                 break;
             case 1:
+                changeTick();
                 break;
             case 2:
                 simulation->advance(TICK);
@@ -568,7 +577,18 @@ bool SimulationProgram::tryBuild(int trainId) {
 }
 
 void SimulationProgram::readyTrain(int trainId) {
-    std::cout << "ready train" << std::endl;
+    std::shared_ptr<Train> tmpTrain;
+    for (int i=0; i<testTrain.size(); i++){
+        if (trainId == testTrain[i]->getID()){
+            tmpTrain = testTrain[i];
+            break;
+        }
+    }
+
+    //set state
+    tmpTrain->setState(READY);
+    std::cout << "Train " << trainId << " is ready for departure from " <<
+    tmpTrain->getFromStation() << " to " << tmpTrain->getToStation() << std::endl;
 }
 
 int SimulationProgram::dispatchTrain(int trainId) {
@@ -591,6 +611,46 @@ void SimulationProgram::disassembleTrain() {
 bool SimulationProgram::sortByName(const std::shared_ptr<Train> &a,
                                    const std::shared_ptr<Train> &b) {
     return a->getDepTime() < b->getDepTime();
+}
+
+void SimulationProgram::changeTick() {
+    bool loop = true;
+    while(loop) {
+        std::cout << "===== Change tick =====" << std::endl;
+        std::cout << "1. Increase interval by 5 (Maximum of 60min)" << std::endl;
+        std::cout << "2. Decrease interval by 5 (Minimum of 5min)" << std::endl;
+        std::cout << "0. Exit" << std::endl;
+        std::cout << "Enter choice" << std::endl;
+        int choice = 0;
+        std::cin >> choice;
+        while (std::cin.fail() || choice < 0 || choice > 3) {
+            std::cout << "Wrong input.\n";
+            std::cin.clear();
+            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+            std::cin >> choice;
+        }
+        switch (choice) {
+            case 1: {
+                if (TICK < 60)
+                TICK += 5;
+                std::cout << "Tick is now set to: 00:" << + TICK << std::endl;
+                break;
+            }
+            case 2: {
+                if (TICK > 5)
+                TICK -= 5;
+                if(TICK >10)
+                std::cout << "Tick is now set to: 00:" << + TICK << std::endl;
+                else
+                    std::cout << "Tick is now set to: 00:0" << + TICK << std::endl;
+                break;
+            }
+            case 0:
+            default:
+                loop = false;
+                break;
+        }
+    }
 }
 
 

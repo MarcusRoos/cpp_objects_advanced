@@ -40,6 +40,7 @@ private:
     int amountDelayed;
     int amountSuccess;
     int totalLate;
+    int TICK;
 public:
     SimulationProgram(Simulator* simulation);
     void runSubMenu();
@@ -54,6 +55,7 @@ public:
     void stationMenu();
     void trainMenu();
     void testMenu();
+    void changeTick();
     void scheduleEvents();
     bool tryBuild(int trainId);
     void readyTrain( int trainId );
