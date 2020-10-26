@@ -17,7 +17,9 @@ Train::Train(int aID, std::string aFrom, std::string aTo, int aDtime,
     fromStation = aFrom;
     toStation = aTo;
     departureTime = aDtime;
+    tmpDepartureTime = aDtime;
     arrivalTime = aAtime;
+    tmpArrivalTime = aAtime;
     maxSpeed = aSpeed;
     logicalVehicles = std::move(aLogicalVehicles);
     state = UNASSMEBLED;

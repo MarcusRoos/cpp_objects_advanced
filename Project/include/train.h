@@ -22,7 +22,7 @@
 class Train {
 protected:
     enum State state;
-    int trainId, departureTime, arrivalTime;
+    int trainId, departureTime, arrivalTime, tmpArrivalTime, tmpDepartureTime;
     std::string fromStation, toStation;
     double maxSpeed;
     bool delayed;
@@ -41,6 +41,8 @@ public:
     std::string getToStation(){return toStation;}
     int getDepTime(){return departureTime;}
     int getArrTime(){return arrivalTime;}
+    int getTmpDepTime(){return tmpDepartureTime;}
+    int getTmpArrTime(){return tmpArrivalTime;}
     State getState(){return state;}
     void setState( State aState ){state = aState;}
     void delay(int time){arrivalTime+=time;departureTime+=time;}

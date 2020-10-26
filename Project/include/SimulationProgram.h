@@ -37,7 +37,7 @@ private:
     Simulator* simulation;
     int amountDelayed;
     int amountSuccess;
-    int totalLate;
+    int totalDelay;
     int TICK;
 public:
     SimulationProgram(Simulator* simulation);

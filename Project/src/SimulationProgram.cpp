@@ -19,7 +19,7 @@ The run function, this function will be called in the main program, from here a
 */
 
 SimulationProgram::SimulationProgram(Simulator* simulation)
-        : simulation(simulation), amountDelayed(0), amountSuccess(0), totalLate(0){
+        : simulation(simulation), amountDelayed(0), amountSuccess(0), totalDelay(0){
     TICK = 10;
     populateStation();
     populateMap();
@@ -617,7 +617,25 @@ int SimulationProgram::dispatchTrain(int trainId) {
 }
 
 void SimulationProgram::arriveTrain(int trainId) {
-    std::cout << "Arrive train " << std::endl;
+    std::shared_ptr<Train> tmpTrain;
+    for (int i=0; i<testTrain.size(); i++){
+        if (trainId == testTrain[i]->getID()){
+            tmpTrain = testTrain[i];
+            break;
+        }
+    }
+    tmpTrain->setState(ARRIVED);
+    std::cout << "Train " << tmpTrain->getID() << " from station " <<
+    tmpTrain->getFromStation() << " has arrived at " <<
+    tmpTrain->getToStation() << std::endl;
+    if (tmpTrain->getDelayed()){
+        int lateMins = tmpTrain->getArrTime() - tmpTrain->getTmpArrTime();
+        amountDelayed++;
+        totalDelay += lateMins;
+        std::cout  << " But it arrived " << lateMins << " minutes behind schedule";
+    }
+    else
+        amountSuccess++;
 }
 
 void SimulationProgram::stripTrain(int trainId) {
