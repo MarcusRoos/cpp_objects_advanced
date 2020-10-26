@@ -29,5 +29,8 @@ std::shared_ptr<Vehicle> Station::outgoingVehicle(int atype) {
 }
 
 void Station::incomingVehicle(std::vector<std::shared_ptr<Vehicle>> aVehicle) {
-
+    for (int i=0; i<aVehicle.size(); i++) {
+        std::cout << "ID: " <<aVehicle[i]->getId() << "TYPE: "<<aVehicle[i]->getType() << std::endl;
+        stationVehicles.push_back(aVehicle[i]);
+    }
 }

@@ -545,19 +545,10 @@ bool SimulationProgram::tryBuild(int trainId) {
         }
     }
 
-    std::string tmpTo, tmpFrom;
-    int tmpDistance=0;
     if (tmpTrain && tmpTrain->assembleVehicle(testStation)){
-        tmpFrom = testTrain[tmpIdx]->getFromStation();
-        tmpTo = testTrain[tmpIdx]->getToStation();
         std::cout << "Started building train ID " << trainId << " at station "
         << testTrain[tmpIdx]->getFromStation() << " with destination to "
         << testTrain[tmpIdx]->getToStation() << std::endl;
-
-        for (int i=0; i<testMap.size(); i++){
-
-        }
-        std::cout << "This route got a distance of: " << tmpDistance << std::endl;
 
         tmpTrain->setState(ASSEMBLED);
         return true;
@@ -574,6 +565,23 @@ bool SimulationProgram::tryBuild(int trainId) {
         std::cout << "trainID: " << trainId << std::endl;
         return false;
     }
+}
+
+void SimulationProgram::EndTrain(int trainId) {
+    std::cout << "Trying to disassemble..." << std::endl;
+    std::shared_ptr<Train> tmpTrain;
+    for (int i=0; i<testTrain.size(); i++){
+        if (trainId == testTrain[i]->getID()){
+            tmpTrain = testTrain[i];
+            break;
+        }
+    }
+    int tmpInt = tmpTrain->getsizeVehicle();
+    tmpTrain->disassembleTrain(testStation);
+    tmpTrain->setState(FINISHED);
+    std::cout << "Unloaded " << tmpInt
+              << " vehicles from train " << tmpTrain->getID() << " at station " <<
+              tmpTrain->getToStation() << std::endl;
 }
 
 void SimulationProgram::readyTrain(int trainId) {
@@ -636,22 +644,6 @@ void SimulationProgram::arriveTrain(int trainId) {
     }
     else
         amountSuccess++;
-}
-
-void SimulationProgram::EndTrain(int trainId) {
-    std::shared_ptr<Train> tmpTrain;
-    for (int i=0; i<testTrain.size(); i++){
-        if (trainId == testTrain[i]->getID()){
-            tmpTrain = testTrain[i];
-            break;
-        }
-    }
-    tmpTrain->disassembleTrain(testStation);
-    tmpTrain->setState(FINISHED);
-    std::cout << "Unloaded " << tmpTrain->getsizeVehicle()
-    << " vehicles from train " << tmpTrain->getID() << " at station " <<
-    tmpTrain->getToStation() << std::endl;
-
 }
 
 void SimulationProgram::endSimulation() {

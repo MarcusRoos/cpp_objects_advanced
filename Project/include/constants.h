@@ -8,9 +8,9 @@
 #define DT060G_CONSTANTS_H
 
 enum State {
-    UNASSMEBLED,
-    ASSEMBLED,
+    NOTASSEMBLED,
     INCOMPLETE,
+    ASSEMBLED,
     READY,
     RUNNING,
     ARRIVED,
@@ -18,10 +18,10 @@ enum State {
 };
 
 const int DELAYTIME = 50;
-const int BUILDTIME = 20;
-const int READYTIME = 20;
+const int BUILDTIME = 30;
+const int READYTIME = 10;
 const int LEAVETIME = 10;
-const int DISASSEMBLETIME = 30;
+const int DISASSEMBLETIME = 20;
 const int SIMMING = 600;
 
 #endif //DT060G_CONSTANTS_H

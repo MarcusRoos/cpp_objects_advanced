@@ -22,7 +22,7 @@ Train::Train(int aID, std::string aFrom, std::string aTo, int aDtime,
     tmpArrivalTime = aAtime;
     maxSpeed = aSpeed;
     logicalVehicles = std::move(aLogicalVehicles);
-    state = UNASSMEBLED;
+    state = NOTASSEMBLED;
     delayed = false;
 }
 
@@ -48,15 +48,8 @@ bool Train::assembleVehicle(std::vector<std::shared_ptr<Station>> aStation) {
 
 void Train::disassembleTrain(std::vector<std::shared_ptr<Station>> aStation) {
     for (int k = 0; k < aStation.size(); k++) {
-        if (aStation[k]->getStationname() == fromStation) {
-            for (int i = 0; i < logicalVehicles.size(); i++) {
-                if ((aStation[k]->outgoingVehicle(logicalVehicles[i]) !=
-                     NULL)) {
-                    trainVehicles.push_back(
-                            aStation[k]->outgoingVehicle(
-                                    logicalVehicles[i]));
-                }
-            }
+        if (aStation[k]->getStationname() == toStation) {
+            aStation[k]->incomingVehicle(trainVehicles);
         }
     }
 }
