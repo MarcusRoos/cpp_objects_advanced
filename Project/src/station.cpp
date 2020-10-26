@@ -30,9 +30,6 @@ std::shared_ptr<Vehicle> Station::outgoingVehicle(int atype) {
     tmpVehicle = stationVehicles;
     for (int i=0; i<tmpVehicle.size(); i++){
         if (tmpVehicle[i]->getType() == atype && tmpVehicle[i] != NULL){
-            std::cout << "Found! Type " << tmpVehicle[i]->getType() <<std::endl;
-            std::cout << "Found! Seats " << tmpVehicle[i]->getSeats() <<std::endl;
-            std::cout << "Found! ID " << tmpVehicle[i]->getId() <<std::endl;
             stationVehicles.erase(stationVehicles.begin() + i);
             return tmpVehicle[i];
         }
