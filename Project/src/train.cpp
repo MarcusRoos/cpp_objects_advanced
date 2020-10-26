@@ -21,7 +21,7 @@ Train::Train(int aID, std::string aFrom, std::string aTo, int aDtime,
     maxSpeed = aSpeed;
     logicalVehicles = std::move(aLogicalVehicles);
     state = UNASSMEBLED;
-    delayed = true;
+    delayed = false;
 }
 
 

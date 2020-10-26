@@ -7,7 +7,6 @@
 #ifndef DT060G_SIMULATIONPROGRAM_H
 #define DT060G_SIMULATIONPROGRAM_H
 
-#include "Menu.h"
 #include "train.h"
 #include "station.h"
 #include "map.h"
@@ -31,7 +30,6 @@ class Simulator;
 
 class SimulationProgram {
 private:
-    Menu menu;
     std::vector<std::shared_ptr<Vehicle>> testVehicle;
     std::vector<std::shared_ptr<Station>> testStation;
     std::vector<std::shared_ptr<Train>> testTrain;

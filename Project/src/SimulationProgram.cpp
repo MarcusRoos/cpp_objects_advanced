@@ -564,10 +564,10 @@ bool SimulationProgram::tryBuild(int trainId) {
     }
     else {
         std::cout << " Train " << trainId << " couldn't be built at station "
-                  << testTrain[tmpIdx]->getFromStation();
+                  << testTrain[tmpIdx]->getFromStation() << std::endl;
 
         testTrain[tmpIdx]->delay(DELAYTIME);
-
+        tmpTrain->setState(INCOMPLETE);
         if (!tmpTrain->getDelayed()) {
             tmpTrain->setDelayed(true);
         }
@@ -584,16 +584,36 @@ void SimulationProgram::readyTrain(int trainId) {
             break;
         }
     }
-
-    //set state
     tmpTrain->setState(READY);
     std::cout << "Train " << trainId << " is ready for departure from " <<
     tmpTrain->getFromStation() << " to " << tmpTrain->getToStation() << std::endl;
 }
 
 int SimulationProgram::dispatchTrain(int trainId) {
-    std::cout << "dispatch train" << std::endl;
-    return 0;
+    std::shared_ptr<Train> tmpTrain;
+    for (int i=0; i<testTrain.size(); i++){
+        if (trainId == testTrain[i]->getID()){
+            tmpTrain = testTrain[i];
+            break;
+        }
+    }
+    int tmpLate = simulation->getTime();
+    tmpTrain->setState(RUNNING);
+    if(tmpTrain->getDelayed()) {
+        tmpLate -= tmpTrain->getDepTime();
+    }
+    std::cout << "Train " << trainId
+    << " left from station " << tmpTrain->getFromStation() << std::endl;
+    if (tmpTrain->getDelayed())
+        std::cout <<  "The train departed " << tmpLate << " minutes too late."
+        << std::endl;
+    else {
+        std::cout << "Train " << trainId
+                  << " left on time from station " << tmpTrain->getFromStation()
+                  << " and will be arriving at " << tmpTrain->getToStation() <<
+                  " on time. " << std::endl;
+    }
+    return tmpTrain->getArrTime();
 }
 
 void SimulationProgram::arriveTrain(int trainId) {
