@@ -46,11 +46,11 @@ void ArriveTrain::processEvent()
 
 void FinishTrain::processEvent()
 {
-    simmer->stripTrain(trainId);
+    simmer->EndTrain(trainId);
 
 }
 
 void EndTrain::processEvent()
 {
-    simmer->disassembleTrain();
+    simmer->endSimulation();
 }

@@ -34,8 +34,8 @@ public:
     ~Train() = default;;
     Train(int aID, std::string aFrom, std::string aTo, int aDtime, int aAtime, double aSpeed, std::vector<int> aLogicalVehicles);
     bool assembleVehicle(std::vector<std::shared_ptr<Station>> aStation);
-    void MegaTest();
-    int sizeVehicle(){return trainVehicles.size();}
+    void disassembleTrain(std::vector<std::shared_ptr<Station>> aStation);
+    int getsizeVehicle(){return trainVehicles.size();}
     int getID(){return trainId;}
     std::string getFromStation(){return fromStation;}
     std::string getToStation(){return toStation;}
@@ -43,7 +43,7 @@ public:
     int getArrTime(){return arrivalTime;}
     int getTmpDepTime(){return tmpDepartureTime;}
     int getTmpArrTime(){return tmpArrivalTime;}
-    State getState(){return state;}
+    enum State getState(){return state;}
     void setState( State aState ){state = aState;}
     void delay(int time){arrivalTime+=time;departureTime+=time;}
     void setDelayed(bool nDelayed){delayed = nDelayed;}

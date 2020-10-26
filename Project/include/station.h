@@ -26,10 +26,9 @@ public:
     Station(std::string aStationname, std::vector<std::shared_ptr<Vehicle>> aVehicle);
     ~Station() = default;;
     std::string getStationname(){return stationName;}
-    void printStation(int aType);
     int getvecSize(){return stationVehicles.size();}
     std::shared_ptr<Vehicle> outgoingVehicle(int atype);
-    void delVehicle();
+    void incomingVehicle(std::vector<std::shared_ptr<Vehicle>> aVehicle);
 };
 
 #endif //DT060G_STATION_H

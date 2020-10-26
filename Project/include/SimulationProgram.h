@@ -59,8 +59,8 @@ public:
     void readyTrain( int trainId );
     int dispatchTrain( int trainId );
     void arriveTrain( int trainId );
-    void stripTrain( int trainId );
-    void disassembleTrain();
+    void EndTrain( int trainId );
+    void endSimulation();
     static bool sortByName( const std::shared_ptr<Train>& d1, const std::shared_ptr<Train>& d2 );
 };
 

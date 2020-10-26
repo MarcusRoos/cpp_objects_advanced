@@ -638,12 +638,24 @@ void SimulationProgram::arriveTrain(int trainId) {
         amountSuccess++;
 }
 
-void SimulationProgram::stripTrain(int trainId) {
-    std::cout << " Strip train" << std::endl;
+void SimulationProgram::EndTrain(int trainId) {
+    std::shared_ptr<Train> tmpTrain;
+    for (int i=0; i<testTrain.size(); i++){
+        if (trainId == testTrain[i]->getID()){
+            tmpTrain = testTrain[i];
+            break;
+        }
+    }
+    tmpTrain->disassembleTrain(testStation);
+    tmpTrain->setState(FINISHED);
+    std::cout << "Unloaded " << tmpTrain->getsizeVehicle()
+    << " vehicles from train " << tmpTrain->getID() << " at station " <<
+    tmpTrain->getToStation() << std::endl;
+
 }
 
-void SimulationProgram::disassembleTrain() {
-    std::cout << " Close tracks" << std::endl;
+void SimulationProgram::endSimulation() {
+    std::cout << "End" << std::endl;
 }
 
 bool SimulationProgram::sortByName(const std::shared_ptr<Train> &a,

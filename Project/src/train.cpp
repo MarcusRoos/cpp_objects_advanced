@@ -43,13 +43,20 @@ bool Train::assembleVehicle(std::vector<std::shared_ptr<Station>> aStation) {
                 }
             }
     }
-    // Need train builder
     return tester;
 }
 
-void Train::MegaTest(){
-    for (int i=0; i<trainVehicles.size(); i++){
-        std::cout << "Type: " << trainVehicles[i]->getType()<<std::endl;
-
+void Train::disassembleTrain(std::vector<std::shared_ptr<Station>> aStation) {
+    for (int k = 0; k < aStation.size(); k++) {
+        if (aStation[k]->getStationname() == fromStation) {
+            for (int i = 0; i < logicalVehicles.size(); i++) {
+                if ((aStation[k]->outgoingVehicle(logicalVehicles[i]) !=
+                     NULL)) {
+                    trainVehicles.push_back(
+                            aStation[k]->outgoingVehicle(
+                                    logicalVehicles[i]));
+                }
+            }
+        }
     }
 }
