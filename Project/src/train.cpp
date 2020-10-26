@@ -48,7 +48,7 @@ bool Train::assembleVehicle(std::vector<std::shared_ptr<Station>> aStation) {
 
 void Train::disassembleTrain(std::vector<std::shared_ptr<Station>> aStation) {
     for (int k = 0; k < aStation.size(); k++) {
-        if (aStation[k]->getStationname() == toStation) {
+        if (aStation[k]->getStationname() == toStation && trainVehicles[k] != NULL) {
             aStation[k]->incomingVehicle(trainVehicles);
         }
     }
