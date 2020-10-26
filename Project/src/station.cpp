@@ -26,11 +26,20 @@ void Station::printStation(int aType) {
 }
 
 std::shared_ptr<Vehicle> Station::outgoingVehicle(int atype) {
-    for (int i=0; i<stationVehicles.size(); i++){
-        if (stationVehicles[i]->getType() == atype){
-            std::cout << "Found!" << stationVehicles[i]->getType() <<std::endl;
-            return stationVehicles[i];
+    std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
+    tmpVehicle = stationVehicles;
+    for (int i=0; i<tmpVehicle.size(); i++){
+        if (tmpVehicle[i]->getType() == atype && tmpVehicle[i] != NULL){
+            std::cout << "Found! Type " << tmpVehicle[i]->getType() <<std::endl;
+            std::cout << "Found! Seats " << tmpVehicle[i]->getSeats() <<std::endl;
+            std::cout << "Found! ID " << tmpVehicle[i]->getId() <<std::endl;
+            stationVehicles.erase(stationVehicles.begin() + i);
+            return tmpVehicle[i];
         }
     }
-    return 0;
+    return NULL;
+}
+
+void Station::delVehicle() {
+
 }

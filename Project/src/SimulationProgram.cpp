@@ -544,6 +544,9 @@ bool SimulationProgram::tryBuild(int trainId) {
         std::cout << "Started building train ID " << trainId << " at station "
         << testTrain[tmpIdx]->getFromStation() << " with destination to "
         << testTrain[tmpIdx]->getToStation() << std::endl;
+        std::cout << "This train is compromised of the types: " << std::endl;
+        testTrain[tmpIdx]->MegaTest();
+
         for (int i=0; i<testMap.size(); i++){
 
         }
