@@ -20,7 +20,7 @@ std::shared_ptr<Vehicle> Station::outgoingVehicle(int atype) {
     std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
     tmpVehicle = stationVehicles;
     for (int i=0; i<tmpVehicle.size(); i++){
-        if (tmpVehicle[i]->getType() == atype && tmpVehicle[i] != NULL){
+        if (tmpVehicle[i] != NULL && tmpVehicle[i]->getType() == atype){
             stationVehicles.erase(stationVehicles.begin() + i);
             return tmpVehicle[i];
         }

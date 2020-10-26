@@ -12,13 +12,24 @@ Simulator::~Simulator() {
     eventQueue.empty();
 }
 
-void Simulator::step(int time){
+bool Simulator::step(int time){
     currTime += time;
+
+    //only process events that are meant to happen before currentTime
     while(eventQueue.top()->getTime() <= currTime) {
-        Event* nextEvent = eventQueue.top();
+
+        Event * nextEvent = eventQueue.top();
         eventQueue.pop();
         nextEvent->processEvent();
+
+        if (eventQueue.empty())
+        {
+            return false;
+        }
+        delete nextEvent;
+
     }
+    return currTime < SIMMING;
 }
 
 void Simulator::scheduleEvent(Event* newEvent) {

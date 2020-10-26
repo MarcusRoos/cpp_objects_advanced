@@ -19,7 +19,7 @@ public:
     ~Simulator();
     void scheduleEvent (Event * newEvent);
     int getTime() const { return currTime; }
-    void step(int time);
+    bool step(int time);
 private:
     int currTime;
     std::priority_queue<Event*, std::vector<Event*>, EventComparison> eventQueue;
