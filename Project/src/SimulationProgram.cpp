@@ -59,7 +59,7 @@ void SimulationProgram::run() {
                 changeTick();
                 break;
             case 2:
-                simulation->advance(TICK);
+                simulation->step(TICK);
                 break;
             case 3:
                 std::cout << "Next event" <<std::endl;

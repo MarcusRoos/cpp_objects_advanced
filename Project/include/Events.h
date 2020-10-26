@@ -17,11 +17,9 @@ class SimulationProgram;
 class Event {
 public:
     Event (unsigned int t) : time(t) { }
-    ~Event() { }
+    virtual ~Event() { }
     virtual void processEvent()=0;
-    unsigned int getTime() const {
-        return time;
-    }
+    unsigned int getTime() const {return time;}
 
 protected:
     unsigned int time;
@@ -46,9 +44,9 @@ public:
     virtual void processEvent();
 
 protected:
-    int trainId;
     Simulator* theSim;
     SimulationProgram* simmer;
+    int trainId;
 };
 
 class ReadyTrain : public Event {
@@ -59,9 +57,9 @@ public:
     virtual void processEvent();
 
 protected:
-    int trainId;
     Simulator* theSim;
     SimulationProgram* simmer;
+    int trainId;
 };
 
 
@@ -74,9 +72,9 @@ public:
     virtual void processEvent();
 
 protected:
-    int trainId;
     Simulator* theSim;
     SimulationProgram* simmer;
+    int trainId;
 };
 
 
@@ -89,9 +87,9 @@ public:
     virtual void processEvent();
 
 protected:
-    int trainId;
     Simulator* theSim;
     SimulationProgram* simmer;
+    int trainId;
 };
 
 
@@ -103,9 +101,9 @@ public:
     virtual void processEvent();
 
 protected:
-    int trainId;
     Simulator* theSim;
     SimulationProgram* simmer;
+    int trainId;
 };
 
 

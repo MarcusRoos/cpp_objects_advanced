@@ -15,12 +15,11 @@
 
 class Simulator {
 public:
-    Simulator () : eventQueue(), currTime(0) { }
+    Simulator () : currTime (0), eventQueue() { }
     ~Simulator();
     void scheduleEvent (Event * newEvent);
     int getTime() const { return currTime; }
-    bool advance(int time);
-
+    bool step(int time);
 private:
     int currTime;
     std::priority_queue<Event*, std::vector<Event*>, EventComparison> eventQueue;

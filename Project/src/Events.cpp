@@ -13,11 +13,11 @@ void BuildTrain::processEvent()
 {
     if (simmer->tryBuild(trainId))
     {
-        time += READYTIME;
         theSim->scheduleEvent(new ReadyTrain(theSim, simmer, time, trainId));
+        time += READYTIME;
     } else {
-        time += DELAYTIME;
         theSim->scheduleEvent(new BuildTrain(theSim, simmer, time, trainId));
+        time += DELAYTIME;
     }
 
 }
@@ -25,29 +25,27 @@ void BuildTrain::processEvent()
 void ReadyTrain::processEvent()
 {
     simmer->readyTrain(trainId);
-    time += LEAVETIME;
     theSim->scheduleEvent(new LeaveTrain(theSim, simmer, time, trainId));
-
+    time += LEAVETIME;
 }
 
 void LeaveTrain::processEvent()
 {
+    theSim->scheduleEvent(new ArriveTrain(theSim, simmer, time, trainId));
     int arrTime = simmer->dispatchTrain(trainId);
     time = arrTime;
-    theSim->scheduleEvent(new ArriveTrain(theSim, simmer, time, trainId));
 }
 
 void ArriveTrain::processEvent()
 {
+    theSim->scheduleEvent(new FinishTrain(theSim, simmer, time, trainId));
     simmer->arriveTrain(trainId);
     time += DISASSEMBLETIME;
-    theSim->scheduleEvent(new FinishTrain(theSim, simmer, time, trainId));
 }
 
 void FinishTrain::processEvent()
 {
     simmer->EndTrain(trainId);
-
 }
 
 void EndTrain::processEvent()

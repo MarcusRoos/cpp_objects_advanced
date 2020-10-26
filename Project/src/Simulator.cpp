@@ -10,32 +10,19 @@
 
 
 Simulator::~Simulator() {
-    while( ! eventQueue.empty()) {
-        Event* delEvent = eventQueue.top();
-        eventQueue.pop();
-        delEvent = NULL;
-    }
+    eventQueue.empty();
 }
 
-bool Simulator::advance(int time)
-
-{
+bool Simulator::step(int time){
     currTime += time;
     while(eventQueue.top()->getTime() <= currTime) {
-
         Event* nextEvent = eventQueue.top();
         eventQueue.pop();
         nextEvent->processEvent();
-
         if (eventQueue.empty())
-        {
             return false;
-        }
-        nextEvent = NULL;
     }
-
     return currTime < SIMMING;
-
 }
 
 void Simulator::scheduleEvent(Event* newEvent) {
