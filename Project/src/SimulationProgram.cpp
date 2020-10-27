@@ -40,7 +40,7 @@ void SimulationProgram::run() {
         std::cout << "Enter choice" << std::endl;
         int choice = 0;
         std::cin >> choice;
-        while (std::cin.fail() || choice < 0 || choice > 3) {
+        while (std::cin.fail() || choice < 0 || choice > 9) {
             std::cout << "Wrong input.\n";
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -308,10 +308,7 @@ void SimulationProgram::printStatistics() {
     for (int k=0; k<testStation.size(); k++){
         std::cout << testStation[k]->getStationname() << " = " ;
         std::cout <<testStation[k]->getvecSize() << std::endl;
-    }
-    for (int k=0; k<testTrain.size(); k++){
-        std::cout << testTrain[k]->getDepTime() << std::endl;
-        std::cout << "State: " << testTrain[k]->getState() <<std::endl;
+            testStation[k]->printTypes();
     }
 }
 
@@ -541,7 +538,7 @@ bool SimulationProgram::tryBuild(int trainId) {
         }
     }
 
-    if (tmpTrain && tmpTrain->assembleVehicle(testStation)){
+    if (tmpTrain->assembleVehicle(testStation)){
         std::cout << "Started building train ID " << trainId << " at station "
                   << testTrain[tmpIdx]->getFromStation() << " with destination to "
                   << testTrain[tmpIdx]->getToStation() << std::endl;

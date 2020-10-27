@@ -21,6 +21,9 @@ std::shared_ptr<Vehicle> Station::outgoingVehicle(int atype) {
     tmpVehicle = stationVehicles;
     for (int i=0; i<tmpVehicle.size(); i++){
         if (tmpVehicle[i] != NULL && tmpVehicle[i]->getType() == atype){
+
+                std::cout << "We currently have types 2" << stationName <<std::endl;
+
             stationVehicles.erase(stationVehicles.begin() + i);
             return tmpVehicle[i];
         }
@@ -32,5 +35,11 @@ void Station::incomingVehicle(std::vector<std::shared_ptr<Vehicle>> aVehicle) {
     std::cout << "stationname: " << stationName << std::endl;
     for (int i=0; i<aVehicle.size(); i++) {
         stationVehicles.push_back(aVehicle[i]);
+    }
+}
+
+void Station::printTypes() {
+    for (int i = 0; i < stationVehicles.size(); i++) {
+        std::cout << "Types: " << stationVehicles[i]->getType() << std::endl;
     }
 }

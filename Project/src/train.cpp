@@ -31,12 +31,20 @@ bool Train::assembleVehicle(std::vector<std::shared_ptr<Station>> aStation) {
     bool tester=true;
         for (int k = 0; k < aStation.size(); k++) {
             if (aStation[k]->getStationname() == fromStation) {
+                std::cout << "logicalVehicles " << std::endl;
+                for (int j=0; j<logicalVehicles.size(); j++){
+                    std::cout << logicalVehicles[j] << ",";
+                }
                 for (int i = 0; i < logicalVehicles.size(); i++) {
                     if ((aStation[k]->outgoingVehicle(logicalVehicles[i]) !=
                          NULL)) {
                         trainVehicles.push_back(
                                 aStation[k]->outgoingVehicle(
                                         logicalVehicles[i]));
+                        std::cout << std::endl << "trainVehicles" << std::endl;
+                        for (int d=0; d<trainVehicles.size(); d++){
+                            std::cout << trainVehicles[d]->getType() << ",";
+                        }
                     }
                     else
                         tester = false;
