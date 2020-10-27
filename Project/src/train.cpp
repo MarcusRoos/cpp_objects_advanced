@@ -70,3 +70,12 @@ void Train::printTypes() {
         std::cout << trainVehicles[i]->getType() << std::endl;
     }
 }
+
+void Train::emptyVehicle(std::vector<std::shared_ptr<Station>> aStation) {
+    for (int i=0; i<aStation.size(); i++){
+        if (aStation[i]->getStationname() == fromStation){
+                aStation[i]->incomingVehicle(trainVehicles);
+        }
+    }
+    trainVehicles.clear();
+}

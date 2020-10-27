@@ -549,7 +549,7 @@ bool SimulationProgram::tryBuild(int trainId) {
     else {
         std::cout << " Train " << trainId << " couldn't be built at station "
                   << testTrain[tmpIdx]->getFromStation() << std::endl;
-
+        testTrain[tmpIdx]->emptyVehicle(testStation);
         testTrain[tmpIdx]->delay(DELAYTIME);
         tmpTrain->setState(INCOMPLETE);
         if (!tmpTrain->getDelayed()) {
@@ -560,7 +560,9 @@ bool SimulationProgram::tryBuild(int trainId) {
 }
 
 void SimulationProgram::EndTrain(int trainId) {
+    /*
     std::cout << "Trying to disassemble... " << trainId <<"....."<< std::endl;
+
     std::shared_ptr<Train> tmpTrain;
     for (int i=0; i<testTrain.size(); i++){
         if (trainId == testTrain[i]->getID()){
@@ -574,7 +576,7 @@ void SimulationProgram::EndTrain(int trainId) {
     std::cout << "Unloaded " << tmpInt
               << " vehicles from train " << tmpTrain->getID() << " at station " <<
               tmpTrain->getToStation() << std::endl;
-
+*/
 }
 
 void SimulationProgram::readyTrain(int trainId) {

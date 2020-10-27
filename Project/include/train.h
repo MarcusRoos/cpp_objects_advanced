@@ -50,6 +50,7 @@ public:
     double getSpeed(){return maxSpeed;}
     bool getDelayed(){return delayed;}
     void printTypes();
+    void emptyVehicle(std::vector<std::shared_ptr<Station>> aStation);
 };
 
 #endif //DT060G_TRAIN_H
