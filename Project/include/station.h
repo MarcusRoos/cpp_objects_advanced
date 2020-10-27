@@ -30,6 +30,7 @@ public:
     std::shared_ptr<Vehicle> outgoingVehicle(int atype);
     void incomingVehicle(std::vector<std::shared_ptr<Vehicle>> aVehicle);
     void printTypes();
+    bool testVehicle(int atype);
 };
 
 #endif //DT060G_STATION_H
