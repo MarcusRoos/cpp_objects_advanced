@@ -54,8 +54,9 @@ void SimulationProgram::run() {
             case 1:
                 changeTick();
                 break;
-            case 2:
+            case 2:{
                 simulation->step(TICK);
+                }
                 break;
             case 3:
                 std::cout << "Next event" <<std::endl;
@@ -504,18 +505,6 @@ void SimulationProgram::testMenu() {
      */
 }
 
-/**
-  bool pusher=true;
-    for (int i=0; i<testTrain.size(); i++) {
-        if (pusher) {
-            std::cout << "In the end: " << std::endl;
-            testTrain[i]->MegaTest();
-            pusher = false;
-        }
-    }
-
-    */
-
 void SimulationProgram::scheduleEvents() {
     std::vector<std::shared_ptr<Train>> tmpTrain;
     tmpTrain = testTrain;
@@ -549,8 +538,8 @@ bool SimulationProgram::tryBuild(int trainId) {
     else {
         std::cout << " Train " << trainId << " couldn't be built at station "
                   << testTrain[tmpIdx]->getFromStation() << std::endl;
-        testTrain[tmpIdx]->emptyVehicle(testStation);
-        testTrain[tmpIdx]->delay(DELAYTIME);
+        tmpTrain->emptyVehicle(testStation);
+        tmpTrain->delay(DELAYTIME);
         tmpTrain->setState(INCOMPLETE);
         if (!tmpTrain->getDelayed()) {
             tmpTrain->setDelayed(true);
