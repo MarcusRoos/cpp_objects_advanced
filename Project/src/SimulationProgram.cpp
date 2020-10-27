@@ -549,13 +549,14 @@ bool SimulationProgram::tryBuild(int trainId) {
         std::cout << "Started building train ID " << trainId << " at station "
         << testTrain[tmpIdx]->getFromStation() << " with destination to "
         << testTrain[tmpIdx]->getToStation() << std::endl;
-
+        std::cout << "TrainVehicleSize: " <<testTrain[tmpIdx]->getsizeVehicle() << std::endl;
         testTrain[tmpIdx]->setState(ASSEMBLED);
         return true;
     }
     else {
-        std::cout << " Train " << trainId << " couldn't be built at station "
+        std::cout << "At time: " << simulation->getTime()<< std::endl << " Train " << trainId << " couldn't be built at station "
                   << testTrain[tmpIdx]->getFromStation() << std::endl;
+
 
         testTrain[tmpIdx]->delay(DELAYTIME);
         testTrain[tmpIdx]->setState(INCOMPLETE);
@@ -568,6 +569,7 @@ bool SimulationProgram::tryBuild(int trainId) {
 }
 
 void SimulationProgram::EndTrain(int trainId) {
+
     std::cout << "Trying to disassemble... " << trainId <<"....."<< std::endl;
 
     std::shared_ptr<Train> tmpTrain;
@@ -599,6 +601,7 @@ void SimulationProgram::readyTrain(int trainId) {
     testTrain[tmpIdx]->setState(READY);
     std::cout << "Train " << trainId << " is ready for departure from " <<
     testTrain[tmpIdx]->getFromStation() << " to " << testTrain[tmpIdx]->getToStation() << std::endl;
+
 }
 
 int SimulationProgram::dispatchTrain(int trainId) {

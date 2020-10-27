@@ -32,6 +32,7 @@ bool Train::assembleVehicle(std::vector<std::shared_ptr<Station>> aStation) {
         for (int k = 0; k < aStation.size(); k++) {
             if (aStation[k]->getStationname() == fromStation) {
                 for (int i = 0; i < logicalVehicles.size(); i++) {
+                    std::cout <<"Type in train: " << logicalVehicles[i] << std::endl;
                     if ((aStation[k]->outgoingVehicle(logicalVehicles[i]) !=
                          NULL)) {
                         trainVehicles.push_back(
