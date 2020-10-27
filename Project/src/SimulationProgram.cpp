@@ -517,27 +517,25 @@ void SimulationProgram::scheduleEvents() {
 }
 
 bool SimulationProgram::tryBuild(int trainId) {
-    int tmpIdx=0;
     std::shared_ptr<Train> tmpTrain;
     for (int i=0; i<testTrain.size(); i++){
         if (trainId == testTrain[i]->getID()){
             tmpTrain = testTrain[i];
-            tmpIdx = i;
             break;
         }
     }
 
     if (tmpTrain->assembleVehicle(testStation)){
         std::cout << "Started building train ID " << trainId << " at station "
-                  << testTrain[tmpIdx]->getFromStation() << " with destination to "
-                  << testTrain[tmpIdx]->getToStation() << std::endl;
+                  << tmpTrain->getFromStation() << " with destination to "
+                  << tmpTrain->getToStation() << std::endl;
 
         tmpTrain->setState(ASSEMBLED);
         return true;
     }
     else {
         std::cout << " Train " << trainId << " couldn't be built at station "
-                  << testTrain[tmpIdx]->getFromStation() << std::endl;
+                  << tmpTrain->getFromStation() << std::endl;
         tmpTrain->emptyVehicle(testStation);
         tmpTrain->delay(DELAYTIME);
         tmpTrain->setState(INCOMPLETE);

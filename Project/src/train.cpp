@@ -29,33 +29,37 @@ Train::Train(int aID, std::string aFrom, std::string aTo, int aDtime,
 
 bool Train::assembleVehicle(std::vector<std::shared_ptr<Station>> aStation) {
     bool tester=true;
+    std::cout << std::endl << std::endl;
     std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
         for (int k = 0; k < aStation.size(); k++) {
             if (aStation[k]->getStationname() == fromStation) {
+
                 std::cout << "logicalVehicles " << std::endl;
-                for (int j=0; j<logicalVehicles.size(); j++){
+                for (int j = 0; j < logicalVehicles.size(); j++) {
                     std::cout << logicalVehicles[j] << ",";
                 }
-                for (int i = 0; i < logicalVehicles.size(); i++) {
-                    if (((aStation[k]->testVehicle(logicalVehicles[i])))) {
-                        trainVehicles.push_back(
-                                aStation[k]->outgoingVehicle(
-                                        logicalVehicles[i]));
-                        std::cout << std::endl << "trainVehicles" << std::endl;
+                if (trainVehicles.empty()) {
+                    for (int i = 0; i < logicalVehicles.size(); i++) {
+                        std::cout << "I am pushing " << logicalVehicles[i]
+                                  << std::endl;
+                        if (((aStation[k]->testVehicle(logicalVehicles[i])))) {
+                            trainVehicles.push_back(
+                                    aStation[k]->outgoingVehicle(
+                                            logicalVehicles[i]));
 
-
-                        for (int d=0; d<trainVehicles.size(); d++){
-                            std::cout << trainVehicles[d]->getType() << ",";
+                            std::cout << std::endl;
+                        } else {
+                            tester = false;
                         }
-                        std::cout << std::endl;
-                    }
-                    else {
-                        tester = false;
                     }
                 }
+                else
+                    tester = false;
+
             }
     }
     return tester;
+
 }
 
 void Train::disassembleTrain(std::vector<std::shared_ptr<Station>> aStation) {
