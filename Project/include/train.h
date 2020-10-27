@@ -49,6 +49,7 @@ public:
     void setDelayed(bool nDelayed){delayed = nDelayed;}
     double getSpeed(){return maxSpeed;}
     bool getDelayed(){return delayed;}
+    void printTypes();
 };
 
 #endif //DT060G_TRAIN_H

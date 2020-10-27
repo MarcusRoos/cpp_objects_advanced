@@ -32,7 +32,6 @@ bool Train::assembleVehicle(std::vector<std::shared_ptr<Station>> aStation) {
         for (int k = 0; k < aStation.size(); k++) {
             if (aStation[k]->getStationname() == fromStation) {
                 for (int i = 0; i < logicalVehicles.size(); i++) {
-                    std::cout <<"Type in train: " << logicalVehicles[i] << std::endl;
                     if ((aStation[k]->outgoingVehicle(logicalVehicles[i]) !=
                          NULL)) {
                         trainVehicles.push_back(
@@ -53,5 +52,12 @@ void Train::disassembleTrain(std::vector<std::shared_ptr<Station>> aStation) {
             aStation[k]->incomingVehicle(trainVehicles);
             trainVehicles.clear();
         }
+    }
+}
+
+void Train::printTypes() {
+    std::cout << "Train Vehicles Types: " << std::endl;
+    for (int i=0; i<trainVehicles.size(); i++){
+        std::cout << trainVehicles[i]->getType() << std::endl;
     }
 }
