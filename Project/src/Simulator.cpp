@@ -13,9 +13,9 @@ Simulator::~Simulator() {
 }
 
 bool Simulator::step(int time){
+    std::cout << "TIME: " << getTime() << std::endl;
     currTime += time;
 
-    //only process events that are meant to happen before currentTime
     while(eventQueue.top()->getTime() <= currTime) {
 
         Event * nextEvent = eventQueue.top();

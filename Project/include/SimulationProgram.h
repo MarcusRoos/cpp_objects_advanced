@@ -55,7 +55,7 @@ public:
     void testMenu();
     void changeTick();
     void scheduleEvents();
-    bool tryBuild(int trainId);
+    bool startAssemble(int trainId);
     void readyTrain( int trainId );
     int dispatchTrain( int trainId );
     void arriveTrain( int trainId );

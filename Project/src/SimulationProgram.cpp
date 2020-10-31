@@ -55,8 +55,11 @@ void SimulationProgram::run() {
                 changeTick();
                 break;
             case 2:{
+                if (simulation->getTime()<SIMMING)
                 simulation->step(TICK);
-                }
+                else
+                    std::cout << "Simulation has ended at time: " << simulation->getTime() <<std::endl;
+            }
                 break;
             case 3:
                 std::cout << "Next event" <<std::endl;
@@ -252,11 +255,11 @@ void SimulationProgram::populateTrain() {
         ss >> atoStation;
         ss >> tmpdepartureTime;
         tmpdepartureTime.erase(remove(tmpdepartureTime.begin(),
-                tmpdepartureTime.end(), ':'), tmpdepartureTime.end());
+                                      tmpdepartureTime.end(), ':'), tmpdepartureTime.end());
         adepartureTime = std::stoi(tmpdepartureTime);
         ss >> tmparrivalTime;
         tmparrivalTime.erase(remove(tmparrivalTime.begin(),
-                tmparrivalTime.end(), ':'), tmparrivalTime.end());
+                                    tmparrivalTime.end(), ':'), tmparrivalTime.end());
         aarrivalTime = std::stoi(tmparrivalTime);
         ss >> amaxSpeed;
         while (ss >> tmpInt){
@@ -309,7 +312,7 @@ void SimulationProgram::printStatistics() {
     for (int k=0; k<testStation.size(); k++){
         std::cout << testStation[k]->getStationname() << " = " ;
         std::cout <<testStation[k]->getvecSize() << std::endl;
-            testStation[k]->printTypes();
+        testStation[k]->printTypes();
     }
 }
 
@@ -417,7 +420,7 @@ void SimulationProgram::stationMenu() {
         switch (choice) {
             case 1:
                 for (int i=0; i<testStation.size(); i++)
-                std::cout << testStation[i]->getStationname() << std::endl;
+                    std::cout << testStation[i]->getStationname() << std::endl;
                 break;
             case 2:
 
@@ -466,7 +469,7 @@ void SimulationProgram::vehicleMenu() {
 void SimulationProgram::testMenu() {
     std::cout << "Dedicated to testing functions" << std::endl;
 
-    tryBuild(5);
+    startAssemble(5);
 
     /*
     std::vector<int> tmpVec;
@@ -516,7 +519,7 @@ void SimulationProgram::scheduleEvents() {
     }
 }
 
-bool SimulationProgram::tryBuild(int trainId) {
+bool SimulationProgram::startAssemble(int trainId) {
     std::shared_ptr<Train> tmpTrain;
     for (int i=0; i<testTrain.size(); i++){
         if (trainId == testTrain[i]->getID()){
@@ -526,7 +529,7 @@ bool SimulationProgram::tryBuild(int trainId) {
     }
 
     if (tmpTrain->assembleVehicle(testStation)){
-        std::cout << "Started building train ID " << trainId << " at station "
+        std::cout << "Building train ID " << trainId << " at station "
                   << tmpTrain->getFromStation() << " with destination to "
                   << tmpTrain->getToStation() << std::endl;
 
@@ -657,15 +660,15 @@ void SimulationProgram::changeTick() {
         switch (choice) {
             case 1: {
                 if (TICK < 60)
-                TICK += 5;
+                    TICK += 5;
                 std::cout << "Tick is now set to: 00:" << + TICK << std::endl;
                 break;
             }
             case 2: {
                 if (TICK > 5)
-                TICK -= 5;
+                    TICK -= 5;
                 if(TICK >10)
-                std::cout << "Tick is now set to: 00:" << + TICK << std::endl;
+                    std::cout << "Tick is now set to: 00:" << + TICK << std::endl;
                 else
                     std::cout << "Tick is now set to: 00:0" << + TICK << std::endl;
                 break;
