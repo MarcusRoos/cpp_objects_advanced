@@ -3,14 +3,14 @@
 #include "memstat.hpp"
 
 int main() {
-    auto *theSim = new Simulator;
-    auto *mainmenu = new SimulationProgram(theSim);
+    Simulator *theSim = new Simulator;
+    SimulationProgram *mainmenu = new SimulationProgram(theSim);
     mainmenu->populateStation();
     mainmenu->populateMap();
     mainmenu->populateTrain();
-    mainmenu->scheduleEvents(mainmenu);
+    mainmenu->scheduleEvents();
     mainmenu->runSubMenu();
-    delete mainmenu;
     delete theSim;
+    delete mainmenu;
     return 0;
 }

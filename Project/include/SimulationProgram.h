@@ -41,7 +41,6 @@ private:
     int TICK;
 public:
     SimulationProgram(Simulator* simulation);
-    ~SimulationProgram();
     void runSubMenu();
     void run();
     void runLogmenu();
@@ -55,8 +54,8 @@ public:
     void trainMenu();
     void testMenu();
     void changeTick();
-    void scheduleEvents(SimulationProgram *pProgram);
-    bool startAssemble(int trainId);
+    void scheduleEvents();
+    bool tryBuild(int trainId);
     void readyTrain( int trainId );
     int dispatchTrain( int trainId );
     void arriveTrain( int trainId );

@@ -12,7 +12,7 @@ Train::Train() {
 }
 
 Train::Train(int aID, std::string aFrom, std::string aTo, int aDtime,
-        int aAtime, double aSpeed, std::vector<int> aLogicalVehicles) {
+             int aAtime, double aSpeed, std::vector<int> aLogicalVehicles) {
     trainId = aID;
     fromStation = aFrom;
     toStation = aTo;
@@ -31,32 +31,32 @@ bool Train::assembleVehicle(std::vector<std::shared_ptr<Station>> aStation) {
     bool tester=true;
     std::cout << std::endl << std::endl;
     std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
-        for (int k = 0; k < aStation.size(); k++) {
-            if (aStation[k]->getStationname() == fromStation) {
+    for (int k = 0; k < aStation.size(); k++) {
+        if (aStation[k]->getStationname() == fromStation) {
 
-                std::cout << "logicalVehicles " << std::endl;
-                for (int j = 0; j < logicalVehicles.size(); j++) {
-                    std::cout << logicalVehicles[j] << ",";
-                }
-                if (trainVehicles.empty()) {
-                    for (int i = 0; i < logicalVehicles.size(); i++) {
-                        std::cout << "I am pushing " << logicalVehicles[i]
-                                  << std::endl;
-                        if (((aStation[k]->testVehicle(logicalVehicles[i])))) {
-                            trainVehicles.push_back(
-                                    aStation[k]->outgoingVehicle(
-                                            logicalVehicles[i]));
+            std::cout << "logicalVehicles " << std::endl;
+            for (int j = 0; j < logicalVehicles.size(); j++) {
+                std::cout << logicalVehicles[j] << ",";
+            }
+            if (trainVehicles.empty()) {
+                for (int i = 0; i < logicalVehicles.size(); i++) {
+                    std::cout << "I am pushing " << logicalVehicles[i]
+                              << std::endl;
+                    if (((aStation[k]->testVehicle(logicalVehicles[i])))) {
+                        trainVehicles.push_back(
+                                aStation[k]->outgoingVehicle(
+                                        logicalVehicles[i]));
 
-                            std::cout << std::endl;
-                        } else {
-                            tester = false;
-                        }
+                        std::cout << std::endl;
+                    } else {
+                        tester = false;
                     }
                 }
-                else // Här ska jag göra annorlunda om trainVehicles INTE är tom
-                    tester = false;
-
             }
+            else
+                tester = false;
+
+        }
     }
     return tester;
 
@@ -64,7 +64,7 @@ bool Train::assembleVehicle(std::vector<std::shared_ptr<Station>> aStation) {
 
 void Train::disassembleTrain(std::vector<std::shared_ptr<Station>> aStation) {
     for (int k = 0; k < aStation.size(); k++) {
-        if (aStation[k]->getStationname() == toStation && trainVehicles[k] != nullptr) {
+        if (aStation[k]->getStationname() == toStation && trainVehicles[k] != NULL) {
             aStation[k]->incomingVehicle(trainVehicles);
             trainVehicles.clear();
         }
@@ -73,12 +73,12 @@ void Train::disassembleTrain(std::vector<std::shared_ptr<Station>> aStation) {
 
 void Train::printTypes() {
 
- /*   if (state == INCOMPLETE){
+    /*   if (state == INCOMPLETE){
 
-        std::cout << trainId << std::endl;
+           std::cout << trainId << std::endl;
 
-    }
-    */
+       }
+       */
 
     if (state == ARRIVED){
 
@@ -89,11 +89,11 @@ void Train::printTypes() {
 }
 
 void Train::emptyVehicle(std::vector<std::shared_ptr<Station>> aStation) {
-  /*  for (int i=0; i<aStation.size(); i++){
-        if (aStation[i]->getStationname() == fromStation){
-                aStation[i]->incomingVehicle(trainVehicles);
-        }
-    }
-    trainVehicles.clear();
-    */
+    /*  for (int i=0; i<aStation.size(); i++){
+          if (aStation[i]->getStationname() == fromStation){
+                  aStation[i]->incomingVehicle(trainVehicles);
+          }
+      }
+      trainVehicles.clear();
+      */
 }

@@ -5,11 +5,10 @@
 //
 
 #include "SimulationProgram.h"
-#include "Prototypes.h"
 #include <iostream>
 #include <iomanip>
 #include <limits>
-
+//Verify
 /**
 The run function, this function will be called in the main program, from here a
  it will enter a switch which will call another function from the menu class.
@@ -22,15 +21,6 @@ The run function, this function will be called in the main program, from here a
 SimulationProgram::SimulationProgram(Simulator* simulation)
         : simulation(simulation), amountDelayed(0), amountSuccess(0), totalDelay(0){
     TICK = 10;
-}
-
-SimulationProgram::~SimulationProgram()
-{
-    testVehicle.clear();
-    testStation.clear();
-    testTrain.clear();
-    testMap.clear();
-
 }
 
 void SimulationProgram::run() {
@@ -59,16 +49,15 @@ void SimulationProgram::run() {
         switch(choice)
         {
             case 0:
-                endSimulation();
                 again = false;
-            default:
                 break;
             case 1:
                 changeTick();
                 break;
-            case 2:                          
-                    simulation->step(TICK);
-                                    break;
+            case 2:{
+                simulation->step(TICK);
+            }
+                break;
             case 3:
                 std::cout << "Next event" <<std::endl;
                 break;
@@ -263,11 +252,11 @@ void SimulationProgram::populateTrain() {
         ss >> atoStation;
         ss >> tmpdepartureTime;
         tmpdepartureTime.erase(remove(tmpdepartureTime.begin(),
-                tmpdepartureTime.end(), ':'), tmpdepartureTime.end());
+                                      tmpdepartureTime.end(), ':'), tmpdepartureTime.end());
         adepartureTime = std::stoi(tmpdepartureTime);
         ss >> tmparrivalTime;
         tmparrivalTime.erase(remove(tmparrivalTime.begin(),
-                tmparrivalTime.end(), ':'), tmparrivalTime.end());
+                                    tmparrivalTime.end(), ':'), tmparrivalTime.end());
         aarrivalTime = std::stoi(tmparrivalTime);
         ss >> amaxSpeed;
         while (ss >> tmpInt){
@@ -320,7 +309,7 @@ void SimulationProgram::printStatistics() {
     for (int k=0; k<testStation.size(); k++){
         std::cout << testStation[k]->getStationname() << " = " ;
         std::cout <<testStation[k]->getvecSize() << std::endl;
-            testStation[k]->printTypes();
+        testStation[k]->printTypes();
     }
 }
 
@@ -428,7 +417,7 @@ void SimulationProgram::stationMenu() {
         switch (choice) {
             case 1:
                 for (int i=0; i<testStation.size(); i++)
-                std::cout << testStation[i]->getStationname() << std::endl;
+                    std::cout << testStation[i]->getStationname() << std::endl;
                 break;
             case 2:
 
@@ -477,7 +466,7 @@ void SimulationProgram::vehicleMenu() {
 void SimulationProgram::testMenu() {
     std::cout << "Dedicated to testing functions" << std::endl;
 
-    startAssemble(5);
+    tryBuild(5);
 
     /*
     std::vector<int> tmpVec;
@@ -516,22 +505,22 @@ void SimulationProgram::testMenu() {
      */
 }
 
-void SimulationProgram::scheduleEvents(SimulationProgram *pProgram) {
+void SimulationProgram::scheduleEvents() {
     std::vector<std::shared_ptr<Train>> tmpTrain;
     tmpTrain = testTrain;
     std::sort(tmpTrain.begin(), tmpTrain.end(), sortByName);
-    for (auto & i : tmpTrain) {
-        int depTime = i->getDepTime() - BUILDTIME;
-        int ID = i->getID();
-        simulation->scheduleEvent(new BuildTrain(simulation,pProgram,depTime,ID));
+    for (int i=0; i<tmpTrain.size(); i++) {
+        int depTime = tmpTrain[i]->getDepTime() - BUILDTIME;
+        int ID = tmpTrain[i]->getID();
+        simulation->scheduleEvent(new BuildTrain(simulation,this,depTime,ID));
     }
 }
 
-bool SimulationProgram::startAssemble(int trainId) {
+bool SimulationProgram::tryBuild(int trainId) {
     std::shared_ptr<Train> tmpTrain;
-    for (auto & i : testTrain){
-        if (trainId == i->getID()){
-            tmpTrain = i;
+    for (int i=0; i<testTrain.size(); i++){
+        if (trainId == testTrain[i]->getID()){
+            tmpTrain = testTrain[i];
             break;
         }
     }
@@ -641,7 +630,6 @@ void SimulationProgram::arriveTrain(int trainId) {
 }
 
 void SimulationProgram::endSimulation() {
-    
     std::cout << "End" << std::endl;
 }
 
@@ -669,15 +657,15 @@ void SimulationProgram::changeTick() {
         switch (choice) {
             case 1: {
                 if (TICK < 60)
-                TICK += 5;
+                    TICK += 5;
                 std::cout << "Tick is now set to: 00:" << + TICK << std::endl;
                 break;
             }
             case 2: {
                 if (TICK > 5)
-                TICK -= 5;
+                    TICK -= 5;
                 if(TICK >10)
-                std::cout << "Tick is now set to: 00:" << + TICK << std::endl;
+                    std::cout << "Tick is now set to: 00:" << + TICK << std::endl;
                 else
                     std::cout << "Tick is now set to: 00:0" << + TICK << std::endl;
                 break;

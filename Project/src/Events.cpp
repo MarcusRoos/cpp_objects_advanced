@@ -11,7 +11,7 @@
 
 void BuildTrain::processEvent()
 {
-    if (simmer->startAssemble(trainId))
+    if (simmer->tryBuild(trainId))
     {
         time += READYTIME;
         theSim->scheduleEvent(new ReadyTrain(theSim, simmer, time, trainId));

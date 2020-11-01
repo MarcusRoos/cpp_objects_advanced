@@ -14,7 +14,6 @@ Simulator::~Simulator() {
         eventQueue.pop();
         delete nextEvent;
     }
-
 }
 
 bool Simulator::step(int time){
