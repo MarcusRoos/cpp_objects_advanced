@@ -22,6 +22,6 @@ const int BUILDTIME = 30;
 const int READYTIME = 10;
 const int LEAVETIME = 10;
 const int DISASSEMBLETIME = 20;
-const int SIMMING = 1440;
+const int SIMMING = 1439;
 
 #endif //DT060G_CONSTANTS_H

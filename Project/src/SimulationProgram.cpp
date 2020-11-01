@@ -652,6 +652,11 @@ void SimulationProgram::changeTick() {
 }
 
 void SimulationProgram::advance() {
+    if (simulation->getTime() + TICK >SIMMING){
+        int tmpTick=0;
+        tmpTick = SIMMING - simulation->getTime();
+        simulation->step(tmpTick);
+    }
     if (simulation->getTime()<SIMMING) {
         simulation->step(TICK);
     }
