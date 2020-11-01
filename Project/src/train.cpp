@@ -34,20 +34,13 @@ bool Train::assembleVehicle(std::vector<std::shared_ptr<Station>> aStation) {
     for (int k = 0; k < aStation.size(); k++) {
         if (aStation[k]->getStationname() == fromStation) {
 
-            std::cout << "logicalVehicles " << std::endl;
-            for (int j = 0; j < logicalVehicles.size(); j++) {
-                std::cout << logicalVehicles[j] << ",";
-            }
             if (trainVehicles.empty()) {
                 for (int i = 0; i < logicalVehicles.size(); i++) {
-                    std::cout << "I am pushing " << logicalVehicles[i]
-                              << std::endl;
                     if (((aStation[k]->testVehicle(logicalVehicles[i])))) {
                         trainVehicles.push_back(
                                 aStation[k]->outgoingVehicle(
                                         logicalVehicles[i]));
 
-                        std::cout << std::endl;
                     } else {
                         tester = false;
                     }
@@ -73,17 +66,8 @@ void Train::disassembleTrain(std::vector<std::shared_ptr<Station>> aStation) {
 
 void Train::printTypes() {
 
-    /*   if (state == INCOMPLETE){
-
-           std::cout << trainId << std::endl;
-
-       }
-       */
-
-    if (state == ARRIVED){
-
+    if (state == INCOMPLETE) {
         std::cout << trainId << std::endl;
-
     }
 
 }

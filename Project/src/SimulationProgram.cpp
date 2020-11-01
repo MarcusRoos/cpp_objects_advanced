@@ -8,7 +8,7 @@
 #include <iostream>
 #include <iomanip>
 #include <limits>
-//Verify
+
 /**
 The run function, this function will be called in the main program, from here a
  it will enter a switch which will call another function from the menu class.
@@ -55,7 +55,13 @@ void SimulationProgram::run() {
                 changeTick();
                 break;
             case 2:{
-                simulation->step(TICK);
+                if (simulation->getTime()<SIMMING) {
+                    simulation->step(TICK);
+                }
+                else {
+                    std::cout << "Simulation is over! " << std::endl;
+                    std::cout << "Time: " << simulation->getTime();
+                }
             }
                 break;
             case 3:
@@ -466,43 +472,10 @@ void SimulationProgram::vehicleMenu() {
 void SimulationProgram::testMenu() {
     std::cout << "Dedicated to testing functions" << std::endl;
 
-    tryBuild(5);
-
-    /*
-    std::vector<int> tmpVec;
-    std::string tmpFrom, tmpTo;
-    int tmpPull=9;
-
-    for (int i=0; i<testTrain.size(); i++){
-        tmpVec = testTrain[tmpPull]->getLogicalVehicles();
-        tmpFrom = testTrain[tmpPull]->getFromStation();
-        tmpTo = testTrain[tmpPull]->getToStation();
-    }
-    std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
-
-
-    for (int i=0; i<testStation.size(); i++){
-        if (tmpFrom == testStation[i]->getStationname()){
-            std::cout << "Hittade station" << std::endl;
-            for (int p=0; p<tmpVec.size(); p++) {
-                if (tmpFrom == testStation[i]->getStationname())
-                tmpVehicle.push_back(testStation[i]->outgoingVehicle(tmpVec[p]));
-            }
-            break;
-        }
-    }
 
     for (int i=0; i<testTrain.size(); i++) {
-        if (tmpFrom == testTrain[i]->getFromStation() && tmpTo == testTrain[i]->getToStation()) {
-            testTrain[i]->assembleVehicle(tmpVehicle);
-            std::cout << "Deptime: " << testTrain[i]->getDepTime() << std::endl;
-            std::cout << "FROM: " << testTrain[i]->getFromStation() << std::endl;
-            std::cout << "TO: " << testTrain[i]->getToStation() << std::endl;
-            std::cout << "ID: " << testTrain[i]->getID() << std::endl;
-            break;
-        }
+        testTrain[i]->printTypes();
     }
-     */
 }
 
 void SimulationProgram::scheduleEvents() {
