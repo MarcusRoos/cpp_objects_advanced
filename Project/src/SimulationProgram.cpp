@@ -260,10 +260,19 @@ void SimulationProgram::populateTrain() {
         tmpdepartureTime.erase(remove(tmpdepartureTime.begin(),
                                       tmpdepartureTime.end(), ':'), tmpdepartureTime.end());
         adepartureTime = std::stoi(tmpdepartureTime);
+        int temp=0;
+        temp = (adepartureTime%100);
+        adepartureTime = (adepartureTime/100);
+        adepartureTime = (adepartureTime*60)+temp;
+        std::cout << "departuretime: " << adepartureTime << std::endl;
         ss >> tmparrivalTime;
         tmparrivalTime.erase(remove(tmparrivalTime.begin(),
                                     tmparrivalTime.end(), ':'), tmparrivalTime.end());
         aarrivalTime = std::stoi(tmparrivalTime);
+        temp = (aarrivalTime%100);
+        aarrivalTime = (aarrivalTime/100);
+        aarrivalTime = (aarrivalTime*60)+temp;
+        std::cout << "ArrivalTime: " << aarrivalTime << std::endl;
         ss >> amaxSpeed;
         while (ss >> tmpInt){
             if (ss.peek() == '\n')
@@ -520,7 +529,7 @@ bool SimulationProgram::tryBuild(int trainId) {
 }
 
 void SimulationProgram::EndTrain(int trainId) {
-    /*
+
     std::cout << "Trying to disassemble... " << trainId <<"....."<< std::endl;
 
     std::shared_ptr<Train> tmpTrain;
@@ -536,7 +545,7 @@ void SimulationProgram::EndTrain(int trainId) {
     std::cout << "Unloaded " << tmpInt
               << " vehicles from train " << tmpTrain->getID() << " at station " <<
               tmpTrain->getToStation() << std::endl;
-*/
+
 }
 
 void SimulationProgram::readyTrain(int trainId) {

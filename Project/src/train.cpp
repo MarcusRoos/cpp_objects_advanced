@@ -46,8 +46,10 @@ bool Train::assembleVehicle(std::vector<std::shared_ptr<Station>> aStation) {
                     }
                 }
             }
-            else
+            else{
                 tester = false;
+            }
+
 
         }
     }
