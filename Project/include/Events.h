@@ -25,8 +25,6 @@ protected:
     unsigned int time;
 };
 
-
-
 class EventComparison {
 public:
     bool operator() (Event * left, Event * right) {
