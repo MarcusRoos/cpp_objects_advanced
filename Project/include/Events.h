@@ -17,7 +17,7 @@ class SimulationProgram;
 class Event {
 public:
     Event (unsigned int t) : time(t) { }
-    virtual ~Event() { }
+    ~Event() = default;
     virtual void processEvent()=0;
     unsigned int getTime() const {return time;}
 

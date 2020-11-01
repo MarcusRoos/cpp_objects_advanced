@@ -7,13 +7,7 @@
 #include "Simulator.h"
 #include "Events.h"
 
-
-Simulator::~Simulator() {
-    eventQueue.empty();
-}
-
 bool Simulator::step(int time){
-    std::cout << "TIME: " << getTime() << std::endl;
     currTime += time;
 
     while(eventQueue.top()->getTime() <= currTime) {

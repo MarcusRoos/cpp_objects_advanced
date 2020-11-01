@@ -16,7 +16,6 @@
 class Simulator {
 public:
     Simulator () : currTime (0), eventQueue() { }
-    ~Simulator();
     void scheduleEvent (Event * newEvent);
     int getTime() const { return currTime; }
     bool step(int time);
