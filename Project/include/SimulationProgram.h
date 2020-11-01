@@ -18,9 +18,8 @@
 #include <fstream>
 #include <vector>
 #include <memory>
-#include <set>
-#include <map>
 #include <algorithm>
+#include <iomanip>
 //34 stycken incomplete utan disassemble
 class Simulator;
 
@@ -55,6 +54,7 @@ public:
     void testMenu();
     void changeTick();
     void scheduleEvents();
+    void advance();
     bool tryBuild(int trainId);
     void readyTrain( int trainId );
     int dispatchTrain( int trainId );

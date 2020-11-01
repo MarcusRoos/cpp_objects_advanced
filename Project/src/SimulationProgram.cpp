@@ -54,15 +54,8 @@ void SimulationProgram::run() {
             case 1:
                 changeTick();
                 break;
-            case 2:{
-                if (simulation->getTime()<SIMMING) {
-                    simulation->step(TICK);
-                }
-                else {
-                    std::cout << "Simulation is over! " << std::endl;
-                    std::cout << "Time: " << simulation->getTime();
-                }
-            }
+            case 2:
+                advance();
                 break;
             case 3:
                 std::cout << "Next event" <<std::endl;
@@ -264,7 +257,6 @@ void SimulationProgram::populateTrain() {
         temp = (adepartureTime%100);
         adepartureTime = (adepartureTime/100);
         adepartureTime = (adepartureTime*60)+temp;
-        std::cout << "departuretime: " << adepartureTime << std::endl;
         ss >> tmparrivalTime;
         tmparrivalTime.erase(remove(tmparrivalTime.begin(),
                                     tmparrivalTime.end(), ':'), tmparrivalTime.end());
@@ -272,7 +264,6 @@ void SimulationProgram::populateTrain() {
         temp = (aarrivalTime%100);
         aarrivalTime = (aarrivalTime/100);
         aarrivalTime = (aarrivalTime*60)+temp;
-        std::cout << "ArrivalTime: " << aarrivalTime << std::endl;
         ss >> amaxSpeed;
         while (ss >> tmpInt){
             if (ss.peek() == '\n')
@@ -658,4 +649,23 @@ void SimulationProgram::changeTick() {
                 break;
         }
     }
+}
+
+void SimulationProgram::advance() {
+    if (simulation->getTime()<SIMMING) {
+        simulation->step(TICK);
+    }
+    else {
+        std::cout << "Simulation is over! " << std::endl;
+    }
+    int tmpT=0, tmpH=0, tmpM=0;
+    tmpT = simulation->getTime();
+    while (tmpT >= 60){
+        tmpH++;
+        tmpT -= 60;
+    }
+    tmpM = tmpT;
+
+    std::cout << "Time: "<<  std::setw(2) << std::setfill('0') << tmpH
+    <<  ":" <<  std::setw(2) << std::setfill('0') <<tmpM << std::endl;
 }
