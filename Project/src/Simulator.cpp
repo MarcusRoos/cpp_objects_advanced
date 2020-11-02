@@ -23,15 +23,6 @@ bool Simulator::step(int time){
     while (currTime < tmpTime) {
         currTime++;
         while (eventQueue.top()->getTime() <= currTime) {
-            int tmpT=0, tmpH=0, tmpM=0;
-            tmpT = currTime;
-            while (tmpT >= 60){
-                tmpH++;
-                tmpT -= 60;
-            }
-            tmpM = tmpT;
-            std::cout << "["<<  std::setw(2) << std::setfill('0') << tmpH
-                      <<  ":" <<  std::setw(2) << std::setfill('0') <<tmpM << "]";
 
             Event *nextEvent = eventQueue.top();
             eventQueue.pop();

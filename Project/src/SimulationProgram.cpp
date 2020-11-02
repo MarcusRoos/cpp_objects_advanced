@@ -251,6 +251,7 @@ void SimulationProgram::populateTrain() {
         ss >> afromStation;
         ss >> atoStation;
         ss >> tmpdepartureTime;
+        std::string aPrintDep = tmpdepartureTime;
         tmpdepartureTime.erase(remove(tmpdepartureTime.begin(),
                                       tmpdepartureTime.end(), ':'), tmpdepartureTime.end());
         adepartureTime = std::stoi(tmpdepartureTime);
@@ -259,6 +260,7 @@ void SimulationProgram::populateTrain() {
         adepartureTime = (adepartureTime/100);
         adepartureTime = (adepartureTime*60)+temp;
         ss >> tmparrivalTime;
+        std::string aPrintArr = tmparrivalTime;
         tmparrivalTime.erase(remove(tmparrivalTime.begin(),
                                     tmparrivalTime.end(), ':'), tmparrivalTime.end());
         aarrivalTime = std::stoi(tmparrivalTime);
@@ -273,7 +275,7 @@ void SimulationProgram::populateTrain() {
                 amountVehicles.push_back(tmpInt);
         }
         testTrain.push_back(std::shared_ptr<Train>(
-                new Train(tmpID, afromStation, atoStation, adepartureTime, aarrivalTime, amaxSpeed, amountVehicles)));
+                new Train(tmpID, afromStation, atoStation, adepartureTime, aarrivalTime, amaxSpeed, amountVehicles, aPrintDep, aPrintArr)));
         amountVehicles.clear();
     }
 }
@@ -491,11 +493,24 @@ bool SimulationProgram::tryBuild(int trainId) {
     }
 
     if (tmpTrain->assembleVehicle(testStation)){
-        std::cout << "Started building train ID " << trainId << " at station "
-                  << tmpTrain->getFromStation() << " with destination to "
-                  << tmpTrain->getToStation() << std::endl;
-
         tmpTrain->setState(ASSEMBLED);
+        int tmpT=0, tmpH=0, tmpM=0;
+        tmpT = simulation->getTime();
+        while (tmpT >= 60){
+            tmpH++;
+            tmpT -= 60;
+        }
+        tmpM = tmpT;
+        std::cout << "["<<  std::setw(2) << std::setfill('0') << tmpH
+                  <<  ":" <<  std::setw(2) << std::setfill('0') <<tmpM << "]";
+
+        std::cout << " Train [" << trainId << "] (" << tmpTrain->getState(tmpTrain->getState())<< ") from "
+                  << tmpTrain->getFromStation() <<" " << tmpTrain->getDepPrint() << " to "
+                  << tmpTrain->getToStation() << " " << tmpTrain->getArrPrint()
+                  << " speed = " << tmpTrain->getSpeed()
+                  << " is now assembled, arriving at the platform at "
+                  << tmpTrain->getArrPrint() << std::endl;
+
         return true;
     }
     else {
@@ -594,7 +609,7 @@ void SimulationProgram::arriveTrain(int trainId) {
 }
 
 void SimulationProgram::endSimulation() {
-    std::cout << "End" << std::endl;
+    std::cout << "End of simulation" << std::endl;
 }
 
 bool SimulationProgram::sortByName(const std::shared_ptr<Train> &a,
@@ -652,7 +667,7 @@ void SimulationProgram::advance() {
         simulation->step(TICK);
     }
     else {
-        std::cout << "Simulation is over! " << std::endl;
+        endSimulation();
     }
 
     int tmpT=0, tmpH=0, tmpM=0;
@@ -667,8 +682,6 @@ void SimulationProgram::advance() {
 }
 
 void SimulationProgram::testMenu() {
-
-
 
     for (auto & i : testTrain)
         i->printTypes();

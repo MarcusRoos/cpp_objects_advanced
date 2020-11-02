@@ -14,7 +14,8 @@ Train::Train() {
 }
 
 Train::Train(int aID, std::string aFrom, std::string aTo, int aDtime,
-             int aAtime, double aSpeed, std::vector<int> aLogicalVehicles) {
+             int aAtime, double aSpeed, std::vector<int> aLogicalVehicles,
+             std::string printD, std::string printA) {
     trainId = aID;
     fromStation = std::move(aFrom);
     toStation = std::move(aTo);
@@ -26,6 +27,8 @@ Train::Train(int aID, std::string aFrom, std::string aTo, int aDtime,
     logicalVehicles = std::move(aLogicalVehicles);
     state = NOTASSEMBLED;
     delayed = false;
+    arrPrint = std::move(printA);
+    depPrint = std::move(printD);
 }
 
 
@@ -70,12 +73,24 @@ void Train::printTypes() {
     }
 }
 
-void Train::emptyVehicle(std::vector<std::shared_ptr<Station>> aStation) {
-    /*  for (int i=0; i<aStation.size(); i++){
-          if (aStation[i]->getStationname() == fromStation){
-                  aStation[i]->incomingVehicle(trainVehicles);
-          }
-      }
-      trainVehicles.clear();
-      */
+std::string Train::getState(State aState) {
+    switch(state)
+    {
+        case 0:
+            return "NOTASSEMBLED";
+        case 1:
+            return "INCOMPLETE";
+        case 2:
+            return "ASSEMBLED";
+        case 3:
+            return "READY";
+        case 4:
+            return "RUNNING";
+        case 5:
+            return "ARRIVED";
+        case 6:
+            return "FINISHED";
+        default:
+            return "Null";
+    }
 }

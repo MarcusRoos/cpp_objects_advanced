@@ -23,7 +23,7 @@ class Train {
 protected:
     enum State state;
     int trainId, departureTime, arrivalTime, tmpArrivalTime, tmpDepartureTime;
-    std::string fromStation, toStation;
+    std::string fromStation, toStation, arrPrint, depPrint;
     double maxSpeed;
     bool delayed;
     std::vector<int> logicalVehicles;
@@ -32,13 +32,16 @@ protected:
 public:
     Train();
     ~Train() = default;;
-    Train(int aID, std::string aFrom, std::string aTo, int aDtime, int aAtime, double aSpeed, std::vector<int> aLogicalVehicles);
+    Train(int aID, std::string aFrom, std::string aTo, int aDtime, int aAtime, double aSpeed, std::vector<int> aLogicalVehicles, std::string printD, std::string printA);
     bool assembleVehicle(const std::vector<std::shared_ptr<Station>>& aStation);
     void disassembleTrain(const std::vector<std::shared_ptr<Station>>& aStation);
     int getsizeVehicle()&{return trainVehicles.size();}
     int getID(){return trainId;}
     std::string getFromStation(){return fromStation;}
     std::string getToStation(){return toStation;}
+    std::string getArrPrint(){return arrPrint;}
+    std::string getDepPrint(){return depPrint;}
+    std::string getState(State aState);
     int getDepTime(){return departureTime;}
     int getArrTime(){return arrivalTime;}
     int getTmpDepTime(){return tmpDepartureTime;}
@@ -50,7 +53,6 @@ public:
     double getSpeed(){return maxSpeed;}
     bool getDelayed(){return delayed;}
     void printTypes();
-    void emptyVehicle(std::vector<std::shared_ptr<Station>> aStation);
 };
 
 #endif //DT060G_TRAIN_H
