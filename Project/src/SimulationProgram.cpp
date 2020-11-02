@@ -63,9 +63,13 @@ void SimulationProgram::run() {
             case 3:
                 std::cout << "Next event" <<std::endl;
                 break;
-            case 4:
+            case 4: {
+                endStats();
+                pauseFunction();
                 again = false;
+                submenuLoop = false;
                 break;
+            }
             case 5:
                 statisticsMenu();
                 break;
@@ -79,15 +83,14 @@ void SimulationProgram::run() {
                 printSpecificStation();
                 break;
             case 9:
-                testMenu();
+                endStats();
                 break;
         }
     }while(again);
 }
 
 void SimulationProgram::runSubMenu() {
-    bool loop = true;
-    while(loop) {
+    while(submenuLoop) {
         std::cout << "===== Start Menu =====" << std::endl;
         std::cout << "1. Change start time [00:00]" << std::endl;
         std::cout << "2. Change end time [23:59]" << std::endl;
@@ -114,7 +117,7 @@ void SimulationProgram::runSubMenu() {
                 break;
             case 0:
             default:
-                loop = false;
+                submenuLoop = false;
                 break;
         }
     }
@@ -755,9 +758,15 @@ void SimulationProgram::advance() {
     <<  ":" <<  std::setw(2) << std::setfill('0') <<tmpM << std::endl;
 }
 
-void SimulationProgram::testMenu() {
-    for (auto & i : testTrain)
+void SimulationProgram::endStats() {
+    std::cout << "These trains never left their departure station: " << std::endl;
+    for (auto & i : testTrain) {
         i->printIncomplete();
+    }
+    std::cout << "These trains was dispatched and arrived on time: " << std::endl;
+    for (auto & i : testTrain) {
+        i->printComplete();
+    }
 
 }
 

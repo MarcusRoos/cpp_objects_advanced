@@ -12,6 +12,8 @@ void pauseFunction(){
     std::cin.sync(); // Synchronizes the input stream
     std::cin.clear(); // Clear stream once again to remove leftovers
     std::cin.sync(); // Synchronizes the input stream
+    std::cout << "Press any key to continue... ";
+    std::cin.get();
 }
 
 std::string validate(std::string input){ // Validate input

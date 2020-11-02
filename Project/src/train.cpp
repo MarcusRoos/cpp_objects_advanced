@@ -102,14 +102,21 @@ std::string Train::getState(State) {
     }
 }
 
-void Train::printIncomplete() {
-    if (state == INCOMPLETE){
-        std::cout << "Incomplete: " <<trainId << std::endl;
+void Train::printAtStation(const std::string& tmpStat) {
+    if ((state == ARRIVED || state == FINISHED) && tmpStat == toStation){
+        std::cout <<"Train " <<getID()<< " has finished at " << toStation << std::endl;
     }
 }
 
-void Train::printAtStation(std::string tmpStat) {
-    if ((state == ARRIVED || state == FINISHED) && tmpStat == toStation){
-        std::cout <<"Train " <<getID()<< " has finished at " << toStation << std::endl;
+void Train::printComplete() {
+    if ((state == ARRIVED || state == FINISHED) && !delayed){
+                  std::cout << trainId << std::endl;
+    }
+}
+
+void Train::printIncomplete() {
+    if (state == INCOMPLETE || state == NOTASSEMBLED
+    || state == ASSEMBLED || state == READY){
+                std::cout << trainId << std::endl;
     }
 }

@@ -38,6 +38,7 @@ private:
     int amountSuccess;
     int totalDelay;
     int TICK;
+    bool submenuLoop = true;
     std::ofstream outFile;
 public:
     explicit SimulationProgram(Simulator* simulation);
@@ -52,7 +53,7 @@ public:
     void printSpecificStation();
     void printSpecificTrain();
     void printTimeTable();
-    void testMenu();
+    void endStats();
     void changeTick();
     void scheduleEvents();
     void advance();

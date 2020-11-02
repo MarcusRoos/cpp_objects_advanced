@@ -35,7 +35,6 @@ public:
     Train(int aID, std::string aFrom, std::string aTo, int aDtime, int aAtime, double aSpeed, std::vector<int> aLogicalVehicles, std::string printD, std::string printA);
     bool assembleVehicle(const std::vector<std::shared_ptr<Station>>& aStation);
     void disassembleTrain(const std::vector<std::shared_ptr<Station>>& aStation);
-    int getsizeVehicle()&{return trainVehicles.size();}
     int getID(){return trainId;}
     std::string getFromStation(){return fromStation;}
     std::string getToStation(){return toStation;}
@@ -44,7 +43,6 @@ public:
     std::string getState(State);
     int getDepTime(){return departureTime;}
     int getArrTime(){return arrivalTime;}
-    int getTmpDepTime(){return tmpDepartureTime;}
     int getTmpArrTime(){return tmpArrivalTime;}
     enum State getState(){return state;}
     void setState( State aState ){state = aState;}
@@ -54,7 +52,9 @@ public:
     bool getDelayed(){return delayed;}
     void printTypes();
     void printIncomplete();
-    void printAtStation(std::string tmpStat);
+    void printComplete();
+    void printEndStatistics();
+    void printAtStation(const std::string& tmpStat);
 };
 
 #endif //DT060G_TRAIN_H
