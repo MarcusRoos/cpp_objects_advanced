@@ -71,8 +71,8 @@ void Train::printTypes() {
     std::cout << "Train " << trainId << " " << getState(getState())
     << " currently have these vehicles attached to it: " << std::endl;
     for (auto & i : trainVehicles){
-        std::cout << "Vehicle ID:" <<i->getId() << std::endl;
-        std::cout << "Vehicle Type: " << i->getType() << std::endl;
+        std::cout << "Vehicle Type: " << i->printType() << " ID: "
+        << i->getId() << std::endl;
     }
     std::cout << "It's leaving from station " << fromStation
     << " and heading for " << toStation << std::endl;

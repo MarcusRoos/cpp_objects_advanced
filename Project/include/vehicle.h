@@ -26,6 +26,7 @@ public:
     virtual void setId(int aID){}
     int getId(){return ID;}
     int getType(){return type;}
+    virtual std::string printType() {return 0;}
     virtual int getSeats(){return 0;}
     virtual int getInternet() {return 0;}
 };
@@ -37,6 +38,7 @@ public:
     CoachCar(int aId, int aType, int aSeats, int aInternet);
     int getSeats();
     int getInternet();
+    virtual std::string printType() {return "Coach car";}
 };
 
 class SleepingCar : public Vehicle{
@@ -44,6 +46,7 @@ protected:
     int beds;
 public:
     SleepingCar(int aId, int aType, int aBeds);
+    virtual std::string printType() {return "Sleeping car";}
 };
 
 class OpenFreight : public Vehicle{
@@ -51,6 +54,7 @@ protected:
     int capacityTons, areaSqm;
 public:
     OpenFreight(int aId, int aType, int aCapacity, int aSquaremt);
+    virtual std::string printType() {return "Open freight";}
 };
 
 class CoveredFreight : public Vehicle{
@@ -58,6 +62,7 @@ protected:
     int capacityCubicm;
 public:
     CoveredFreight(int aId, int aType, int aCapacityC);
+    virtual std::string printType() {return "Covered freight";}
 };
 
 class DieselEngine : public Vehicle{
@@ -65,6 +70,7 @@ private:
     int maxSpeed, fuelConsump;
 public:
     DieselEngine(int aId, int aType, int aMaxspeed, int aFuelcon);
+    virtual std::string printType() {return "Diesel engine";}
 };
 
 
@@ -74,6 +80,7 @@ protected:
 public:
     ElectricalEngine(int aId, int aType, int aMaxspeed,
                      int aPowerKW);
+    virtual std::string printType() {return "Electrical engine";}
 };
 
 #endif //DT060G_VEHICLE_H
