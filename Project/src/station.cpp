@@ -41,7 +41,9 @@ bool Station::testVehicle(int atype) {
 }
 
 void Station::incomingVehicle(const std::vector<std::shared_ptr<Vehicle>>& aVehicle) {
+    std::cout << "depositing to station: " << stationName << std::endl;
     for (auto & i : aVehicle) {
+        std::cout << "types: " << i->getType() << std::endl;
         stationVehicles.push_back(i);
     }
 }

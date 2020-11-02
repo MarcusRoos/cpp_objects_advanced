@@ -501,7 +501,6 @@ bool SimulationProgram::tryBuild(int trainId) {
     else {
         std::cout << " Train " << trainId << " couldn't be built at station "
                   << tmpTrain->getFromStation() << std::endl;
-        tmpTrain->emptyVehicle(testStation);
         tmpTrain->delay(DELAYTIME);
         tmpTrain->setState(INCOMPLETE);
         if (!tmpTrain->getDelayed()) {
@@ -671,8 +670,11 @@ void SimulationProgram::testMenu() {
 
 
     std::cout << "Dedicated to testing functions" << std::endl;
-
-    for (auto & i : testTrain)
-        i->printTypes();
+    for (auto & i : testStation){
+        if (i->getStationname() == "Luz")
+            i->printTypes();
+    }
+    //for (auto & i : testTrain)
+       // i->printTypes();
 
 }
