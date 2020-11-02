@@ -514,10 +514,23 @@ bool SimulationProgram::tryBuild(int trainId) {
         return true;
     }
     else {
-        std::cout << " Train " << trainId << " couldn't be built at station "
-                  << tmpTrain->getFromStation() << std::endl;
-        tmpTrain->delay(DELAYTIME);
         tmpTrain->setState(INCOMPLETE);
+        int tmpT=0, tmpH=0, tmpM=0;
+        tmpT = simulation->getTime();
+        while (tmpT >= 60){
+            tmpH++;
+            tmpT -= 60;
+        }
+        tmpM = tmpT;
+        std::cout << "["<<  std::setw(2) << std::setfill('0') << tmpH
+                  <<  ":" <<  std::setw(2) << std::setfill('0') <<tmpM << "]";
+
+        std::cout << " Train [" << trainId << "] (" << tmpTrain->getState(tmpTrain->getState())<< ") from "
+                  << tmpTrain->getFromStation() <<" " << tmpTrain->getDepPrint() << " to "
+                  << tmpTrain->getToStation() << " " << tmpTrain->getArrPrint()
+                  << " couldn't be assembled "
+                  << tmpTrain->getArrPrint() << std::endl;
+        tmpTrain->delay(DELAYTIME);
         if (!tmpTrain->getDelayed()) {
             tmpTrain->setDelayed(true);
         }
@@ -526,9 +539,6 @@ bool SimulationProgram::tryBuild(int trainId) {
 }
 
 void SimulationProgram::EndTrain(int trainId) {
-
-    std::cout << "Trying to disassemble... " << trainId <<"....."<< std::endl;
-
     std::shared_ptr<Train> tmpTrain;
     for (auto & i : testTrain){
         if (trainId == i->getID()){
@@ -536,12 +546,24 @@ void SimulationProgram::EndTrain(int trainId) {
             break;
         }
     }
-    int tmpInt = tmpTrain->getsizeVehicle();
     tmpTrain->disassembleTrain(testStation);
     tmpTrain->setState(FINISHED);
-    std::cout << "Unloaded " << tmpInt
-              << " vehicles from train " << tmpTrain->getID() << " at station " <<
-              tmpTrain->getToStation() << std::endl;
+    int tmpT=0, tmpH=0, tmpM=0;
+    tmpT = simulation->getTime();
+    while (tmpT >= 60){
+        tmpH++;
+        tmpT -= 60;
+    }
+    tmpM = tmpT;
+    std::cout << "["<<  std::setw(2) << std::setfill('0') << tmpH
+              <<  ":" <<  std::setw(2) << std::setfill('0') <<tmpM << "]";
+
+    std::cout << " Train [" << trainId << "] (" << tmpTrain->getState(tmpTrain->getState())<< ") from "
+              << tmpTrain->getFromStation() <<" " << tmpTrain->getDepPrint() << " to "
+              << tmpTrain->getToStation() << " " << tmpTrain->getArrPrint()
+              << " speed = " << tmpTrain->getSpeed()
+              << " has reached its destination and is now being disassembled at "
+              << tmpTrain->getToStation() << std::endl;
 
 }
 
@@ -554,8 +576,22 @@ void SimulationProgram::readyTrain(int trainId) {
         }
     }
     tmpTrain->setState(READY);
-    std::cout << "Train " << trainId << " is ready for departure from " <<
-              tmpTrain->getFromStation() << " to " << tmpTrain->getToStation() << std::endl;
+    int tmpT=0, tmpH=0, tmpM=0;
+    tmpT = simulation->getTime();
+    while (tmpT >= 60){
+        tmpH++;
+        tmpT -= 60;
+    }
+    tmpM = tmpT;
+    std::cout << "["<<  std::setw(2) << std::setfill('0') << tmpH
+              <<  ":" <<  std::setw(2) << std::setfill('0') <<tmpM << "]";
+
+    std::cout << " Train [" << trainId << "] (" << tmpTrain->getState(tmpTrain->getState())<< ") from "
+              << tmpTrain->getFromStation() <<" " << tmpTrain->getDepPrint() << " to "
+              << tmpTrain->getToStation() << " " << tmpTrain->getArrPrint()
+              << " speed = " << tmpTrain->getSpeed()
+              << " is now ready at station" << tmpTrain->getFromStation()
+              << " and is scheduled to " << tmpTrain->getToStation() << std::endl;
 
 }
 
@@ -572,16 +608,42 @@ int SimulationProgram::dispatchTrain(int trainId) {
     if(tmpTrain->getDelayed()) {
         tmpLate -= tmpTrain->getDepTime();
     }
-    std::cout << "Train " << trainId
-              << " left from station " << tmpTrain->getFromStation() << std::endl;
+    int tmpT=0, tmpH=0, tmpM=0;
+    tmpT = simulation->getTime();
+    while (tmpT >= 60){
+        tmpH++;
+        tmpT -= 60;
+    }
+    tmpM = tmpT;
+    std::cout << "["<<  std::setw(2) << std::setfill('0') << tmpH
+              <<  ":" <<  std::setw(2) << std::setfill('0') <<tmpM << "]";
+
+    std::cout << " Train [" << trainId << "] (" << tmpTrain->getState(tmpTrain->getState())<< ") from "
+              << tmpTrain->getFromStation() <<" " << tmpTrain->getDepPrint() << " to "
+              << tmpTrain->getToStation() << " " << tmpTrain->getArrPrint()
+              << " speed = " << tmpTrain->getSpeed()
+              << " has left from " << tmpTrain->getFromStation() << std::endl;
     if (tmpTrain->getDelayed())
-        std::cout <<  "The train departed " << tmpLate << " minutes too late."
+        std::cout <<  "But the train departed " << tmpLate << " minutes too late."
                   << std::endl;
     else {
-        std::cout << "Train " << trainId
-                  << " left on time from station " << tmpTrain->getFromStation()
-                  << " and will be arriving at " << tmpTrain->getToStation() <<
-                  " on time. " << std::endl;
+        tmpT=0, tmpH=0, tmpM=0;
+        tmpT = simulation->getTime();
+        while (tmpT >= 60){
+            tmpH++;
+            tmpT -= 60;
+        }
+        tmpM = tmpT;
+        std::cout << "["<<  std::setw(2) << std::setfill('0') << tmpH
+                  <<  ":" <<  std::setw(2) << std::setfill('0') <<tmpM << "]";
+
+        std::cout << " Train [" << trainId << "] (" << tmpTrain->getState(tmpTrain->getState())<< ") from "
+                  << tmpTrain->getFromStation() <<" " << tmpTrain->getDepPrint() << " to "
+                  << tmpTrain->getToStation() << " " << tmpTrain->getArrPrint()
+                  << " speed = " << tmpTrain->getSpeed()
+                  << " is now leaving " << tmpTrain->getFromStation()
+                  << " and is scheduled to arrive at " <<
+                  tmpTrain->getToStation() << " on time." << std::endl;
     }
     return tmpTrain->getArrTime();
 }
@@ -595,9 +657,22 @@ void SimulationProgram::arriveTrain(int trainId) {
         }
     }
     tmpTrain->setState(ARRIVED);
-    std::cout << "Train " << tmpTrain->getID() << " from station " <<
-              tmpTrain->getFromStation() << " has arrived at " <<
-              tmpTrain->getToStation() << std::endl;
+    int tmpT=0, tmpH=0, tmpM=0;
+    tmpT = simulation->getTime();
+    while (tmpT >= 60){
+        tmpH++;
+        tmpT -= 60;
+    }
+    tmpM = tmpT;
+    std::cout << "["<<  std::setw(2) << std::setfill('0') << tmpH
+              <<  ":" <<  std::setw(2) << std::setfill('0') <<tmpM << "]";
+
+    std::cout << " Train [" << trainId << "] (" << tmpTrain->getState(tmpTrain->getState())<< ") from "
+              << tmpTrain->getFromStation() <<" " << tmpTrain->getDepPrint() << " to "
+              << tmpTrain->getToStation() << " " << tmpTrain->getArrPrint()
+              << " speed = " << tmpTrain->getSpeed()
+              << " has arrived at  "
+              << tmpTrain->getToStation() << std::endl;
     if (tmpTrain->getDelayed()){
         int lateMins = tmpTrain->getArrTime() - tmpTrain->getTmpArrTime();
         amountDelayed++;
