@@ -34,8 +34,8 @@ public:
     ~Train() = default;;
     Train(int aID, std::string aFrom, std::string aTo, int aDtime, int aAtime, double aSpeed, std::vector<int> aLogicalVehicles);
     bool assembleVehicle(const std::vector<std::shared_ptr<Station>>& aStation);
-    void disassembleTrain(std::vector<std::shared_ptr<Station>> aStation);
-    int getsizeVehicle(){return trainVehicles.size();}
+    void disassembleTrain(const std::vector<std::shared_ptr<Station>>& aStation);
+    int getsizeVehicle()&{return trainVehicles.size();}
     int getID(){return trainId;}
     std::string getFromStation(){return fromStation;}
     std::string getToStation(){return toStation;}

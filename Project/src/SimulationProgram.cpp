@@ -669,12 +669,8 @@ void SimulationProgram::advance() {
 void SimulationProgram::testMenu() {
 
 
-    std::cout << "Dedicated to testing functions" << std::endl;
-    for (auto & i : testStation){
-        if (i->getStationname() == "Luz")
-            i->printTypes();
-    }
-    //for (auto & i : testTrain)
-       // i->printTypes();
+
+    for (auto & i : testTrain)
+        i->printTypes();
 
 }

@@ -56,10 +56,10 @@ bool Train::assembleVehicle(const std::vector<std::shared_ptr<Station>>& aStatio
     return tester;
 }
 
-void Train::disassembleTrain(std::vector<std::shared_ptr<Station>> aStation) {
-    for (size_t k = 0; k < aStation.size(); k++) {
-        if (aStation[k]->getStationname() == toStation && trainVehicles[k] != nullptr) {
-            aStation[k]->incomingVehicle(trainVehicles);
+void Train::disassembleTrain(const std::vector<std::shared_ptr<Station>>& aStation) {
+    for (auto & k : aStation) {
+        if (k->getStationname() == toStation) {
+            k->incomingVehicle(trainVehicles);
             trainVehicles.clear();
         }
     }
