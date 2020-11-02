@@ -77,7 +77,7 @@ void SimulationProgram::run() {
                 printSpecificTrain();
                 break;
             case 8:
-                vehicleMenu();
+                printSpecificStation();
                 break;
             case 9:
                 testMenu();
@@ -360,7 +360,7 @@ void SimulationProgram::statisticsMenu() {
                 printSpecificTrain();
                 break;
             case 5:
-                vehicleMenu();
+                printSpecificStation();
                 break;
             case 0:
             default:
@@ -401,16 +401,26 @@ void SimulationProgram::printSpecificTrain() {
     tmpTrain->printTypes();
 }
 
-void SimulationProgram::vehicleMenu() {
+void SimulationProgram::printSpecificStation() {
     bool loop = true;
     while (loop) {
-        std::cout << "===== Vehicle menu =====" << std::endl;
-        std::cout << "1. Show vehicle by id" << std::endl;
-        std::cout << "0. Exit" << std::endl;
+        std::cout << "===== Station menu =====" << std::endl;
+        std::cout << "Show information about which station?" << std::endl;
         std::cout << "Enter choice" << std::endl;
+        std::cout << "1. Grand Central" << std::endl;
+        std::cout << "2. Liege-Guillemins" << std::endl;
+        std::cout << "3. ST.Pancras" << std::endl;
+        std::cout << "4. Dunedin" << std::endl;
+        std::cout << "5. MilanoCentrale" << std::endl;
+        std::cout << "6. Luz" << std::endl;
+        std::cout << "7. Shinjuku" << std::endl;
+        std::cout << "8. Hauptbahnhof" << std::endl;
+        std::cout << "0. Exit" << std::endl;
+        std::cout << "Enter" << std::endl;
+
         int choice = 0;
         std::cin >> choice;
-        while (std::cin.fail() || choice < 0 || choice > 1) {
+        while (std::cin.fail() || choice < 0 || choice > 8) {
             std::cout << "Wrong input.\n";
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -418,7 +428,16 @@ void SimulationProgram::vehicleMenu() {
         }
         switch (choice) {
             case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:{
+                    testStation[choice-1]->printTypes();
                 break;
+            }
             case 0:
             default:
                 loop = false;
@@ -739,9 +758,8 @@ void SimulationProgram::advance() {
 }
 
 void SimulationProgram::testMenu() {
-
     for (auto & i : testTrain)
-        i->printTypes();
+        i->printIncomplete();
 
 }
 

@@ -47,6 +47,7 @@ void Station::incomingVehicle(const std::vector<std::shared_ptr<Vehicle>>& aVehi
 }
 
 void Station::printTypes() {
+    std::cout << stationName << std::endl;
     for (auto & stationVehicle : stationVehicles) {
         std::cout << "Types: " << stationVehicle->getType() << std::endl;
     }

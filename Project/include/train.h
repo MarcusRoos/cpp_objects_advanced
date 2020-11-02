@@ -53,6 +53,7 @@ public:
     double getSpeed(){return maxSpeed;}
     bool getDelayed(){return delayed;}
     void printTypes();
+    void printIncomplete();
 };
 
 #endif //DT060G_TRAIN_H

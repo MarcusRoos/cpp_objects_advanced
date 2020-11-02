@@ -49,7 +49,7 @@ public:
     void populateTrain();
     void statisticsMenu();
     void printStatistics();
-    void vehicleMenu();
+    void printSpecificStation();
     void printSpecificTrain();
     void printTimeTable();
     void testMenu();

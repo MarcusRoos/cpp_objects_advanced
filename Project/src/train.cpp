@@ -101,3 +101,9 @@ std::string Train::getState(State) {
             return "Null";
     }
 }
+
+void Train::printIncomplete() {
+    if (state == INCOMPLETE){
+        std::cout << trainId << std::endl;
+    }
+}
