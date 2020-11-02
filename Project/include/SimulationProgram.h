@@ -38,8 +38,9 @@ private:
     int amountSuccess;
     int totalDelay;
     int TICK;
+    std::ofstream outFile;
 public:
-    SimulationProgram(Simulator* simulation);
+    explicit SimulationProgram(Simulator* simulation);
     void runSubMenu();
     void run();
     void runLogmenu();
@@ -55,6 +56,7 @@ public:
     void changeTick();
     void scheduleEvents();
     void advance();
+    void writeToFile(const std::string& aString);
     bool tryBuild(int trainId);
     void readyTrain( int trainId );
     int dispatchTrain( int trainId );
