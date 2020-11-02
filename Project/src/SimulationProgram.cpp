@@ -34,9 +34,9 @@ void SimulationProgram::run() {
         std::cout << "3. Next event" << std::endl;
         std::cout << "4. Finish (Complete simulation)" << std::endl;
         std::cout << "5. Statistics menu" << std::endl;
-        std::cout << "6. Train menu" << std::endl;
-        std::cout << "7. Station menu" << std::endl;
-        std::cout << "8. Vehicle menu"<< std::endl;
+        std::cout << "6. Print time table for all trains" << std::endl;
+        std::cout << "7. Print information for one specific train" << std::endl;
+        std::cout << "8. Print one specific station"<< std::endl;
         std::cout << "9. Tester." << std::endl;
         std::cout << "0. Exit" << std::endl;
         std::cout << "Enter choice" << std::endl;
@@ -71,7 +71,7 @@ void SimulationProgram::run() {
                 statisticsMenu();
                 break;
             case 6:
-                trainMenu();
+                printTimeTable();
                 break;
             case 7:
                 stationMenu();
@@ -354,7 +354,7 @@ void SimulationProgram::statisticsMenu() {
                 break;
             }
             case 3:
-                trainMenu();
+                printTimeTable();
                 break;
             case 4:
                 stationMenu();
@@ -370,41 +370,12 @@ void SimulationProgram::statisticsMenu() {
     }
 }
 
-void SimulationProgram::trainMenu() {
-    bool loop = true;
-    while (loop) {
-        std::cout << "===== Train menu =====" << std::endl;
-        std::cout << "1. Search train by number" << std::endl;
-        std::cout << "2. Search train by vehicle id" << std::endl;
-        std::cout << "3. Change log level [low VAR]" << std::endl;
-        std::cout << "0. Exit" << std::endl;
-        std::cout << "Enter choice" << std::endl;
-        int choice = 0;
-        std::cin >> choice;
-        while (std::cin.fail() || choice < 0 || choice > 3) {
-            std::cout << "Wrong input.\n";
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cin >> choice;
-        }
-        if (choice == 0) {
-            choice = 4;
-        }
-        switch (choice) {
-            case 1:
-
-                break;
-            case 2:
-
-                break;
-            case 3:
-                runLogmenu();
-                break;
-            case 0:
-            default:
-                loop = false;
-                break;
-        }
+void SimulationProgram::printTimeTable() {
+    for (auto & i : testTrain){
+        std::cout << "Train: "<< i->getID()
+        << " "<<i->getFromStation() << " --> " << i->getToStation()
+        << " | " << i->getDepPrint() << " <---> "
+        << i->getArrPrint() << "|" << std::endl;
     }
 }
 
@@ -414,12 +385,11 @@ void SimulationProgram::stationMenu() {
         std::cout << "===== Station menu =====" << std::endl;
         std::cout << "1. Show station names" << std::endl;
         std::cout << "2. Show station by name" << std::endl;
-        std::cout << "3. Change log level [low VAR]" << std::endl;
         std::cout << "0. Exit" << std::endl;
         std::cout << "Enter choice" << std::endl;
         int choice = 0;
         std::cin >> choice;
-        while (std::cin.fail() || choice < 0 || choice > 3) {
+        while (std::cin.fail() || choice < 0 || choice > 2) {
             std::cout << "Wrong input.\n";
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -432,9 +402,6 @@ void SimulationProgram::stationMenu() {
                 break;
             case 2:
 
-                break;
-            case 3:
-                runLogmenu();
                 break;
             case 0:
             default:
@@ -449,12 +416,11 @@ void SimulationProgram::vehicleMenu() {
     while (loop) {
         std::cout << "===== Vehicle menu =====" << std::endl;
         std::cout << "1. Show vehicle by id" << std::endl;
-        std::cout << "2. Change log level [low VAR]" << std::endl;
         std::cout << "0. Exit" << std::endl;
         std::cout << "Enter choice" << std::endl;
         int choice = 0;
         std::cin >> choice;
-        while (std::cin.fail() || choice < 0 || choice > 2) {
+        while (std::cin.fail() || choice < 0 || choice > 1) {
             std::cout << "Wrong input.\n";
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -462,9 +428,6 @@ void SimulationProgram::vehicleMenu() {
         }
         switch (choice) {
             case 1:
-                break;
-            case 2:
-                runLogmenu();
                 break;
             case 0:
             default:

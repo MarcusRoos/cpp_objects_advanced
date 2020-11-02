@@ -51,7 +51,7 @@ public:
     void printStatistics();
     void vehicleMenu();
     void stationMenu();
-    void trainMenu();
+    void printTimeTable();
     void testMenu();
     void changeTick();
     void scheduleEvents();
