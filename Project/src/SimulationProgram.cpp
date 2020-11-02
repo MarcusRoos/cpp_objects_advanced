@@ -64,10 +64,9 @@ void SimulationProgram::run() {
                 std::cout << "Next event" <<std::endl;
                 break;
             case 4:
-                std::cout << "Finish/Complete simulation" <<std::endl;
+                again = false;
                 break;
             case 5:
-                std::cout << "Change log level" <<std::endl;
                 statisticsMenu();
                 break;
             case 6:
@@ -328,38 +327,33 @@ void SimulationProgram::statisticsMenu() {
     bool loop=true;
     while (loop) {
         std::cout << "===== Log level menu =====" << std::endl;
-        std::cout << "1. Change log level [low VAR]" << std::endl;
-        std::cout << "2. Print statistics" << std::endl;
-        std::cout << "3. Train menu" << std::endl;
-        std::cout << "4. Station menu" << std::endl;
-        std::cout << "5. Vehicle menu" << std::endl;
+        std::cout << "1. Print statistics" << std::endl;
+        std::cout << "2. Print time table for all trains" << std::endl;
+        std::cout << "3. Print information for one specific train" << std::endl;
+        std::cout << "4. Print one specific station"<< std::endl;
         std::cout << "0. Return" << std::endl;
         std::cout << "Enter choice" << std::endl;
         int choice = 0;
         std::cin >> choice;
-        while (std::cin.fail() || choice < 0 || choice > 5) {
+        while (std::cin.fail() || choice < 0 || choice > 4) {
             std::cout << "Wrong input.\n";
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
             std::cin >> choice;
         }
         switch (choice) {
-            case 1:
-                std::cout << "Low log level" << std::endl;
-                runLogmenu();
-                break;
-            case 2: {
+            case 1: {
                 std::cout << "Print statistics" << std::endl;
                 printStatistics();
                 break;
             }
-            case 3:
+            case 2:
                 printTimeTable();
                 break;
-            case 4:
+            case 3:
                 printSpecificTrain();
                 break;
-            case 5:
+            case 4:
                 printSpecificStation();
                 break;
             case 0:
@@ -436,6 +430,10 @@ void SimulationProgram::printSpecificStation() {
             case 7:
             case 8:{
                     testStation[choice-1]->printTypes();
+                    std::string tmpString = testStation[choice-1]->getStationname();
+                    for (auto & i : testTrain){
+                        i->printAtStation(tmpString);
+                    }
                 break;
             }
             case 0:

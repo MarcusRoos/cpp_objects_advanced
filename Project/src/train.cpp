@@ -107,3 +107,9 @@ void Train::printIncomplete() {
         std::cout << "Incomplete: " <<trainId << std::endl;
     }
 }
+
+void Train::printAtStation(std::string tmpStat) {
+    if ((state == ARRIVED || state == FINISHED) && tmpStat == toStation){
+        std::cout <<"Train " <<getID()<< " has finished at " << toStation << std::endl;
+    }
+}

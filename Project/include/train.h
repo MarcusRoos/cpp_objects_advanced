@@ -54,6 +54,7 @@ public:
     bool getDelayed(){return delayed;}
     void printTypes();
     void printIncomplete();
+    void printAtStation(std::string tmpStat);
 };
 
 #endif //DT060G_TRAIN_H
