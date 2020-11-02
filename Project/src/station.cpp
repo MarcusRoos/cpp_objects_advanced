@@ -5,6 +5,7 @@
 //
 
 #include <algorithm>
+#include <utility>
 #include "station.h"
 
 Station::Station() {
@@ -12,42 +13,41 @@ Station::Station() {
 }
 
 Station::Station(std::string aStationname, std::vector<std::shared_ptr<Vehicle>> aVehicle) {
-    stationName = aStationname;
+    stationName = std::move(aStationname);
     stationVehicles = std::move(aVehicle);
 }
 
 std::shared_ptr<Vehicle> Station::outgoingVehicle(int atype) {
     std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
     tmpVehicle = stationVehicles;
-    for (int i=0; i<tmpVehicle.size(); i++){
-        if (tmpVehicle[i] != NULL && tmpVehicle[i]->getType() == atype){
+    for (size_t i=0; i<tmpVehicle.size(); i++){
+        if (tmpVehicle[i] != nullptr && tmpVehicle[i]->getType() == atype){
             stationVehicles.erase(stationVehicles.begin() + i);
             return tmpVehicle[i];
         }
     }
-    return NULL;
+    return nullptr;
 }
 
 bool Station::testVehicle(int atype) {
     std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
     tmpVehicle = stationVehicles;
-    for (int i=0; i<tmpVehicle.size(); i++){
-        if (tmpVehicle[i] != NULL && tmpVehicle[i]->getType() == atype){
+    for (auto & i : tmpVehicle){
+        if (i != nullptr && i->getType() == atype){
             return true;
         }
     }
     return false;
 }
 
-void Station::incomingVehicle(std::vector<std::shared_ptr<Vehicle>> aVehicle) {
-    for (int i=0; i<aVehicle.size(); i++) {
-        std::cout << "pushing back: " << aVehicle[i]->getType() << " to station " << stationName << std::endl;
-        stationVehicles.push_back(aVehicle[i]);
+void Station::incomingVehicle(const std::vector<std::shared_ptr<Vehicle>>& aVehicle) {
+    for (auto & i : aVehicle) {
+        stationVehicles.push_back(i);
     }
 }
 
 void Station::printTypes() {
-    for (int i = 0; i < stationVehicles.size(); i++) {
-        std::cout << "Types: " << stationVehicles[i]->getType() << std::endl;
+    for (auto & stationVehicle : stationVehicles) {
+        std::cout << "Types: " << stationVehicle->getType() << std::endl;
     }
 }

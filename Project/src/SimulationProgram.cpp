@@ -49,6 +49,7 @@ void SimulationProgram::run() {
         switch(choice)
         {
             case 0:
+            default:
                 again = false;
                 break;
             case 1:
@@ -130,12 +131,12 @@ void SimulationProgram::populateStation() {
     {
         tmpStat.push_back(line);
     }
-    for (int i=0; i<tmpStat.size(); i++) {
+    for (const auto & i : tmpStat) {
         std::stringstream ss;
         char delim;
         std::string stationName;
         int tmpID = 0, tmpType = 6, param1 = 0, param2 = 0, choice;
-        ss << tmpStat[i];
+        ss << i;
         ss >> stationName;
         ss >> delim;
         while (!ss.eof()) {
@@ -219,9 +220,9 @@ void SimulationProgram::populateMap() {
     }
     int tmpDist=0;
     std::string tmpDep, tmpDest;
-    for (int i=0; i<tmpMap.size(); i++) {
+    for (const auto & i : tmpMap) {
         std::stringstream ss;
-        ss << tmpMap[i];
+        ss << i;
         ss >> tmpDep;
         ss >> tmpDest;
         ss >> tmpDist;
@@ -243,9 +244,9 @@ void SimulationProgram::populateTrain() {
     int tmpID=0, tmpInt=0, adepartureTime=0, aarrivalTime=0;
     std::string afromStation, atoStation, tmpdepartureTime, tmparrivalTime;
     double amaxSpeed;
-    for (int i=0; i<tmpTrain.size(); i++) {
+    for (const auto & i : tmpTrain) {
         std::stringstream ss;
-        ss << tmpTrain[i];
+        ss << i;
         ss >> tmpID;
         ss >> afromStation;
         ss >> atoStation;
@@ -312,10 +313,10 @@ void SimulationProgram::runLogmenu() {
 
 void SimulationProgram::printStatistics() {
     std::cout << "Number of vehicles at start of simulation:" << std::endl;
-    for (int k=0; k<testStation.size(); k++){
-        std::cout << testStation[k]->getStationname() << " = " ;
-        std::cout <<testStation[k]->getvecSize() << std::endl;
-        testStation[k]->printTypes();
+    for (auto & k : testStation){
+        std::cout << k->getStationname() << " = " ;
+        std::cout <<k->getvecSize() << std::endl;
+        k->printTypes();
     }
 }
 
@@ -422,8 +423,8 @@ void SimulationProgram::stationMenu() {
         }
         switch (choice) {
             case 1:
-                for (int i=0; i<testStation.size(); i++)
-                    std::cout << testStation[i]->getStationname() << std::endl;
+                for (auto & i : testStation)
+                    std::cout << i->getStationname() << std::endl;
                 break;
             case 2:
 
@@ -473,18 +474,18 @@ void SimulationProgram::scheduleEvents() {
     std::vector<std::shared_ptr<Train>> tmpTrain;
     tmpTrain = testTrain;
     std::sort(tmpTrain.begin(), tmpTrain.end(), sortByName);
-    for (int i=0; i<tmpTrain.size(); i++) {
-        int depTime = tmpTrain[i]->getDepTime() - BUILDTIME;
-        int ID = tmpTrain[i]->getID();
+    for (auto & i : tmpTrain) {
+        int depTime = i->getDepTime() - BUILDTIME;
+        int ID = i->getID();
         simulation->scheduleEvent(new BuildTrain(simulation,this,depTime,ID));
     }
 }
 
 bool SimulationProgram::tryBuild(int trainId) {
     std::shared_ptr<Train> tmpTrain;
-    for (int i=0; i<testTrain.size(); i++){
-        if (trainId == testTrain[i]->getID()){
-            tmpTrain = testTrain[i];
+    for (auto & i : testTrain){
+        if (trainId == i->getID()){
+            tmpTrain = i;
             break;
         }
     }
@@ -515,9 +516,9 @@ void SimulationProgram::EndTrain(int trainId) {
     std::cout << "Trying to disassemble... " << trainId <<"....."<< std::endl;
 
     std::shared_ptr<Train> tmpTrain;
-    for (int i=0; i<testTrain.size(); i++){
-        if (trainId == testTrain[i]->getID()){
-            tmpTrain = testTrain[i];
+    for (auto & i : testTrain){
+        if (trainId == i->getID()){
+            tmpTrain = i;
             break;
         }
     }
@@ -532,9 +533,9 @@ void SimulationProgram::EndTrain(int trainId) {
 
 void SimulationProgram::readyTrain(int trainId) {
     std::shared_ptr<Train> tmpTrain;
-    for (int i=0; i<testTrain.size(); i++){
-        if (trainId == testTrain[i]->getID()){
-            tmpTrain = testTrain[i];
+    for (auto & i : testTrain){
+        if (trainId == i->getID()){
+            tmpTrain = i;
             break;
         }
     }
@@ -546,9 +547,9 @@ void SimulationProgram::readyTrain(int trainId) {
 
 int SimulationProgram::dispatchTrain(int trainId) {
     std::shared_ptr<Train> tmpTrain;
-    for (int i=0; i<testTrain.size(); i++){
-        if (trainId == testTrain[i]->getID()){
-            tmpTrain = testTrain[i];
+    for (auto & i : testTrain){
+        if (trainId == i->getID()){
+            tmpTrain = i;
             break;
         }
     }
@@ -573,9 +574,9 @@ int SimulationProgram::dispatchTrain(int trainId) {
 
 void SimulationProgram::arriveTrain(int trainId) {
     std::shared_ptr<Train> tmpTrain;
-    for (int i=0; i<testTrain.size(); i++){
-        if (trainId == testTrain[i]->getID()){
-            tmpTrain = testTrain[i];
+    for (auto & i : testTrain){
+        if (trainId == i->getID()){
+            tmpTrain = i;
             break;
         }
     }
@@ -670,8 +671,8 @@ void SimulationProgram::testMenu() {
 
 
     std::cout << "Dedicated to testing functions" << std::endl;
-    /*
-    for (int i=0; i<testTrain.size(); i++)
-        testTrain[i]->printTypes();
-*/
+
+    for (auto & i : testTrain)
+        i->printTypes();
+
 }

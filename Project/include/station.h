@@ -28,7 +28,7 @@ public:
     std::string getStationname(){return stationName;}
     int getvecSize(){return stationVehicles.size();}
     std::shared_ptr<Vehicle> outgoingVehicle(int atype);
-    void incomingVehicle(std::vector<std::shared_ptr<Vehicle>> aVehicle);
+    void incomingVehicle(const std::vector<std::shared_ptr<Vehicle>>& aVehicle);
     void printTypes();
     bool testVehicle(int atype);
 };

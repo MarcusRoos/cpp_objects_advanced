@@ -17,7 +17,7 @@ enum State {
     FINISHED
 };
 
-const int DELAYTIME = 20;
+const int DELAYTIME = 10;
 const int BUILDTIME = 30;
 const int READYTIME = 10;
 const int LEAVETIME = 10;

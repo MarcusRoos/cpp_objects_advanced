@@ -33,7 +33,7 @@ public:
     Train();
     ~Train() = default;;
     Train(int aID, std::string aFrom, std::string aTo, int aDtime, int aAtime, double aSpeed, std::vector<int> aLogicalVehicles);
-    bool assembleVehicle(std::vector<std::shared_ptr<Station>> aStation);
+    bool assembleVehicle(const std::vector<std::shared_ptr<Station>>& aStation);
     void disassembleTrain(std::vector<std::shared_ptr<Station>> aStation);
     int getsizeVehicle(){return trainVehicles.size();}
     int getID(){return trainId;}
