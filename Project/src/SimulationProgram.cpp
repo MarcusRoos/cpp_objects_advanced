@@ -654,6 +654,7 @@ void SimulationProgram::advance() {
     else {
         std::cout << "Simulation is over! " << std::endl;
     }
+
     int tmpT=0, tmpH=0, tmpM=0;
     tmpT = simulation->getTime();
     while (tmpT >= 60){
@@ -661,8 +662,7 @@ void SimulationProgram::advance() {
         tmpT -= 60;
     }
     tmpM = tmpT;
-
-    std::cout << "Time: "<<  std::setw(2) << std::setfill('0') << tmpH
+    std::cout<< std::endl << "Current time: "<<  std::setw(2) << std::setfill('0') << tmpH
     <<  ":" <<  std::setw(2) << std::setfill('0') <<tmpM << std::endl;
 }
 

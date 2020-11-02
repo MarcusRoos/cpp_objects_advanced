@@ -4,6 +4,7 @@
 // StudentID: Maro1904
 //
 
+#include <iomanip>
 #include "Simulator.h"
 #include "Events.h"
 
@@ -17,20 +18,31 @@ Simulator::~Simulator() {
 }
 
 bool Simulator::step(int time){
-    currTime += time;
+    int tmpTime=0;
+    tmpTime = currTime + time;
+    while (currTime < tmpTime) {
+        currTime++;
+        while (eventQueue.top()->getTime() <= currTime) {
+            int tmpT=0, tmpH=0, tmpM=0;
+            tmpT = currTime;
+            while (tmpT >= 60){
+                tmpH++;
+                tmpT -= 60;
+            }
+            tmpM = tmpT;
+            std::cout << "["<<  std::setw(2) << std::setfill('0') << tmpH
+                      <<  ":" <<  std::setw(2) << std::setfill('0') <<tmpM << "]";
 
-    while(eventQueue.top()->getTime() <= currTime) {
+            Event *nextEvent = eventQueue.top();
+            eventQueue.pop();
+            nextEvent->processEvent();
 
-        Event * nextEvent = eventQueue.top();
-        eventQueue.pop();
-        nextEvent->processEvent();
+            if (eventQueue.empty()) {
+                return false;
+            }
+            delete nextEvent;
 
-        if (eventQueue.empty())
-        {
-            return false;
         }
-        delete nextEvent;
-
     }
     return currTime < SIMMING;
 }

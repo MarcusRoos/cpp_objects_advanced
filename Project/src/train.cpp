@@ -31,7 +31,6 @@ Train::Train(int aID, std::string aFrom, std::string aTo, int aDtime,
 
 bool Train::assembleVehicle(const std::vector<std::shared_ptr<Station>>& aStation) {
     bool tester=true;
-    std::cout << std::endl << std::endl;
     std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
     for (auto & k : aStation) {
         if (k->getStationname() == fromStation) {
