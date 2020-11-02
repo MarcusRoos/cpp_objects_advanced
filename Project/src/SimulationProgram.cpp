@@ -74,7 +74,7 @@ void SimulationProgram::run() {
                 printTimeTable();
                 break;
             case 7:
-                stationMenu();
+                printSpecificTrain();
                 break;
             case 8:
                 vehicleMenu();
@@ -357,7 +357,7 @@ void SimulationProgram::statisticsMenu() {
                 printTimeTable();
                 break;
             case 4:
-                stationMenu();
+                printSpecificTrain();
                 break;
             case 5:
                 vehicleMenu();
@@ -379,36 +379,26 @@ void SimulationProgram::printTimeTable() {
     }
 }
 
-void SimulationProgram::stationMenu() {
-    bool loop = true;
-    while (loop) {
-        std::cout << "===== Station menu =====" << std::endl;
-        std::cout << "1. Show station names" << std::endl;
-        std::cout << "2. Show station by name" << std::endl;
-        std::cout << "0. Exit" << std::endl;
-        std::cout << "Enter choice" << std::endl;
-        int choice = 0;
-        std::cin >> choice;
-        while (std::cin.fail() || choice < 0 || choice > 2) {
-            std::cout << "Wrong input.\n";
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cin >> choice;
-        }
-        switch (choice) {
-            case 1:
-                for (auto & i : testStation)
-                    std::cout << i->getStationname() << std::endl;
-                break;
-            case 2:
-
-                break;
-            case 0:
-            default:
-                loop = false;
-                break;
+void SimulationProgram::printSpecificTrain() {
+    std::cout << "Print a specific train by entering its ID. " << std::endl;
+    std::cout << "Trains ID range from 1 to 130. " << std::endl;
+    std::cout << "ID: ";
+    int tmpIdx=0;
+    std::cin >> tmpIdx;
+    while (std::cin.fail() || tmpIdx < 1 || tmpIdx > 130) {
+        std::cout << "Wrong input.\n";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin >> tmpIdx;
+    }
+    std::shared_ptr<Train> tmpTrain;
+    for (auto & i : testTrain){
+        if (tmpIdx == i->getID()){
+            tmpTrain = i;
+            break;
         }
     }
+    tmpTrain->printTypes();
 }
 
 void SimulationProgram::vehicleMenu() {

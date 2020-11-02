@@ -41,7 +41,7 @@ public:
     std::string getToStation(){return toStation;}
     std::string getArrPrint(){return arrPrint;}
     std::string getDepPrint(){return depPrint;}
-    std::string getState(State aState);
+    std::string getState(State);
     int getDepTime(){return departureTime;}
     int getArrTime(){return arrivalTime;}
     int getTmpDepTime(){return tmpDepartureTime;}

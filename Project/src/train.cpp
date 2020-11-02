@@ -68,12 +68,19 @@ void Train::disassembleTrain(const std::vector<std::shared_ptr<Station>>& aStati
 }
 
 void Train::printTypes() {
-    if (state == INCOMPLETE){
-        std::cout << "incomplete: " << trainId << std::endl;
+    std::cout << "Train " << trainId << " " << getState(getState())
+    << " currently have these vehicles attached to it: " << std::endl;
+    for (auto & i : trainVehicles){
+        std::cout << "Vehicle ID:" <<i->getId() << std::endl;
+        std::cout << "Vehicle Type: " << i->getType() << std::endl;
     }
+    std::cout << "It's leaving from station " << fromStation
+    << " and heading for " << toStation << std::endl;
+    std::cout << "It will depart at " << getDepPrint() << " and arrive at "
+    << getArrPrint() << std::endl;
 }
 
-std::string Train::getState(State aState) {
+std::string Train::getState(State) {
     switch(state)
     {
         case 0:

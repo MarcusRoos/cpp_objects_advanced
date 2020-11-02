@@ -50,7 +50,7 @@ public:
     void statisticsMenu();
     void printStatistics();
     void vehicleMenu();
-    void stationMenu();
+    void printSpecificTrain();
     void printTimeTable();
     void testMenu();
     void changeTick();
