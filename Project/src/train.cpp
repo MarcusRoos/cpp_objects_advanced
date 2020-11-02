@@ -104,6 +104,6 @@ std::string Train::getState(State) {
 
 void Train::printIncomplete() {
     if (state == INCOMPLETE){
-        std::cout << trainId << std::endl;
+        std::cout << "Incomplete: " <<trainId << std::endl;
     }
 }
