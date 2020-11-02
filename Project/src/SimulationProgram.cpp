@@ -469,15 +469,6 @@ void SimulationProgram::vehicleMenu() {
     }
 }
 
-void SimulationProgram::testMenu() {
-    std::cout << "Dedicated to testing functions" << std::endl;
-
-
-    for (int i=0; i<testTrain.size(); i++) {
-        testTrain[i]->printTypes();
-    }
-}
-
 void SimulationProgram::scheduleEvents() {
     std::vector<std::shared_ptr<Train>> tmpTrain;
     tmpTrain = testTrain;
@@ -673,4 +664,14 @@ void SimulationProgram::advance() {
 
     std::cout << "Time: "<<  std::setw(2) << std::setfill('0') << tmpH
     <<  ":" <<  std::setw(2) << std::setfill('0') <<tmpM << std::endl;
+}
+
+void SimulationProgram::testMenu() {
+
+
+    std::cout << "Dedicated to testing functions" << std::endl;
+    /*
+    for (int i=0; i<testTrain.size(); i++)
+        testTrain[i]->printTypes();
+*/
 }

@@ -29,6 +29,7 @@ Train::Train(int aID, std::string aFrom, std::string aTo, int aDtime,
 
 bool Train::assembleVehicle(std::vector<std::shared_ptr<Station>> aStation) {
     bool tester=true;
+    int tmp=0;
     std::cout << std::endl << std::endl;
     std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
     for (int k = 0; k < aStation.size(); k++) {
@@ -41,20 +42,19 @@ bool Train::assembleVehicle(std::vector<std::shared_ptr<Station>> aStation) {
                                 aStation[k]->outgoingVehicle(
                                         logicalVehicles[i]));
 
-                    } else {
-                        tester = false;
+                        } else {
+                            tester = false;
                     }
                 }
-            }
-            else{
-                tester = false;
+                } else {
+                        tester = false;
+                    }
+
+                }
             }
 
 
-        }
-    }
     return tester;
-
 }
 
 void Train::disassembleTrain(std::vector<std::shared_ptr<Station>> aStation) {
@@ -67,9 +67,16 @@ void Train::disassembleTrain(std::vector<std::shared_ptr<Station>> aStation) {
 }
 
 void Train::printTypes() {
-
-    if (state == INCOMPLETE) {
-        std::cout << trainId << std::endl;
+    if (state == INCOMPLETE){
+        std::cout << "incomplete: " << trainId << std::endl;
+        std::cout << "Logical: " << std::endl;
+        for (int i=0; i<logicalVehicles.size(); i++){
+            std::cout << logicalVehicles[i] << +",";
+        }
+        std::cout << std::endl << "TrainVehicle: " << std::endl;
+        for (int i=0; i<trainVehicles.size(); i++){
+            std::cout << trainVehicles[i]->getType() << +",";
+        }
     }
 
 }
