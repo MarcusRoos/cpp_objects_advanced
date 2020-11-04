@@ -53,15 +53,24 @@ int CoachCar::getSeats() {
     return seats;
 }
 
-int CoachCar::getInternet() {
-    return internet;
+std::string CoachCar::getInternet() {
+    if (internet == 1){
+        return "Yes";
+    }
+    else
+        return "No";
 }
+
 
 /**
  * CLASS SLEEPINGCAR
  * **/
 SleepingCar::SleepingCar(int aId, int aType, int aBeds) : Vehicle(aId, aType) {
     beds = aBeds;
+}
+
+int SleepingCar::getBeds() {
+    return beds;
 }
 
 /**
@@ -73,11 +82,23 @@ OpenFreight::OpenFreight(int aId, int aType, int aCapacity, int aSquaremt)
     areaSqm = aSquaremt;
 }
 
+int OpenFreight::getTon() {
+    return capacityTons;
+}
+
+int OpenFreight::getSqm() {
+    return areaSqm;
+}
+
 /**
  * CLASS COVEREDFREIGHT
  * **/
 CoveredFreight::CoveredFreight(int aId, int aType, int aCapacityC) : Vehicle(aId, aType) {
     capacityCubicm = aCapacityC;
+}
+
+int CoveredFreight::getCubic() {
+    return capacityCubicm;
 }
 
 /**
@@ -89,6 +110,14 @@ DieselEngine::DieselEngine(int aId, int aType, int aMaxspeed, int aFuelcon)
     fuelConsump = aFuelcon;
 }
 
+int DieselEngine::getDieselSpeed() {
+    return maxSpeed;
+}
+
+int DieselEngine::getFuelConsump() {
+    return fuelConsump;
+}
+
 /**
  * CLASS ELECTRICALENGINE
  * **/
@@ -96,4 +125,11 @@ ElectricalEngine::ElectricalEngine(int aId, int aType, int aMaxspeed,
                                    int aPowerKW) : Vehicle(aId, aType) {
     maxSpeed = aMaxspeed;
     powerKW = aPowerKW;
+}
+
+int ElectricalEngine::getElectricSpeed(){
+    return maxSpeed;
+}
+int ElectricalEngine::getEffectKW() {
+    return powerKW;
 }

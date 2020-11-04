@@ -28,6 +28,16 @@ public:
     virtual ~Vehicle() = default;
     unsigned int getId();
     unsigned int getType();
+    virtual int getSeats() {return 0;}
+    virtual std::string getInternet() {return 0;}
+    virtual int getBeds() {return 0;}
+    virtual int getTon() {return 0;}
+    virtual int getSqm() {return 0;}
+    virtual int getCubic() {return 0;}
+    virtual int getElectricSpeed() {return 0;}
+    virtual int getEffectKW() {return 0;}
+    virtual int getDieselSpeed() {return 0;}
+    virtual int getFuelConsump() {return 0;}
     virtual std::string printType() {return 0;}
 };
 
@@ -36,6 +46,8 @@ protected:
     int seats, internet;
 public:
     CoachCar(int aId, int aType, int aSeats, int aInternet);
+    int getSeats() override;
+    std::string getInternet() override;
     virtual std::string printType() {return "Coach car";}
 };
 
@@ -43,6 +55,7 @@ class SleepingCar : public Vehicle{
 protected:
     int beds;
 public:
+    int getBeds() override;
     SleepingCar(int aId, int aType, int aBeds);
     virtual std::string printType() {return "Sleeping car";}
 };
@@ -52,6 +65,8 @@ protected:
     int capacityTons, areaSqm;
 public:
     OpenFreight(int aId, int aType, int aCapacity, int aSquaremt);
+    int getTon() override;
+    int getSqm() override;
     virtual std::string printType() {return "Open freight";}
 };
 
@@ -61,6 +76,7 @@ protected:
 public:
     CoveredFreight(int aId, int aType, int aCapacityC);
     virtual std::string printType() {return "Covered freight";}
+    virtual int getCubic() override;
 };
 
 class DieselEngine : public Vehicle{
@@ -69,6 +85,8 @@ private:
 public:
     DieselEngine(int aId, int aType, int aMaxspeed, int aFuelcon);
     virtual std::string printType() {return "Diesel engine";}
+    int getDieselSpeed() override;
+    int getFuelConsump() override;
 };
 
 
@@ -79,6 +97,8 @@ public:
     ElectricalEngine(int aId, int aType, int aMaxspeed,
                      int aPowerKW);
     virtual std::string printType() {return "Electrical engine";}
+    int getElectricSpeed() override;
+    int getEffectKW() override;
 };
 
 #endif //DT060G_VEHICLE_H

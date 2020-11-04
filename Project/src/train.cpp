@@ -20,7 +20,6 @@ Train::Train(int aID, std::string aFrom, std::string aTo, int aDtime,
     fromStation = std::move(aFrom);
     toStation = std::move(aTo);
     departureTime = aDtime;
-    tmpDepartureTime = aDtime;
     arrivalTime = aAtime;
     tmpArrivalTime = aAtime;
     maxSpeed = aSpeed;
