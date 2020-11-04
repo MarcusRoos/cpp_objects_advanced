@@ -287,10 +287,7 @@ void SimulationProgram::populateTrain() {
 }
 
 void SimulationProgram::printStatistics() {
-    std::cout << "Number of vehicles at start of simulation:" << std::endl;
     for (auto & k : testStation){
-        std::cout << k->getStationname() << " = " ;
-        std::cout <<k->getvecSize() << std::endl;
         k->printTypes();
     }
 }

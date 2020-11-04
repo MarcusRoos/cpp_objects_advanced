@@ -48,7 +48,7 @@ void Station::incomingVehicle(const std::vector<std::shared_ptr<Vehicle>>& aVehi
 
 void Station::printTypes() {
     std::cout << std::endl << "======" << stationName << "======" << std::endl;
-    std::cout << "Available vehicles" << std::endl;
+    std::cout << "Available vehicles " << stationVehicles.size() << std::endl;
     for (auto &i : stationVehicles) {
         int tmpType = 0;
         std::cout << "Types: " << i->printType() << " ID: " <<
@@ -63,16 +63,16 @@ void Station::printTypes() {
                 std::cout << " Beds: " <<i->getBeds() << std::endl;
                 break;
             case 2:
-                std::cout << " Capacity tons: " <<i->getTon() << " Sqm capacity "<< i->getSqm() << std::endl;
+                std::cout << " Capacity tons: " <<i->getTon() << " Sqm capacity: "<< i->getSqm() << std::endl;
                 break;
             case 3:
                 std::cout << " Cubic meter: " <<i->getCubic() << std::endl;
                 break;
             case 4:
-                std::cout << " Max speed: " <<i->getElectricSpeed() << " Effect KW "<< i->getEffectKW() << std::endl;
+                std::cout << " Max speed: " <<i->getElectricSpeed() << " Effect KW: "<< i->getEffectKW() << std::endl;
                 break;
             case 5:
-                std::cout << " Max speed: " <<i->getDieselSpeed() << " Diesel consump litre/h "<< i->getFuelConsump() << std::endl;
+                std::cout << " Max speed: " <<i->getDieselSpeed() << " Diesel consump litre/h: "<< i->getFuelConsump() << std::endl;
                 break;
         }
     }
