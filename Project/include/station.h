@@ -31,6 +31,7 @@ public:
     void incomingVehicle(const std::vector<std::shared_ptr<Vehicle>>& aVehicle);
     void printTypes();
     bool testVehicle(int atype);
+    bool getVehicleID(unsigned int aID);
 };
 
 #endif //DT060G_STATION_H

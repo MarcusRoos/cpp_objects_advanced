@@ -44,7 +44,6 @@ public:
     explicit SimulationProgram(Simulator* simulation);
     void runSubMenu();
     void run();
-    void runLogmenu();
     void populateStation();
     void populateMap();
     void populateTrain();
@@ -56,6 +55,7 @@ public:
     void endStats();
     void changeTick();
     void scheduleEvents();
+    void followVehicle();
     void advance();
     void writeToFile(const std::string& aString);
     bool tryBuild(int trainId);

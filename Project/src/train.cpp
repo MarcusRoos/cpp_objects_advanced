@@ -120,3 +120,18 @@ void Train::printIncomplete() {
                 std::cout << trainId << ",";
     }
 }
+
+bool Train::getVehicleID(unsigned int aID) {
+    bool inTrain=false;
+    for (auto & i : trainVehicles){
+            if (aID == i->getId()) {
+                inTrain = true;
+                std::cout << "Vehicle ID " << i->getId()
+                          << " is attached to train "
+                          << trainId << " and heading from " << fromStation
+                          << " to " <<
+                          toStation << std::endl;
+            }
+    }
+    return inTrain;
+}

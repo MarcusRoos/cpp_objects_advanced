@@ -37,7 +37,7 @@ void SimulationProgram::run() {
         std::cout << "6. Print time table for all trains" << std::endl;
         std::cout << "7. Print information for one specific train" << std::endl;
         std::cout << "8. Print one specific station"<< std::endl;
-        std::cout << "9. Tester." << std::endl;
+        std::cout << "9. Following vehicle by ID." << std::endl;
         std::cout << "0. Exit" << std::endl;
         std::cout << "Enter choice" << std::endl;
         int choice = 0;
@@ -83,7 +83,7 @@ void SimulationProgram::run() {
                 printSpecificStation();
                 break;
             case 9:
-                endStats();
+                followVehicle();
                 break;
         }
     }while(again);
@@ -283,39 +283,6 @@ void SimulationProgram::populateTrain() {
         testTrain.push_back(std::make_shared<Train>(
                 tmpID, afromStation, atoStation, adepartureTime, aarrivalTime, amaxSpeed, amountVehicles, aPrintDep, aPrintArr));
         amountVehicles.clear();
-    }
-}
-
-
-
-void SimulationProgram::runLogmenu() {
-    bool loop=true;
-    while (loop) {
-        std::cout << "===== Log level menu =====" << std::endl;
-        std::cout << "1. Low log level" << std::endl;
-        std::cout << "2. High log level" << std::endl;
-        std::cout << "0. Return" << std::endl;
-        std::cout << "Enter choice" << std::endl;
-        int choice = 0;
-        std::cin >> choice;
-        while (std::cin.fail() || choice < 0 || choice > 2) {
-            std::cout << "Wrong input.\n";
-            std::cin.clear();
-            std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-            std::cin >> choice;
-        }
-        switch (choice) {
-            case 1:
-                std::cout << "Low log level" << std::endl;
-                break;
-            case 2:
-                std::cout << "High log level" << std::endl;
-                break;
-            case 0:
-            default:
-                loop = false;
-                break;
-        }
     }
 }
 
@@ -774,4 +741,16 @@ void SimulationProgram::endStats() {
 
 void SimulationProgram::writeToFile(const std::string& aString) {
     outFile << aString;
+}
+
+void SimulationProgram::followVehicle() {
+    std::cout << "Enter ID of the vehicle to track. Vehicle IDs range from 1 to 741." << std::endl;
+    int tmpID=0;
+    std::cin >> tmpID;
+    for (auto & i : testTrain){
+        i->getVehicleID(tmpID);
+    }
+    for (auto & i : testStation){
+        i->getVehicleID(tmpID);
+    }
 }

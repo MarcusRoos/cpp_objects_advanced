@@ -54,3 +54,16 @@ void Station::printTypes() {
         stationVehicle->getId() << std::endl;
     }
 }
+
+bool Station::getVehicleID(unsigned int aID) {
+    bool inTrain=false;
+    for (auto & i : stationVehicles){
+        if (aID == i->getId()) {
+            inTrain = true;
+            std::cout << "Vehicle ID " << i->getId()
+                      << " is currently at station "
+                      << stationName << std::endl;
+        }
+    }
+    return inTrain;
+}

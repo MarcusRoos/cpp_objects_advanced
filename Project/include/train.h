@@ -53,7 +53,7 @@ public:
     void printTypes();
     void printIncomplete();
     void printComplete();
-    void printEndStatistics();
+    bool getVehicleID(unsigned int aID);
     void printAtStation(const std::string& tmpStat);
 };
 
