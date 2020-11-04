@@ -13,7 +13,7 @@
 #include "vehicle.h"
 /**
  Class Map
-
+ Keeps track of the distances between different stations.
  */
 class Map {
 protected:
@@ -23,7 +23,7 @@ public:
     Map();
     ~Map() = default;
     Map(std::string aDepstat, std::string adestStat, int aDist);
-    void printMap();
+    void printMap(const std::string& aStat, const std::string& bStat);
     std::string getDepstat(){return depStat;}
     std::string getDestStat(){return destStat;}
     int getDistance(){return distance;}

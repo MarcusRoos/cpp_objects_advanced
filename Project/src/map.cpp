@@ -17,8 +17,8 @@ Map::Map(std::string aDepstat, std::string adestStat, int aDist) {
     destStat = adestStat;
 }
 
-void Map::printMap() {
-    std::cout << depStat;
-    std::cout << " -> " << destStat << std::endl;
-    std::cout << "With a distance of: " << distance << std::endl;
+void Map::printMap(const std::string& aStat, const std::string& bStat) {
+    if ((aStat == depStat && bStat == destStat) || (aStat == destStat && bStat == depStat)) {
+    std::cout << distance << std::endl;
+    }
 }
