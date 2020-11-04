@@ -22,7 +22,7 @@ The run function, this function will be called in the main program, from here a
 SimulationProgram::SimulationProgram(Simulator* simulation)
         : simulation(simulation), amountDelayed(0), amountSuccess(0), totalDelay(0){
     TICK = 10;
-    outFile.open("Trainsim.log", std::ios_base::app);
+    outFile.open("Trainsim.log", std::fstream::out | std::fstream::trunc);
 }
 
 void SimulationProgram::run() {
