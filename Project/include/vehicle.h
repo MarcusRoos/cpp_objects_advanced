@@ -8,12 +8,15 @@
 #define DT060G_VEHICLE_H
 #include "constants.h"
 #include <string>
-//------------------------------------------------------------------------------
-// Class definition
-//------------------------------------------------------------------------------
+
 /**
  Class Vehicle
-
+ This class will handle all information regarding vehicles, it consists of a
+ base class which contain all data members which are used for the derived
+ functions as well as virtual functions. All virtual functions are later
+ redefined under their respective subclass and data members unique to the
+ sub class is declared and set. This class will contain all information
+ regarding all vehicles in the program.
  */
 class Vehicle {
 protected:
@@ -23,7 +26,6 @@ public:
     Vehicle();
     Vehicle(int aID, int aType);
     virtual ~Vehicle() = default;
-    virtual void setId(int aID){}
     unsigned int getId();
     unsigned int getType();
     virtual std::string printType() {return 0;}
@@ -34,8 +36,6 @@ protected:
     int seats, internet;
 public:
     CoachCar(int aId, int aType, int aSeats, int aInternet);
-    int getSeats();
-    int getInternet();
     virtual std::string printType() {return "Coach car";}
 };
 

@@ -337,7 +337,6 @@ void SimulationProgram::statisticsMenu() {
 }
 
 void SimulationProgram::printTimeTable() {
-    int tmpDist=0;
     for (auto & i : testTrain){
         std::cout << "Train: "<< i->getID()
         << " "<<i->getFromStation() << " --> " << i->getToStation()

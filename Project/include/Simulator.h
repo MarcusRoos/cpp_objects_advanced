@@ -29,6 +29,7 @@ public:
     bool step(int time);
 private:
     int currTime;
+    // The priority queue, uses events to put together a queue
     std::priority_queue<Event*, std::vector<Event*>, EventComparison> eventQueue;
 };
 

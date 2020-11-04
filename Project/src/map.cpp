@@ -6,6 +6,7 @@
 
 #include "map.h"
 #include <iostream>
+#include <utility>
 
 Map::Map() {
 
@@ -13,8 +14,8 @@ Map::Map() {
 
 Map::Map(std::string aDepstat, std::string adestStat, int aDist) {
     distance = aDist;
-    depStat = aDepstat;
-    destStat = adestStat;
+    depStat = std::move(aDepstat);
+    destStat = std::move(adestStat);
 }
 
 void Map::printMap(const std::string& aStat, const std::string& bStat) {
