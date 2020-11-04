@@ -24,11 +24,9 @@ public:
     Vehicle(int aID, int aType);
     virtual ~Vehicle() = default;
     virtual void setId(int aID){}
-    int getId(){return ID;}
-    int getType(){return type;}
+    unsigned int getId();
+    unsigned int getType();
     virtual std::string printType() {return 0;}
-    virtual int getSeats(){return 0;}
-    virtual int getInternet() {return 0;}
 };
 
 class CoachCar : public Vehicle{

@@ -4,6 +4,7 @@
 // StudentID: Maro1904
 //
 
+#include <iostream>
 #include "vehicle.h"
 
 /**
@@ -16,6 +17,28 @@ Vehicle::Vehicle(int aID, int aType) {
 
 Vehicle::Vehicle() {
 
+}
+
+unsigned int Vehicle::getId() {
+    unsigned int tmpInt=-1;
+    try {
+        tmpInt = ID;
+    }
+    catch(int tmpInt){
+        std::cout << "No ID could be returned from vehicles at " << tmpInt;
+    }
+    return tmpInt;
+}
+
+unsigned int Vehicle::getType() {
+    unsigned int tmpInt=-1;
+    try {
+        tmpInt = type;
+    }
+    catch(int tmpInt){
+        std::cout << "No type could be returned from vehicles at " << tmpInt;
+    }
+    return tmpInt;
 }
 
 /**
