@@ -765,6 +765,7 @@ void SimulationProgram::endStats() {
     for (auto & i : testTrain) {
         i->printIncomplete();
     }
+    std::cout << std::endl;
     std::cout << "These trains was dispatched and arrived on time: " << std::endl;
     for (auto & i : testTrain) {
         i->printComplete();

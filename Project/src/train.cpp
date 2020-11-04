@@ -110,13 +110,13 @@ void Train::printAtStation(const std::string& tmpStat) {
 
 void Train::printComplete() {
     if ((state == ARRIVED || state == FINISHED) && !delayed){
-                  std::cout << trainId << std::endl;
+                  std::cout << trainId << ",";
     }
 }
 
 void Train::printIncomplete() {
     if (state == INCOMPLETE || state == NOTASSEMBLED
     || state == ASSEMBLED || state == READY){
-                std::cout << trainId << std::endl;
+                std::cout << trainId << ",";
     }
 }
