@@ -770,7 +770,6 @@ void SimulationProgram::endStats() {
     for (auto & i : testTrain) {
         i->printComplete();
     }
-
 }
 
 void SimulationProgram::writeToFile(const std::string& aString) {
