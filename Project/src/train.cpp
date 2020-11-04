@@ -128,7 +128,7 @@ bool Train::getVehicleID(unsigned int aID) {
                 inTrain = true;
                 std::cout << "Vehicle ID " << i->getId()
                           << " is attached to train "
-                          << trainId << " and heading from " << fromStation
+                          << trainId << " and on route from " << fromStation
                           << " to " <<
                           toStation << std::endl;
             }

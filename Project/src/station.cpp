@@ -62,7 +62,8 @@ bool Station::getVehicleID(unsigned int aID) {
             inTrain = true;
             std::cout << "Vehicle ID " << i->getId()
                       << " is currently at station "
-                      << stationName << std::endl;
+                      << stationName
+                      << " and ready to be attached to a train "<<std::endl;
         }
     }
     return inTrain;
