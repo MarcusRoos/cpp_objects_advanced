@@ -12,7 +12,14 @@
 #include <memory>
 #include "Events.h"
 
+/**
+ Class Simulator
 
+Handles the actual simulation, in here time will be compared, the events will
+ be put in a priority queue depending on their dispatch time. It will handle
+ both current time and advance the time forward once the "step" function has
+ been called.
+ */
 class Simulator {
 public:
     Simulator () : currTime (0), eventQueue() { }

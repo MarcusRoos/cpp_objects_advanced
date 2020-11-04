@@ -6,7 +6,10 @@
 
 #ifndef DT060G_CONSTANTS_H
 #define DT060G_CONSTANTS_H
-
+/**
+Header file for constants, not much need to be said here,
+ used within the program.
+ */
 enum State {
     NOTASSEMBLED,
     INCOMPLETE,

@@ -10,10 +10,22 @@
 #include "constants.h"
 #include "train.h"
 
+//------------------------------------------------------------------------------
+// Class definition
+//------------------------------------------------------------------------------
+/**
+ Class Events
+
+Handles the different events and states for the overlying program. These events
+ will be called both by the simulator and the main program to handle the
+ different states a train may be in, as well as to build and disassemble the train.
+ */
+
 // Forward declarations
 class Simulator;
 class SimulationProgram;
 
+// Base class
 class Event {
 public:
     Event (unsigned int t) : time(t) { }
@@ -33,7 +45,7 @@ public:
 };
 
 //--- Derived Event-classes ----------------------------------------------------
-
+// Takes care of building a train
 class BuildTrain : public Event {
 public:
     BuildTrain (Simulator *sim, SimulationProgram *simmer, int time, int trainId)
@@ -47,6 +59,7 @@ protected:
     int trainId;
 };
 
+//Takes care of signing a train as ready to leave
 class ReadyTrain : public Event {
 public:
     ReadyTrain (Simulator *sim, SimulationProgram *simmer, int time, int trainId)
@@ -60,8 +73,7 @@ protected:
     int trainId;
 };
 
-
-
+//Takes care of signing a train as dispatched
 class LeaveTrain : public Event {
 public:
     LeaveTrain(Simulator *sim, SimulationProgram *simmer, int time, int trainId)
@@ -75,8 +87,7 @@ protected:
     int trainId;
 };
 
-
-
+//Takes care of signing a train as arrived
 class ArriveTrain : public Event {
 public:
     ArriveTrain(Simulator *sim, SimulationProgram *simmer, int time, int trainId)
@@ -90,7 +101,7 @@ protected:
     int trainId;
 };
 
-
+//Takes care of signing a train as finished
 class FinishTrain : public Event {
 public:
     FinishTrain (Simulator *sim, SimulationProgram *simmer, int time, int trainId)
@@ -102,19 +113,6 @@ protected:
     Simulator* theSim;
     SimulationProgram* simmer;
     int trainId;
-};
-
-
-class EndTrain : public Event {
-public:
-    EndTrain (Simulator *sim, SimulationProgram *simmer, int time, int trainId)
-            : Event(time),theSim(sim),simmer(simmer) { }
-
-    virtual void processEvent();
-
-protected:
-    Simulator* theSim;
-    SimulationProgram* simmer;
 };
 
 #endif //DT060G_EVENTS_H
