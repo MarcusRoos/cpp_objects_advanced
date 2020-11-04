@@ -117,6 +117,8 @@ void SimulationProgram::runSubMenu() {
                 break;
             case 0:
             default:
+                endStats();
+                pauseFunction();
                 submenuLoop = false;
                 break;
         }
