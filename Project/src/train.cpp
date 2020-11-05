@@ -9,8 +9,7 @@
 #include <utility>
 
 Train::Train() {
-
-
+    
 }
 
 Train::Train(int aID, std::string aFrom, std::string aTo, int aDtime,
@@ -67,16 +66,34 @@ void Train::disassembleTrain(const std::vector<std::shared_ptr<Station>>& aStati
 }
 
 void Train::printTypes() {
-    std::cout << "Train " << trainId << " " << getState(getState())
-    << " currently have these vehicles attached to it: " << std::endl;
-    for (auto & i : trainVehicles){
-        std::cout << "Vehicle Type: " << i->printType() << " ID: "
-        << i->getId() << std::endl;
+    if (state == ARRIVED){
+        std::cout << "Train " << trainId <<
+        " has arrived at its destination and is waiting to be disassembled." << std::endl;
     }
-    std::cout << "It's leaving from station " << fromStation
-    << " and heading for " << toStation << std::endl;
-    std::cout << "It will depart at " << getDepPrint() << " and arrive at "
-    << getArrPrint() << std::endl;
+    else if (state == FINISHED){
+        std::cout << "Train " << trainId <<
+                  " has arrived at its destination is finished." << std::endl;
+    }
+    else {
+        if (!trainVehicles.empty()) {
+            std::cout << "Train " << trainId << " " << getState(getState())
+                      << " currently have these vehicles attached to it: "
+                      << std::endl;
+            for (auto &i : trainVehicles) {
+                std::cout << "Vehicle Type: " << i->printType() << " ID: "
+                          << i->getId() << std::endl;
+            }
+        }
+        else {
+            std::cout <<
+            "There are currently no vehicles attached to this train" << std::endl;
+        }
+            std::cout << "It's departure station is " << fromStation
+                      << " and arrival station is " << toStation << std::endl;
+            std::cout << "Its scheduled to depart at " << getDepPrint()
+                      << " and arrive at " << getArrPrint() << std::endl;
+
+    }
 }
 
 std::string Train::getState(State) {

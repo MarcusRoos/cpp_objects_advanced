@@ -31,18 +31,17 @@ void SimulationProgram::run() {
         std::cout << "===== Train Station Program =====" << std::endl;
         std::cout << "1. Change interval [00:" + std::to_string(TICK) +"]" << std::endl;
         std::cout << "2. Run next interval" << std::endl;
-        std::cout << "3. Next event" << std::endl;
-        std::cout << "4. Finish (Complete simulation)" << std::endl;
-        std::cout << "5. Statistics menu" << std::endl;
-        std::cout << "6. Print time table for all trains" << std::endl;
-        std::cout << "7. Print information for one specific train" << std::endl;
-        std::cout << "8. Print one specific station"<< std::endl;
-        std::cout << "9. Following vehicle by ID." << std::endl;
+        std::cout << "3. Finish (Complete simulation)" << std::endl;
+        std::cout << "4. Statistics menu" << std::endl;
+        std::cout << "5. Print time table for all trains" << std::endl;
+        std::cout << "6. Print information for one specific train" << std::endl;
+        std::cout << "7. Print one specific station"<< std::endl;
+        std::cout << "8. Following vehicle by ID." << std::endl;
         std::cout << "0. Exit" << std::endl;
         std::cout << "Enter choice" << std::endl;
         int choice = 0;
         std::cin >> choice;
-        while (std::cin.fail() || choice < 0 || choice > 9) {
+        while (std::cin.fail() || choice < 0 || choice > 8) {
             std::cout << "Wrong input.\n";
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -60,29 +59,26 @@ void SimulationProgram::run() {
             case 2:
                 advance();
                 break;
-            case 3:
-                std::cout << "Next event" <<std::endl;
-                break;
-            case 4: {
+            case 3: {
                 endStats();
                 pauseFunction();
                 again = false;
                 submenuLoop = false;
                 break;
             }
-            case 5:
+            case 4:
                 statisticsMenu();
                 break;
-            case 6:
+            case 5:
                 printTimeTable();
                 break;
-            case 7:
+            case 6:
                 printSpecificTrain();
                 break;
-            case 8:
+            case 7:
                 printSpecificStation();
                 break;
-            case 9:
+            case 8:
                 followVehicle();
                 break;
         }
@@ -92,14 +88,12 @@ void SimulationProgram::run() {
 void SimulationProgram::runSubMenu() {
     while(submenuLoop) {
         std::cout << "===== Start Menu =====" << std::endl;
-        std::cout << "1. Change start time [00:00]" << std::endl;
-        std::cout << "2. Change end time [23:59]" << std::endl;
-        std::cout << "3. Start simulation" << std::endl;
+        std::cout << "1. Start simulation" << std::endl;
         std::cout << "0. Exit" << std::endl;
         std::cout << "Enter choice" << std::endl;
         int choice = 0;
         std::cin >> choice;
-        while (std::cin.fail() || choice < 0 || choice > 3) {
+        while (std::cin.fail() || choice < 0 || choice > 1) {
             std::cout << "Wrong input.\n";
             std::cin.clear();
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -107,12 +101,6 @@ void SimulationProgram::runSubMenu() {
         }
         switch (choice) {
             case 1:
-                std::cout << "Change start time" << std::endl;
-                break;
-            case 2:
-                std::cout << "Change end time" << std::endl;
-                break;
-            case 3:
                 run();
                 break;
             case 0:

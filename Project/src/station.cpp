@@ -72,7 +72,7 @@ void Station::printTypes() {
                 std::cout << " Max speed: " <<i->getElectricSpeed() << " Effect KW: "<< i->getEffectKW() << std::endl;
                 break;
             case 5:
-                std::cout << " Max speed: " <<i->getDieselSpeed() << " Diesel consump litre/h: "<< i->getFuelConsump() << std::endl;
+                std::cout << " Max speed: " <<i->getDieselSpeed() << " Diesel consumption litre/h: "<< i->getFuelConsump() << std::endl;
                 break;
         }
     }
