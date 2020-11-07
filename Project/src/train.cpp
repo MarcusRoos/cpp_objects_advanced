@@ -9,7 +9,7 @@
 #include <utility>
 
 Train::Train() {
-    
+
 }
 
 Train::Train(int aID, std::string aFrom, std::string aTo, int aDtime,

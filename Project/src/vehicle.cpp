@@ -20,7 +20,7 @@ Vehicle::Vehicle() {
 }
 
 unsigned int Vehicle::getId() {
-    unsigned int tmpInt=-1;
+    unsigned int tmpInt=0;
     try {
         tmpInt = ID;
     }
@@ -31,7 +31,7 @@ unsigned int Vehicle::getId() {
 }
 
 unsigned int Vehicle::getType() {
-    unsigned int tmpInt=-1;
+    unsigned int tmpInt=0;
     try {
         tmpInt = type;
     }
@@ -50,7 +50,14 @@ CoachCar::CoachCar(int aId, int aType, int aSeats, int aInternet) : Vehicle(aId,
 }
 
 int CoachCar::getSeats() {
-    return seats;
+    unsigned int tmpInt=0;
+    try {
+        tmpInt = seats;
+    }
+    catch(int tmpInt){
+        std::cout << "No seats could be returned from vehicles at " << tmpInt;
+    }
+    return tmpInt;
 }
 
 std::string CoachCar::getInternet() {
@@ -70,7 +77,14 @@ SleepingCar::SleepingCar(int aId, int aType, int aBeds) : Vehicle(aId, aType) {
 }
 
 int SleepingCar::getBeds() {
-    return beds;
+    unsigned int tmpInt=0;
+    try {
+        tmpInt = beds;
+    }
+    catch(int tmpInt){
+        std::cout << "No beds could be returned from vehicles at " << tmpInt;
+    }
+    return tmpInt;
 }
 
 /**
@@ -83,11 +97,25 @@ OpenFreight::OpenFreight(int aId, int aType, int aCapacity, int aSquaremt)
 }
 
 int OpenFreight::getTon() {
-    return capacityTons;
+    unsigned int tmpInt=0;
+    try {
+        tmpInt = capacityTons;
+    }
+    catch(int tmpInt){
+        std::cout << "No capacity tons could be returned from vehicles at " << tmpInt;
+    }
+    return tmpInt;
 }
 
 int OpenFreight::getSqm() {
-    return areaSqm;
+    unsigned int tmpInt=0;
+    try {
+        tmpInt = areaSqm;
+    }
+    catch(int tmpInt){
+        std::cout << "No seats could be returned from vehicles at " << tmpInt;
+    }
+    return tmpInt;
 }
 
 /**
@@ -98,7 +126,14 @@ CoveredFreight::CoveredFreight(int aId, int aType, int aCapacityC) : Vehicle(aId
 }
 
 int CoveredFreight::getCubic() {
-    return capacityCubicm;
+    unsigned int tmpInt=0;
+    try {
+        tmpInt = capacityCubicm;
+    }
+    catch(int tmpInt){
+        std::cout << "No cubic capacity could be returned from vehicles at " << tmpInt;
+    }
+    return tmpInt;
 }
 
 /**
@@ -111,11 +146,25 @@ DieselEngine::DieselEngine(int aId, int aType, int aMaxspeed, int aFuelcon)
 }
 
 int DieselEngine::getDieselSpeed() {
-    return maxSpeed;
+    unsigned int tmpInt=0;
+    try {
+        tmpInt = maxSpeed;
+    }
+    catch(int tmpInt){
+        std::cout << "No max speed could be returned from vehicles at " << tmpInt;
+    }
+    return tmpInt;
 }
 
 int DieselEngine::getFuelConsump() {
-    return fuelConsump;
+    unsigned int tmpInt=0;
+    try {
+        tmpInt = fuelConsump;
+    }
+    catch(int tmpInt){
+        std::cout << "No fuel consumption could be returned from vehicles at " << tmpInt;
+    }
+    return tmpInt;
 }
 
 /**
@@ -128,8 +177,22 @@ ElectricalEngine::ElectricalEngine(int aId, int aType, int aMaxspeed,
 }
 
 int ElectricalEngine::getElectricSpeed(){
-    return maxSpeed;
+    unsigned int tmpInt=0;
+    try {
+        tmpInt = maxSpeed;
+    }
+    catch(int tmpInt){
+        std::cout << "No max speed could be returned from vehicles at " << tmpInt;
+    }
+    return tmpInt;
 }
 int ElectricalEngine::getEffectKW() {
-    return powerKW;
+    unsigned int tmpInt=0;
+    try {
+        tmpInt = powerKW;
+    }
+    catch(int tmpInt){
+        std::cout << "No power KW could be returned from vehicles at " << tmpInt;
+    }
+    return tmpInt;
 }
