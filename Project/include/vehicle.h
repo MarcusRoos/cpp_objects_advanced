@@ -26,8 +26,8 @@ public:
     Vehicle();
     Vehicle(int aID, int aType);
     virtual ~Vehicle() = default;
-    unsigned int getId();
-    unsigned int getType();
+    int getId();
+    int getType();
     virtual int getSeats() {return 0;}
     virtual std::string getInternet() {return 0;}
     virtual int getBeds() {return 0;}

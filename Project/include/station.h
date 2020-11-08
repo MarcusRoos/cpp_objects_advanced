@@ -56,14 +56,7 @@ public:
 * @param None.
 * @return string.
 */
-    std::string getStationname(){return stationName;}
-    /**
-* Returns size of stationVehicles vector
-*
-* @param None.
-* @return Integer.
-*/
-    int getvecSize(){return stationVehicles.size();}
+    std::string getStationname();
     /**
 * Will return a shared pointer to vehicle, used for vehicles leaving the station
      * and being attached to trains

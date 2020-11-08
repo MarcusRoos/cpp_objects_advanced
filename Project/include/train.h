@@ -77,35 +77,35 @@ public:
 * @param None.
 * @return Integer.
 */
-    int getID(){return trainId;}
+    int getID();
     /**
 * Returns trains depart station
 *
 * @param None.
 * @return String.
 */
-    std::string getFromStation(){return fromStation;}
+    std::string getFromStation();
     /**
 * Returns trains arrival station
 *
 * @param None.
 * @return String.
 */
-    std::string getToStation(){return toStation;}
+    std::string getToStation();
     /**
 * Returns trains arrival station station in form of a string
 *
 * @param None.
 * @return String.
 */
-    std::string getArrPrint(){return arrPrint;}
+    std::string getArrPrint();
     /**
 * Returns trains departure station station in form of a string
 *
 * @param None.
 * @return String.
 */
-    std::string getDepPrint(){return depPrint;}
+    std::string getDepPrint();
     /**
 * Returns state of the train as a string
 *
@@ -119,14 +119,14 @@ public:
 * @param None.
 * @return Integer.
 */
-    int getDepTime(){return departureTime;}
+    int getDepTime();
     /**
 * Returns trains arrival time in form of an integer
 *
 * @param None.
 * @return Integer.
 */
-    int getArrTime(){return arrivalTime;}
+    int getArrTime();
     /**
 * Returns trains arrival time in form of an integer, temporary arrival time to
      * calculate delay
@@ -134,14 +134,14 @@ public:
 * @param None.
 * @return Integer.
 */
-    int getTmpArrTime(){return tmpArrivalTime;}
+    int getTmpArrTime();
     /**
 * Returns trains state as type state
 *
 * @param None.
 * @return State.
 */
-    enum State getState(){return state;}
+    enum State getState();
     /**
 * Sets the state of the train
 *
@@ -169,14 +169,14 @@ public:
 * @param None.
 * @return Double.
 */
-    double getSpeed(){return maxSpeed;}
+    double getSpeed();
     /**
 * Returns whether train is delayed or not
 *
 * @param None.
 * @return Bool.
 */
-    bool getDelayed(){return delayed;}
+    bool getDelayed();
     /**
 * Prints data for the train and its types
 *

@@ -20,22 +20,32 @@ Station::Station(std::string aStationname, std::vector<std::shared_ptr<Vehicle>>
 std::shared_ptr<Vehicle> Station::outgoingVehicle(int atype) {
     std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
     tmpVehicle = stationVehicles;
-    for (size_t i=0; i<tmpVehicle.size(); i++){
-        if (tmpVehicle[i] != nullptr && tmpVehicle[i]->getType() == atype){
-            stationVehicles.erase(stationVehicles.begin() + i);
-            return tmpVehicle[i];
+    try {
+        for (size_t i = 0; i < tmpVehicle.size(); i++) {
+            if (tmpVehicle[i] != nullptr && tmpVehicle[i]->getType() == atype) {
+                stationVehicles.erase(stationVehicles.begin() + i);
+                return tmpVehicle[i];
+            }
         }
+    }
+    catch(std::vector<std::shared_ptr<Vehicle>> &tmpVehicle){
+        std::cout << "Could not find outGoingVehicle" << std::endl;
     }
     return nullptr;
 }
 
 bool Station::testVehicle(int atype) {
-    std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
-    tmpVehicle = stationVehicles;
-    for (auto & i : tmpVehicle){
-        if (i != nullptr && i->getType() == atype){
-            return true;
+    try {
+        std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
+        tmpVehicle = stationVehicles;
+        for (auto &i : tmpVehicle) {
+            if (i != nullptr && i->getType() == atype) {
+                return true;
+            }
         }
+    }
+    catch(bool tmpBool){
+        std::cout << "Not found testVehicle: " << tmpBool;
     }
     return false;
 }
@@ -80,14 +90,31 @@ void Station::printTypes() {
 
 bool Station::getVehicleID(unsigned int aID) {
     bool inTrain=false;
-    for (auto & i : stationVehicles){
-        if (aID == i->getId()) {
-            inTrain = true;
-            std::cout << "Vehicle ID " << i->getId()
-                      << " is currently at station "
-                      << stationName
-                      << " and ready to be attached to a train "<<std::endl;
+    try {
+        for (auto &i : stationVehicles) {
+            if (aID == i->getId()) {
+                inTrain = true;
+                std::cout << "Vehicle ID " << i->getId()
+                          << " is currently at station "
+                          << stationName
+                          << " and ready to be attached to a train "
+                          << std::endl;
+            }
         }
     }
+    catch(bool &inTrain){
+        std::cout << "Not found getVehicleID: " << inTrain;
+    }
     return inTrain;
+}
+
+std::string Station::getStationname() {
+    std::string tmpString="stationNameError";
+    try {
+        tmpString = stationName;
+    }
+    catch(std::string &tmpString){
+        std::cout << "Not found: " << tmpString;
+    }
+    return tmpString;
 }

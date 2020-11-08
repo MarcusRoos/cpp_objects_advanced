@@ -17,7 +17,8 @@ enum State {
     READY,
     RUNNING,
     ARRIVED,
-    FINISHED
+    FINISHED,
+    STATEERROR
 };
 
 const int DELAYTIME = 10;
