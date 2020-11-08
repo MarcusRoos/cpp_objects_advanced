@@ -18,6 +18,7 @@ memory leaks. Using smart pointers, callable objects, STL, exception handling
 is also of importance.
 
 ## Procedures
-
+*Video*
 
 ## Discussion
+*Video*

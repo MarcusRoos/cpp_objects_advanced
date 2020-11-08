@@ -5,10 +5,6 @@
 //
 
 #include "SimulationProgram.h"
-#include <iostream>
-#include <iomanip>
-#include <limits>
-#include <memory>
 
 /**
 The run function, this function will be called in the main program, from here a
@@ -25,6 +21,11 @@ SimulationProgram::SimulationProgram(Simulator* simulation)
     outFile.open("Trainsim.log", std::fstream::out | std::fstream::trunc);
 }
 
+/**
+ This is the main menu of the program, it will print the different alternatives
+ and allow the user to choose what to do next. Ran by a switch which will take
+ the users input and call the relevant function depending on the input.
+*/
 void SimulationProgram::run() {
     bool again = true;
     do{
@@ -85,6 +86,12 @@ void SimulationProgram::run() {
     }while(again);
 }
 
+/**
+ This is the sub menu of the program, this is the first screen the user is
+ met with, here they can decide either to start the simulation or straight up
+ exit the program. Not a necessary stage, but it would be necessary for further
+ development if alternatives to change simulation time were to be added.
+*/
 void SimulationProgram::runSubMenu() {
     while(submenuLoop) {
         std::cout << "===== Start Menu =====" << std::endl;
@@ -114,8 +121,12 @@ void SimulationProgram::runSubMenu() {
 }
 
 /**
- * Populators, reads in the three files and stores them in their
- * respective class with pointers.**/
+ * Station populator
+ * Will open the file "TrainStations.txt" and read its contents and store
+ * in the station vector. Depending on the type it will use different
+ * cases to determine which kind of vehicle is being read in. This file
+ * contains all the different vechicles located at the different stations
+ * at run time.**/
 void SimulationProgram::populateStation() {
     testVehicle.clear();
     std::ifstream inFile("TrainStations.txt");
@@ -202,7 +213,11 @@ void SimulationProgram::populateStation() {
                 stationName, std::move(testVehicle)));
     }
 }
-
+/**
+ Map populator
+ Works the same as the station function except theres no different
+ types to be read so its simply just storing each line in the map vector.
+*/
 void SimulationProgram::populateMap() {
     testMap.clear();
     std::ifstream inFile("TrainMap.txt");
@@ -225,6 +240,13 @@ void SimulationProgram::populateMap() {
     }
 }
 
+/**
+ Train populator
+ Reads the file "Trains.txt" and stores it contents in the train vector.
+ This will read all the relevant information in the file and use a stringstream
+ to pick out the parts for the different parameters, once it has reached
+ end of line it will add all the values to the train vector.
+*/
 void SimulationProgram::populateTrain() {
     testTrain.clear();
     std::ifstream inFile("Trains.txt");
@@ -274,12 +296,20 @@ void SimulationProgram::populateTrain() {
     }
 }
 
+/**
+Simple printing functions, iterates through the testStation vector and calls the
+ printTypes function.
+*/
 void SimulationProgram::printStatistics() {
     for (auto & k : testStation){
         k->printTypes();
     }
 }
 
+/**
+ Menu for printing different statistic alternatives, uses switch statement to
+ determine which function to call.
+*/
 void SimulationProgram::statisticsMenu() {
     bool loop=true;
     while (loop) {
@@ -321,6 +351,9 @@ void SimulationProgram::statisticsMenu() {
     }
 }
 
+/**
+ Prints the time table for all the trains.
+*/
 void SimulationProgram::printTimeTable() {
     for (auto & i : testTrain){
         std::cout << "Train: "<< i->getID()
@@ -333,6 +366,10 @@ void SimulationProgram::printTimeTable() {
     }
 }
 
+/**
+ Prints the details for one specific train, determined by user input and
+ should be the trains ID.
+*/
 void SimulationProgram::printSpecificTrain() {
     std::cout << "Print a specific train by entering its ID. " << std::endl;
     std::cout << "Trains ID range from 1 to 130. " << std::endl;
@@ -355,6 +392,10 @@ void SimulationProgram::printSpecificTrain() {
     tmpTrain->printTypes();
 }
 
+/**
+ Prints all available vehicles at one specific station, prints a list for the
+ user to look at and decide which station they want to print information for.
+*/
 void SimulationProgram::printSpecificStation() {
     bool loop = true;
     while (loop) {
@@ -404,17 +445,29 @@ void SimulationProgram::printSpecificStation() {
     }
 }
 
+/**
+ Schedules the events in the priority queue for the trains, used to determine
+ which train gets to be built first.
+*/
 void SimulationProgram::scheduleEvents() {
     std::vector<std::shared_ptr<Train>> tmpTrain;
+    SimulationProgram *tmpSimulation = this;
     tmpTrain = testTrain;
-    std::sort(tmpTrain.begin(), tmpTrain.end(), sortByName);
-    for (auto & i : tmpTrain) {
-        int depTime = i->getDepTime() - BUILDTIME;
-        int ID = i->getID();
-        simulation->scheduleEvent(new BuildTrain(simulation,this,depTime,ID));
+    std::sort(tmpTrain.begin(), tmpTrain.end(), sortByTime);
+    for (auto & df : tmpTrain) {
+        int depTime = df->getDepTime() - BUILDTIME;
+        int ID = df->getID();
+        simulation->scheduleEvent(new BuildTrain(simulation,tmpSimulation,depTime,ID));
     }
 }
 
+/**
+ Tries to build the train, if it fails it will return an error and set the
+ trains state to incomplete. If it succeeds the trains state will be set to
+ assembled and the train will move on to the next stage to be dispatched.
+ Also prints current states on the screen and writes it down to the log file
+ at the same time.
+*/
 bool SimulationProgram::tryBuild(int trainId) {
     std::shared_ptr<Train> tmpTrain;
     for (auto & i : testTrain){
@@ -477,6 +530,12 @@ bool SimulationProgram::tryBuild(int trainId) {
     }
 }
 
+/**
+ Once a train has reached his arrival destination it will be set as finished
+ state and the train will be disassembled at the destination station. Just
+ as above relevant info will be printed on the screen and logged to the log
+ file.
+*/
 void SimulationProgram::EndTrain(int trainId) {
     std::stringstream ss;
     std::shared_ptr<Train> tmpTrain;
@@ -508,6 +567,11 @@ void SimulationProgram::EndTrain(int trainId) {
     writeToFile(tmpString);
 }
 
+/**
+ Once a train has been marked as assembled it will be marked as ready in this
+ function, and once ready its waiting to be dispatched. Just as above the
+ current state will be printed on the screen and written to the log file.
+*/
 void SimulationProgram::readyTrain(int trainId) {
     std::stringstream ss;
     std::shared_ptr<Train> tmpTrain;
@@ -538,6 +602,11 @@ void SimulationProgram::readyTrain(int trainId) {
     writeToFile(tmpString);
 }
 
+/**
+ Once the train is marked as ready it will next be called to be dispatched, once
+ here its state will be set to running as the train has been dispatched.
+ As previously, contents will be printed and written to log file.
+*/
 int SimulationProgram::dispatchTrain(int trainId) {
     std::stringstream ss;
     std::shared_ptr<Train> tmpTrain;
@@ -599,6 +668,10 @@ int SimulationProgram::dispatchTrain(int trainId) {
     return tmpTrain->getArrTime();
 }
 
+/**
+ Once the train has reached its arrival station the state will be set as arrived,
+ and contents will be printed on screen and written to the log file.
+*/
 void SimulationProgram::arriveTrain(int trainId) {
     std::stringstream ss;
     std::shared_ptr<Train> tmpTrain;
@@ -624,7 +697,6 @@ void SimulationProgram::arriveTrain(int trainId) {
               << " speed = " << tmpTrain->getSpeed()
               << " has arrived at  "
               << tmpTrain->getToStation() << std::endl;
-
     if (tmpTrain->getDelayed()){
         int lateMins = tmpTrain->getArrTime() - tmpTrain->getTmpArrTime();
         amountDelayed++;
@@ -642,15 +714,27 @@ void SimulationProgram::arriveTrain(int trainId) {
     }
 }
 
+/**
+ Called at 23:59 to inform the user that the simulation has reached its end.
+*/
 void SimulationProgram::endSimulation() {
     std::cout << "End of simulation" << std::endl;
 }
 
-bool SimulationProgram::sortByName(const std::shared_ptr<Train> &a,
+/**
+ Sorts the trains by departure time from early to late.
+*/
+bool SimulationProgram::sortByTime(const std::shared_ptr<Train> &a,
                                    const std::shared_ptr<Train> &b) {
     return a->getDepTime() < b->getDepTime();
 }
 
+/**
+ Used to change the tick for the simulation program, I decided to implement
+ it as an incremental feature where the user can increase or decrease the
+ ticktime by 5 minutes, allowing them to skip 60 minutes at a time, or 5 minutes
+ at lowest. The switch case is used to ensure proper formatting once printing.
+*/
 void SimulationProgram::changeTick() {
     bool loop = true;
     while(loop) {
@@ -691,6 +775,14 @@ void SimulationProgram::changeTick() {
     }
 }
 
+/**
+ Uses the tick to advance the simulation, will check if the current time + the
+ tick time will exceed the total simming time, if it does it means it would
+ bypass the 23:59 end of simulation time and take necessary actions to make
+ sure it ends at precisely 23:59. If it won't exceed the end simming time it will
+ simply call the step function from the simulator class and advance the simulation
+ by as much time as determined by the aforementioned tick.
+*/
 void SimulationProgram::advance() {
     if (simulation->getTime() + TICK >SIMMING){
         int tmpTick=0;
@@ -715,6 +807,10 @@ void SimulationProgram::advance() {
     <<  ":" <<  std::setw(2) << std::setfill('0') <<tmpM << std::endl;
 }
 
+/**
+ Prints the end statistics once the program has ended, shows which trains never
+ left their departure station, and shows which trains left and arrived on time.
+*/
 void SimulationProgram::endStats() {
     std::cout << "These trains never left their departure station: " << std::endl;
     for (auto & i : testTrain) {
@@ -727,14 +823,27 @@ void SimulationProgram::endStats() {
     }
 }
 
+/**
+ Writes a the string parameter to a file.
+*/
 void SimulationProgram::writeToFile(const std::string& aString) {
     outFile << aString;
 }
 
+/**
+ Used to follow a vehicle and see if its either at a station or attached
+ to a train, accepts user input between 1 and 741.
+*/
 void SimulationProgram::followVehicle() {
     std::cout << "Enter ID of the vehicle to track. Vehicle IDs range from 1 to 741." << std::endl;
-    int tmpID=0;
+    int tmpID = 0;
     std::cin >> tmpID;
+    while (std::cin.fail() || tmpID < 1 || tmpID > 741) {
+        std::cout << "Wrong input.\n";
+        std::cin.clear();
+        std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+        std::cin >> tmpID;
+    }
     for (auto & i : testTrain){
         i->getVehicleID(tmpID);
     }

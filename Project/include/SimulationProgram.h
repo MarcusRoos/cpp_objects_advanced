@@ -14,9 +14,10 @@
 #include "constants.h"
 #include "Events.h"
 #include "Simulator.h"
-#include <unordered_map>
 #include <fstream>
+#include <iostream>
 #include <vector>
+#include <limits>
 #include <memory>
 #include <algorithm>
 #include <iomanip>
@@ -215,7 +216,7 @@ public:
 * @param Two shared pointers to the object train.
 * @return Bool.
 */
-    static bool sortByName( const std::shared_ptr<Train>& d1, const std::shared_ptr<Train>& d2 );
+    static bool sortByTime( const std::shared_ptr<Train>& d1, const std::shared_ptr<Train>& d2 );
 };
 
 #endif //DT060G_SIMULATIONPROGRAM_H

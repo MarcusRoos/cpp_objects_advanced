@@ -24,12 +24,15 @@ class Simulator {
 public:
     Simulator () : currTime (0), eventQueue() { }
     ~Simulator();
+    // Add a new event to event queue.
     void scheduleEvent (Event * newEvent);
     int getTime() const { return currTime; }
     bool step(int time);
 private:
     int currTime;
-    // The priority queue, uses events to put together a queue
+    /* The event queue. Always sorted with respect to the times
+       for the events. The event with the 'smallest' time is always
+       placed first in queue and will be processed next. */
     std::priority_queue<Event*, std::vector<Event*>, EventComparison> eventQueue;
 };
 

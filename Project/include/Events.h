@@ -25,15 +25,24 @@ class SimulationProgram;
 // Base class
 class Event {
 public:
+    // Constructor requires time of event
     Event (unsigned int t) : time(t) { }
-    ~Event() = default;
+    virtual ~Event() = default;
+
+    // Process event by invoking this method
     virtual void processEvent()=0;
-    unsigned int getTime() const {return time;}
+
+    // Get time for this event
+    unsigned int getTime() const {
+        return time;
+    }
 
 protected:
+    // Time for this event
     unsigned int time;
 };
 
+// Used to compare to Events with respect to time
 class EventComparison {
 public:
     bool operator() (Event * left, Event * right) {

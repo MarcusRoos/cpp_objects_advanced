@@ -20,6 +20,6 @@ Map::Map(std::string aDepstat, std::string adestStat, int aDist) {
 
 void Map::printMap(const std::string& aStat, const std::string& bStat) {
     if ((aStat == depStat && bStat == destStat) || (aStat == destStat && bStat == depStat)) {
-    std::cout << distance << std::endl;
+    std::cout << distance << "km"<<std::endl;
     }
 }

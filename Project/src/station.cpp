@@ -17,6 +17,16 @@ Station::Station(std::string aStationname, std::vector<std::shared_ptr<Vehicle>>
     stationVehicles = std::move(aVehicle);
 }
 
+/**
+ Used when a train is trying to be assembled, will accept an integer as
+ parameter and try to find this integer in the current station. The current
+ station will always be the correct departure station as the only function
+ calling this function is found within trains and it will only call this
+ function once it has found its departure station.
+ It will find the vehicle that the train needs, and return a temporary
+ vector pointer as it needs to delete the vehicle from the original
+ pointer (as the vehicle is no longer at the said station).
+*/
 std::shared_ptr<Vehicle> Station::outgoingVehicle(int atype) {
     std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
     tmpVehicle = stationVehicles;
@@ -34,6 +44,10 @@ std::shared_ptr<Vehicle> Station::outgoingVehicle(int atype) {
     return nullptr;
 }
 
+/**
+ Test whether a vehicle is at a station or not, also makes sure the
+ pointer isn't null. Used to avoid crashes.
+*/
 bool Station::testVehicle(int atype) {
     try {
         std::vector<std::shared_ptr<Vehicle>> tmpVehicle;
@@ -50,12 +64,22 @@ bool Station::testVehicle(int atype) {
     return false;
 }
 
+/**
+ Used once a vehicle is being disassmbled, the vehicle will be passed down as a
+ parameter and simply pushed back into the vehicles at the station. As the above
+ outgoingVehicle function it will only be called once the train has found
+ its correct station.
+*/
 void Station::incomingVehicle(const std::vector<std::shared_ptr<Vehicle>>& aVehicle) {
     for (auto & i : aVehicle) {
         stationVehicles.push_back(i);
     }
 }
 
+/**
+ Used for printing information relevant to the different stations, all the
+ vehicles at the station, how many and their relevant statistics.
+*/
 void Station::printTypes() {
     std::cout << std::endl << "======" << stationName << "======" << std::endl;
     std::cout << "Available vehicles " << stationVehicles.size() << std::endl;
@@ -88,6 +112,9 @@ void Station::printTypes() {
     }
 }
 
+/**
+ Returns a vehicle ID at the given station and its current state.
+*/
 bool Station::getVehicleID(unsigned int aID) {
     bool inTrain=false;
     try {
@@ -108,6 +135,9 @@ bool Station::getVehicleID(unsigned int aID) {
     return inTrain;
 }
 
+/**
+ Returns station name.
+*/
 std::string Station::getStationname() {
     std::string tmpString="stationNameError";
     try {
