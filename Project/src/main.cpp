@@ -1,6 +1,6 @@
 #include "SimulationProgram.h"
 #include "Simulator.h"
-//#include "memstat.hpp"
+#include "memstat.hpp"
 
 int main() {
     auto *theSim = new Simulator;
